@@ -3,6 +3,9 @@ name: Build and deploy page
 on:
   workflow_call:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   build-and-deploy-page:
     name: Build Home page
