@@ -9,7 +9,7 @@ jobs:
   test-and-lint:
     uses: ./.github/workflows/test-and-lint.yml
 
-  # deploy:
-  #   needs: test-and-lint
-  #   uses: ./.github/workflows/build-and-deploy.yml
-  #   secrets: inherit
+  deploy:
+    needs: test-and-lint
+    uses: ./.github/workflows/build-and-deploy.yml
+    secrets: inherit
