@@ -1,0 +1,19 @@
+{
+  "name": "vait-homepage-infra",
+  "version": "0.1.0",
+  "scripts": {
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "cdk:diff": "cdk diff",
+    "cdk:synth": "cdk synth",
+    "cdk:deploy": "cdk deploy"
+  },
+  "devDependencies": {
+    "@types/node": "22.7.9",
+    "aws-cdk": "2.1016.1"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.196.0",
+    "constructs": "^10.0.0"
+  }
+}
