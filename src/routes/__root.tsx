@@ -1,5 +1,6 @@
 import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { lazy } from 'react';
+import NotFoundPage from '../pages/not-found';
 
 const TanStackRouterDevtools = import.meta.env.PROD
   ? () => null
@@ -16,4 +17,5 @@ export const Route = createRootRoute({
       <TanStackRouterDevtools />
     </>
   ),
+  notFoundComponent: () => <NotFoundPage />,
 });
