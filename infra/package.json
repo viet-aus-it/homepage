@@ -6,7 +6,7 @@
     "cdk": "cdk",
     "cdk:diff": "cdk diff",
     "cdk:synth": "cdk synth",
-    "cdk:deploy": "cdk deploy"
+    "cdk:deploy": "cdk deploy --require-approval never"
   },
   "devDependencies": {
     "@types/node": "22.7.9",
