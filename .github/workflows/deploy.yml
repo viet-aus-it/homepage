@@ -1,0 +1,15 @@
+name: "Deployment Action: Build and push Docker images"
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test-and-lint:
+    uses: ./.github/workflows/test-and-lint.yml
+
+  # deploy:
+  #   needs: test-and-lint
+  #   uses: ./.github/workflows/build-and-deploy.yml
+  #   secrets: inherit

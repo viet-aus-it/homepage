@@ -1,0 +1,24 @@
+name: Build and deploy Docker Image
+
+on:
+  workflow_call:
+
+jobs:
+  build-and-deploy-page:
+    name: Build Home page
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up project
+        uses: ./.github/actions/setup-node-deps
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Deploy with CDK
+        run: |
+          cd infra
+          pnpm run cdk:deploy
