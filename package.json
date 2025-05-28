@@ -1,7 +1,7 @@
 {
-  "name": "@samhwang/vite-react-starter-template",
+  "name": "vait-homepage",
   "version": "1.0.0",
-  "description": "Vite + React Starter Template",
+  "description": "VAIT Homepage",
   "type": "module",
   "engines": {
     "node": "^22.0.0",
