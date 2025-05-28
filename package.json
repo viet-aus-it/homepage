@@ -2,9 +2,6 @@
   "name": "@samhwang/vite-react-starter-template",
   "version": "1.0.0",
   "description": "Vite + React Starter Template",
-  "msw": {
-    "workerDirectory": ["public"]
-  },
   "type": "module",
   "engines": {
     "node": "^22.0.0",
@@ -58,7 +55,6 @@
     "jsdom": "^26.1.0",
     "lint-prepush": "^3.0.2",
     "lint-staged": "^16.1.0",
-    "msw": "^2.8.5",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
@@ -66,6 +62,6 @@
     "vitest-preview": "^0.0.1"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild", "msw"]
+    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
   }
 }
