@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "ignore": ["src/routeTree.gen.ts", "src/**/__snapshots__", "node_modules", "dist", "coverage", "public/mockServiceWorker.js"],
+    "ignore": [".vscode/**", "src/routeTree.gen.ts", "src/**/__snapshots__", "node_modules", "dist", "coverage", "public/mockServiceWorker.js"],
     "ignoreUnknown": true
   },
   "linter": {
