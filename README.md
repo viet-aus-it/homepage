@@ -26,13 +26,14 @@ pnpm run dev
 # Run tests
 pnpm run test
 
-# Lint & format
+# Lint & format (auto-fix)
 pnpm run lint
-pnpm run format
+pnpm run lint:fix
 
 # Build for production
 pnpm run build
 ```
+> **Note:** `pnpm run lint:fix` will both lint and format the codebase using Biome.
 
 ## Project Structure
 - `src/` – App source code (components, pages, hooks, services, types, utils)
