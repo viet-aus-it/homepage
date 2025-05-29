@@ -36,10 +36,10 @@ pnpm run build
 > **Note:** `pnpm run lint:fix` will both lint and format the codebase using Biome.
 
 ## Project Structure
-- `src/` – App source code (components, pages, hooks, services, types, utils)
-- `infra/` – Infrastructure as code (AWS CDK)
-- `.github/` – CI/CD workflows
-- `public/` – Static assets
+- `.github/`  – CI/CD workflows
+- `infra/`    – Infrastructure as code (AWS CDK)
+- `public/`   – Static assets
+- `src/`      – App source code (components, pages, hooks, services, types, utils)
 
 See [docs/architecture.md](docs/architecture.md) for more details.
 
