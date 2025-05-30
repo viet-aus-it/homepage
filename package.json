@@ -71,6 +71,6 @@
     "vitest-preview": "^0.0.1"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
+    "onlyBuiltDependencies": ["@biomejs/biome", "@tailwindcss/oxide", "esbuild"]
   }
 }
