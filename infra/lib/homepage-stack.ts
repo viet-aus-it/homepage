@@ -9,24 +9,26 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3_deployment from 'aws-cdk-lib/aws-s3-deployment';
 import type { Construct } from 'constructs';
 
-const BASE_DOMAIN = 'vietausit.com';
+import { BASE_DOMAIN, SITE_DOMAIN } from './constants';
 
 export class HomepageStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     const zone = route53.HostedZone.fromLookup(this, 'VAITHostedZone', { domainName: BASE_DOMAIN });
-    const siteDomain = `home.${BASE_DOMAIN}`;
-    new cdk.CfnOutput(this, 'SiteDomain', { value: `https://${siteDomain}` });
 
-    const certificate = new acm.Certificate(this, 'SiteCertificate', {
-      domainName: siteDomain,
-      validation: acm.CertificateValidation.fromDns(zone),
+    /**
+     * acm.DnsValidatedCertificate is a deprecated construct, and dealing with proper cross stack regional reference in AWS
+     * is still experimental and plainly a PITA. I'll revise this construct when they come up with a new solution.
+     */
+    const certificate = new acm.DnsValidatedCertificate(this, 'VAITHomeCertificate', {
+      region: 'us-east-1',
+      domainName: SITE_DOMAIN,
+      hostedZone: zone,
     });
-    new cdk.CfnOutput(this, 'Certificate', { value: certificate.certificateArn });
 
     const siteBucket = new s3.Bucket(this, 'HomepageSiteBucket', {
-      bucketName: siteDomain,
+      bucketName: SITE_DOMAIN,
       publicReadAccess: false,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
@@ -37,7 +39,7 @@ export class HomepageStack extends cdk.Stack {
     const distribution = new cloudfront.Distribution(this, 'HomepageSiteDistribution', {
       defaultRootObject: 'index.html',
       certificate,
-      domainNames: [siteDomain],
+      domainNames: [SITE_DOMAIN],
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       defaultBehavior: {
         origin: cloudfront_origins.S3BucketOrigin.withOriginAccessControl(siteBucket),
@@ -64,7 +66,7 @@ export class HomepageStack extends cdk.Stack {
 
     const siteDomainTarget = new route53_targets.CloudFrontTarget(distribution);
     new route53.ARecord(this, 'SiteAliasRecord', {
-      recordName: siteDomain,
+      recordName: SITE_DOMAIN,
       target: route53.RecordTarget.fromAlias(siteDomainTarget),
       zone,
     });
