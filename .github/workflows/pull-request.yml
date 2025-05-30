@@ -42,7 +42,21 @@ jobs:
           cd infra
           pnpm run cdk:synth
 
-      - name: CDK Diff
-        uses: corymhall/cdk-diff-action@v1
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: CDK diff
+        run: |
+          cd infra
+          npx cdk diff --progress=events --no-change-set --no-staging --ignore-errors --no-version-reporting &> >(tee cdk-diff.log)
+
+      - name: Setup cdk-notifier
+        run: |
+          curl -fL -o cdk-notifier.gz https://github.com/karlderkaefer/cdk-notifier/releases/download/v2.14.3/cdk-notifier_linux_amd64.gz
+          gunzip cdk-notifier.gz
+          chmod +x cdk-notifier
+
+      - name: Update PR
+        env:
+          PR_ID: ${{ github.event.pull_request.number }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./cdk-notifier --log-file ./cdk-diff.log --template extended --disable-collapse
