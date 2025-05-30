@@ -5,6 +5,11 @@ on:
     branches:
       - master
 
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
 jobs:
   test-and-lint:
     uses: ./.github/workflows/test-and-lint.yml
@@ -12,10 +17,6 @@ jobs:
   cdk-diff:
     needs: test-and-lint
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-      pull-requests: write
     concurrency: cdk-diff
     steps:
       - name: Checkout code
