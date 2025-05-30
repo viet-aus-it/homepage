@@ -38,7 +38,9 @@ jobs:
       - name: CDK Synth
         env:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-        run: npx cdk synth
+        run: |
+          cd infra
+          pnpm run cdk:synth
 
       - name: CDK Diff
         uses: corymhall/cdk-diff-action@v1
