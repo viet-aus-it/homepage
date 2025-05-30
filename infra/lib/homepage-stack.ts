@@ -36,6 +36,7 @@ export class HomepageStack extends cdk.Stack {
 
     const distribution = new cloudfront.Distribution(this, 'HomepageSiteDistribution', {
       defaultRootObject: 'index.html',
+      certificate,
       domainNames: [siteDomain],
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       defaultBehavior: {
