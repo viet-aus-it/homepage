@@ -5,6 +5,53 @@ on:
     branches:
       - master
 
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
 jobs:
   test-and-lint:
     uses: ./.github/workflows/test-and-lint.yml
+
+  cdk-diff:
+    needs: test-and-lint
+    runs-on: ubuntu-latest
+    concurrency: cdk-diff
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up project
+        uses: ./.github/actions/setup-node-deps
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Setup AWS <-> GitHub OIDC
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          aws-region: ap-southeast-2
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
+          role-session-name: diff-homepage-session
+
+      - name: CDK diff
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        run: |
+          cd infra
+          npx cdk diff --progress=events --no-change-set --no-staging --ignore-errors --no-version-reporting &> >(tee cdk-diff.log)
+
+      - name: Setup cdk-notifier
+        run: |
+          curl -fL -o cdk-notifier.gz https://github.com/karlderkaefer/cdk-notifier/releases/download/v2.14.3/cdk-notifier_linux_amd64.gz
+          gunzip cdk-notifier.gz
+          chmod +x cdk-notifier
+
+      - name: Update PR
+        env:
+          PR_ID: ${{ github.event.pull_request.number }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./cdk-notifier --log-file ./infra/cdk-diff.log --template extended --disable-collapse

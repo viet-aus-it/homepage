@@ -33,6 +33,8 @@ jobs:
           role-session-name: deploy-homepage-session
 
       - name: Deploy with CDK
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
         run: |
           cd infra
           pnpm run cdk:deploy
