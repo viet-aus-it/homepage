@@ -35,14 +35,9 @@ jobs:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
           role-session-name: diff-homepage-session
 
-      - name: CDK Synth
+      - name: CDK diff
         env:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-        run: |
-          cd infra
-          pnpm run cdk:synth
-
-      - name: CDK diff
         run: |
           cd infra
           npx cdk diff --progress=events --no-change-set --no-staging --ignore-errors --no-version-reporting &> >(tee cdk-diff.log)
