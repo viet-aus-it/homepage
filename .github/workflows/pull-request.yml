@@ -8,3 +8,38 @@ on:
 jobs:
   test-and-lint:
     uses: ./.github/workflows/test-and-lint.yml
+
+  cdk-diff:
+    needs: test-and-lint
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    concurrency: cdk-diff
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up project
+        uses: ./.github/actions/setup-node-deps
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Setup AWS <-> GitHub OIDC
+        uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          aws-region: ap-southeast-2
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
+          role-session-name: diff-homepage-session
+
+      - name: CDK Synth
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        run: npx cdk synth
+
+      - name: CDK Diff
+        uses: corymhall/cdk-diff-action@v1
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
