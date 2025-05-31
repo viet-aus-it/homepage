@@ -1,6 +1,6 @@
 import Footer from '@/components/footer';
 import Hero from '@/components/hero';
-import JoinCommunityCTA from '@/components/join-community-cta';
+import JoinCommunityCTAButton from '@/components/ui/join-community-cta-button';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
 import SectionWithImage from '@/components/ui/section-with-image';
 
@@ -65,7 +65,7 @@ function IndexPage() {
           />
         </div>
         <div id="join">
-          <JoinCommunityCTA />
+          <JoinCommunityCTAButton />
         </div>
       </main>
 
