@@ -1,14 +1,13 @@
 import { Button } from '@/components/ui/button';
-import React from 'react';
 
 const DISCORD_INVITE = 'https://chat.vietausit.com/';
 
 /**
- * Join Community CTA section for the homepage.
+ * Join Community CTA button for the homepage.
  * @param {Object} props
  * @param {string} [props.ctaText] - The CTA button text
  */
-function JoinCommunityCTA({ ctaText = 'Join our Discord Community' }: { ctaText?: string }) {
+function JoinCommunityCTAButton({ ctaText = 'Join our Discord Community' }: { ctaText?: string }) {
   return (
     <section className="w-full flex flex-col items-center justify-center my-16">
       <Button
@@ -24,4 +23,4 @@ function JoinCommunityCTA({ ctaText = 'Join our Discord Community' }: { ctaText?
   );
 }
 
-export default JoinCommunityCTA;
+export default JoinCommunityCTAButton;

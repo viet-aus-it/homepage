@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * Footer component for VAIT site.
  * @param {Object} props
