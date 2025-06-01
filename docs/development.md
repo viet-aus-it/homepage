@@ -14,7 +14,7 @@ This guide helps new developers get started with the VAIT Homepage project. For 
   pnpm install
   ```
 - **Configure your editor:**
-  - Use VSCode or a TypeScript-aware editor for best experience.
+  - Use a TypeScript-aware editor for best experience. (e.g. [VSCode](https://code.visualstudio.com), [Zed](https://zed.dev/))
   - Enable format-on-save and install the Biome extension if available.
 
 ---
