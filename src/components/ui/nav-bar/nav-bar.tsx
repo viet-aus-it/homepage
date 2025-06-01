@@ -5,6 +5,17 @@ import { ORGANISATION } from '@/lib/constants';
 import NavMenu from './nav-menu';
 import NavSheet from './nav-sheet';
 
+/**
+ * NavBar provides a consistent, accessible navigation experience across all screen sizes, reinforcing brand identity and supporting key user actions.
+ *
+ * Design rationale:
+ * - On desktop, navigation links are always visible for quick access and orientation.
+ * - On mobile (limited width), navigation is moved into a sheet (slide-out panel) to maximise screen real estate and reduce clutter, while still providing full access to site sections.
+ * - The sheet approach ensures a modern, touch-friendly experience and avoids overwhelming users with too many visible options on small screens.
+ * - The Discord button is always accessible, supporting community engagement as a primary action.
+ *
+ * The layout and structure are optimised for clarity, responsiveness, and a seamless transition between device sizes.
+ */
 function NavBar() {
   return (
     <nav className="fixed z-10 top-6 inset-x-4 h-14 bg-background border dark:border-slate-700/70 max-w-screen-lg mx-auto rounded-full">

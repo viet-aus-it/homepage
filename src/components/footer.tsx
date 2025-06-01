@@ -1,7 +1,14 @@
 import { ORGANISATION } from '@/lib/constants';
 
 /**
- * Footer component for VAIT site.
+ * Footer provides persistent legal and organisational context, reinforcing trust and compliance for all site visitors.
+ *
+ * Use this component to:
+ * - Display essential organisational details (ABN, Association Number, copyright)
+ * - Ensure users can always verify the legitimacy of the organisation
+ * - Maintain a consistent, accessible, and branded site footer across all pages
+ *
+ * The layout is optimised for clarity and responsiveness, supporting both desktop and mobile users.
  */
 function Footer() {
   const currentYear = new Date().getFullYear();
