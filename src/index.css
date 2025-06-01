@@ -156,10 +156,10 @@
   .text-brand-gray {
     color: var(--brand-gray);
   }
-  .bg-brand-dark-gray {
-    background-color: var(--brand-dark-gray);
+  .bg-brand-gray-dark {
+    background-color: var(--brand-gray-dark);
   }
-  .text-brand-dark-gray {
-    color: var(--brand-dark-gray);
+  .text-brand-gray-dark {
+    color: var(--brand-gray-dark);
   }
 }

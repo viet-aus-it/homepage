@@ -1,75 +1,74 @@
 import Footer from '@/components/footer';
 import Hero from '@/components/hero';
 import JoinCommunityCTAButton from '@/components/ui/join-community-cta-button';
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
+import NavBar from '@/components/ui/nav-bar';
 import SectionWithImage from '@/components/ui/section-with-image';
+
+interface SectionConfig {
+  id: string;
+  title: string;
+  description: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  reverse?: boolean;
+}
+
+const sections: SectionConfig[] = [
+  {
+    id: 'hero',
+    title: 'Empowering Vietnamese Australians IT Professionals',
+    description: "Connect, learn, and grow with Australia's leading Vietnamese IT community",
+  },
+  {
+    id: 'knowledge-sharing',
+    title: 'Share Knowledge, Build Community',
+    description:
+      'Connect with experienced professionals and emerging talent. Share insights, solve challenges together, and stay current with the latest technologies shaping our industry.',
+    imageSrc: '/images/knowledge-sharing.jpg',
+    imageAlt: 'People sharing knowledge at a tech event',
+    reverse: false,
+  },
+  {
+    id: 'networking-events',
+    title: 'Connect Beyond Code',
+    description:
+      'Join regular meetups, workshops, and social events designed to strengthen our community bonds. Build lasting professional relationships and discover new opportunities.',
+    imageSrc: '/images/connect-beyond-code.jpg',
+    imageAlt: 'Networking event with people talking and connecting',
+    reverse: true,
+  },
+  {
+    id: 'professional-growth',
+    title: 'Advance Your Career',
+    description: 'Access career guidance, skill development opportunities, and industry insights from Vietnamese Australian leaders across the tech sector.',
+    imageSrc: '/images/advance-career.jpg',
+    imageAlt: 'Professional growth and mentorship opportunities',
+    reverse: false,
+  },
+];
 
 function IndexPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-brand-dark-gray">
-      {/* Navigation Bar */}
-      <header className="w-full px-4 py-4 bg-white shadow-sm sticky top-0 z-10">
-        <nav className="max-w-6xl mx-auto">
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="#hero">Home</NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="#knowledge">Knowledge Sharing</NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="#networking">Networking Events</NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="#growth">Professional Growth</NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink href="#join">Join</NavigationMenuLink>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-        </nav>
-      </header>
+      <NavBar />
 
-      {/* Main Content */}
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-8 bg-white">
-        <div id="hero">
-          <Hero title="Empowering Vietnamese-Australians." subtitle="Supporting IT professionals across Australia." />
-        </div>
-        <div id="knowledge">
+        <Hero title={sections[0].title} subtitle={sections[0].description} />
+
+        {sections.slice(1).map((section) => (
           <SectionWithImage
-            title="Knowledge Sharing"
-            description="Access and contribute to a growing library of resources, talks, and articles from Vietnamese-Australian IT professionals."
-            imageSrc="https://placehold.co/400"
-            imageAlt="People sharing knowledge at a tech event"
-            reverse={false}
+            key={section.id}
+            sectionId={section.id}
+            title={section.title}
+            description={section.description}
+            imageSrc={section.imageSrc ?? ''}
+            imageAlt={section.imageAlt ?? ''}
+            reverse={section.reverse}
           />
-        </div>
-        <div id="networking">
-          <SectionWithImage
-            title="Networking Events"
-            description="Connect with peers at regular meetups, webinars, and conferences designed to foster collaboration and community."
-            imageSrc="https://placehold.co/400"
-            imageAlt="Networking event with people talking and connecting"
-            reverse={true}
-          />
-        </div>
-        <div id="growth">
-          <SectionWithImage
-            title="Professional Growth"
-            description="Advance your career with mentorship, workshops, and opportunities tailored for Vietnamese-Australian IT professionals."
-            imageSrc="https://placehold.co/400"
-            imageAlt="Professional growth and mentorship opportunities"
-            reverse={false}
-          />
-        </div>
-        <div id="join">
-          <JoinCommunityCTAButton />
-        </div>
+        ))}
+        <JoinCommunityCTAButton />
       </main>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
