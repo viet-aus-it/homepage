@@ -4,7 +4,6 @@
     "bradlc.vscode-tailwindcss",
     "EditorConfig.EditorConfig",
     "github.vscode-github-actions",
-    "heybourn.headwind",
     "vitest.explorer"
   ]
 }
