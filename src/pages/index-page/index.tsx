@@ -3,6 +3,8 @@ import Hero from '@/components/hero';
 import JoinCommunityCTAButton from '@/components/ui/join-community-cta-button';
 import NavBar from '@/components/ui/nav-bar';
 import SectionWithImage from '@/components/ui/section-with-image';
+import { ORGANISATION } from '@/lib/constants';
+import { useEffect } from 'react';
 
 interface SectionConfig {
   id: string;
@@ -48,6 +50,9 @@ const sections: SectionConfig[] = [
 ];
 
 function IndexPage() {
+  useEffect(() => {
+    document.title = `${ORGANISATION.SHORT_NAME} - ${ORGANISATION.NAME}`;
+  }, []);
   return (
     <div className="min-h-screen flex flex-col bg-white text-brand-dark-gray">
       <NavBar />

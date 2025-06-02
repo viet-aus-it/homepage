@@ -1,5 +1,6 @@
 export const ORGANISATION = {
   NAME: 'Vietnamese Australians in Information Technology Inc.',
+  SHORT_NAME: 'VAIT',
   ABN: '54 638 315 913',
   ASSOCIATION_NUMBER: 'A0000009Z',
   ADDRESS: 'Melbourne, VIC Australia',
