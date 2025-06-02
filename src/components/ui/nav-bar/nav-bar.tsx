@@ -21,7 +21,7 @@ function NavBar() {
   return (
     <nav className="fixed z-10 top-6 inset-x-4 h-14 bg-background border dark:border-slate-700/70 max-w-screen-lg mx-auto rounded-full">
       <div className="h-full flex items-center justify-between mx-auto px-3">
-        <Logo className="h-6 w-auto" />
+        <Logo className="h-6 w-auto" colour="dark-gray" />
 
         <div className="flex items-center gap-3 h-3/5">
           {/* Desktop Menu */}
