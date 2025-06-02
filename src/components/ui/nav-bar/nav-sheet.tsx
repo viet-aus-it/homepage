@@ -13,7 +13,7 @@ function NavSheet() {
         </Button>
       </SheetTrigger>
       <SheetContent className="pt-3 px-6">
-        <Logo />
+        <Logo colour="dark-gray" />
         <NavMenu orientation="vertical" className="mt-12" />
       </SheetContent>
     </Sheet>
