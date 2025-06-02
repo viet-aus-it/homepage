@@ -1,11 +1,20 @@
+import { ORGANISATION } from '@/lib/constants';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import IndexPage from './index';
 
 describe('Index Page', () => {
-  it('should render Hi text', () => {
+  it('should show the ABN and Association Number', () => {
     render(<IndexPage />);
-    const hiText = screen.getByText(/Hi/i);
-    expect(hiText).toBeInTheDocument();
+    const abnText = screen.getByText(`ABN: ${ORGANISATION.ABN}`);
+    const associationNumberText = screen.getByText(`Association No: ${ORGANISATION.ASSOCIATION_NUMBER}`);
+    expect(abnText).toBeInTheDocument();
+    expect(associationNumberText).toBeInTheDocument();
+  });
+
+  it('should have the correct title metadata', () => {
+    render(<IndexPage />);
+    const title = document.title;
+    expect(title).toBe(`${ORGANISATION.SHORT_NAME} - ${ORGANISATION.NAME}`);
   });
 });
