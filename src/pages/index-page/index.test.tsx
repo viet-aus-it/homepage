@@ -7,7 +7,7 @@ describe('Index Page', () => {
   it('should show the ABN and Association Number', () => {
     render(<IndexPage />);
     const abnText = screen.getByText(`ABN: ${ORGANISATION.ABN}`);
-    const associationNumberText = screen.getByText(`Association No: ${ORGANISATION.ASSOCIATION_NUMBER}`);
+    const associationNumberText = screen.getByText(`Association No: (VIC) ${ORGANISATION.ASSOCIATION_NUMBER}`);
     expect(abnText).toBeInTheDocument();
     expect(associationNumberText).toBeInTheDocument();
   });

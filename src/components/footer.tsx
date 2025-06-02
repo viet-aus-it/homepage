@@ -18,7 +18,7 @@ function Footer() {
       <div className="flex flex-col md:flex-row items-center justify-center gap-2">
         <span>ABN: {ORGANISATION.ABN}</span>
         <span className="hidden md:inline">|</span>
-        <span>Association No: {ORGANISATION.ASSOCIATION_NUMBER}</span>
+        <span>Association No: (VIC) {ORGANISATION.ASSOCIATION_NUMBER}</span>
       </div>
       <div className="mt-2 text-brand-gray">
         &copy; {currentYear} {ORGANISATION.NAME}
