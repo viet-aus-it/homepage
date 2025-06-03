@@ -14,7 +14,7 @@ function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full py-6 px-4 bg-brand-gray-dark text-brand-yellow text-center text-sm border-t border-brand-gray bg-brand-gray-dark">
+    <footer className="z-1 w-full py-6 px-4 bg-brand-gray-dark text-brand-yellow text-center text-sm border-t border-brand-gray bg-brand-gray-dark">
       <div className="flex flex-col md:flex-row items-center justify-center gap-2">
         <span>ABN: {ORGANISATION.ABN}</span>
         <span className="hidden md:inline">|</span>
