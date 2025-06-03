@@ -1,5 +1,6 @@
 import Footer from '@/components/footer';
 import Hero from '@/components/hero';
+import FuturisticBackground from '@/components/ui/futuristic-background';
 import JoinCommunityCTAButton from '@/components/ui/join-community-cta-button';
 import NavBar from '@/components/ui/nav-bar';
 import SectionWithImage from '@/components/ui/section-with-image';
@@ -54,23 +55,27 @@ function IndexPage() {
     document.title = `${ORGANISATION.SHORT_NAME} - ${ORGANISATION.NAME}`;
   }, []);
   return (
-    <div className="min-h-screen flex flex-col bg-white text-brand-dark-gray">
-      <NavBar />
+    <div className="min-h-screen flex flex-col bg-stone-50 text-brand-dark-gray">
+      <FuturisticBackground />
 
-      <main className="flex-1 flex flex-col items-center justify-center px-4 py-8 bg-white">
+      <NavBar />
+      <main className="z-1 flex-1 flex flex-col items-center justify-center px-4 py-8">
         <Hero title={sections[0].title} subtitle={sections[0].description} />
 
-        {sections.slice(1).map((section) => (
-          <SectionWithImage
-            key={section.id}
-            sectionId={section.id}
-            title={section.title}
-            description={section.description}
-            imageSrc={section.imageSrc ?? ''}
-            imageAlt={section.imageAlt ?? ''}
-            reverse={section.reverse}
-          />
-        ))}
+        <section className="w-full max-w-screen-lg bg-white rounded-2xl shadow-md p-8 my-8">
+          {sections.slice(1).map((section) => (
+            <SectionWithImage
+              key={section.id}
+              sectionId={section.id}
+              title={section.title}
+              description={section.description}
+              imageSrc={section.imageSrc ?? ''}
+              imageAlt={section.imageAlt ?? ''}
+              reverse={section.reverse}
+            />
+          ))}
+        </section>
+
         <JoinCommunityCTAButton />
       </main>
 
