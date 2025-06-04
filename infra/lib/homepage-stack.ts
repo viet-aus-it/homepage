@@ -23,7 +23,7 @@ export class HomepageStack extends cdk.Stack {
      */
     const certificate = new acm.DnsValidatedCertificate(this, 'VAITHomeCertificate', {
       region: 'us-east-1',
-      domainName: SITE_DOMAIN,
+      domainName: `*.${BASE_DOMAIN}`,
       hostedZone: zone,
     });
 
