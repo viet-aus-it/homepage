@@ -9,7 +9,7 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3_deployment from 'aws-cdk-lib/aws-s3-deployment';
 import type { Construct } from 'constructs';
 
-import { BASE_DOMAIN, SITE_DOMAIN } from './constants';
+import { BASE_DOMAIN, SITE_DOMAIN, WWW_DOMAIN } from './constants';
 
 export class HomepageStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -67,6 +67,16 @@ export class HomepageStack extends cdk.Stack {
     const siteDomainTarget = new route53_targets.CloudFrontTarget(distribution);
     new route53.ARecord(this, 'SiteAliasRecord', {
       recordName: SITE_DOMAIN,
+      target: route53.RecordTarget.fromAlias(siteDomainTarget),
+      zone,
+    });
+    new route53.ARecord(this, 'SiteAliasRecord', {
+      recordName: BASE_DOMAIN,
+      target: route53.RecordTarget.fromAlias(siteDomainTarget),
+      zone,
+    });
+    new route53.ARecord(this, 'SiteAliasRecord', {
+      recordName: WWW_DOMAIN,
       target: route53.RecordTarget.fromAlias(siteDomainTarget),
       zone,
     });
