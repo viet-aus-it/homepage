@@ -65,17 +65,17 @@ export class HomepageStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'DistributionId', { value: distribution.distributionId });
 
     const siteDomainTarget = new route53_targets.CloudFrontTarget(distribution);
-    new route53.ARecord(this, 'SiteAliasRecord', {
+    new route53.ARecord(this, 'HomepageAliasRecord', {
       recordName: SITE_DOMAIN,
       target: route53.RecordTarget.fromAlias(siteDomainTarget),
       zone,
     });
-    new route53.ARecord(this, 'SiteAliasRecord', {
+    new route53.ARecord(this, 'BaseAliasRecord', {
       recordName: BASE_DOMAIN,
       target: route53.RecordTarget.fromAlias(siteDomainTarget),
       zone,
     });
-    new route53.ARecord(this, 'SiteAliasRecord', {
+    new route53.ARecord(this, 'WwwAliasRecord', {
       recordName: WWW_DOMAIN,
       target: route53.RecordTarget.fromAlias(siteDomainTarget),
       zone,
