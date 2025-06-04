@@ -1,5 +1,6 @@
 import path from 'node:path';
 import * as cdk from 'aws-cdk-lib';
+import { Duration } from 'aws-cdk-lib';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as cloudfront_origins from 'aws-cdk-lib/aws-cloudfront-origins';
@@ -46,6 +47,17 @@ export class HomepageStack extends cdk.Stack {
         compress: true,
         allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        cachePolicy: new cloudfront.CachePolicy(this, 'LongTimeCachingPolicy', {
+          cachePolicyName: 'LongTimeCachingPolicy',
+          defaultTtl: Duration.hours(24),
+          maxTtl: Duration.days(365),
+          minTtl: Duration.seconds(0),
+          cookieBehavior: cloudfront.CacheCookieBehavior.none(),
+          headerBehavior: cloudfront.CacheHeaderBehavior.none(),
+          queryStringBehavior: cloudfront.CacheQueryStringBehavior.none(),
+          enableAcceptEncodingGzip: true,
+          enableAcceptEncodingBrotli: true,
+        }),
       },
       errorResponses: [
         {
