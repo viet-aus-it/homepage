@@ -9,7 +9,7 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3_deployment from 'aws-cdk-lib/aws-s3-deployment';
 import type { Construct } from 'constructs';
 
-import { BASE_DOMAIN, SITE_DOMAIN } from './constants';
+import { BASE_DOMAIN, SITE_DOMAIN, WWW_DOMAIN } from './constants';
 
 export class HomepageStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -23,7 +23,8 @@ export class HomepageStack extends cdk.Stack {
      */
     const certificate = new acm.DnsValidatedCertificate(this, 'VAITHomeCertificate', {
       region: 'us-east-1',
-      domainName: SITE_DOMAIN,
+      domainName: BASE_DOMAIN,
+      subjectAlternativeNames: [SITE_DOMAIN, WWW_DOMAIN],
       hostedZone: zone,
     });
 
@@ -39,7 +40,7 @@ export class HomepageStack extends cdk.Stack {
     const distribution = new cloudfront.Distribution(this, 'HomepageSiteDistribution', {
       defaultRootObject: 'index.html',
       certificate,
-      domainNames: [SITE_DOMAIN],
+      domainNames: [SITE_DOMAIN, WWW_DOMAIN, BASE_DOMAIN],
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       defaultBehavior: {
         origin: cloudfront_origins.S3BucketOrigin.withOriginAccessControl(siteBucket),
@@ -65,8 +66,18 @@ export class HomepageStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'DistributionId', { value: distribution.distributionId });
 
     const siteDomainTarget = new route53_targets.CloudFrontTarget(distribution);
-    new route53.ARecord(this, 'SiteAliasRecord', {
+    new route53.ARecord(this, 'HomepageSiteAliasRecord', {
       recordName: SITE_DOMAIN,
+      target: route53.RecordTarget.fromAlias(siteDomainTarget),
+      zone,
+    });
+    new route53.ARecord(this, 'HomepageAliasRecord', {
+      recordName: BASE_DOMAIN,
+      target: route53.RecordTarget.fromAlias(siteDomainTarget),
+      zone,
+    });
+    new route53.ARecord(this, 'HomepageWWWAliasRecord', {
+      recordName: WWW_DOMAIN,
       target: route53.RecordTarget.fromAlias(siteDomainTarget),
       zone,
     });
