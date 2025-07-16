@@ -49,7 +49,7 @@
     "zod": "^3.25.32"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.0.0",
     "@tanstack/router-cli": "^1.120.11",
     "@tanstack/router-vite-plugin": "^1.120.11",
     "@testing-library/dom": "^10.4.0",
@@ -74,6 +74,10 @@
     "vitest-preview": "^0.0.1"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "@tailwindcss/oxide", "esbuild"]
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "@tailwindcss/oxide",
+      "esbuild"
+    ]
   }
 }
