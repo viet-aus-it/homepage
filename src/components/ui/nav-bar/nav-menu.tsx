@@ -1,6 +1,6 @@
+import type { NavigationMenuProps } from '@radix-ui/react-navigation-menu';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils';
-import type { NavigationMenuProps } from '@radix-ui/react-navigation-menu';
 
 interface NavMenuItemProps {
   title: string;

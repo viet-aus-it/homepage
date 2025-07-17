@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Footer from '@/components/footer';
 import Hero from '@/components/hero';
 import FuturisticBackground from '@/components/ui/futuristic-background';
@@ -5,7 +6,6 @@ import JoinCommunityCTAButton from '@/components/ui/join-community-cta-button';
 import NavBar from '@/components/ui/nav-bar';
 import SectionWithImage from '@/components/ui/section-with-image';
 import { ORGANISATION } from '@/lib/constants';
-import { useEffect } from 'react';
 
 interface SectionConfig {
   id: string;

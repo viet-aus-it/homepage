@@ -1,6 +1,6 @@
-import { ORGANISATION } from '@/lib/constants';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import { ORGANISATION } from '@/lib/constants';
 import IndexPage from './index';
 
 describe('Index Page', () => {
