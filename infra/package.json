@@ -9,7 +9,7 @@
     "cdk:deploy": "cdk deploy --require-approval never --all"
   },
   "devDependencies": {
-    "aws-cdk": "2.1016.1"
+    "aws-cdk": "2.1021.0"
   },
   "dependencies": {
     "aws-cdk-lib": "2.196.0",
