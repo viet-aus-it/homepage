@@ -12,12 +12,9 @@ importers:
         specifier: 2.196.0
         version: 2.196.0(constructs@10.4.2)
       constructs:
-        specifier: ^10.0.0
+        specifier: ^10.4.2
         version: 10.4.2
     devDependencies:
-      '@types/node':
-        specifier: 22.7.9
-        version: 22.7.9
       aws-cdk:
         specifier: 2.1016.1
         version: 2.1016.1
@@ -36,9 +33,6 @@ packages:
     bundledDependencies:
       - jsonschema
       - semver
-
-  '@types/node@22.7.9':
-    resolution: {integrity: sha512-jrTfRC7FM6nChvU7X2KqcrgquofrWLFDeYC1hKfwNWomVvrn7JIksqf344WN2X/y8xrgqBd2dJATZV4GbatBfg==}
 
   aws-cdk-lib@2.196.0:
     resolution: {integrity: sha512-CAy0ahDpUHuYArP0vhDrOZ9OUSyRAznCcKcbETJOPr438QZUCyv+tRVgk8VP5lFW1JuV9sNzIvxdZcsNVSCF7g==}
@@ -71,9 +65,6 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  undici-types@6.19.8:
-    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
-
 snapshots:
 
   '@aws-cdk/asset-awscli-v1@2.2.236': {}
@@ -81,10 +72,6 @@ snapshots:
   '@aws-cdk/asset-node-proxy-agent-v6@2.1.0': {}
 
   '@aws-cdk/cloud-assembly-schema@41.2.0': {}
-
-  '@types/node@22.7.9':
-    dependencies:
-      undici-types: 6.19.8
 
   aws-cdk-lib@2.196.0(constructs@10.4.2):
     dependencies:
@@ -101,5 +88,3 @@ snapshots:
 
   fsevents@2.3.2:
     optional: true
-
-  undici-types@6.19.8: {}
