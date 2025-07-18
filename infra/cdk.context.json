@@ -6,5 +6,6 @@
   "hosted-zone:account=415927671471:domainName=vietausit.com:region=ap-southeast-2": {
     "Id": "/hostedzone/Z077369421PGT0PNQ9P1N",
     "Name": "vietausit.com."
-  }
+  },
+  "cli-telemetry": false
 }

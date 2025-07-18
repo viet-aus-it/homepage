@@ -12,15 +12,12 @@ importers:
         specifier: 2.196.0
         version: 2.196.0(constructs@10.4.2)
       constructs:
-        specifier: ^10.0.0
+        specifier: ^10.4.2
         version: 10.4.2
     devDependencies:
-      '@types/node':
-        specifier: 22.7.9
-        version: 22.7.9
       aws-cdk:
-        specifier: 2.1016.1
-        version: 2.1016.1
+        specifier: 2.1021.0
+        version: 2.1021.0
 
 packages:
 
@@ -36,9 +33,6 @@ packages:
     bundledDependencies:
       - jsonschema
       - semver
-
-  '@types/node@22.7.9':
-    resolution: {integrity: sha512-jrTfRC7FM6nChvU7X2KqcrgquofrWLFDeYC1hKfwNWomVvrn7JIksqf344WN2X/y8xrgqBd2dJATZV4GbatBfg==}
 
   aws-cdk-lib@2.196.0:
     resolution: {integrity: sha512-CAy0ahDpUHuYArP0vhDrOZ9OUSyRAznCcKcbETJOPr438QZUCyv+tRVgk8VP5lFW1JuV9sNzIvxdZcsNVSCF7g==}
@@ -58,9 +52,9 @@ packages:
       - yaml
       - mime-types
 
-  aws-cdk@2.1016.1:
-    resolution: {integrity: sha512-248TBiluT8jHUjkpzvWJOHv2fS+An9fiII3eji8H7jwfTu5yMBk7on4B/AVNr9A1GXJk9I32qf9Q0A3rLWRYPQ==}
-    engines: {node: '>= 14.15.0'}
+  aws-cdk@2.1021.0:
+    resolution: {integrity: sha512-kE557b4N9UFWax+7km3R6D56o4tGhpzOks/lRDugaoC8su3mocLCXJhb954b/IRl0ipnbZnY/Sftq+RQ/sxivg==}
+    engines: {node: '>= 18.0.0'}
     hasBin: true
 
   constructs@10.4.2:
@@ -71,9 +65,6 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  undici-types@6.19.8:
-    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
-
 snapshots:
 
   '@aws-cdk/asset-awscli-v1@2.2.236': {}
@@ -82,10 +73,6 @@ snapshots:
 
   '@aws-cdk/cloud-assembly-schema@41.2.0': {}
 
-  '@types/node@22.7.9':
-    dependencies:
-      undici-types: 6.19.8
-
   aws-cdk-lib@2.196.0(constructs@10.4.2):
     dependencies:
       '@aws-cdk/asset-awscli-v1': 2.2.236
@@ -93,7 +80,7 @@ snapshots:
       '@aws-cdk/cloud-assembly-schema': 41.2.0
       constructs: 10.4.2
 
-  aws-cdk@2.1016.1:
+  aws-cdk@2.1021.0:
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -101,5 +88,3 @@ snapshots:
 
   fsevents@2.3.2:
     optional: true
-
-  undici-types@6.19.8: {}
