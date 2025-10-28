@@ -3,7 +3,7 @@
   "files": {
     "includes": [
       "**",
-      "!**/.vscode/**",
+      "!**/.vscode",
       "!**/.zed",
       "!**/src/routeTree.gen.ts",
       "!**/src/**/__snapshots__",
