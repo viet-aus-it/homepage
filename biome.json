@@ -3,7 +3,7 @@
   "files": {
     "includes": [
       "**",
-      "!**/.vscode/**",
+      "!**/.vscode",
       "!**/.zed",
       "!**/src/routeTree.gen.ts",
       "!**/src/**/__snapshots__",
@@ -49,6 +49,14 @@
   "css": {
     "formatter": {
       "enabled": true
+    },
+    "parser": {
+      "tailwindDirectives": true
     }
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
   }
 }
