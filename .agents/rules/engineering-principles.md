@@ -25,7 +25,7 @@ This document outlines the engineering principles that guide development of the 
 ## React 19 Principles
 
 ### Component Architecture
-```typescript
+```tsx
 // ✅ Good: Functional components with proper typing
 type NavigationProps = {
   items: NavigationItem[];
@@ -50,7 +50,7 @@ export const Navigation = ({ items, currentPath, onNavigate }: NavigationProps) 
 ```
 
 ### Hook Patterns
-```typescript
+```tsx
 // ✅ Good: Custom hooks with proper typing and error handling
 type UseApiResult<T> = {
   data: T | null;

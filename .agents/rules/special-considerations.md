@@ -11,7 +11,7 @@ This document outlines special considerations and constraints specific to the VA
 - **Polyfill strategy**: Use Vite's @vitejs/plugin-legacy for legacy browser support
 
 ### Feature Detection
-```typescript
+```tsx
 // ✅ Good: Feature detection with fallbacks
 export const useFeatureDetection = () => {
   const [features, setFeatures] = useState({
@@ -51,7 +51,7 @@ export const useFeatureDetection = () => {
 ```
 
 ### CSS Feature Support
-```typescript
+```tsx
 // ✅ Good: CSS feature detection with Tailwind
 export const HeroSection = () => {
   const { features } = useFeatureDetection();

@@ -18,7 +18,7 @@ This document provides comprehensive code style guidelines for the VAIT Homepage
 - Use proper return type annotations for public APIs
 
 ### Type Definitions
-```typescript
+```tsx
 // ✅ Good: Interface for object shapes
 interface UserProfile {
   id: string;
@@ -43,7 +43,7 @@ const fetchData = async (url: string): Promise<unknown> => {
 ## React Component Patterns
 
 ### Component Structure
-```typescript
+```tsx
 // ✅ Good: Functional component with proper typing
 type HeroProps = {
   title: string;
@@ -63,7 +63,7 @@ export const Hero = ({ title, subtitle, onAction }: HeroProps) => {
 ```
 
 ### Custom Hooks
-```typescript
+```tsx
 // ✅ Good: Custom hook with proper typing and 'use' prefix
 type UseApiResult<T> = {
   data: T | null;
