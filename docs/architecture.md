@@ -17,10 +17,13 @@ This document provides a high-level overview of the VAIT Homepage architecture.
 ## Main Technologies
 - **React 19** for UI
 - **TanStack Router** for routing
-- **React Query** for data fetching
 - **Zod** for schema validation
 - **Biome** for linting/formatting
 - **Vitest** for testing
+- **AWS CDK** for infrastructure as code
+- **AWS S3** for static hosting
+- **AWS CloudFront** for CDN
+- **AWS Route53** for DNS management
 
 ## More Details
 - See [Development Guide](./development.md) for workflow and conventions
