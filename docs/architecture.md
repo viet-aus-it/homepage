@@ -20,6 +20,10 @@ This document provides a high-level overview of the VAIT Homepage architecture.
 - **Zod** for schema validation
 - **Biome** for linting/formatting
 - **Vitest** for testing
+- **AWS CDK** for infrastructure as code
+- **AWS S3** for static hosting
+- **AWS CloudFront** for CDN
+- **AWS Route53** for DNS management
 
 ## More Details
 - See [Development Guide](./development.md) for workflow and conventions

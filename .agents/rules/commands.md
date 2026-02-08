@@ -155,17 +155,35 @@ cd infra/
 # Install CDK dependencies
 pnpm install
 
+# Watch for changes and compile
+pnpm run watch
+
 # Synthesize CloudFormation template
-pnpm run cdk synth
+npx cdk synth
 
 # Deploy infrastructure
-pnpm run cdk deploy
+npx cdk deploy
+
+# Compare deployed stack with current state
+npx cdk diff
 
 # Destroy infrastructure (use with caution)
-pnpm run cdk destroy
+npx cdk destroy
 
 # List all stacks
-pnpm run cdk list
+npx cdk list
+```
+
+### Environment-Specific Deployment
+```bash
+# Deploy to development environment
+cd infra/ && npx cdk deploy VaitHomepageDev --profile dev
+
+# Deploy to production environment
+cd infra/ && npx cdk deploy VaitHomepageProd --profile prod
+
+# Deploy with parameters
+npx cdk deploy --parameters Environment=production
 ```
 
 ### Local Infrastructure Development

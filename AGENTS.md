@@ -72,6 +72,7 @@ Load these rules when working on relevant domains:
 - **[engineering-principles.md](.agents/rules/engineering-principles.md)** - Clean code, performance, security, decision framework
 - **[communication.md](.agents/rules/communication.md)** - Communication style and output expectations
 - **[special-considerations.md](.agents/rules/special-considerations.md)** - Browser compatibility, SEO, accessibility, deployment
+- **[infrastructure.md](.agents/rules/infrastructure.md)** - AWS CDK patterns, deployment strategies, and operational best practices
 
 ## Available Skills
 
