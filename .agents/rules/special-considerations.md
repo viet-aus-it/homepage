@@ -523,62 +523,66 @@ export const useAssetCache = () => {
 ```
 
 ### Error Monitoring and Analytics
-```typescript
-// ✅ Good: Error boundary with monitoring
-export class MonitoredErrorBoundary extends Component<
-  { children: ReactNode },
-  { hasError: boolean }
-> {
-  constructor(props: { children: ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
-  }
+```tsx
+// ✅ Good: Error boundary with monitoring using react-error-boundary
+import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Log to monitoring service
-    console.error('Error caught by boundary:', error, errorInfo);
-
-    // Send to error tracking service (e.g., Sentry)
-    if (typeof window !== 'undefined' && window.Sentry) {
-      window.Sentry.captureException(error, {
-        contexts: {
-          react: {
-            componentStack: errorInfo.componentStack
-          }
-        }
-      });
-    }
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">
-              Something went wrong
-            </h1>
-            <p className="text-gray-600 mb-6">
-              We're sorry, but something unexpected happened.
-              Please try refreshing the page.
-            </p>
-            <button
-              onClick={() => window.location.reload()}
-              className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
-            >
-              Refresh Page
-            </button>
-          </div>
+function MonitoredErrorFallback({ error, resetErrorBoundary }: {
+  error: Error;
+  resetErrorBoundary: () => void;
+}) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">
+          Something went wrong
+        </h1>
+        <p className="text-gray-600 mb-6">
+          We're sorry, but something unexpected happened.
+          Please try again or refresh the page.
+        </p>
+        <div className="space-x-4">
+          <button
+            onClick={resetErrorBoundary}
+            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
+          >
+            Try Again
+          </button>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700"
+          >
+            Refresh Page
+          </button>
         </div>
-      );
-    }
+      </div>
+    </div>
+  );
+}
 
-    return this.props.children;
-  }
+export function MonitoredErrorBoundary({ children }: { children: ReactNode }) {
+  return (
+    <ReactErrorBoundary
+      FallbackComponent={MonitoredErrorFallback}
+      onError={(error, errorInfo) => {
+        // Log to monitoring service
+        console.error('Error caught by boundary:', error, errorInfo);
+
+        // Send to error tracking service (e.g., Sentry)
+        if (typeof window !== 'undefined' && window.Sentry) {
+          window.Sentry.captureException(error, {
+            contexts: {
+              react: {
+                componentStack: errorInfo.componentStack
+              }
+            }
+          });
+        }
+      }}
+    >
+      {children}
+    </ReactErrorBoundary>
+  );
 }
 ```
 

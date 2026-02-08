@@ -202,32 +202,34 @@ src/pages/index-page/
 ## Error Handling
 
 ### React Error Boundaries
-```typescript
-// ✅ Good: Proper error boundary implementation
-export class ErrorBoundary extends Component<
-  { children: ReactNode },
-  { hasError: boolean }
-> {
-  constructor(props: { children: ReactNode }) {
-    super(props);
-    this.state = { hasError: false };
-  }
+```tsx
+// ✅ Good: Error boundary using react-error-boundary
+import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true };
-  }
+function ErrorFallback({ error, resetErrorBoundary }: {
+  error: Error;
+  resetErrorBoundary: () => void;
+}) {
+  return (
+    <div role="alert">
+      <h2>Something went wrong.</h2>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  );
+}
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <div>Something went wrong.</div>;
-    }
-
-    return this.props.children;
-  }
+export function ErrorBoundary({ children }: { children: ReactNode }) {
+  return (
+    <ReactErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onError={(error, errorInfo) => {
+        console.error('Error caught by boundary:', error, errorInfo);
+      }}
+    >
+      {children}
+    </ReactErrorBoundary>
+  );
 }
 ```
 
