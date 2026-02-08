@@ -94,7 +94,6 @@ export const useApi = <T>(url: string): UseApiResult<T> => {
 ```typescript
 // ✅ Good: Properly organized imports
 import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
 import { cn } from '@/lib/utils';

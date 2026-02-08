@@ -18,7 +18,7 @@ You are working on the VAIT Homepage, the official website for the Viet-Aus IT c
 
 - **Domain**: Community homepage showcasing VAIT events, membership, and resources
 - **Team**: VAIT (Vietnamese Australians in Information Technology community)
-- **Tech Stack**: React 19, Vite, TypeScript, TanStack Router, React Query, Zod, Biome, Vitest
+- **Tech Stack**: React 19, Vite, TypeScript, TanStack Router, Zod, Biome, Vitest
 - **Architecture**: Component-based architecture with type-safe routing and state management
 - **Infrastructure**: AWS CDK, S3, CloudFront for deployment
 
@@ -68,7 +68,7 @@ Load these rules when working on relevant domains:
 
 - **[commands.md](.agents/rules/commands.md)** - Complete reference of available pnpm commands and workflows
 - **[code-style.md](.agents/rules/code-style.md)** - Code formatting, TypeScript conventions, React patterns
-- **[patterns.md](.agents/rules/patterns.md)** - React, TanStack Router, React Query, and testing patterns
+- **[patterns.md](.agents/rules/patterns.md)** - React, TanStack Router, and testing patterns
 - **[engineering-principles.md](.agents/rules/engineering-principles.md)** - Clean code, performance, security, decision framework
 - **[communication.md](.agents/rules/communication.md)** - Communication style and output expectations
 - **[special-considerations.md](.agents/rules/special-considerations.md)** - Browser compatibility, SEO, accessibility, deployment
@@ -84,7 +84,7 @@ Currently: _(No skills defined yet - add skills under `.agents/skills/[skill-nam
 ### Tech Stack
 
 - React 19, Vite, TypeScript
-- TanStack Router, React Query, Zod
+- TanStack Router, Zod
 - Biome for formatting, Vitest for testing
 - AWS CDK, S3, CloudFront for deployment
 

@@ -161,48 +161,56 @@ export function DataFetcher<T>({ url, children }: DataFetcherProps<T>) {
 
 ### Data Fetching Hooks
 ```typescript
-// ✅ Good: Reusable data fetching hook with React Query
+// ✅ Good: Reusable data fetching hook with proper state management
 type UseApiOptions<T> = {
   enabled?: boolean;
-  staleTime?: number;
-  cacheTime?: number;
   onSuccess?: (data: T) => void;
   onError?: (error: Error) => void;
 };
 
 export function useApi<T>(
-  queryKey: string[],
-  fetcher: () => Promise<T>,
+  url: string,
   options: UseApiOptions<T> = {}
 ) {
-  const {
-    enabled = true,
-    staleTime = 5 * 60 * 1000, // 5 minutes
-    cacheTime = 10 * 60 * 1000, // 10 minutes
-    onSuccess,
-    onError
-  } = options;
+  const [data, setData] = useState<T | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const { enabled = true, onSuccess, onError } = options;
 
-  return useQuery({
-    queryKey,
-    queryFn: fetcher,
-    enabled,
-    staleTime,
-    cacheTime,
-    onSuccess,
-    onError
-  });
+  useEffect(() => {
+    if (!enabled) return;
+
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        const result = await response.json();
+        setData(result);
+        onSuccess?.(result);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+        setError(errorMessage);
+        onError?.(err instanceof Error ? err : new Error(errorMessage));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [url, enabled, onSuccess, onError]);
+
+  return { data, loading, error };
 }
 
 // Usage:
-const { data: userProfile, loading, error } = useApi(
-  ['user-profile', userId],
-  () => fetchUserProfile(userId),
-  {
-    staleTime: 2 * 60 * 1000, // 2 minutes
-    onError: (error) => console.error('Failed to fetch user profile:', error)
-  }
-);
+const { data: userProfile, loading, error } = useApi(`/api/users/${userId}`, {
+  onSuccess: (data) => console.log('User profile loaded:', data),
+  onError: (error) => console.error('Failed to fetch user profile:', error)
+});
 ```
 
 ### Local Storage Hooks
@@ -238,69 +246,7 @@ export function useLocalStorage<T>(
 const [theme, setTheme] = useLocalStorage<'light' | 'dark'>('theme', 'light');
 ```
 
-### Form Handling Hooks
-```typescript
-// ✅ Good: Form handling with Zod validation
-export function useForm<T extends z.ZodSchema>(
-  schema: T,
-  initialValues: z.infer<T>
-) {
-  const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const setValue = useCallback((name: string, value: unknown) => {
-    setValues(prev => ({ ...prev, [name]: value }));
-    // Clear error for this field
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  }, [errors]);
-
-  const validate = useCallback(() => {
-    try {
-      schema.parse(values);
-      setErrors({});
-      return true;
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const fieldErrors: Record<string, string> = {};
-        error.errors.forEach(err => {
-          if (err.path.length > 0) {
-            fieldErrors[err.path[0]] = err.message;
-          }
-        });
-        setErrors(fieldErrors);
-      }
-      return false;
-    }
-  }, [values, schema]);
-
-  const handleSubmit = useCallback(async (
-    onSubmit: (values: z.infer<T>) => Promise<void>
-  ) => {
-    if (!validate()) return;
-
-    setIsSubmitting(true);
-    try {
-      await onSubmit(values);
-    } catch (error) {
-      console.error('Form submission error:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [validate]);
-
-  return {
-    values,
-    errors,
-    isSubmitting,
-    setValue,
-    validate,
-    handleSubmit
-  };
-}
-```
 
 ## TanStack Router Patterns
 
@@ -379,30 +325,13 @@ export const UserCard = ({ user }: { user: UserProfile }) => {
 // ✅ Good: User-focused component testing
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { UserProfile } from './user-profile';
-
-const createTestQueryClient = () => new QueryClient({
-  defaultOptions: {
-    queries: { retry: false },
-    mutations: { retry: false }
-  }
-});
-
-const renderWithQueryClient = (component: React.ReactElement) => {
-  const queryClient = createTestQueryClient();
-  return render(
-    <QueryClientProvider client={queryClient}>
-      {component}
-    </QueryClientProvider>
-  );
-};
 
 describe('UserProfile', () => {
   it('should display user information when loaded', async () => {
     const mockUser = { id: '1', name: 'John Doe', email: 'john@example.com' };
     
-    renderWithQueryClient(<UserProfile userId="1" />);
+    render(<UserProfile userId="1" />);
     
     expect(screen.getByText('Loading...')).toBeInTheDocument();
     
@@ -412,20 +341,19 @@ describe('UserProfile', () => {
     });
   });
 
-  it('should handle edit mode correctly', async () => {
+  it('should handle user interactions correctly', async () => {
     const user = userEvent.setup();
     const mockUser = { id: '1', name: 'John Doe', email: 'john@example.com' };
     
-    renderWithQueryClient(<UserProfile userId="1" />);
+    render(<UserProfile userId="1" />);
     
     await waitFor(() => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
     });
 
-    await user.click(screen.getByRole('button', { name: /edit/i }));
+    await user.click(screen.getByRole('button', { name: /view details/i }));
     
-    expect(screen.getByDisplayValue('John Doe')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('john@example.com')).toBeInTheDocument();
+    expect(screen.getByText('User Details')).toBeInTheDocument();
   });
 });
 ```
@@ -446,12 +374,6 @@ const server = setupServer(
         email: 'test@example.com'
       })
     );
-  }),
-  rest.post('/api/users/:userId', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({ success: true })
-    );
   })
 );
 
@@ -470,7 +392,7 @@ describe('UserProfile with mocked API', () => {
       })
     );
 
-    renderWithQueryClient(<UserProfile userId="1" />);
+    render(<UserProfile userId="1" />);
     
     await waitFor(() => {
       expect(screen.getByText(/failed to load user/i)).toBeInTheDocument();
@@ -486,76 +408,60 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from '@tanstack/react-router';
 import { App } from '../app';
 
-describe('User Registration Flow', () => {
-  it('should complete full registration workflow', async () => {
+describe('Navigation Flow', () => {
+  it('should navigate through pages correctly', async () => {
     render(
-      <MemoryRouter initialEntries={['/register']}>
+      <MemoryRouter initialEntries={['/']}>
         <App />
       </MemoryRouter>
     );
 
-    // Step 1: Fill registration form
-    await userEvent.type(screen.getByLabelText(/name/i), 'John Doe');
-    await userEvent.type(screen.getByLabelText(/email/i), 'john@example.com');
-    await userEvent.type(screen.getByLabelText(/password/i), 'securepassword');
+    // Step 1: Verify home page
+    expect(screen.getByText('Welcome to VAIT')).toBeInTheDocument();
     
-    // Step 2: Submit form
-    await userEvent.click(screen.getByRole('button', { name: /register/i }));
+    // Step 2: Navigate to about page
+    await userEvent.click(screen.getByRole('link', { name: /about/i }));
     
-    // Step 3: Verify redirect to profile
+    // Step 3: Verify about page content
     await waitFor(() => {
-      expect(screen.getByText(/welcome, john doe/i)).toBeInTheDocument();
+      expect(screen.getByText(/about vait/i)).toBeInTheDocument();
     });
     
-    // Step 4: Verify navigation
-    expect(screen.getByRole('link', { name: /profile/i })).toHaveAttribute('href', '/profile');
+    // Step 4: Verify navigation structure
+    expect(screen.getByRole('link', { name: /events/i })).toBeInTheDocument();
   });
 });
 ```
 
 ## State Management Patterns
 
-### React Query Patterns
+### Local State Patterns
 ```typescript
-// ✅ Good: Optimistic updates with React Query
-export function useLikePost() {
-  const queryClient = useQueryClient();
+// ✅ Good: Component state with proper typing
+export function useNavigationState() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('home');
 
-  return useMutation({
-    mutationFn: async (postId: string) => {
-      const response = await fetch(`/api/posts/${postId}/like`, { method: 'POST' });
-      if (!response.ok) throw new Error('Failed to like post');
-      return response.json();
-    },
-    onMutate: async (postId: string) => {
-      // Cancel any outgoing refetches
-      await queryClient.cancelQueries({ queryKey: ['posts'] });
-      
-      // Snapshot the previous value
-      const previousPosts = queryClient.getQueryData(['posts']);
-      
-      // Optimistically update to the new value
-      queryClient.setQueryData(['posts'], (old: Post[]) => 
-        old.map(post => 
-          post.id === postId 
-            ? { ...post, likes: post.likes + 1, isLiked: true }
-            : post
-        )
-      );
-      
-      return { previousPosts };
-    },
-    onError: (err, postId, context) => {
-      // Rollback on error
-      if (context?.previousPosts) {
-        queryClient.setQueryData(['posts'], context.previousPosts);
-      }
-    },
-    onSettled: () => {
-      // Always refetch after error or success
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
-    }
-  });
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
+  const navigateToSection = useCallback((section: string) => {
+    setActiveSection(section);
+    closeMenu();
+  }, [closeMenu]);
+
+  return {
+    isMenuOpen,
+    activeSection,
+    toggleMenu,
+    closeMenu,
+    navigateToSection
+  };
 }
 ```
 

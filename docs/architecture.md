@@ -17,7 +17,6 @@ This document provides a high-level overview of the VAIT Homepage architecture.
 ## Main Technologies
 - **React 19** for UI
 - **TanStack Router** for routing
-- **React Query** for data fetching
 - **Zod** for schema validation
 - **Biome** for linting/formatting
 - **Vitest** for testing

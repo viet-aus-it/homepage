@@ -91,8 +91,8 @@ export const useApi = <T>(url: string): UseApiResult<T> => {
 
 ### State Management Principles
 - **Local state first**: Use useState for component-specific state
-- **Server state with React Query**: Use @tanstack/react-query for API data
 - **URL state for navigation**: Use TanStack Router for route state
+- **Custom hooks for shared logic**: Extract reusable stateful logic
 - **Avoid global state**: Only use context when truly necessary
 
 ## Performance Principles
