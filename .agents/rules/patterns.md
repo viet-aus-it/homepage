@@ -5,7 +5,7 @@ This document provides comprehensive development patterns for the VAIT Homepage 
 ## React Component Patterns
 
 ### Component Composition
-```typescript
+```tsx
 // ✅ Good: Component composition over inheritance
 type CardProps = {
   children: ReactNode;
@@ -51,7 +51,7 @@ export const CardHeader = ({ children, className }: CardHeaderProps) => {
 ```
 
 ### Compound Components
-```typescript
+```tsx
 // ✅ Good: Compound component pattern for complex UI
 type TabsContextValue = {
   activeTab: string;
@@ -121,100 +121,45 @@ export const Tab = ({ id, children, className }: TabProps) => {
 };
 ```
 
-### Render Props Pattern
-```typescript
-// ✅ Good: Render props for flexible component behavior
-type DataFetcherProps<T> = {
-  url: string;
-  children: (data: { loading: boolean; data: T | null; error: string | null }) => ReactNode;
-};
 
-export function DataFetcher<T>({ url, children }: DataFetcherProps<T>) {
-  const [state, setState] = useState({
-    loading: true,
-    data: null as T | null,
-    error: null as string | null
-  });
-
-  useEffect(() => {
-    fetch(url)
-      .then(response => response.json())
-      .then(data => setState({ loading: false, data, error: null }))
-      .catch(error => setState({ loading: false, data: null, error: error.message }));
-  }, [url]);
-
-  return <>{children(state)}</>;
-}
-
-// Usage:
-<DataFetcher<UserProfile> url="/api/user/profile">
-  {({ loading, data, error }) => {
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-    if (data) return <div>Welcome, {data.name}</div>;
-    return null;
-  }}
-</DataFetcher>
-```
 
 ## Custom Hook Patterns
 
-### Data Fetching Hooks
-```typescript
-// ✅ Good: Reusable data fetching hook with proper state management
-type UseApiOptions<T> = {
-  enabled?: boolean;
-  onSuccess?: (data: T) => void;
-  onError?: (error: Error) => void;
-};
+### Local Storage Hooks
+```tsx
+// ✅ Good: Type-safe local storage hook
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T, (value: T) => void] {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(`Error reading localStorage key "${key}":`, error);
+      return initialValue;
+    }
+  });
 
-export function useApi<T>(
-  url: string,
-  options: UseApiOptions<T> = {}
-) {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const { enabled = true, onSuccess, onError } = options;
+  const setValue = useCallback((value: T) => {
+    try {
+      setStoredValue(value);
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      console.error(`Error setting localStorage key "${key}":`, error);
+    }
+  }, [key]);
 
-  useEffect(() => {
-    if (!enabled) return;
-
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        const result = await response.json();
-        setData(result);
-        onSuccess?.(result);
-      } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-        setError(errorMessage);
-        onError?.(err instanceof Error ? err : new Error(errorMessage));
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [url, enabled, onSuccess, onError]);
-
-  return { data, loading, error };
+  return [storedValue, setValue];
 }
 
 // Usage:
-const { data: userProfile, loading, error } = useApi(`/api/users/${userId}`, {
-  onSuccess: (data) => console.log('User profile loaded:', data),
-  onError: (error) => console.error('Failed to fetch user profile:', error)
-});
+const [theme, setTheme] = useLocalStorage<'light' | 'dark'>('theme', 'light');
 ```
 
 ### Local Storage Hooks
-```typescript
+```tsx
 // ✅ Good: Type-safe local storage hook
 export function useLocalStorage<T>(
   key: string,
@@ -251,7 +196,7 @@ const [theme, setTheme] = useLocalStorage<'light' | 'dark'>('theme', 'light');
 ## TanStack Router Patterns
 
 ### Route Configuration
-```typescript
+```tsx
 // ✅ Good: Type-safe route configuration
 import { createFileRoute } from '@tanstack/react-router';
 
@@ -285,7 +230,7 @@ function UserProfilePage() {
 ```
 
 ### Navigation Patterns
-```typescript
+```tsx
 // ✅ Good: Type-safe navigation with parameters
 import { useNavigate } from '@tanstack/react-router';
 
@@ -321,7 +266,7 @@ export const UserCard = ({ user }: { user: UserProfile }) => {
 ## Testing Patterns
 
 ### Component Testing with Testing Library
-```typescript
+```tsx
 // ✅ Good: User-focused component testing
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
@@ -330,11 +275,11 @@ import { UserProfile } from './user-profile';
 describe('UserProfile', () => {
   it('should display user information when loaded', async () => {
     const mockUser = { id: '1', name: 'John Doe', email: 'john@example.com' };
-    
+
     render(<UserProfile userId="1" />);
-    
+
     expect(screen.getByText('Loading...')).toBeInTheDocument();
-    
+
     await waitFor(() => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
       expect(screen.getByText('john@example.com')).toBeInTheDocument();
@@ -344,65 +289,59 @@ describe('UserProfile', () => {
   it('should handle user interactions correctly', async () => {
     const user = userEvent.setup();
     const mockUser = { id: '1', name: 'John Doe', email: 'john@example.com' };
-    
+
     render(<UserProfile userId="1" />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('John Doe')).toBeInTheDocument();
     });
 
     await user.click(screen.getByRole('button', { name: /view details/i }));
-    
+
     expect(screen.getByText('User Details')).toBeInTheDocument();
   });
 });
 ```
 
-### Mock Service Worker (MSW) Patterns
-```typescript
-// ✅ Good: API mocking with MSW
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
+### Component Testing with Mock Data
+```tsx
+// ✅ Good: Testing with mock data instead of API calls
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
+import { UserProfile } from './user-profile';
 
-const server = setupServer(
-  rest.get('/api/users/:userId', (req, res, ctx) => {
-    const { userId } = req.params;
-    return res(
-      ctx.json({
-        id: userId,
-        name: 'Test User',
-        email: 'test@example.com'
-      })
-    );
-  })
-);
+describe('UserProfile with mock data', () => {
+  const mockUser = { id: '1', name: 'John Doe', email: 'john@example.com' };
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+  it('should handle error states gracefully', async () => {
+    const mockProps = {
+      userId: 'invalid-id',
+      initialData: null
+    };
 
-describe('UserProfile with mocked API', () => {
-  it('should handle API errors gracefully', async () => {
-    server.use(
-      rest.get('/api/users/:userId', (req, res, ctx) => {
-        return res(
-          ctx.status(500),
-          ctx.json({ error: 'Internal server error' })
-        );
-      })
-    );
+    render(<UserProfile {...mockProps} />);
 
-    render(<UserProfile userId="1" />);
-    
     await waitFor(() => {
-      expect(screen.getByText(/failed to load user/i)).toBeInTheDocument();
+      expect(screen.getByText(/user not found/i)).toBeInTheDocument();
     });
+  });
+
+  it('should display loading states correctly', () => {
+    const mockProps = {
+      userId: '1',
+      initialData: null,
+      isLoading: true
+    };
+
+    render(<UserProfile {...mockProps} />);
+
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 });
 ```
 
 ### Integration Testing Patterns
-```typescript
+```tsx
 // ✅ Good: Integration testing for user workflows
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from '@tanstack/react-router';
@@ -418,15 +357,15 @@ describe('Navigation Flow', () => {
 
     // Step 1: Verify home page
     expect(screen.getByText('Welcome to VAIT')).toBeInTheDocument();
-    
+
     // Step 2: Navigate to about page
     await userEvent.click(screen.getByRole('link', { name: /about/i }));
-    
+
     // Step 3: Verify about page content
     await waitFor(() => {
       expect(screen.getByText(/about vait/i)).toBeInTheDocument();
     });
-    
+
     // Step 4: Verify navigation structure
     expect(screen.getByRole('link', { name: /events/i })).toBeInTheDocument();
   });
@@ -436,7 +375,7 @@ describe('Navigation Flow', () => {
 ## State Management Patterns
 
 ### Local State Patterns
-```typescript
+```tsx
 // ✅ Good: Component state with proper typing
 export function useNavigationState() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -466,7 +405,7 @@ export function useNavigationState() {
 ```
 
 ### Context Patterns
-```typescript
+```tsx
 // ✅ Good: Context for theme management
 type ThemeContextValue = {
   theme: 'light' | 'dark';
@@ -505,7 +444,7 @@ export const useTheme = () => {
 ## Performance Patterns
 
 ### Code Splitting Patterns
-```typescript
+```tsx
 // ✅ Good: Route-based code splitting
 import { lazy } from 'react';
 
@@ -532,7 +471,7 @@ export const AppRoutes = () => {
 ```
 
 ### Memoization Patterns
-```typescript
+```tsx
 // ✅ Good: Strategic memoization for performance
 export const ExpensiveComponent = React.memo<Props>(({ data, onAction }) => {
   // Memoize expensive calculations
@@ -569,7 +508,7 @@ export const ExpensiveComponent = React.memo<Props>(({ data, onAction }) => {
 ## Anti-Patterns to Avoid
 
 ### React Anti-Patterns
-```typescript
+```tsx
 // ❌ Bad: Using index as key
 {items.map((item, index) => (
   <Item key={index} item={item} />
@@ -595,7 +534,7 @@ const addItem = (newItem) => {
 ```
 
 ### Performance Anti-Patterns
-```typescript
+```tsx
 // ❌ Bad: Creating functions in render
 const BadComponent = ({ items }) => {
   return (
