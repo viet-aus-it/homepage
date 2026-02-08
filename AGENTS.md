@@ -12,7 +12,7 @@ You are working on the VAIT Homepage, the official website for the Viet-Aus IT c
 - **User experience**: Fast, accessible, and responsive web design
 - **Code quality**: Clean, maintainable, and well-tested code
 - **Modern stack**: Using cutting-edge frontend technologies
-- **Performance**: Optimized for Core Web Vitals and mobile devices
+- **Performance**: Optimised for Core Web Vitals and mobile devices
 
 ## Role & Technical Context
 
@@ -104,7 +104,7 @@ pnpm run typecheck    # Run TypeScript type checking
 - **Atomic changes**: Smallest logical units
 - **Test coverage**: Component and integration tests
 - **Type safety**: Strict TypeScript with no `any`
-- **Performance first**: Core Web Vitals optimization
+- **Performance first**: Core Web Vitals optimisation
 - **Accessibility**: WCAG 2.1 AA compliance
 
 ## Rules vs. Skills at a Glance

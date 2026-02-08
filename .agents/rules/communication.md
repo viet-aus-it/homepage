@@ -145,7 +145,7 @@ This document provides communication guidelines for AI agents working on the VAI
 5. Next steps needed
 
 # Example:
-"Performance issue with image loading. Investigated using Chrome DevTools, found 3MB hero image causing slow LCP. Optimized to 500KB but still below target. Need help with further optimization strategies."
+"Performance issue with image loading. Investigated using Chrome DevTools, found 3MB hero image causing slow LCP. Optimised to 500KB but still below target. Need help with further optimisation strategies."
 ```
 
 ## User Interaction Patterns
@@ -171,7 +171,7 @@ This document provides communication guidelines for AI agents working on the VAI
 4. Wait for user confirmation
 
 # Example:
-"You mentioned 'optimize the component'. Do you want to focus on performance (bundle size, rendering) or code quality (readability, maintainability)?"
+"You mentioned 'optimise the component'. Do you want to focus on performance (bundle size, rendering) or code quality (readability, maintainability)?"
 ```
 
 ### Progress Updates

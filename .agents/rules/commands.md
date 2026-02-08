@@ -11,7 +11,7 @@ pnpm run dev
 
 # The dev server starts on http://localhost:5173 by default
 # Includes hot module replacement (HMR) for fast development
-# Supports Vite's dev-time optimizations
+# Supports Vite's dev-time optimisations
 ```
 
 ### Build Commands
@@ -23,7 +23,7 @@ pnpm run build
 pnpm run preview
 
 # Build outputs to dist/ directory
-# Optimized for AWS S3/CloudFront deployment
+# Optimised for AWS S3/CloudFront deployment
 ```
 
 ### Testing Commands
@@ -207,7 +207,7 @@ git commit -m "fix: resolve navigation menu overflow issue"
 git commit -m "docs: update API documentation"
 
 # Refactoring
-git commit -m "refactor: optimize image loading performance"
+git commit -m "refactor: optimise image loading performance"
 
 # Breaking changes
 git commit -m "feat!: update component prop interface"
@@ -223,7 +223,7 @@ pnpm run build -- --analyze
 
 # Check bundle size impact
 # Use Vite's built-in bundle analyzer
-# Look for large dependencies and optimization opportunities
+# Look for large dependencies and optimisation opportunities
 ```
 
 ### Performance Testing

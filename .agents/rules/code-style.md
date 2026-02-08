@@ -77,7 +77,7 @@ export const useApi = <T>(url: string): UseApiResult<T> => {
   const [error, setError] = useState<string | null>(null);
 
   // Hook implementation...
-  
+
   return { data, loading, error };
 };
 ```
@@ -235,7 +235,7 @@ export class ErrorBoundary extends Component<
 ### Service Error Handling
 ```typescript
 // ✅ Good: Result pattern for error handling
-type Result<T, E = Error> = 
+type Result<T, E = Error> =
   | { success: true; data: T }
   | { success: false; error: E };
 
@@ -255,13 +255,13 @@ const fetchUserProfile = async (id: string): Promise<Result<UserProfile>> => {
 
 ## Performance Considerations
 
-### React Optimization
+### React Optimisation
 - Use `React.memo` for pure components
 - Implement proper dependency arrays in hooks
 - Avoid unnecessary re-renders
 
 ```typescript
-// ✅ Good: Optimized component
+// ✅ Good: Optimised component
 export const ExpensiveComponent = React.memo<Props>(({ data, onUpdate }) => {
   const processedData = useMemo(() => {
     return data.map(item => expensiveTransform(item));
@@ -281,9 +281,9 @@ export const ExpensiveComponent = React.memo<Props>(({ data, onUpdate }) => {
 });
 ```
 
-### Bundle Optimization
+### Bundle Optimisation
 - Use dynamic imports for code splitting
-- Optimize imports to reduce bundle size
+- Optimise imports to reduce bundle size
 - Lazy load components where appropriate
 
 ```typescript
@@ -292,7 +292,7 @@ const AdminPanel = lazy(() => import('@/components/admin-panel'));
 
 export const App = () => {
   const isAdmin = useAdminAuth();
-  
+
   return (
     <div>
       <Navigation />

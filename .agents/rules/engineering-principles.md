@@ -97,7 +97,7 @@ export const useApi = <T>(url: string): UseApiResult<T> => {
 
 ## Performance Principles
 
-### Rendering Optimization
+### Rendering Optimisation
 ```typescript
 // ✅ Good: Memoized component with proper dependencies
 export const ProductList = React.memo<ProductListProps>(({ products, onAddToCart }) => {
@@ -129,14 +129,14 @@ export const ProductList = React.memo<ProductListProps>(({ products, onAddToCart
 });
 ```
 
-### Bundle Optimization
+### Bundle Optimisation
 - **Code splitting**: Use dynamic imports for large components
 - **Tree shaking**: Ensure imports are specific and unused code is eliminated
-- **Asset optimization**: Compress images and optimize fonts
+- **Asset optimisation**: Compress images and optimise fonts
 - **Lazy loading**: Implement intersection observer for below-fold content
 
 ### Core Web Vitals
-- **LCP (Largest Contentful Paint)**: Optimize hero images and critical content
+- **LCP (Largest Contentful Paint)**: Optimise hero images and critical content
 - **FID (First Input Delay)**: Minimize JavaScript execution time
 - **CLS (Cumulative Layout Shift)**: Specify dimensions for media and avoid layout changes
 
@@ -160,7 +160,7 @@ export const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const validated = contactSchema.parse(formData);
       // Process validated data
@@ -204,7 +204,7 @@ export const Hero = () => {
       <section aria-labelledby="hero-heading">
         <h1 id="hero-heading">Welcome to VAIT</h1>
         <p>Connecting Vietnamese and Australian IT communities</p>
-        
+
         <nav aria-label="Main navigation">
           <a href="/about" className="button">Learn More</a>
           <a href="/community" className="button primary">Join Community</a>
@@ -240,15 +240,15 @@ describe('ContactForm', () => {
   it('should submit form with valid data', async () => {
     const user = userEvent.setup();
     const mockSubmit = vi.fn();
-    
+
     render(<ContactForm onSubmit={mockSubmit} />);
-    
+
     await user.type(screen.getByLabelText(/name/i), 'John Doe');
     await user.type(screen.getByLabelText(/email/i), 'john@example.com');
     await user.type(screen.getByLabelText(/message/i), 'Test message');
-    
+
     await user.click(screen.getByRole('button', { name: /send/i }));
-    
+
     await waitFor(() => {
       expect(mockSubmit).toHaveBeenCalledWith({
         name: 'John Doe',
@@ -284,11 +284,11 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-export const Button = ({ 
-  children, 
-  variant = 'primary', 
-  size = 'md', 
-  onClick 
+export const Button = ({
+  children,
+  variant = 'primary',
+  size = 'md',
+  onClick
 }: ButtonProps) => {
   const baseClasses = 'font-medium rounded-md transition-colors';
   const variantClasses = {
@@ -329,7 +329,7 @@ export const Button = ({
 ### AWS Architecture
 - **Infrastructure as Code**: Use AWS CDK for all infrastructure definitions
 - **Least privilege**: Grant minimum necessary permissions to all resources
-- **Cost optimization**: Use appropriate AWS services and sizing
+- **Cost optimisation**: Use appropriate AWS services and sizing
 - **Monitoring**: Implement proper logging and monitoring
 
 ### Deployment Principles

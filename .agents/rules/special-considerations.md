@@ -26,7 +26,7 @@ export const useFeatureDetection = () => {
       const intersectionObserver = 'IntersectionObserver' in window;
       const localStorage = typeof Storage !== 'undefined';
       const geolocation = 'geolocation' in navigator;
-      
+
       // WebP detection
       const webp = await new Promise((resolve) => {
         const webp = new Image();
@@ -80,7 +80,7 @@ export const HeroSection = () => {
 
 ### SEO Considerations
 ```typescript
-// ✅ Good: SEO-optimized component structure
+// ✅ Good: SEO-optimised component structure
 export const EventPage = ({ event }: { event: Event }) => {
   const structuredData = {
     '@context': 'https://schema.org',
@@ -111,7 +111,7 @@ export const EventPage = ({ event }: { event: Event }) => {
         <meta property="og:image" content={event.imageUrl} />
         <meta property="og:url" content={`https://vait.org.au/events/${event.id}`} />
         <meta name="twitter:card" content="summary_large_image" />
-        
+
         {/* Structured data */}
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
@@ -125,12 +125,12 @@ export const EventPage = ({ event }: { event: Event }) => {
             {new Date(event.startDate).toLocaleDateString('en-AU')}
           </time>
         </header>
-        
+
         <section>
           <h2>About this event</h2>
           <p>{event.description}</p>
         </section>
-        
+
         <section>
           <h2>Location</h2>
           <address>{event.venue.name}</address>
@@ -177,7 +177,7 @@ export const Navigation = () => {
           <a href="/" className="font-bold text-xl">
             VAIT
           </a>
-          
+
           {/* Mobile menu button */}
           <button
             className="md:hidden"
@@ -188,7 +188,7 @@ export const Navigation = () => {
             <span className="sr-only">Open main menu</span>
             {/* Hamburger icon */}
           </button>
-          
+
           {/* Desktop menu */}
           <ul className="hidden md:flex space-x-8">
             <li><a href="/about" className="hover:text-blue-600">About</a></li>
@@ -197,7 +197,7 @@ export const Navigation = () => {
             <li><a href="/contact" className="hover:text-blue-600">Contact</a></li>
           </ul>
         </div>
-        
+
         {/* Mobile menu */}
         <div
           ref={menuRef}
@@ -268,25 +268,25 @@ export const BundleSizeMonitor = () => {
 
   return (
     <div className="fixed bottom-4 right-4 bg-yellow-100 p-2 text-xs">
-      Bundle: {(bundleInfo.size / 1024).toFixed(1)}KB | 
-      Chunks: {bundleInfo.chunks} | 
+      Bundle: {(bundleInfo.size / 1024).toFixed(1)}KB |
+      Chunks: {bundleInfo.chunks} |
       Load: {bundleInfo.loadTime.toFixed(0)}ms
     </div>
   );
 };
 ```
 
-### Image Optimization
+### Image Optimisation
 ```typescript
-// ✅ Good: Optimized image component
-export const OptimizedImage = ({
+// ✅ Good: Optimised image component
+export const OptimisedImage = ({
   src,
   alt,
   width,
   height,
   priority = false,
   className
-}: OptimizedImageProps) => {
+}: OptimisedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
 
@@ -302,7 +302,7 @@ export const OptimizedImage = ({
         )}
         aria-hidden="true"
       />
-      
+
       {/* Main image */}
       <img
         src={`${src}?w=${width}&h=${height}&format=webp&quality=80`}
@@ -318,7 +318,7 @@ export const OptimizedImage = ({
         onLoad={() => setIsLoaded(true)}
         onError={() => setError(true)}
       />
-      
+
       {/* Error fallback */}
       {error && (
         <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
@@ -342,7 +342,7 @@ export const EventCard = ({ event }: { event: Event }) => {
       <div className="md:flex">
         {/* Image container */}
         <div className="md:w-1/3">
-          <OptimizedImage
+          <OptimisedImage
             src={event.imageUrl}
             alt={event.title}
             width={400}
@@ -350,7 +350,7 @@ export const EventCard = ({ event }: { event: Event }) => {
             className="w-full h-48 md:h-full object-cover"
           />
         </div>
-        
+
         {/* Content container */}
         <div className="p-6 md:w-2/3">
           <header>
@@ -366,11 +366,11 @@ export const EventCard = ({ event }: { event: Event }) => {
               })}
             </time>
           </header>
-          
+
           <p className="mt-4 text-gray-700 line-clamp-3">
             {event.description}
           </p>
-          
+
           <footer className="mt-6">
             <a
               href={`/events/${event.id}`}
@@ -407,7 +407,7 @@ export const TouchFriendlyCarousel = ({ items }: { items: CarouselItem[] }) => {
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
@@ -437,7 +437,7 @@ export const TouchFriendlyCarousel = ({ items }: { items: CarouselItem[] }) => {
           </div>
         ))}
       </div>
-      
+
       {/* Touch indicators */}
       <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
         {items.map((_, index) => (
@@ -491,7 +491,7 @@ export const useConfig = () => {
 // ✅ Good: Cache-aware asset loading
 export const useAssetCache = () => {
   const config = useConfig();
-  
+
   const getAssetUrl = (path: string, version?: string) => {
     const baseUrl = config.cdnUrl;
     const versionedPath = version ? `${path}?v=${version}` : path;
@@ -509,7 +509,7 @@ export const useAssetCache = () => {
       const link = document.createElement('link');
       link.rel = 'preload';
       link.href = getAssetUrl(asset);
-      link.as = asset.endsWith('.woff2') ? 'font' : 
+      link.as = asset.endsWith('.woff2') ? 'font' :
                 asset.endsWith('.css') ? 'style' : 'image';
       if (link.as === 'font') {
         link.crossOrigin = 'anonymous';
@@ -541,7 +541,7 @@ export class MonitoredErrorBoundary extends Component<
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Log to monitoring service
     console.error('Error caught by boundary:', error, errorInfo);
-    
+
     // Send to error tracking service (e.g., Sentry)
     if (typeof window !== 'undefined' && window.Sentry) {
       window.Sentry.captureException(error, {
@@ -563,7 +563,7 @@ export class MonitoredErrorBoundary extends Component<
               Something went wrong
             </h1>
             <p className="text-gray-600 mb-6">
-              We're sorry, but something unexpected happened. 
+              We're sorry, but something unexpected happened.
               Please try refreshing the page.
             </p>
             <button
@@ -603,7 +603,7 @@ export const SecureComponent = () => {
     <div>
       {/* Use dangerouslySetInnerHTML only with sanitized content */}
       <div dangerouslySetInnerHTML={{ __html: content }} />
-      
+
       {/* Avoid inline styles and scripts */}
       <style>{/* CSS should be in separate files */}</style>
     </div>
@@ -620,7 +620,7 @@ export const secureApiClient = {
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${import.meta.env.VITE_API_URL}${endpoint}`;
-    
+
     const defaultHeaders = {
       'Content-Type': 'application/json',
       'X-Requested-With': 'XMLHttpRequest'
