@@ -11,7 +11,7 @@ export default mergeConfig(
       setupFiles: ['./vitest.setup.ts'],
       coverage: {
         provider: 'v8',
-        enabled: true,
+        enabled: !!process.env.CI,
         include: ['src/**/*'],
         exclude: ['src/routeTree.gen.ts'],
       },
