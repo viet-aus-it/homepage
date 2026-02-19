@@ -13,6 +13,7 @@
     "githooks:init": "husky",
     "dev": "vite",
     "build": "vite build",
+    "build:cf": "DEPLOY_TO_CLOUDFLARE=true pnpm run build",
     "preview": "vite preview",
     "typecheck": "tsc",
     "test": "vitest",
