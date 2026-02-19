@@ -2,6 +2,8 @@
 
 This document provides comprehensive infrastructure guidelines for the VAIT Homepage project, covering AWS CDK patterns, deployment strategies, and operational best practices.
 
+> **Migration Note**: This project is gradually migrating from AWS to Cloudflare Workers. The longer-term goal is to remove the AWS deployment entirely. New infrastructure work should prioritize Cloudflare Workers where possible.
+
 ## AWS CDK Development Patterns
 
 ### Stack Organization
