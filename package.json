@@ -12,6 +12,7 @@
     "prepare": "pnpm run githooks:init",
     "githooks:init": "husky",
     "dev": "vite",
+    "dev:cf": "DEPLOY_TO_CLOUDFLARE=true pnpm run dev",
     "build": "vite build",
     "build:cf": "DEPLOY_TO_CLOUDFLARE=true pnpm run build",
     "preview": "vite preview",
@@ -24,7 +25,8 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "lint:fix:unsafe": "biome check --write --unsafe .",
-    "ci": "biome ci ."
+    "ci": "biome ci .",
+    "deploy:cf": "wrangler deploy"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.2",
