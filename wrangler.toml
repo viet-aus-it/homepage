@@ -1,6 +1,6 @@
 #:schema node_modules/wrangler/config-schema.json
 
-name = "me-samh-page-worker"
+name = "vait-homepage-worker"
 compatibility_date = "2025-09-15"
 compatibility_flags = ["nodejs_compat"]
 
