@@ -8,7 +8,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 /**
- * @constant {boolean} To notify if whether we want to deploy to cloudflare
+ * @constant To notify if whether we want to deploy to cloudflare
  *
  * This enables the cloudflare specific packages that are not applicable to other environments
  * (e.g. AWS S3 Bucket like our current setup)
