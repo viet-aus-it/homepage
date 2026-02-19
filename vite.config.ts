@@ -7,6 +7,13 @@ import { tanstackRouter } from '@tanstack/router-vite-plugin';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
+/**
+ * @constant {boolean} To notify if whether we want to deploy to cloudflare
+ *
+ * This enables the cloudflare specific packages that are not applicable to other environments
+ * (e.g. AWS S3 Bucket like our current setup)
+ */
+const DEPLOY_TO_CLOUDFLARE = process.env.DEPLOY_TO_CLOUDFLARE === 'true';
 const basePlugins = [
   react({
     babel: {
@@ -19,7 +26,7 @@ const basePlugins = [
   }),
 ];
 const cloudflarePlugins = [cloudflare()];
-const plugins = process.env.DEPLOY_TO_CLOUDFLARE === 'true' ? [...basePlugins, ...cloudflarePlugins] : basePlugins;
+const plugins = DEPLOY_TO_CLOUDFLARE ? [...basePlugins, ...cloudflarePlugins] : basePlugins;
 
 // https://vitejs.dev/config/
 export default defineConfig({
