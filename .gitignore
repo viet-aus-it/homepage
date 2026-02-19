@@ -29,3 +29,6 @@ coverage
 # Generated files
 public/mockServiceWorker.js
 .vitest-preview
+
+# Wrangler cache
+.wrangler

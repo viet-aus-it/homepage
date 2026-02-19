@@ -1,6 +1,8 @@
 # Infrastructure Overview
 
-This document provides a comprehensive overview of the VAIT Homepage infrastructure, built with AWS CDK and deployed on AWS.
+This document provides a comprehensive overview of the VAIT Homepage infrastructure. The project currently supports **dual deployment** to both AWS CDK and Cloudflare Workers, with a gradual migration underway to transition entirely to Cloudflare Workers.
+
+> **Migration Notice**: This project is in the process of migrating from AWS to Cloudflare Workers. The longer-term goal is to remove the AWS deployment from this project entirely.
 
 ## Architecture
 
