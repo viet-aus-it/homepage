@@ -23,4 +23,4 @@ persist = true
 invocation_logs = true
 
 [build]
-command = "pnpm run ci && pnpm run test && pnpm run tyepcheck && pnpm run build:cf"
+command = "pnpm run ci && pnpm run test && pnpm run typecheck && pnpm run build:cf"
