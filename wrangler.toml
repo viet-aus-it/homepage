@@ -11,6 +11,14 @@ preview_urls = false
 pattern = "vait.au"
 custom_domain = true
 
+[[routes]]
+pattern = "www.vait.au"
+custom_domain = true
+
+[[routes]]
+pattern = "home.vait.au"
+custom_domain = true
+
 [assets]
 directory = "dist"
 not_found_handling = "single-page-application"
