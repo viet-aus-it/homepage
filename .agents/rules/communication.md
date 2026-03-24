@@ -71,7 +71,7 @@ This document provides communication guidelines for AI agents working on the VAI
 - **Complex logic**: Add comments only for genuinely complex business logic
 
 ### Commit Messages
-- **Conventional commits**: Use standard format (feat:, fix:, docs:, etc.)
+- **[Conventional Commits](https://www.conventionalcommits.org/)**: Use standard format (feat:, fix:, docs:, etc.)
 - **Descriptive scope**: Include what was changed and why
 - **Co-signature**: Add "Co-signed by OpenCode" for agent commits
 
@@ -79,6 +79,23 @@ This document provides communication guidelines for AI agents working on the VAI
 - **Cross-reference**: Link to existing documentation rather than duplicating
 - **Maintain consistency**: Follow established patterns in existing docs
 - **Version awareness**: Consider impact on existing documentation
+
+## Documentation Framework
+
+### [Diataxis](https://diataxis.fr/) Compliance
+- The `docs/` directory follows the [Diataxis](https://diataxis.fr/) framework
+- Each document serves **one** primary purpose: tutorial, how-to guide, explanation, or reference
+- Do not mix content types (e.g., no how-to steps in reference docs, no reference tables in tutorials)
+
+### External Linking Rule
+- Every mention of an external tool, framework, pattern, or standard must include a hyperlink on first mention per document
+- Applies to: technology names, methodologies, external tools, specifications, and design patterns
+- Example: `[React](https://react.dev/)`, `[Vitest](https://vitest.dev/)`, `[Diataxis](https://diataxis.fr/)`
+
+### Documentation Requirement for New Features
+- All new features, architectural changes, and configuration changes **must** include corresponding documentation updates
+- Use the `update-docs` skill to identify which docs are affected
+- Documentation updates should be included in the same PR as the code change
 
 ## Technical Discussion Patterns
 
@@ -261,8 +278,8 @@ This document provides communication guidelines for AI agents working on the VAI
 
 - **Code Style**: See `code-style.md` for coding and formatting standards
 - **Commands**: See `commands.md` for command-line communication patterns
-- **Development**: See `docs/development.md` for team workflow patterns
-- **Contributing**: See `docs/contributing.md` for collaboration guidelines
+- **Development**: See `docs/how-to/01-development.md` for team workflow patterns
+- **Contributing**: See `docs/how-to/02-contributing.md` for collaboration guidelines
 
 ## Agent-Specific Guidelines
 

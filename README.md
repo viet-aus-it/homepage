@@ -8,12 +8,12 @@ Welcome to the homepage for Vietnamese Australians in Information Technology Inc
 A not-for-profit landing page for Viet-Au IT professionals in Australia. Built for rapid, modern web delivery and easy developer onboarding.
 
 ## Tech Stack
-- **Frontend:** React 19 + Vite + TypeScript
-- **State/Router:** TanStack Router, React Query, Zod
-- **Testing:** Vitest, Testing Library
-- **Lint/Format:** Biome
-- **Infrastructure:** AWS CDK (TypeScript), S3 + CloudFront
-- **CI/CD:** GitHub Actions
+- **Frontend:** [React](https://react.dev/) 19 + [Vite](https://vite.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **State/Router:** [TanStack Router](https://tanstack.com/router), [React Query](https://tanstack.com/query), [Zod](https://zod.dev/)
+- **Testing:** [Vitest](https://vitest.dev/), [Testing Library](https://testing-library.com/)
+- **Lint/Format:** [Biome](https://biomejs.dev/)
+- **Infrastructure:** [AWS CDK](https://docs.aws.amazon.com/cdk/) (TypeScript), [S3](https://aws.amazon.com/s3/) + [CloudFront](https://aws.amazon.com/cloudfront/)
+- **CI/CD:** [GitHub Actions](https://docs.github.com/en/actions)
 
 ## Quickstart
 ```sh
@@ -41,25 +41,25 @@ pnpm run build
 - `public/`   – Static assets
 - `src/`      – App source code (components, pages, hooks, services, types, utils)
 
-See [docs/architecture.md](docs/architecture.md) for more details.
+See [docs/index.md](docs/index.md) for more details.
 
 ## Development
 - Strict TypeScript config (`tsconfig.json`)
-- Biome for linting/formatting
-- Husky for git hooks
-- See [docs/development.md](docs/development.md) for workflow, conventions, and tips
+- [Biome](https://biomejs.dev/) for linting/formatting
+- [Husky](https://typicode.github.io/husky/) for git hooks
+- See [docs/how-to/01-development.md](docs/how-to/01-development.md) for workflow, conventions, and tips
 
 ## Infrastructure
-- AWS CDK (TypeScript)
-- See [infra/README.md](infra/README.md) and [docs/infra.md](docs/infra.md)
+- [AWS CDK](https://docs.aws.amazon.com/cdk/) (TypeScript)
+- See [infra/README.md](infra/README.md) and [docs/explanation/02-infrastructure.md](docs/explanation/02-infrastructure.md)
 
 ## CI/CD
-- Automated via GitHub Actions
-- See [docs/ci-cd.md](docs/ci-cd.md)
+- Automated via [GitHub Actions](https://docs.github.com/en/actions)
+- See [docs/how-to/03-deployment.md](docs/how-to/03-deployment.md)
 
 ## Contributing
-- Please read [docs/contributing.md](docs/contributing.md)
+- Please read [docs/how-to/02-contributing.md](docs/how-to/02-contributing.md)
 
 ---
 
-For more, see the [docs/](docs/) directory.
+For more, see the [documentation index](docs/index.md).

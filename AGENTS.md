@@ -12,15 +12,15 @@ You are working on the VAIT Homepage, the official website for the Viet-Aus IT c
 - **User experience**: Fast, accessible, and responsive web design
 - **Code quality**: Clean, maintainable, and well-tested code
 - **Modern stack**: Using cutting-edge frontend technologies
-- **Performance**: Optimised for Core Web Vitals and mobile devices
+- **Performance**: Optimised for [Core Web Vitals](https://web.dev/articles/vitals) and mobile devices
 
 ## Role & Technical Context
 
 - **Domain**: Community homepage showcasing VAIT events, membership, and resources
 - **Team**: VAIT (Vietnamese Australians in Information Technology community)
-- **Tech Stack**: React 19, Vite, TypeScript, TanStack Router, Zod, Biome, Vitest
+- **Tech Stack**: [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/), [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/), [Biome](https://biomejs.dev/), [Vitest](https://vitest.dev/)
 - **Architecture**: Component-based architecture with type-safe routing and state management
-- **Infrastructure**: AWS CDK, S3, CloudFront for deployment
+- **Infrastructure**: [AWS CDK](https://docs.aws.amazon.com/cdk/), [S3](https://aws.amazon.com/s3/), [CloudFront](https://aws.amazon.com/cloudfront/) for deployment
 
 ## Change Management Philosophy
 
@@ -30,14 +30,15 @@ All changes must be:
 - **Safe**: Reviewed, tested, and production-ready
 - **Tested**: Component tests required for new features, integration tests for user workflows
 - **Linted**: Must pass `pnpm run lint:fix && pnpm run typecheck` before commit
-- **Documented**: Clear commit messages following conventional commits pattern
+- **Documented**: Clear commit messages following [Conventional Commits](https://www.conventionalcommits.org/); new features must include doc updates following the [Diataxis](https://diataxis.fr/) framework
 - **Delivered**: Merged via pull request after review
 
 ## Project Structure
 
 ```
 .agents/
-  skills/          # Task-specific toolkits with proven workflows
+  skills/
+    update-docs/SKILL.md  # Documentation audit and update workflow
   rules/           # Domain-specific guidelines and constraints
     commands.md
     code-style.md
@@ -45,6 +46,13 @@ All changes must be:
     engineering-principles.md
     communication.md
     special-considerations.md
+    infrastructure.md
+docs/
+  index.md               # Documentation hub (Diataxis framework)
+  tutorials/             # Learning-oriented guides
+  how-to/                # Goal-oriented recipes
+  explanation/           # Understanding-oriented discussion
+  reference/             # Information-oriented lookup
 ```
 
 ## Execution Protocol
@@ -76,18 +84,18 @@ Load these rules when working on relevant domains:
 
 ## Available Skills
 
-Skills will be added as needed for specific task types (e.g., code review, feature implementation, refactoring).
+Load a skill when its trigger condition matches the task:
 
-Currently: _(No skills defined yet - add skills under `.agents/skills/[skill-name]/SKILL.md`)_
+- **[update-docs](.agents/skills/update-docs/SKILL.md)** — Audit and update docs after code changes. Trigger: user asks to update, sync, or audit documentation.
 
 ## Quick Reference
 
 ### Tech Stack
 
-- React 19, Vite, TypeScript
-- TanStack Router, Zod
-- Biome for formatting, Vitest for testing
-- AWS CDK, S3, CloudFront for deployment
+- [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/)
+- [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/)
+- [Biome](https://biomejs.dev/) for formatting, [Vitest](https://vitest.dev/) for testing
+- [AWS CDK](https://docs.aws.amazon.com/cdk/), [S3](https://aws.amazon.com/s3/), [CloudFront](https://aws.amazon.com/cloudfront/) for deployment
 
 ### Essential Commands
 
@@ -105,8 +113,8 @@ pnpm run typecheck    # Run TypeScript type checking
 - **Atomic changes**: Smallest logical units
 - **Test coverage**: Component and integration tests
 - **Type safety**: Strict TypeScript with no `any`
-- **Performance first**: Core Web Vitals optimisation
-- **Accessibility**: WCAG 2.1 AA compliance
+- **Performance first**: [Core Web Vitals](https://web.dev/articles/vitals) optimisation
+- **Accessibility**: [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/) AA compliance
 
 ## Rules vs. Skills at a Glance
 
