@@ -7,6 +7,7 @@ Type voice runs the **system UI stack** (shadcn/Tailwind default sans) at **semi
 Component voltage comes from three anchors: the **floating pill nav** (`{component.nav-bar}`), the **full-viewport hero** with community CTA, and a **white elevated content shell** (`{component.content-shell}`) that holds alternating image/text bands. The **dark charcoal footer** (`{component.footer}`) inverts the warm page — yellow legal text on gray-dark — so the site closes with institutional weight, not another cream band.
 
 **Key Characteristics:**
+
 - Warm stone canvas (`{colors.canvas}`) plus cream gradient backdrop (`{colors.backdrop-from}` — `#fffbea` → white → `#fef9ef`).
 - Brand yellow accent (`{colors.brand-yellow}` — `#f4df4d`) on CTAs, footer ink, and section titles; gray scale for structure (`{colors.brand-gray}`, `{colors.brand-gray-dark}`).
 - Tick-and-star **VAIT logo** SVG (`{component.logo}`) with three colourways: full colour, gray, dark-gray.
@@ -18,6 +19,7 @@ Component voltage comes from three anchors: the **floating pill nav** (`{compone
 ## Colors
 
 ### Brand & Accent
+
 - **Brand Yellow** (`{colors.brand-yellow}` — `#f4df4d`): Primary CTA fill, footer headline text, logo primary ticks. Logo source also lists `#F5DF4D` — treat as the same family; CSS token is canonical for the site.
 - **Brand Yellow Dark** (`{colors.brand-yellow-dark}` — `#e0c944`): Section h2 emphasis (`text-brand-yellow-dark`).
 - **Brand Yellow Darker** (`{colors.brand-yellow-darker}` — `#c7b139`): Deeper yellow for future badges or hover depth (utility classes exist; lightly used today).
@@ -25,6 +27,7 @@ Component voltage comes from three anchors: the **floating pill nav** (`{compone
 - **Brand Gray Dark** (`{colors.brand-gray-dark}` — `#1c1c1c`): Footer background, CTA label ink, hero subtitle (`text-brand-dark-gray` in components — maps to this token).
 
 ### Surface
+
 - **Canvas** (`{colors.canvas}` — `stone-50` / ~`#fafaf9`): Page floor on `{page.index}`.
 - **Backdrop From** (`{colors.backdrop-from}` — `#fffbea`): Gradient start on `{component.futuristic-background}`.
 - **Backdrop Via** (`{colors.backdrop-via}` — `#ffffff`): Gradient centre.
@@ -36,6 +39,7 @@ Component voltage comes from three anchors: the **floating pill nav** (`{compone
 - **Hairline** (`{colors.hairline}` — `{colors.border}` / oklch border token): Nav border, shadcn inputs.
 
 ### Text
+
 - **Ink** (`{colors.ink}` — `{colors.foreground}`): Default body from shadcn theme (~near-black oklch).
 - **Body** (`{colors.body}` — `gray-700`): Section descriptions in `{component.section-with-image}`.
 - **Muted** (`{colors.muted}` — `{colors.muted-foreground}`): shadcn muted copy where used.
@@ -43,6 +47,7 @@ Component voltage comes from three anchors: the **floating pill nav** (`{compone
 - **On Dark** (`{colors.on-dark}` — `{colors.brand-yellow}`): Footer primary line on charcoal.
 
 ### Semantic (shadcn)
+
 - **Primary** (`{colors.primary}`): shadcn default button (outline nav icon uses `{component.button-outline}`).
 - **Destructive** (`{colors.destructive}`): Form/error states (reserved).
 - **Ring** (`{colors.ring}`): Focus rings on interactive elements.
@@ -50,32 +55,36 @@ Component voltage comes from three anchors: the **floating pill nav** (`{compone
 ## Typography
 
 ### Font Family
+
 The system uses the **Tailwind/shadcn default sans stack** (system UI). No custom webfont is loaded in `index.html`. Headlines rely on **weight and size**, not a display face.
 
 ### Hierarchy
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-hero}` | 36–60px (`text-4xl` → `text-6xl`) | 600 | 1.2 | tight | Hero h1 |
-| `{typography.display-subhero}` | 30–36px (`text-3xl` → `text-4xl`) | 400 (default) | default | tight | Hero h2 / subtitle |
-| `{typography.title-section}` | 24–30px (`text-2xl` → `text-3xl`) | 600 | default | 0 | Section h2 — brand yellow-dark |
-| `{typography.body}` | 16px (default) | 400 | default | 0 | Section descriptions (`text-gray-700`) |
-| `{typography.footer}` | 14px (`text-sm`) | 400 | default | 0 | Footer legal lines |
-| `{typography.button-cta}` | 18px (`text-lg`) | 600 | default | 0 | Join Community CTA |
-| `{typography.nav-link}` | 14px (`text-sm`) | 500 | default | 0 | Desktop nav items (shadcn NavigationMenu) |
-| `{typography.badge}` | 12px (`text-xs`) | 500 | default | 0 | Section anchor badges (`#{sectionId}`) |
+| Token                          | Size                              | Weight        | Line Height | Letter Spacing | Use                                       |
+| ------------------------------ | --------------------------------- | ------------- | ----------- | -------------- | ----------------------------------------- |
+| `{typography.display-hero}`    | 36–60px (`text-4xl` → `text-6xl`) | 600           | 1.2         | tight          | Hero h1                                   |
+| `{typography.display-subhero}` | 30–36px (`text-3xl` → `text-4xl`) | 400 (default) | default     | tight          | Hero h2 / subtitle                        |
+| `{typography.title-section}`   | 24–30px (`text-2xl` → `text-3xl`) | 600           | default     | 0              | Section h2 — brand yellow-dark            |
+| `{typography.body}`            | 16px (default)                    | 400           | default     | 0              | Section descriptions (`text-gray-700`)    |
+| `{typography.footer}`          | 14px (`text-sm`)                  | 400           | default     | 0              | Footer legal lines                        |
+| `{typography.button-cta}`      | 18px (`text-lg`)                  | 600           | default     | 0              | Join Community CTA                        |
+| `{typography.nav-link}`        | 14px (`text-sm`)                  | 500           | default     | 0              | Desktop nav items (shadcn NavigationMenu) |
+| `{typography.badge}`           | 12px (`text-xs`)                  | 500           | default     | 0              | Section anchor badges (`#{sectionId}`)    |
 
 ### Principles
+
 - **One accent colour in type**: yellow-dark for section titles; avoid introducing a second headline colour without updating tokens.
 - **Hero subtitle** uses charcoal (`{colors.brand-gray-dark}`), not muted gray — keeps the value prop readable on warm backgrounds.
 - **Semibold** is the ceiling for marketing headlines; heavier weights are unnecessary on the system stack.
 
 ### Note on Font Substitutes
+
 When a display face is introduced, prefer a **warm, slightly rounded sans** (e.g. DM Sans, Plus Jakarta Sans) that harmonises with yellow without competing with the logo ticks. Until then, tighten tracking on display sizes only.
 
 ## Layout
 
 ### Spacing System
+
 - **Base unit:** 4px (Tailwind default).
 - **Tokens:** `{spacing.1}` 4px · `{spacing.2}` 8px · `{spacing.3}` 12px · `{spacing.4}` 16px · `{spacing.6}` 24px · `{spacing.8}` 32px · `{spacing.16}` 64px.
 - **Nav offset:** `top-6` + `inset-x-4` — floating nav breathes below viewport edge.
@@ -83,27 +92,30 @@ When a display face is introduced, prefer a **warm, slightly rounded sans** (e.g
 - **Hero:** `min-h-screen`, centred column, `max-w-screen-md` for copy.
 
 ### Grid & Container
+
 - **Max content width:** `max-w-screen-lg` (~1024px) for nav, content shell, and section grid.
 - **Hero:** Single centred column; background is full-bleed fixed layer.
 - **Sections:** `grid-cols-1` → `md:grid-cols-2` with `md:gap-16`; `reverse` alternates image/text order.
 - **Footer:** Full-width band, centred stacked legal copy.
 
 ### Whitespace Philosophy
+
 VAIT uses **vertical rhythm through full-viewport hero + card shell** rather than many separated bands. Warm background fills negative space; the white shell concentrates scan path for three feature stories. Avoid adding more boxed cards inside the shell — alternation already provides rhythm.
 
 ## Elevation & Depth
 
-| Level | Treatment | Use |
-|---|---|---|
+| Level         | Treatment                                        | Use                                 |
+| ------------- | ------------------------------------------------ | ----------------------------------- |
 | Flat backdrop | Fixed gradient + soft blobs + noise line texture | `{component.futuristic-background}` |
-| Floating nav | `bg-background` + border, no heavy shadow | `{component.nav-bar}` |
-| Content shell | `shadow-md` on white card | `{component.content-shell}` |
-| CTA emphasis | `shadow-lg` on yellow pill | `{component.join-community-cta}` |
-| Footer band | Flat charcoal, top border `border-brand-gray` | `{component.footer}` |
+| Floating nav  | `bg-background` + border, no heavy shadow        | `{component.nav-bar}`               |
+| Content shell | `shadow-md` on white card                        | `{component.content-shell}`         |
+| CTA emphasis  | `shadow-lg` on yellow pill                       | `{component.join-community-cta}`    |
+| Footer band   | Flat charcoal, top border `border-brand-gray`    | `{component.footer}`                |
 
 Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editorial content — not a multi-shadow marketing stack.
 
 ### Decorative Depth
+
 - **Animated warm blobs** — pulse animation, heavy blur; not tokenised beyond hex fills above.
 - **Repeating hairline texture** — 1px horizontal lines at 0.5% black alpha over the backdrop.
 
@@ -111,14 +123,14 @@ Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editor
 
 ### Border Radius Scale
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.sm}` | `calc(var(--radius) - 4px)` (~6px) | shadcn small controls |
-| `{rounded.md}` | `calc(var(--radius) - 2px)` (~8px) | Default buttons, badges |
-| `{rounded.lg}` | `var(--radius)` (10px / 0.625rem) | Base `--radius` in `:root` |
-| `{rounded.xl}` | `calc(var(--radius) + 4px)` (~14px) | shadcn xl variant |
-| `{rounded.2xl}` | 16px (Tailwind) | Content shell |
-| `{rounded.full}` | 9999px | Nav bar, Discord CTA, outline icon button |
+| Token            | Value                               | Use                                       |
+| ---------------- | ----------------------------------- | ----------------------------------------- |
+| `{rounded.sm}`   | `calc(var(--radius) - 4px)` (~6px)  | shadcn small controls                     |
+| `{rounded.md}`   | `calc(var(--radius) - 2px)` (~8px)  | Default buttons, badges                   |
+| `{rounded.lg}`   | `var(--radius)` (10px / 0.625rem)   | Base `--radius` in `:root`                |
+| `{rounded.xl}`   | `calc(var(--radius) + 4px)` (~14px) | shadcn xl variant                         |
+| `{rounded.2xl}`  | 16px (Tailwind)                     | Content shell                             |
+| `{rounded.full}` | 9999px                              | Nav bar, Discord CTA, outline icon button |
 
 ## Components
 
@@ -161,6 +173,7 @@ Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editor
 ## Do's and Don'ts
 
 ### Do
+
 - Keep the page on **warm stone + cream gradient** — it signals community, not enterprise SaaS cold gray.
 - Use **brand yellow** only for emphasis: CTAs, footer highlights, section titles — not body paragraphs.
 - Keep **Discord** as the primary outward CTA unless a second channel is officially approved.
@@ -170,6 +183,7 @@ Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editor
 - Honour `prefers-reduced-motion` when extending blob animations (not yet wired).
 
 ### Don't
+
 - Don't add a second competing accent (e.g. blue CTAs) without updating `{colors.brand-yellow}` contract.
 - Don't flatten the page to pure white — lose `{component.futuristic-background}` and the site reads generic.
 - Don't use the dark footer palette in the hero body — warmth is the opening move; charcoal is the close.
@@ -181,17 +195,19 @@ Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editor
 
 ### Breakpoints
 
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile | < 768px | `{component.nav-sheet}` replaces `{component.nav-menu}`; hero type scales down (`text-4xl` h1); sections single column |
-| Tablet / Desktop | ≥ 768px | Full horizontal nav; section grids 2-column; footer legal inline with separator |
-| Wide | ≥ 1024px | `max-w-screen-lg` containers centred with side margin via `mx-auto` |
+| Name             | Width    | Key Changes                                                                                                            |
+| ---------------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Mobile           | < 768px  | `{component.nav-sheet}` replaces `{component.nav-menu}`; hero type scales down (`text-4xl` h1); sections single column |
+| Tablet / Desktop | ≥ 768px  | Full horizontal nav; section grids 2-column; footer legal inline with separator                                        |
+| Wide             | ≥ 1024px | `max-w-screen-lg` containers centred with side margin via `mx-auto`                                                    |
 
 ### Touch Targets
+
 - `{component.join-community-cta}` — `size="lg"` shadcn button (~48px height target).
 - Nav Discord icon button — `size="icon"`; ensure 44×44px hit area when auditing.
 
 ### Collapsing Strategy
+
 - Nav collapses to sheet under `md`.
 - Hero remains centred single column at all breakpoints.
 - Section images stack below copy on mobile regardless of `reverse`.
