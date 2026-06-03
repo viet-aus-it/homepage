@@ -19,6 +19,7 @@ When user asks to:
 | Location | Content | Key Sections |
 |----------|---------|-------------|
 | `README.md` | Project overview, setup, tech stack | Overview, quick start, commands |
+| `DESIGN.md` | Homepage visual design system | Colours, typography, components, do's/don'ts |
 | `docs/` | User-facing docs ([Diataxis](https://diataxis.fr/) framework) | Tutorials, how-to guides, explanation, reference |
 | `AGENTS.md` | Agent control manifest | Project structure, tech stack, available skills/rules, commands |
 | `.agents/rules/` | Domain-specific guidelines | Code style, patterns, commands, engineering principles, communication, special considerations, infrastructure |
@@ -59,6 +60,7 @@ For each category, note which documentation locations are affected using the map
 | Change Type | Docs to Check |
 |-------------|---------------|
 | New feature/component | `README.md`, `docs/explanation/01-architecture.md`, `AGENTS.md` (project structure) |
+| Marketing UI / brand / layout | `DESIGN.md`, `docs/index.md`, `docs/explanation/01-architecture.md`, `docs/how-to/01-development.md`, `docs/how-to/02-contributing.md`, `AGENTS.md` |
 | New dependency | `README.md`, `AGENTS.md` (tech stack), `docs/reference/01-project-reference.md` |
 | New command/script | `README.md`, `AGENTS.md` (commands), `docs/reference/01-project-reference.md`, `.agents/rules/commands.md` |
 | Infrastructure change | `docs/explanation/02-infrastructure.md`, `docs/how-to/03-deployment.md`, `.agents/rules/infrastructure.md` |
@@ -114,6 +116,7 @@ pnpm run lint
 - [ ] Commit range identified and all changes reviewed
 - [ ] Changes categorised by documentation impact
 - [ ] `README.md` checked and updated
+- [ ] `DESIGN.md` checked when UI tokens, components, or layout change
 - [ ] `docs/` files checked and updated for affected topics
 - [ ] `AGENTS.md` checked: project structure, tech stack, skills, rules, commands
 - [ ] `.agents/rules/` checked for affected rules

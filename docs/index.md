@@ -20,3 +20,4 @@ Welcome to the VAIT Homepage documentation, organised following the [Diataxis](h
 ## Reference
 
 - [Project Reference](./reference/01-project-reference.md) — Tech stack, commands, project structure, and testing tools
+- [Design System](../DESIGN.md) — Homepage visual design: colours, typography, components, and UI do's/don'ts

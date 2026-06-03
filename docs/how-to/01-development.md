@@ -49,6 +49,8 @@ Day-to-day development workflows, conventions, and tips for the VAIT Homepage.
   Use lazy loading and `React.memo` where appropriate.
 - **Accessibility:**
   Use semantic HTML and test with screen readers if possible. Aim for [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/) AA compliance.
+- **Visual / UI:**
+  Follow [DESIGN.md](../../DESIGN.md) for homepage colours, layout, and components. Add new brand tokens in `src/index.css` rather than inline hex in components.
 
 ---
 
@@ -56,3 +58,4 @@ See also:
 - [Getting Started](../tutorials/01-getting-started.md) — First-time setup
 - [Contributing](./02-contributing.md) — How to propose changes
 - [Project Reference](../reference/01-project-reference.md) — Commands and tech stack
+- [Design System](../../DESIGN.md) — Homepage visual design reference

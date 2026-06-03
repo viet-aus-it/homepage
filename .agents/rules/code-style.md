@@ -8,6 +8,7 @@ This document provides comprehensive code style guidelines for the VAIT Homepage
 - **Readability first**: Code should be self-documenting where possible
 - **Type safety**: Leverage TypeScript to catch errors at compile time
 - **Performance awareness**: Write code that renders efficiently
+- **Visual design**: Marketing UI must follow [DESIGN.md](../../DESIGN.md); use `--brand-*` tokens from `src/index.css`, not ad hoc hex in components
 
 ## TypeScript Configuration
 

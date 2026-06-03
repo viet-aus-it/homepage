@@ -48,6 +48,7 @@ See [docs/index.md](docs/index.md) for more details.
 - [Biome](https://biomejs.dev/) for linting/formatting
 - [Husky](https://typicode.github.io/husky/) for git hooks
 - See [docs/how-to/01-development.md](docs/how-to/01-development.md) for workflow, conventions, and tips
+- Homepage visual design: [DESIGN.md](DESIGN.md) (colours, components, UI guidelines)
 
 ## Infrastructure
 - [AWS CDK](https://docs.aws.amazon.com/cdk/) (TypeScript)
