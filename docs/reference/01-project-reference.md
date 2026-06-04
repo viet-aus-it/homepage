@@ -42,7 +42,17 @@ public/        — Static assets
 .github/       — CI/CD workflows (GitHub Actions)
 docs/          — Project documentation (Diataxis framework)
 .agents/       — AI agent rules and skills
+DESIGN.md      — Homepage visual design system (see below)
+AGENTS.md      — AI agent control manifest
 ```
+
+## Design Documentation
+
+| Document | Purpose |
+|---|---|
+| [DESIGN.md](../../DESIGN.md) | Homepage visual design: colour tokens, typography, named components, layout, do's/don'ts |
+| [Architecture](../explanation/01-architecture.md) | Tech stack rationale and link to visual design |
+| Brand tokens in code | `src/index.css` (`--brand-*`), utilities in `@layer utilities` |
 
 ## Testing Tools
 

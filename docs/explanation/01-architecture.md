@@ -26,6 +26,7 @@ public/        — Static assets
 .github/       — CI/CD workflows (GitHub Actions)
 docs/          — Project documentation (Diataxis framework)
 .agents/       — AI agent rules and skills
+DESIGN.md      — Homepage visual design system (repository root)
 ```
 
 ## Design Principles
@@ -35,8 +36,20 @@ docs/          — Project documentation (Diataxis framework)
 - **Accessibility**: Targets [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/) AA compliance with semantic HTML and keyboard navigation
 - **Simplicity**: Minimal dependencies, clear code paths, no over-engineering
 
+## Visual Design
+
+Marketing UI is documented in [DESIGN.md](../../DESIGN.md) at the repository root (not under `docs/`). That file is the source of truth for:
+
+- Brand colours (`--brand-*` in `src/index.css`) and warm canvas/backdrop treatment
+- Named homepage components (`nav-bar`, `hero`, `content-shell`, `join-community-cta`, etc.)
+- Typography hierarchy, spacing, and responsive breakpoints
+- Do's and don'ts (e.g. brand yellow for emphasis only, dark footer, Discord as primary CTA)
+
+When changing landing-page visuals, read `DESIGN.md` first and update it in the same pull request if tokens or component contracts change.
+
 ---
 
 See also:
+- [Design System](../../DESIGN.md) — Full visual design reference
 - [Infrastructure](./02-infrastructure.md) — AWS and Cloudflare architecture
 - [Project Reference](../reference/01-project-reference.md) — Tech stack versions and commands

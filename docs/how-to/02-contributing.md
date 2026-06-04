@@ -23,6 +23,7 @@ Thank you for your interest in contributing to the VAIT Homepage project!
 
 - New features, architectural changes, and configuration changes **must** include corresponding documentation updates.
 - The `docs/` directory follows the [Diataxis](https://diataxis.fr/) framework — place content in the correct category (tutorial, how-to, explanation, or reference).
+- Marketing UI changes (colours, typography, layout, new sections) **must** align with [DESIGN.md](../../DESIGN.md); update that file when tokens or documented components change.
 - Every mention of an external tool, framework, or standard must include a hyperlink on first mention per document.
 
 ## Where to Ask for Help
@@ -36,3 +37,4 @@ See also:
 - [Development](./01-development.md) — Day-to-day workflows and conventions
 - [Project Reference](../reference/01-project-reference.md) — Commands and tech stack
 - [Architecture](../explanation/01-architecture.md) — Design decisions
+- [Design System](../../DESIGN.md) — Homepage visual design reference

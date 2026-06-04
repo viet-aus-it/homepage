@@ -20,6 +20,7 @@ You are working on the VAIT Homepage, the official website for the Viet-Aus IT c
 - **Team**: VAIT (Vietnamese Australians in Information Technology community)
 - **Tech Stack**: [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/), [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/), [Biome](https://biomejs.dev/), [Vitest](https://vitest.dev/)
 - **Architecture**: Component-based architecture with type-safe routing and state management
+- **Visual design**: [DESIGN.md](DESIGN.md) — tokens, components, and do's/don'ts for the public homepage (warm canvas, brand yellow, shadcn/Tailwind)
 - **Infrastructure**: [AWS CDK](https://docs.aws.amazon.com/cdk/), [S3](https://aws.amazon.com/s3/), [CloudFront](https://aws.amazon.com/cloudfront/) for deployment
 
 ## Change Management Philosophy
@@ -47,6 +48,7 @@ All changes must be:
     communication.md
     special-considerations.md
     infrastructure.md
+DESIGN.md                # Visual design system (homepage UI — read before marketing UI changes)
 docs/
   index.md               # Documentation hub (Diataxis framework)
   tutorials/             # Learning-oriented guides
@@ -58,15 +60,16 @@ docs/
 ## Execution Protocol
 
 1. **Always read this file first** before starting a task so you know which skills or rules to load from `.agents/`.
-2. **Skills**:
+2. **Visual / marketing UI** (colours, typography, layout, new homepage sections, brand components): read [DESIGN.md](DESIGN.md) before editing `src/components/` or `src/pages/`. Update `DESIGN.md` in the same pull request when you add or change design tokens, named components, or documented behaviour.
+3. **Skills**:
    - Load a skill only if its trigger condition matches the task. Example: code review tasks must load `skills/code-review/SKILL.md`.
    - Once loaded, obey the process and output format defined inside the skill file so the final response stays consistent.
    - Skills are located in `.agents/skills/[skill-name]/SKILL.md`
-3. **Rules**:
+4. **Rules**:
    - Rules are long-lived constraints (API guidelines, coding practices, etc.). Whenever a task touches those domains, read the matching file under `.agents/rules/`.
    - Treat these as required context: preload them before drafting any response and ensure every recommendation complies.
    - Rules are located in `.agents/rules/[rule-name].md`
-4. **Response contract**:
+5. **Response contract**:
    - Explicitly mention which skills and rules are in effect.
    - Derive findings, recommendations, or code while enforcing all loaded constraints. If conflicts arise, ask for clarification before diverging.
 
@@ -81,6 +84,10 @@ Load these rules when working on relevant domains:
 - **[communication.md](.agents/rules/communication.md)** - Communication style and output expectations
 - **[special-considerations.md](.agents/rules/special-considerations.md)** - Browser compatibility, SEO, accessibility, deployment
 - **[infrastructure.md](.agents/rules/infrastructure.md)** - AWS CDK patterns, deployment strategies, and operational best practices
+
+## Visual Design System
+
+- **[DESIGN.md](DESIGN.md)** — Canonical reference for the public homepage: colour tokens (`{colors.*}`), typography scale, layout, elevation, component keys (`{component.*}`), responsive behaviour, iteration guide, and known gaps. Pair with **[code-style.md](.agents/rules/code-style.md)** and **[special-considerations.md](.agents/rules/special-considerations.md)** for accessibility and implementation detail.
 
 ## Available Skills
 
@@ -115,6 +122,7 @@ pnpm run typecheck    # Run TypeScript type checking
 - **Type safety**: Strict TypeScript with no `any`
 - **Performance first**: [Core Web Vitals](https://web.dev/articles/vitals) optimisation
 - **Accessibility**: [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/) AA compliance
+- **Visual consistency**: Follow [DESIGN.md](DESIGN.md) for marketing UI; keep tokens in `src/index.css` (`--brand-*`)
 
 ## Rules vs. Skills at a Glance
 
@@ -132,4 +140,4 @@ Think of **rules** as a "manual" that keeps behavior aligned, while **skills** a
 - Additional **skills** (architecture review, test planning, etc.) or **rules** (team code style, compliance requirements) can be added under the existing folders.
 - Keep this file updated so future agents know when to load each artifact and how to combine them safely.
 
-Remember: You're supporting the VAIT community homepage. Focus on clean, performant, and accessible code that serves the community well. When in doubt, follow existing patterns in the codebase and refer to the relevant rules.
+Remember: You're supporting the VAIT community homepage. Focus on clean, performant, and accessible code that serves the community well. When in doubt, follow existing patterns in the codebase, [DESIGN.md](DESIGN.md) for visual work, and the relevant rules.
