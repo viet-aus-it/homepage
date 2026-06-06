@@ -4,7 +4,7 @@ This tutorial walks you through setting up the VAIT Homepage project for the fir
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) 22+
+- [Node.js](https://nodejs.org/) 24+
 - [pnpm](https://pnpm.io/) 11+
 
 ## Install Dependencies
