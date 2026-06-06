@@ -71,4 +71,4 @@ AGENTS.md      — AI agent control manifest
 ## Requirements
 
 - [Node.js](https://nodejs.org/) 22+
-- [pnpm](https://pnpm.io/) 10+
+- [pnpm](https://pnpm.io/) 11+
