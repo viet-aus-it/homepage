@@ -37,7 +37,7 @@ pnpm run lint:fix
 pnpm run build
 ```
 
-> **Note:** `pnpm run lint:fix` will both lint and format the codebase using Oxlint.
+> **Note:** `pnpm run lint:fix` will lint with Oxlint and format with Oxfmt.
 
 ## Project Structure
 
