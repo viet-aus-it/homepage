@@ -1,9 +1,3 @@
 {
-  "recommendations": [
-    "biomejs.biome",
-    "bradlc.vscode-tailwindcss",
-    "EditorConfig.EditorConfig",
-    "github.vscode-github-actions",
-    "vitest.explorer"
-  ]
+  "recommendations": ["oxc.oxc", "bradlc.vscode-tailwindcss", "EditorConfig.EditorConfig", "github.vscode-github-actions", "vitest.explorer"]
 }

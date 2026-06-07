@@ -5,12 +5,14 @@ This document outlines special considerations and constraints specific to the VA
 ## Browser Compatibility
 
 ### Target Browsers
+
 - **Modern browsers**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
 - **Mobile browsers**: iOS Safari 14+, Chrome Mobile 90+
 - **Progressive enhancement**: Core functionality should work in older browsers
 - **Polyfill strategy**: Use Vite's @vitejs/plugin-legacy for legacy browser support
 
 ### Feature Detection
+
 ```tsx
 // ✅ Good: Feature detection with fallbacks
 export const useFeatureDetection = () => {
@@ -18,7 +20,7 @@ export const useFeatureDetection = () => {
     intersectionObserver: false,
     webp: false,
     localStorage: false,
-    geolocation: false
+    geolocation: false,
   });
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export const useFeatureDetection = () => {
         intersectionObserver,
         webp,
         localStorage,
-        geolocation
+        geolocation,
       });
     };
 
@@ -51,25 +53,24 @@ export const useFeatureDetection = () => {
 ```
 
 ### CSS Feature Support
+
 ```tsx
 // ✅ Good: CSS feature detection with Tailwind
 export const HeroSection = () => {
   const { features } = useFeatureDetection();
 
   return (
-    <section className={cn(
-      'relative min-h-screen flex items-center justify-center',
-      // Fallback for older browsers
-      !features.intersectionObserver && 'bg-gray-100'
-    )}>
+    <section
+      className={cn(
+        'relative min-h-screen flex items-center justify-center',
+        // Fallback for older browsers
+        !features.intersectionObserver && 'bg-gray-100'
+      )}
+    >
       {/* Content with progressive enhancement */}
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-center">
-          Welcome to VAIT
-        </h1>
-        <p className="text-xl text-center mt-4">
-          Connecting Vietnamese and Australian IT communities
-        </p>
+        <h1 className="text-4xl md:text-6xl font-bold text-center">Welcome to VAIT</h1>
+        <p className="text-xl text-center mt-4">Connecting Vietnamese and Australian IT communities</p>
       </div>
     </section>
   );
@@ -79,6 +80,7 @@ export const HeroSection = () => {
 ## SEO and Accessibility
 
 ### SEO Considerations
+
 ```typescript
 // ✅ Good: SEO-optimised component structure
 export const EventPage = ({ event }: { event: Event }) => {
@@ -142,6 +144,7 @@ export const EventPage = ({ event }: { event: Event }) => {
 ```
 
 ### Accessibility Requirements
+
 ```typescript
 // ✅ Good: Accessible navigation component
 export const Navigation = () => {
@@ -223,6 +226,7 @@ export const Navigation = () => {
 ## Performance Budgets
 
 ### Core Web Vitals Targets
+
 - **LCP (Largest Contentful Paint)**: < 2.5 seconds
 - **FID (First Input Delay)**: < 100 milliseconds
 - **CLS (Cumulative Layout Shift)**: < 0.1
@@ -230,6 +234,7 @@ export const Navigation = () => {
 - **TTI (Time to Interactive)**: < 3.8 seconds
 
 ### Bundle Size Constraints
+
 ```typescript
 // ✅ Good: Bundle size monitoring
 export const BundleSizeMonitor = () => {
@@ -277,6 +282,7 @@ export const BundleSizeMonitor = () => {
 ```
 
 ### Image Optimisation
+
 ```typescript
 // ✅ Good: Optimised image component
 export const OptimisedImage = ({
@@ -333,6 +339,7 @@ export const OptimisedImage = ({
 ## Mobile-First Responsive Design
 
 ### Breakpoint Strategy
+
 ```typescript
 // ✅ Good: Responsive component with mobile-first approach
 export const EventCard = ({ event }: { event: Event }) => {
@@ -387,6 +394,7 @@ export const EventCard = ({ event }: { event: Event }) => {
 ```
 
 ### Touch Interaction Patterns
+
 ```typescript
 // ✅ Good: Touch-friendly component
 export const TouchFriendlyCarousel = ({ items }: { items: CarouselItem[] }) => {
@@ -460,24 +468,25 @@ export const TouchFriendlyCarousel = ({ items }: { items: CarouselItem[] }) => {
 ## Deployment Considerations
 
 ### AWS S3/CloudFront Configuration
+
 ```typescript
 // ✅ Good: Environment-aware configuration
 export const config = {
   development: {
     apiUrl: 'http://localhost:3001/api',
     cdnUrl: 'http://localhost:5173',
-    environment: 'development'
+    environment: 'development',
   },
   staging: {
     apiUrl: 'https://staging-api.vait.org.au/api',
     cdnUrl: 'https://staging.vait.org.au',
-    environment: 'staging'
+    environment: 'staging',
   },
   production: {
     apiUrl: 'https://api.vait.org.au/api',
     cdnUrl: 'https://vait.org.au',
-    environment: 'production'
-  }
+    environment: 'production',
+  },
 } as const;
 
 export const useConfig = () => {
@@ -487,6 +496,7 @@ export const useConfig = () => {
 ```
 
 ### Cache Headers and CDN
+
 ```typescript
 // ✅ Good: Cache-aware asset loading
 export const useAssetCache = () => {
@@ -499,18 +509,13 @@ export const useAssetCache = () => {
   };
 
   const preloadCriticalAssets = () => {
-    const criticalAssets = [
-      '/fonts/inter-var.woff2',
-      '/images/hero-bg.webp',
-      '/css/critical.css'
-    ];
+    const criticalAssets = ['/fonts/inter-var.woff2', '/images/hero-bg.webp', '/css/critical.css'];
 
-    criticalAssets.forEach(asset => {
+    criticalAssets.forEach((asset) => {
       const link = document.createElement('link');
       link.rel = 'preload';
       link.href = getAssetUrl(asset);
-      link.as = asset.endsWith('.woff2') ? 'font' :
-                asset.endsWith('.css') ? 'style' : 'image';
+      link.as = asset.endsWith('.woff2') ? 'font' : asset.endsWith('.css') ? 'style' : 'image';
       if (link.as === 'font') {
         link.crossOrigin = 'anonymous';
       }
@@ -523,35 +528,22 @@ export const useAssetCache = () => {
 ```
 
 ### Error Monitoring and Analytics
+
 ```tsx
 // ✅ Good: Error boundary with monitoring using react-error-boundary
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 
-function MonitoredErrorFallback({ error, resetErrorBoundary }: {
-  error: Error;
-  resetErrorBoundary: () => void;
-}) {
+function MonitoredErrorFallback({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          Something went wrong
-        </h1>
-        <p className="text-gray-600 mb-6">
-          We're sorry, but something unexpected happened.
-          Please try again or refresh the page.
-        </p>
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">Something went wrong</h1>
+        <p className="text-gray-600 mb-6">We're sorry, but something unexpected happened. Please try again or refresh the page.</p>
         <div className="space-x-4">
-          <button
-            onClick={resetErrorBoundary}
-            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
-          >
+          <button onClick={resetErrorBoundary} className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
             Try Again
           </button>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700"
-          >
+          <button onClick={() => window.location.reload()} className="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700">
             Refresh Page
           </button>
         </div>
@@ -573,9 +565,9 @@ export function MonitoredErrorBoundary({ children }: { children: ReactNode }) {
           window.Sentry.captureException(error, {
             contexts: {
               react: {
-                componentStack: errorInfo.componentStack
-              }
-            }
+                componentStack: errorInfo.componentStack,
+              },
+            },
           });
         }
       }}
@@ -589,6 +581,7 @@ export function MonitoredErrorBoundary({ children }: { children: ReactNode }) {
 ## Security Considerations
 
 ### Content Security Policy (CSP)
+
 ```typescript
 // ✅ Good: CSP-compliant component
 export const SecureComponent = () => {
@@ -616,18 +609,16 @@ export const SecureComponent = () => {
 ```
 
 ### API Security Patterns
+
 ```typescript
 // ✅ Good: Secure API client
 export const secureApiClient = {
-  async request<T>(
-    endpoint: string,
-    options: RequestInit = {}
-  ): Promise<T> {
+  async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const url = `${import.meta.env.VITE_API_URL}${endpoint}`;
 
     const defaultHeaders = {
       'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
+      'X-Requested-With': 'XMLHttpRequest',
     };
 
     // Add CSRF token if available
@@ -640,9 +631,9 @@ export const secureApiClient = {
       ...options,
       headers: {
         ...defaultHeaders,
-        ...options.headers
+        ...options.headers,
       },
-      credentials: 'same-origin' // Include cookies for same-origin requests
+      credentials: 'same-origin', // Include cookies for same-origin requests
     });
 
     if (!response.ok) {
@@ -650,7 +641,7 @@ export const secureApiClient = {
     }
 
     return response.json();
-  }
+  },
 };
 ```
 
@@ -664,12 +655,14 @@ export const secureApiClient = {
 ## Compliance and Legal
 
 ### Data Privacy
+
 - **GDPR compliance**: Implement cookie consent and data handling policies
 - **Australian Privacy Act**: Follow Australian data protection regulations
 - **Data minimization**: Only collect necessary user information
 - **Transparent policies**: Clearly communicate data usage to users
 
 ### Accessibility Compliance
+
 - **WCAG 2.1 AA**: Target AA level compliance for all public-facing content
 - **Screen reader support**: Test with popular screen readers
 - **Keyboard navigation**: Ensure full keyboard accessibility

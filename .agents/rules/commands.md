@@ -5,6 +5,7 @@ This document provides comprehensive command guidelines for the VAIT Homepage pr
 ## Core Development Commands
 
 ### Development Server
+
 ```bash
 # Start local development server
 pnpm run dev
@@ -15,6 +16,7 @@ pnpm run dev
 ```
 
 ### Build Commands
+
 ```bash
 # Build for production
 pnpm run build
@@ -27,6 +29,7 @@ pnpm run preview
 ```
 
 ### Testing Commands
+
 ```bash
 # Run tests in watch mode (default)
 pnpm run test
@@ -45,6 +48,7 @@ pnpm run test:preview
 ```
 
 ### Code Quality Commands
+
 ```bash
 # Check code formatting and linting
 pnpm run lint
@@ -55,11 +59,12 @@ pnpm run lint:fix
 # Unsafe auto-fix (may break code)
 pnpm run lint:fix:unsafe
 
-# Run CI checks (Biome)
+# Run CI checks (Oxlint + Oxfmt)
 pnpm run ci
 ```
 
 ### Type Checking
+
 ```bash
 # Run TypeScript compiler checks
 pnpm run typecheck
@@ -70,6 +75,7 @@ pnpm run typecheck
 ## Agent-Specific Workflows
 
 ### Before Making Changes
+
 ```bash
 # 1. Ensure clean working directory
 git status
@@ -85,6 +91,7 @@ pnpm run lint:fix && pnpm run typecheck
 ```
 
 ### During Development
+
 ```bash
 # 1. Start dev server
 pnpm run dev
@@ -98,6 +105,7 @@ pnpm run lint:fix && pnpm run typecheck
 ```
 
 ### Before Committing
+
 ```bash
 # 1. Stage your changes
 git add .
@@ -118,6 +126,7 @@ git commit -m "feat: add new feature"
 ## TanStack Router Commands
 
 ### Route Tree Generation
+
 ```bash
 # Generate route tree (automatically runs on file changes)
 pnpm run router:gen
@@ -130,6 +139,7 @@ npx tsr validate
 ```
 
 ### Route Development
+
 ```bash
 # Create new route file
 # Routes are auto-discovered from src/routes/ directory
@@ -148,6 +158,7 @@ npx tsr validate
 ## Infrastructure Commands
 
 ### AWS CDK Commands
+
 ```bash
 # Navigate to infrastructure directory
 cd infra/
@@ -175,6 +186,7 @@ npx cdk list
 ```
 
 ### Environment-Specific Deployment
+
 ```bash
 # Deploy to development environment
 cd infra/ && npx cdk deploy VaitHomepageDev --profile dev
@@ -187,6 +199,7 @@ npx cdk deploy --parameters Environment=production
 ```
 
 ### Local Infrastructure Development
+
 ```bash
 # Start local development environment
 # Uses Vite's built-in dev server
@@ -199,6 +212,7 @@ pnpm run msw:init  # (run once during setup)
 ## Git Workflow Commands
 
 ### Branch Management
+
 ```bash
 # Create new feature branch
 git checkout -b feature/new-component
@@ -214,6 +228,7 @@ git push -u origin feature/new-component
 ```
 
 ### Commit Patterns
+
 ```bash
 # Feature commits
 git commit -m "feat: add user authentication component"
@@ -234,6 +249,7 @@ git commit -m "feat!: update component prop interface"
 ## Performance Commands
 
 ### Bundle Analysis
+
 ```bash
 # Analyze bundle size (add to package.json if needed)
 pnpm add --save-dev rollup-plugin-visualizer
@@ -245,6 +261,7 @@ pnpm run build -- --analyze
 ```
 
 ### Performance Testing
+
 ```bash
 # Run Lighthouse CI (if configured)
 pnpm run lighthouse
@@ -257,6 +274,7 @@ pnpm run lighthouse
 ## Debugging Commands
 
 ### Development Debugging
+
 ```bash
 # Start dev server with debug flags
 pnpm run dev --debug
@@ -269,11 +287,12 @@ pnpm run test -- --no-coverage --reporter=verbose
 ```
 
 ### Error Investigation
+
 ```bash
 # Check TypeScript compilation details
 pnpm run typecheck -- --noEmit --pretty
 
-# Run Biome with verbose output
+# Run Oxlint with verbose output
 pnpm run lint -- --verbose
 
 # Check Vite build details
@@ -283,6 +302,7 @@ pnpm run build -- --mode development
 ## Maintenance Commands
 
 ### Dependency Management
+
 ```bash
 # Check for outdated dependencies
 pnpm outdated
@@ -301,6 +321,7 @@ pnpm remove package-name
 ```
 
 ### Cleanup Commands
+
 ```bash
 # Clean build artifacts
 rm -rf dist/
@@ -319,6 +340,7 @@ pnpm store prune
 ## Environment Commands
 
 ### Environment Setup
+
 ```bash
 # Copy environment template
 cp .env.example .env.local
@@ -328,6 +350,7 @@ cp .env.example .env.local
 ```
 
 ### Production Deployment
+
 ```bash
 # Build for production
 pnpm run build
@@ -349,6 +372,7 @@ cd infra/ && pnpm run cdk deploy
 ## Command Aliases (Optional)
 
 Add these to your shell profile for convenience:
+
 ```bash
 # ~/.bashrc or ~/.zshrc
 alias vdev='pnpm run dev'

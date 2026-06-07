@@ -14,7 +14,7 @@ The VAIT Homepage is a static landing page for the Vietnamese Australians in Inf
 - **[TanStack Router](https://tanstack.com/router)**: Type-safe routing with built-in code splitting. Chosen for its first-class TypeScript support over React Router.
 - **[React Query](https://tanstack.com/query)**: Server state management with caching, background refetching, and stale-while-revalidate patterns.
 - **[Zod](https://zod.dev/)**: Schema validation for runtime type checking at system boundaries (API responses, form inputs, route params).
-- **[Biome](https://biomejs.dev/)**: Unified linter and formatter replacing ESLint + Prettier. Faster and simpler configuration.
+- **[Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)**: High-performance linter and formatter built on the Oxc compiler stack.
 - **[Vitest](https://vitest.dev/)**: Testing framework with native Vite integration. Runs tests in the same pipeline as the build.
 
 ## Project Structure
@@ -50,6 +50,7 @@ When changing landing-page visuals, read `DESIGN.md` first and update it in the 
 ---
 
 See also:
+
 - [Design System](../../DESIGN.md) — Full visual design reference
 - [Infrastructure](./02-infrastructure.md) — AWS and Cloudflare architecture
 - [Project Reference](../reference/01-project-reference.md) — Tech stack versions and commands

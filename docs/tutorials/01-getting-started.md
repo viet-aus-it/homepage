@@ -17,8 +17,8 @@ pnpm install
 
 Use a [TypeScript](https://www.typescriptlang.org/)-aware editor for the best experience:
 
-- [VSCode](https://code.visualstudio.com/) — install the [Biome](https://biomejs.dev/) extension and enable format-on-save
-- [Zed](https://zed.dev/) — install the Biome extension and enable format-on-save
+- [VSCode](https://code.visualstudio.com/) — install the [Oxc](https://marketplace.visualstudio.com/items?itemName=oxc.oxc) extension and enable format-on-save
+- [Zed](https://zed.dev/) — install the Oxc extension and enable format-on-save
 
 ## Start the Development Server
 

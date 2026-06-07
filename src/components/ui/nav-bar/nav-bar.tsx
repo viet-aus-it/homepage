@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { DiscordLogo } from '@/components/ui/icons';
 import Logo from '@/components/ui/logo';
 import { ORGANISATION } from '@/lib/constants';
+
 import { Separator } from '../separator';
 import NavMenu from './nav-menu';
 import NavSheet from './nav-sheet';

@@ -34,6 +34,7 @@ Thank you for your interest in contributing to the VAIT Homepage project!
 ---
 
 See also:
+
 - [Development](./01-development.md) — Day-to-day workflows and conventions
 - [Project Reference](../reference/01-project-reference.md) — Commands and tech stack
 - [Architecture](../explanation/01-architecture.md) — Design decisions

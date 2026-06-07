@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "VAIT Homepage",
   "type": "module",
-  "engines": {
-    "node": "^24.0.0",
-    "pnpm": "^11.0.0"
-  },
-  "packageManager": "pnpm@11.5.2",
   "scripts": {
     "prepare": "pnpm run githooks:init",
     "githooks:init": "husky",
@@ -22,10 +17,12 @@
     "test:watch": "vitest watch",
     "test:CI": "pnpm run test && pnpm run typecheck",
     "test:preview": "vitest-preview",
-    "lint": "biome check .",
-    "lint:fix": "biome check --write .",
-    "lint:fix:unsafe": "biome check --write --unsafe .",
-    "ci": "biome ci .",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix && oxfmt --write",
+    "lint:fix:unsafe": "oxlint --fix-dangerously && oxfmt --write",
+    "format": "oxfmt --write",
+    "format:check": "oxfmt --check",
+    "ci": "oxlint && oxfmt --check",
     "deploy:cf": "wrangler deploy"
   },
   "dependencies": {
@@ -49,7 +46,6 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.16",
     "@cloudflare/vite-plugin": "^1.40.0",
     "@tanstack/router-cli": "^1.167.17",
     "@tanstack/router-vite-plugin": "^1.167.18",
@@ -69,6 +65,8 @@
     "jsdom": "^29.1.1",
     "lint-prepush": "^3.0.3",
     "lint-staged": "^17.0.7",
+    "oxfmt": "^0.53.0",
+    "oxlint": "^1.68.0",
     "tsx": "^4.22.4",
     "tw-animate-css": "^1.4.0",
     "typescript": "^6.0.3",
@@ -76,5 +74,10 @@
     "vitest": "^4.1.8",
     "vitest-preview": "^0.0.3",
     "wrangler": "^4.98.0"
-  }
+  },
+  "engines": {
+    "node": "^24.0.0",
+    "pnpm": "^11.0.0"
+  },
+  "packageManager": "pnpm@11.5.2"
 }

@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 160,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "quoteProps": "as-needed",
+  "trailingComma": "es5",
+  "sortImports": true,
+  "experimentalTailwindcssSorting": true,
+  "ignorePatterns": ["**/.vscode", "**/.zed", "**/src/routeTree.gen.ts", "**/src/**/__snapshots__", "**/public/mockServiceWorker.js", "**/infra/cdk.out"]
+}

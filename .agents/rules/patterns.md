@@ -5,6 +5,7 @@ This document provides comprehensive development patterns for the VAIT Homepage 
 ## React Component Patterns
 
 ### Component Composition
+
 ```tsx
 // ✅ Good: Component composition over inheritance
 type CardProps = {
@@ -15,12 +16,7 @@ type CardProps = {
 
 export const Card = ({ children, className, variant = 'default' }: CardProps) => {
   return (
-    <div className={cn(
-      'rounded-lg p-6',
-      variant === 'default' && 'bg-white shadow-md',
-      variant === 'outlined' && 'border border-gray-200',
-      className
-    )}>
+    <div className={cn('rounded-lg p-6', variant === 'default' && 'bg-white shadow-md', variant === 'outlined' && 'border border-gray-200', className)}>
       {children}
     </div>
   );
@@ -32,11 +28,7 @@ type CardHeaderProps = {
 };
 
 export const CardHeader = ({ children, className }: CardHeaderProps) => {
-  return (
-    <div className={cn('mb-4', className)}>
-      {children}
-    </div>
-  );
+  return <div className={cn('mb-4', className)}>{children}</div>;
 };
 
 // Usage: Compose cards with flexible structure
@@ -47,10 +39,11 @@ export const CardHeader = ({ children, className }: CardHeaderProps) => {
   <Card>
     <p>Join our upcoming events...</p>
   </Card>
-</Card>
+</Card>;
 ```
 
 ### Compound Components
+
 ```tsx
 // ✅ Good: Compound component pattern for complex UI
 type TabsContextValue = {
@@ -71,9 +64,7 @@ export const Tabs = ({ children, defaultTab, className }: TabsProps) => {
 
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab }}>
-      <div className={className}>
-        {children}
-      </div>
+      <div className={className}>{children}</div>
     </TabsContext.Provider>
   );
 };
@@ -121,17 +112,13 @@ export const Tab = ({ id, children, className }: TabProps) => {
 };
 ```
 
-
-
 ## Custom Hook Patterns
 
 ### Local Storage Hooks
+
 ```tsx
 // ✅ Good: Type-safe local storage hook
-export function useLocalStorage<T>(
-  key: string,
-  initialValue: T
-): [T, (value: T) => void] {
+export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -142,14 +129,17 @@ export function useLocalStorage<T>(
     }
   });
 
-  const setValue = useCallback((value: T) => {
-    try {
-      setStoredValue(value);
-      window.localStorage.setItem(key, JSON.stringify(value));
-    } catch (error) {
-      console.error(`Error setting localStorage key "${key}":`, error);
-    }
-  }, [key]);
+  const setValue = useCallback(
+    (value: T) => {
+      try {
+        setStoredValue(value);
+        window.localStorage.setItem(key, JSON.stringify(value));
+      } catch (error) {
+        console.error(`Error setting localStorage key "${key}":`, error);
+      }
+    },
+    [key]
+  );
 
   return [storedValue, setValue];
 }
@@ -159,12 +149,10 @@ const [theme, setTheme] = useLocalStorage<'light' | 'dark'>('theme', 'light');
 ```
 
 ### Local Storage Hooks
+
 ```tsx
 // ✅ Good: Type-safe local storage hook
-export function useLocalStorage<T>(
-  key: string,
-  initialValue: T
-): [T, (value: T) => void] {
+export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -175,14 +163,17 @@ export function useLocalStorage<T>(
     }
   });
 
-  const setValue = useCallback((value: T) => {
-    try {
-      setStoredValue(value);
-      window.localStorage.setItem(key, JSON.stringify(value));
-    } catch (error) {
-      console.error(`Error setting localStorage key "${key}":`, error);
-    }
-  }, [key]);
+  const setValue = useCallback(
+    (value: T) => {
+      try {
+        setStoredValue(value);
+        window.localStorage.setItem(key, JSON.stringify(value));
+      } catch (error) {
+        console.error(`Error setting localStorage key "${key}":`, error);
+      }
+    },
+    [key]
+  );
 
   return [storedValue, setValue];
 }
@@ -190,12 +181,11 @@ export function useLocalStorage<T>(
 // Usage:
 const [theme, setTheme] = useLocalStorage<'light' | 'dark'>('theme', 'light');
 ```
-
-
 
 ## TanStack Router Patterns
 
 ### Route Configuration
+
 ```tsx
 // ✅ Good: Type-safe route configuration
 import { createFileRoute } from '@tanstack/react-router';
@@ -209,9 +199,9 @@ export const Route = createFileRoute('/users/$userId')({
   component: UserProfilePage,
   loader: ({ params }) => fetchUserProfile(params.userId),
   validateSearch: (search: Record<string, unknown>): UserProfileSearchParams => ({
-    tab: search.tab as string || 'overview',
-    edit: search.edit === 'true'
-  })
+    tab: (search.tab as string) || 'overview',
+    edit: search.edit === 'true',
+  }),
 });
 
 function UserProfilePage() {
@@ -230,6 +220,7 @@ function UserProfilePage() {
 ```
 
 ### Navigation Patterns
+
 ```tsx
 // ✅ Good: Type-safe navigation with parameters
 import { useNavigate } from '@tanstack/react-router';
@@ -241,7 +232,7 @@ export const UserCard = ({ user }: { user: UserProfile }) => {
     navigate({
       to: '/users/$userId',
       params: { userId: user.id },
-      search: { tab: 'overview' }
+      search: { tab: 'overview' },
     });
   };
 
@@ -249,7 +240,7 @@ export const UserCard = ({ user }: { user: UserProfile }) => {
     navigate({
       to: '/users/$userId',
       params: { userId: user.id },
-      search: { tab: 'edit', edit: true }
+      search: { tab: 'edit', edit: true },
     });
   };
 
@@ -266,6 +257,7 @@ export const UserCard = ({ user }: { user: UserProfile }) => {
 ## Testing Patterns
 
 ### Component Testing with Testing Library
+
 ```tsx
 // ✅ Good: User-focused component testing
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
@@ -304,6 +296,7 @@ describe('UserProfile', () => {
 ```
 
 ### Component Testing with Mock Data
+
 ```tsx
 // ✅ Good: Testing with mock data instead of API calls
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
@@ -316,7 +309,7 @@ describe('UserProfile with mock data', () => {
   it('should handle error states gracefully', async () => {
     const mockProps = {
       userId: 'invalid-id',
-      initialData: null
+      initialData: null,
     };
 
     render(<UserProfile {...mockProps} />);
@@ -330,7 +323,7 @@ describe('UserProfile with mock data', () => {
     const mockProps = {
       userId: '1',
       initialData: null,
-      isLoading: true
+      isLoading: true,
     };
 
     render(<UserProfile {...mockProps} />);
@@ -341,6 +334,7 @@ describe('UserProfile with mock data', () => {
 ```
 
 ### Integration Testing Patterns
+
 ```tsx
 // ✅ Good: Integration testing for user workflows
 import { render, screen, waitFor } from '@testing-library/react';
@@ -375,6 +369,7 @@ describe('Navigation Flow', () => {
 ## State Management Patterns
 
 ### Local State Patterns
+
 ```tsx
 // ✅ Good: Component state with proper typing
 export function useNavigationState() {
@@ -382,29 +377,33 @@ export function useNavigationState() {
   const [activeSection, setActiveSection] = useState<string>('home');
 
   const toggleMenu = useCallback(() => {
-    setIsMenuOpen(prev => !prev);
+    setIsMenuOpen((prev) => !prev);
   }, []);
 
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
   }, []);
 
-  const navigateToSection = useCallback((section: string) => {
-    setActiveSection(section);
-    closeMenu();
-  }, [closeMenu]);
+  const navigateToSection = useCallback(
+    (section: string) => {
+      setActiveSection(section);
+      closeMenu();
+    },
+    [closeMenu]
+  );
 
   return {
     isMenuOpen,
     activeSection,
     toggleMenu,
     closeMenu,
-    navigateToSection
+    navigateToSection,
   };
 }
 ```
 
 ### Context Patterns
+
 ```tsx
 // ✅ Good: Context for theme management
 type ThemeContextValue = {
@@ -425,9 +424,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={value}>
-      <div className={theme}>
-        {children}
-      </div>
+      <div className={theme}>{children}</div>
     </ThemeContext.Provider>
   );
 };
@@ -444,6 +441,7 @@ export const useTheme = () => {
 ## Performance Patterns
 
 ### Code Splitting Patterns
+
 ```tsx
 // ✅ Good: Route-based code splitting
 import { lazy } from 'react';
@@ -455,47 +453,59 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/profile" element={
-        <Suspense fallback={<div>Loading profile...</div>}>
-          <UserProfile />
-        </Suspense>
-      } />
-      <Route path="/admin" element={
-        <Suspense fallback={<div>Loading admin panel...</div>}>
-          <AdminPanel />
-        </Suspense>
-      } />
+      <Route
+        path="/profile"
+        element={
+          <Suspense fallback={<div>Loading profile...</div>}>
+            <UserProfile />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <Suspense fallback={<div>Loading admin panel...</div>}>
+            <AdminPanel />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 };
 ```
 
 ### Memoization Patterns
+
 ```tsx
 // ✅ Good: Strategic memoization for performance
-export const ExpensiveComponent = React.memo<Props>(({ data, onAction }) => {
-  // Memoize expensive calculations
-  const processedData = useMemo(() => {
-    return data.map(item => expensiveTransform(item));
-  }, [data]);
+export const ExpensiveComponent = React.memo<Props>(
+  ({ data, onAction }) => {
+    // Memoize expensive calculations
+    const processedData = useMemo(() => {
+      return data.map((item) => expensiveTransform(item));
+    }, [data]);
 
-  // Memoize event handlers
-  const handleAction = useCallback((id: string) => {
-    onAction(id);
-  }, [onAction]);
+    // Memoize event handlers
+    const handleAction = useCallback(
+      (id: string) => {
+        onAction(id);
+      },
+      [onAction]
+    );
 
-  return (
-    <div>
-      {processedData.map(item => (
-        <Item key={item.id} item={item} onAction={handleAction} />
-      ))}
-    </div>
-  );
-}, (prevProps, nextProps) => {
-  // Custom comparison function
-  return prevProps.data.length === nextProps.data.length &&
-         prevProps.data.every((item, index) => item.id === nextProps.data[index]?.id);
-});
+    return (
+      <div>
+        {processedData.map((item) => (
+          <Item key={item.id} item={item} onAction={handleAction} />
+        ))}
+      </div>
+    );
+  },
+  (prevProps, nextProps) => {
+    // Custom comparison function
+    return prevProps.data.length === nextProps.data.length && prevProps.data.every((item, index) => item.id === nextProps.data[index]?.id);
+  }
+);
 ```
 
 ## Cross References
@@ -508,16 +518,17 @@ export const ExpensiveComponent = React.memo<Props>(({ data, onAction }) => {
 ## Anti-Patterns to Avoid
 
 ### React Anti-Patterns
+
 ```tsx
 // ❌ Bad: Using index as key
-{items.map((item, index) => (
-  <Item key={index} item={item} />
-))}
+{
+  items.map((item, index) => <Item key={index} item={item} />);
+}
 
 // ✅ Good: Using stable, unique keys
-{items.map(item => (
-  <Item key={item.id} item={item} />
-))}
+{
+  items.map((item) => <Item key={item.id} item={item} />);
+}
 
 // ❌ Bad: Mutating state directly
 const [items, setItems] = useState([]);
@@ -529,17 +540,18 @@ const addItem = (newItem) => {
 // ✅ Good: Immutable updates
 const [items, setItems] = useState([]);
 const addItem = (newItem) => {
-  setItems(prev => [...prev, newItem]);
+  setItems((prev) => [...prev, newItem]);
 };
 ```
 
 ### Performance Anti-Patterns
+
 ```tsx
 // ❌ Bad: Creating functions in render
 const BadComponent = ({ items }) => {
   return (
     <div>
-      {items.map(item => (
+      {items.map((item) => (
         <button key={item.id} onClick={() => handleClick(item.id)}>
           {item.name}
         </button>
@@ -556,7 +568,7 @@ const GoodComponent = ({ items }) => {
 
   return (
     <div>
-      {items.map(item => (
+      {items.map((item) => (
         <Item key={item.id} item={item} onClick={handleClick} />
       ))}
     </div>

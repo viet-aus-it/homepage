@@ -5,18 +5,21 @@ This document outlines the engineering principles that guide development of the 
 ## Core Principles
 
 ### User Experience First
+
 - **Performance matters**: Every component should render efficiently and contribute to fast page loads
 - **Accessibility is mandatory**: Build with WCAG guidelines in mind from the start
 - **Mobile-first design**: Ensure responsive behavior across all device sizes
 - **Progressive enhancement**: Core functionality should work without JavaScript when possible
 
 ### Type Safety and Reliability
+
 - **No runtime surprises**: Use TypeScript to catch errors at compile time
 - **Validate all inputs**: Use Zod schemas for API responses and user input
 - **Handle errors gracefully**: Implement proper error boundaries and fallback states
 - **Test critical paths**: Ensure user workflows are thoroughly tested
 
 ### Maintainability and Scalability
+
 - **Code should be self-documenting**: Use clear naming and structure
 - **Prefer composition over inheritance**: Build reusable components through composition
 - **Separate concerns**: Keep business logic, presentation, and data fetching separate
@@ -25,6 +28,7 @@ This document outlines the engineering principles that guide development of the 
 ## React 19 Principles
 
 ### Component Architecture
+
 ```tsx
 // ✅ Good: Functional components with proper typing
 type NavigationProps = {
@@ -36,13 +40,8 @@ type NavigationProps = {
 export const Navigation = ({ items, currentPath, onNavigate }: NavigationProps) => {
   return (
     <nav>
-      {items.map(item => (
-        <NavigationItem
-          key={item.path}
-          item={item}
-          isActive={currentPath === item.path}
-          onClick={() => onNavigate?.(item.path)}
-        />
+      {items.map((item) => (
+        <NavigationItem key={item.path} item={item} isActive={currentPath === item.path} onClick={() => onNavigate?.(item.path)} />
       ))}
     </nav>
   );
@@ -50,6 +49,7 @@ export const Navigation = ({ items, currentPath, onNavigate }: NavigationProps) 
 ```
 
 ### Hook Patterns
+
 ```tsx
 // ✅ Good: Custom hooks with proper typing and error handling
 type UseApiResult<T> = {
@@ -90,6 +90,7 @@ export const useApi = <T>(url: string): UseApiResult<T> => {
 ```
 
 ### State Management Principles
+
 - **Local state first**: Use useState for component-specific state
 - **URL state for navigation**: Use TanStack Router for route state
 - **Custom hooks for shared logic**: Extract reusable stateful logic
@@ -98,6 +99,7 @@ export const useApi = <T>(url: string): UseApiResult<T> => {
 ## Performance Principles
 
 ### Rendering Optimisation
+
 ```typescript
 // ✅ Good: Memoized component with proper dependencies
 export const ProductList = React.memo<ProductListProps>(({ products, onAddToCart }) => {
@@ -130,12 +132,14 @@ export const ProductList = React.memo<ProductListProps>(({ products, onAddToCart
 ```
 
 ### Bundle Optimisation
+
 - **Code splitting**: Use dynamic imports for large components
 - **Tree shaking**: Ensure imports are specific and unused code is eliminated
 - **Asset optimisation**: Compress images and optimise fonts
 - **Lazy loading**: Implement intersection observer for below-fold content
 
 ### Core Web Vitals
+
 - **LCP (Largest Contentful Paint)**: Optimise hero images and critical content
 - **FID (First Input Delay)**: Minimize JavaScript execution time
 - **CLS (Cumulative Layout Shift)**: Specify dimensions for media and avoid layout changes
@@ -143,6 +147,7 @@ export const ProductList = React.memo<ProductListProps>(({ products, onAddToCart
 ## Security Principles
 
 ### Frontend Security
+
 ```typescript
 // ✅ Good: Input validation and sanitization
 const contactSchema = z.object({
@@ -182,12 +187,14 @@ export const ContactForm = () => {
 ```
 
 ### Content Security Policy
+
 - **Inline scripts**: Avoid inline JavaScript, use event handlers
 - **External resources**: Use trusted domains for external content
-- **Data attributes**: Use data-* attributes for component configuration
+- **Data attributes**: Use data-\* attributes for component configuration
 - **XSS prevention**: Sanitize user-generated content before rendering
 
 ### API Security
+
 - **HTTPS only**: All API calls must use HTTPS
 - **CORS configuration**: Configure proper cross-origin policies
 - **Rate limiting**: Implement client-side rate limiting for API calls
@@ -196,6 +203,7 @@ export const ContactForm = () => {
 ## Accessibility Principles
 
 ### Semantic HTML
+
 ```typescript
 // ✅ Good: Semantic and accessible component structure
 export const Hero = () => {
@@ -216,12 +224,14 @@ export const Hero = () => {
 ```
 
 ### Keyboard Navigation
+
 - **Tab order**: Ensure logical tab navigation through interactive elements
 - **Focus management**: Provide clear focus indicators and manage focus appropriately
 - **Keyboard shortcuts**: Implement keyboard alternatives to mouse interactions
 - **Skip links**: Add skip navigation links for screen reader users
 
 ### Screen Reader Support
+
 - **ARIA labels**: Use appropriate ARIA attributes for custom components
 - **Alt text**: Provide descriptive alt text for meaningful images
 - **Live regions**: Use aria-live for dynamic content updates
@@ -230,6 +240,7 @@ export const Hero = () => {
 ## Testing Principles
 
 ### Component Testing
+
 ```typescript
 // ✅ Good: User-focused component testing
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
@@ -261,12 +272,14 @@ describe('ContactForm', () => {
 ```
 
 ### Integration Testing
+
 - **User workflows**: Test complete user journeys through the application
 - **API integration**: Mock API responses for consistent testing
 - **Error scenarios**: Test error states and recovery mechanisms
 - **Performance testing**: Use React Testing Library's performance utilities
 
 ### Test Coverage
+
 - **Critical paths**: Ensure 100% coverage for user-facing functionality
 - **Error handling**: Test all error conditions and fallback states
 - **Edge cases**: Test boundary conditions and unusual inputs
@@ -275,6 +288,7 @@ describe('ContactForm', () => {
 ## Code Quality Principles
 
 ### SOLID Principles in React
+
 ```typescript
 // ✅ Good: Single Responsibility Principle
 type ButtonProps = {
@@ -313,12 +327,14 @@ export const Button = ({
 ```
 
 ### DRY (Don't Repeat Yourself)
+
 - **Component composition**: Build complex UIs from simple, reusable components
 - **Custom hooks**: Extract shared logic into reusable hooks
 - **Utility functions**: Create pure functions for common operations
 - **Configuration**: Use objects and constants for configuration data
 
 ### Clean Code
+
 - **Descriptive naming**: Use names that clearly express intent
 - **Small functions**: Keep functions focused and under 20 lines when possible
 - **Consistent style**: Follow established patterns and formatting rules
@@ -327,18 +343,21 @@ export const Button = ({
 ## Infrastructure Principles
 
 ### AWS Architecture
+
 - **Infrastructure as Code**: Use AWS CDK for all infrastructure definitions
 - **Least privilege**: Grant minimum necessary permissions to all resources
 - **Cost optimisation**: Use appropriate AWS services and sizing
 - **Monitoring**: Implement proper logging and monitoring
 
 ### Deployment Principles
+
 - **Automated deployments**: Use GitHub Actions for CI/CD
 - **Blue-green deployments**: Minimize downtime during releases
 - **Rollback capability**: Maintain ability to quickly rollback changes
 - **Environment parity**: Keep staging and production environments consistent
 
 ### Data Management
+
 - **Caching strategy**: Use appropriate caching layers for performance
 - **CDN usage**: Leverage CloudFront for static asset delivery
 - **Backup procedures**: Implement regular backup and recovery processes

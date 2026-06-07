@@ -1,4 +1,4 @@
-name: "Deployment Action: Build and deploy page"
+name: 'Deployment Action: Build and deploy page'
 
 on:
   push:
