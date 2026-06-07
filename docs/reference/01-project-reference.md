@@ -12,7 +12,7 @@ Quick-reference lookup for the VAIT Homepage tech stack, commands, project struc
 | [TanStack Router](https://tanstack.com/router)        | Routing                            | Latest      |
 | [React Query](https://tanstack.com/query)             | Server state management            | Latest      |
 | [Zod](https://zod.dev/)                               | Schema validation                  | Latest      |
-| [Biome](https://biomejs.dev/)                         | Linting and formatting             | Latest      |
+| [Oxlint](https://oxc.rs/) + [Oxfmt](https://oxc.rs/)  | Linting and formatting             | Latest      |
 | [Vitest](https://vitest.dev/)                         | Testing framework                  | Latest      |
 | [Testing Library](https://testing-library.com/)       | Component testing                  | Latest      |
 | [AWS CDK](https://docs.aws.amazon.com/cdk/)           | Infrastructure as code             | Latest      |

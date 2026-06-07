@@ -13,7 +13,7 @@ A not-for-profit landing page for Viet-Au IT professionals in Australia. Built f
 - **Frontend:** [React](https://react.dev/) 19 + [Vite](https://vite.dev/) + [TypeScript](https://www.typescriptlang.org/)
 - **State/Router:** [TanStack Router](https://tanstack.com/router), [React Query](https://tanstack.com/query), [Zod](https://zod.dev/)
 - **Testing:** [Vitest](https://vitest.dev/), [Testing Library](https://testing-library.com/)
-- **Lint/Format:** [Biome](https://biomejs.dev/)
+- **Lint/Format:** [Oxlint](https://oxc.rs/) + [Oxfmt](https://oxc.rs/)
 - **Infrastructure:** [AWS CDK](https://docs.aws.amazon.com/cdk/) (TypeScript), [S3](https://aws.amazon.com/s3/) + [CloudFront](https://aws.amazon.com/cloudfront/)
 - **CI/CD:** [GitHub Actions](https://docs.github.com/en/actions)
 
@@ -37,7 +37,7 @@ pnpm run lint:fix
 pnpm run build
 ```
 
-> **Note:** `pnpm run lint:fix` will both lint and format the codebase using Biome.
+> **Note:** `pnpm run lint:fix` will both lint and format the codebase using Oxlint.
 
 ## Project Structure
 
@@ -51,7 +51,7 @@ See [docs/index.md](docs/index.md) for more details.
 ## Development
 
 - Strict TypeScript config (`tsconfig.json`)
-- [Biome](https://biomejs.dev/) for linting/formatting
+- [Oxlint](https://oxc.rs/) + [Oxfmt](https://oxc.rs/) for linting/formatting
 - [Husky](https://typicode.github.io/husky/) for git hooks
 - See [docs/how-to/01-development.md](docs/how-to/01-development.md) for workflow, conventions, and tips
 - Homepage visual design: [DESIGN.md](DESIGN.md) (colours, components, UI guidelines)

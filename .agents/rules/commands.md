@@ -59,7 +59,7 @@ pnpm run lint:fix
 # Unsafe auto-fix (may break code)
 pnpm run lint:fix:unsafe
 
-# Run CI checks (Biome)
+# Run CI checks (Oxlint + Oxfmt)
 pnpm run ci
 ```
 
@@ -292,7 +292,7 @@ pnpm run test -- --no-coverage --reporter=verbose
 # Check TypeScript compilation details
 pnpm run typecheck -- --noEmit --pretty
 
-# Run Biome with verbose output
+# Run Oxlint with verbose output
 pnpm run lint -- --verbose
 
 # Check Vite build details

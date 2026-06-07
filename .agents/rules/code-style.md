@@ -1,6 +1,6 @@
 # Code Style Guidelines
 
-This document provides comprehensive code style guidelines for the VAIT Homepage project, building upon the existing Biome configuration and development conventions.
+This document provides comprehensive code style guidelines for the VAIT Homepage project, building upon the existing Oxlint and Oxfmt configuration and development conventions.
 
 ## Core Principles
 
@@ -351,7 +351,7 @@ export const App = () => {
 
 ## Tool Configuration
 
-This project uses **Biome** for consistent formatting and linting:
+This project uses **Oxlint** + **Oxfmt** for linting and formatting:
 
 - **Indentation**: 2 spaces
 - **Line width**: 160 characters

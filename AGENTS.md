@@ -18,7 +18,7 @@ You are working on the VAIT Homepage, the official website for the Viet-Aus IT c
 
 - **Domain**: Community homepage showcasing VAIT events, membership, and resources
 - **Team**: VAIT (Vietnamese Australians in Information Technology community)
-- **Tech Stack**: [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/), [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/), [Biome](https://biomejs.dev/), [Vitest](https://vitest.dev/)
+- **Tech Stack**: [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/), [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/), [Oxlint](https://oxc.rs/) + [Oxfmt](https://oxc.rs/), [Vitest](https://vitest.dev/)
 - **Architecture**: Component-based architecture with type-safe routing and state management
 - **Visual design**: [DESIGN.md](DESIGN.md) — tokens, components, and do's/don'ts for the public homepage (warm canvas, brand yellow, shadcn/Tailwind)
 - **Infrastructure**: [AWS CDK](https://docs.aws.amazon.com/cdk/), [S3](https://aws.amazon.com/s3/), [CloudFront](https://aws.amazon.com/cloudfront/) for deployment
@@ -101,7 +101,7 @@ Load a skill when its trigger condition matches the task:
 
 - [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/)
 - [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/)
-- [Biome](https://biomejs.dev/) for formatting, [Vitest](https://vitest.dev/) for testing
+- [Oxlint](https://oxc.rs/) + [Oxfmt](https://oxc.rs/) for linting and formatting, [Vitest](https://vitest.dev/) for testing
 - [AWS CDK](https://docs.aws.amazon.com/cdk/), [S3](https://aws.amazon.com/s3/), [CloudFront](https://aws.amazon.com/cloudfront/) for deployment
 
 ### Essential Commands
