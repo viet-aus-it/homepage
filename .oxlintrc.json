@@ -1,0 +1,7 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "warn"
+  },
+  "ignorePatterns": ["**/.vscode", "**/.zed", "**/src/routeTree.gen.ts", "**/src/**/__snapshots__", "**/public/mockServiceWorker.js", "**/infra/cdk.out"]
+}
