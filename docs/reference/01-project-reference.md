@@ -4,20 +4,20 @@ Quick-reference lookup for the VAIT Homepage tech stack, commands, project struc
 
 ## Tech Stack
 
-| Technology                                            | Purpose                            | Version     |
-| ----------------------------------------------------- | ---------------------------------- | ----------- |
-| [React](https://react.dev/)                           | UI framework                       | 19          |
-| [Vite](https://vite.dev/)                             | Build tool                         | Latest      |
-| [TypeScript](https://www.typescriptlang.org/)         | Type safety                        | Strict mode |
-| [TanStack Router](https://tanstack.com/router)        | Routing                            | Latest      |
-| [React Query](https://tanstack.com/query)             | Server state management            | Latest      |
-| [Zod](https://zod.dev/)                               | Schema validation                  | Latest      |
-| [Oxlint](https://oxc.rs/) + [Oxfmt](https://oxc.rs/)  | Linting and formatting             | Latest      |
-| [Vitest](https://vitest.dev/)                         | Testing framework                  | Latest      |
-| [Testing Library](https://testing-library.com/)       | Component testing                  | Latest      |
-| [AWS CDK](https://docs.aws.amazon.com/cdk/)           | Infrastructure as code             | Latest      |
-| [Cloudflare Workers](https://workers.cloudflare.com/) | Edge deployment (migration target) | Latest      |
-| [GitHub Actions](https://docs.github.com/en/actions)  | CI/CD                              | N/A         |
+| Technology                                                                                                      | Purpose                            | Version     |
+| --------------------------------------------------------------------------------------------------------------- | ---------------------------------- | ----------- |
+| [React](https://react.dev/)                                                                                     | UI framework                       | 19          |
+| [Vite](https://vite.dev/)                                                                                       | Build tool                         | Latest      |
+| [TypeScript](https://www.typescriptlang.org/)                                                                   | Type safety                        | Strict mode |
+| [TanStack Router](https://tanstack.com/router)                                                                  | Routing                            | Latest      |
+| [React Query](https://tanstack.com/query)                                                                       | Server state management            | Latest      |
+| [Zod](https://zod.dev/)                                                                                         | Schema validation                  | Latest      |
+| [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) | Linting and formatting             | Latest      |
+| [Vitest](https://vitest.dev/)                                                                                   | Testing framework                  | Latest      |
+| [Testing Library](https://testing-library.com/)                                                                 | Component testing                  | Latest      |
+| [AWS CDK](https://docs.aws.amazon.com/cdk/)                                                                     | Infrastructure as code             | Latest      |
+| [Cloudflare Workers](https://workers.cloudflare.com/)                                                           | Edge deployment (migration target) | Latest      |
+| [GitHub Actions](https://docs.github.com/en/actions)                                                            | CI/CD                              | N/A         |
 
 ## Commands
 
