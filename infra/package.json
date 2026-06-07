@@ -8,11 +8,11 @@
     "cdk:synth": "cdk synth",
     "cdk:deploy": "cdk deploy --require-approval never --all"
   },
-  "devDependencies": {
-    "aws-cdk": "2.1021.0"
-  },
   "dependencies": {
     "aws-cdk-lib": "2.196.0",
     "constructs": "^10.6.0"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.1021.0"
   }
 }

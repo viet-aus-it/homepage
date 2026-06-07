@@ -50,6 +50,7 @@ When changing landing-page visuals, read `DESIGN.md` first and update it in the 
 ---
 
 See also:
+
 - [Design System](../../DESIGN.md) — Full visual design reference
 - [Infrastructure](./02-infrastructure.md) — AWS and Cloudflare architecture
 - [Project Reference](../reference/01-project-reference.md) — Tech stack versions and commands

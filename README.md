@@ -5,9 +5,11 @@ Welcome to the homepage for Vietnamese Australians in Information Technology Inc
 ---
 
 ## What is this?
+
 A not-for-profit landing page for Viet-Au IT professionals in Australia. Built for rapid, modern web delivery and easy developer onboarding.
 
 ## Tech Stack
+
 - **Frontend:** [React](https://react.dev/) 19 + [Vite](https://vite.dev/) + [TypeScript](https://www.typescriptlang.org/)
 - **State/Router:** [TanStack Router](https://tanstack.com/router), [React Query](https://tanstack.com/query), [Zod](https://zod.dev/)
 - **Testing:** [Vitest](https://vitest.dev/), [Testing Library](https://testing-library.com/)
@@ -16,6 +18,7 @@ A not-for-profit landing page for Viet-Au IT professionals in Australia. Built f
 - **CI/CD:** [GitHub Actions](https://docs.github.com/en/actions)
 
 ## Quickstart
+
 ```sh
 # Install dependencies (Node.js 24+, pnpm 11+ required)
 pnpm install
@@ -33,17 +36,20 @@ pnpm run lint:fix
 # Build for production
 pnpm run build
 ```
+
 > **Note:** `pnpm run lint:fix` will both lint and format the codebase using Biome.
 
 ## Project Structure
-- `.github/`  – CI/CD workflows
-- `infra/`    – Infrastructure as code (AWS CDK)
-- `public/`   – Static assets
-- `src/`      – App source code (components, pages, hooks, services, types, utils)
+
+- `.github/` – CI/CD workflows
+- `infra/` – Infrastructure as code (AWS CDK)
+- `public/` – Static assets
+- `src/` – App source code (components, pages, hooks, services, types, utils)
 
 See [docs/index.md](docs/index.md) for more details.
 
 ## Development
+
 - Strict TypeScript config (`tsconfig.json`)
 - [Biome](https://biomejs.dev/) for linting/formatting
 - [Husky](https://typicode.github.io/husky/) for git hooks
@@ -51,14 +57,17 @@ See [docs/index.md](docs/index.md) for more details.
 - Homepage visual design: [DESIGN.md](DESIGN.md) (colours, components, UI guidelines)
 
 ## Infrastructure
+
 - [AWS CDK](https://docs.aws.amazon.com/cdk/) (TypeScript)
 - See [infra/README.md](infra/README.md) and [docs/explanation/02-infrastructure.md](docs/explanation/02-infrastructure.md)
 
 ## CI/CD
+
 - Automated via [GitHub Actions](https://docs.github.com/en/actions)
 - See [docs/how-to/03-deployment.md](docs/how-to/03-deployment.md)
 
 ## Contributing
+
 - Please read [docs/how-to/02-contributing.md](docs/how-to/02-contributing.md)
 
 ---

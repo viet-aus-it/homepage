@@ -13,12 +13,14 @@ This document provides comprehensive code style guidelines for the VAIT Homepage
 ## TypeScript Configuration
 
 ### Strict Mode Requirements
+
 - No `any` types - use `unknown` if type is unclear
 - Prefer `interface` for object shapes, `type` for unions or computed types
 - Enable all strict type checking options
 - Use proper return type annotations for public APIs
 
 ### Type Definitions
+
 ```tsx
 // ✅ Good: Interface for object shapes
 interface UserProfile {
@@ -32,7 +34,9 @@ type Theme = 'light' | 'dark';
 type ButtonVariant = 'primary' | 'secondary' | 'outline';
 
 // ❌ Bad: Using 'any'
-const fetchData = (url: any): any => { /* ... */ }
+const fetchData = (url: any): any => {
+  /* ... */
+};
 
 // ✅ Good: Using unknown with proper type guards
 const fetchData = async (url: string): Promise<unknown> => {
@@ -44,6 +48,7 @@ const fetchData = async (url: string): Promise<unknown> => {
 ## React Component Patterns
 
 ### Component Structure
+
 ```tsx
 // ✅ Good: Functional component with proper typing
 type HeroProps = {
@@ -64,6 +69,7 @@ export const Hero = ({ title, subtitle, onAction }: HeroProps) => {
 ```
 
 ### Custom Hooks
+
 ```tsx
 // ✅ Good: Custom hook with proper typing and 'use' prefix
 type UseApiResult<T> = {
@@ -86,6 +92,7 @@ export const useApi = <T>(url: string): UseApiResult<T> => {
 ## Import Organization
 
 ### Import Order
+
 1. React and related libraries
 2. Third-party libraries (alphabetical)
 3. Internal utilities (`@/lib/*`)
@@ -105,6 +112,7 @@ import type { UserProfile } from '@/types/user';
 ```
 
 ### Path Aliases
+
 - Use `@/` alias for all src imports
 - Prefer absolute imports over relative imports
 - Follow established patterns in the codebase
@@ -112,40 +120,59 @@ import type { UserProfile } from '@/types/user';
 ## Naming Conventions
 
 ### Components
+
 - **PascalCase** for component names
 - Descriptive names that indicate purpose
 - Prefix with appropriate category if needed
 
 ```typescript
 // ✅ Good: Clear, descriptive component names
-export const NavigationBar = () => { /* ... */ };
-export const HeroSection = () => { /* ... */ };
-export const JoinCommunityButton = () => { /* ... */ };
+export const NavigationBar = () => {
+  /* ... */
+};
+export const HeroSection = () => {
+  /* ... */
+};
+export const JoinCommunityButton = () => {
+  /* ... */
+};
 
 // ❌ Bad: Unclear or abbreviated names
-export const Nav = () => { /* ... */ };
-export const Hero = () => { /* ... */ };
-export const Btn = () => { /* ... */ };
+export const Nav = () => {
+  /* ... */
+};
+export const Hero = () => {
+  /* ... */
+};
+export const Btn = () => {
+  /* ... */
+};
 ```
 
 ### Functions and Variables
+
 - **camelCase** for functions and variables
 - Descriptive names that indicate purpose
 - Use verbs for functions, nouns for variables
 
 ```typescript
 // ✅ Good: Clear naming
-const fetchUserData = async (userId: string) => { /* ... */ };
+const fetchUserData = async (userId: string) => {
+  /* ... */
+};
 const isLoading = false;
 const navigationItems = ['home', 'about', 'contact'];
 
 // ❌ Bad: Unclear naming
-const getData = async (id: string) => { /* ... */ };
+const getData = async (id: string) => {
+  /* ... */
+};
 const loading = false;
 const items = ['home', 'about', 'contact'];
 ```
 
 ### Constants
+
 - **UPPER_SNAKE_CASE** for constants
 - Group related constants in objects
 
@@ -161,6 +188,7 @@ const DEFAULT_TIMEOUT = 30000; // 30 seconds
 ```
 
 ### Private Members
+
 - Prefix private class members with `_`
 - Use private fields where appropriate
 
@@ -185,6 +213,7 @@ class ApiService {
 ## File Organization
 
 ### Component Structure
+
 ```
 src/components/ui/button/
 ├── index.ts          # Export barrel
@@ -193,6 +222,7 @@ src/components/ui/button/
 ```
 
 ### Page Structure
+
 ```
 src/pages/index-page/
 ├── index.tsx         # Page component
@@ -203,14 +233,12 @@ src/pages/index-page/
 ## Error Handling
 
 ### React Error Boundaries
+
 ```tsx
 // ✅ Good: Error boundary using react-error-boundary
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 
-function ErrorFallback({ error, resetErrorBoundary }: {
-  error: Error;
-  resetErrorBoundary: () => void;
-}) {
+function ErrorFallback({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) {
   return (
     <div role="alert">
       <h2>Something went wrong.</h2>
@@ -235,11 +263,10 @@ export function ErrorBoundary({ children }: { children: ReactNode }) {
 ```
 
 ### Service Error Handling
+
 ```typescript
 // ✅ Good: Result pattern for error handling
-type Result<T, E = Error> =
-  | { success: true; data: T }
-  | { success: false; error: E };
+type Result<T, E = Error> = { success: true; data: T } | { success: false; error: E };
 
 const fetchUserProfile = async (id: string): Promise<Result<UserProfile>> => {
   try {
@@ -258,6 +285,7 @@ const fetchUserProfile = async (id: string): Promise<Result<UserProfile>> => {
 ## Performance Considerations
 
 ### React Optimisation
+
 - Use `React.memo` for pure components
 - Implement proper dependency arrays in hooks
 - Avoid unnecessary re-renders
@@ -284,6 +312,7 @@ export const ExpensiveComponent = React.memo<Props>(({ data, onUpdate }) => {
 ```
 
 ### Bundle Optimisation
+
 - Use dynamic imports for code splitting
 - Optimise imports to reduce bundle size
 - Lazy load components where appropriate
@@ -323,6 +352,7 @@ export const App = () => {
 ## Tool Configuration
 
 This project uses **Biome** for consistent formatting and linting:
+
 - **Indentation**: 2 spaces
 - **Line width**: 160 characters
 - **Quotes**: Single quotes

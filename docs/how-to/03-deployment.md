@@ -49,5 +49,6 @@ cd infra/ && npx cdk deploy --profile prod
 ---
 
 See also:
+
 - [Infrastructure](../explanation/02-infrastructure.md) — Architecture and security details
 - [Project Reference](../reference/01-project-reference.md) — All commands

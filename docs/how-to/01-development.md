@@ -55,6 +55,7 @@ Day-to-day development workflows, conventions, and tips for the VAIT Homepage.
 ---
 
 See also:
+
 - [Getting Started](../tutorials/01-getting-started.md) — First-time setup
 - [Contributing](./02-contributing.md) — How to propose changes
 - [Project Reference](../reference/01-project-reference.md) — Commands and tech stack
