@@ -352,7 +352,7 @@ export const Button = ({
 ### Deployment Principles
 
 - **Automated deployments**: Use GitHub Actions for CI/CD
-- **Blue-green deployments**: Minimize downtime during releases
+- **Rolling deployments**: Cloudflare Workers instant global deploy with rollback
 - **Rollback capability**: Maintain ability to quickly rollback changes
 - **Environment parity**: Keep staging and production environments consistent
 

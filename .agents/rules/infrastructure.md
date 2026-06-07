@@ -1,497 +1,205 @@
 # Infrastructure Guidelines
 
-This document provides comprehensive infrastructure guidelines for the VAIT Homepage project, covering AWS CDK patterns, deployment strategies, and operational best practices.
+This document provides comprehensive infrastructure guidelines for the VAIT Homepage project, covering Cloudflare Workers patterns, deployment strategies, and operational best practices.
 
-> **Migration Note**: This project is gradually migrating from AWS to Cloudflare Workers. The longer-term goal is to remove the AWS deployment entirely. New infrastructure work should prioritize Cloudflare Workers where possible.
+## Cloudflare Workers Development Patterns
 
-## AWS CDK Development Patterns
+### Wrangler Configuration
 
-### Stack Organization
+The `wrangler.toml` file is the single source of truth for Cloudflare Workers configuration:
 
-```typescript
-// ✅ Good: Logical stack separation
-export class HomepageStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
-    super(scope, id, props);
+```toml
+# ✅ Good: Clean wrangler config with static assets
+name = "homepage"
+compatibility_date = "2026-02-19"
+compatibility_flags = ["nodejs_compat"]
 
-    // Create S3 bucket
-    const bucket = new s3.Bucket(this, 'WebsiteBucket', {
-      bucketName: 'home.vietausit.com',
-      blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
-      encryption: s3.BucketEncryption.S3_MANAGED,
-      removalPolicy: Removal.DESTROY, // Development only
-      versioned: true,
-    });
-
-    // Create CloudFront distribution
-    const distribution = new cloudfront.Distribution(this, 'Distribution', {
-      defaultBehavior: {
-        origin: new origins.S3Origin(bucket),
-        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
-      },
-      domainNames: ['home.vietausit.com', 'www.vietausit.com'],
-      certificate: this.createSSLCertificate(),
-    });
-  }
-
-  private createSSLCertificate(): certmgr.Certificate {
-    // SSL certificate creation logic
-  }
-}
+[assets]
+directory = "dist"
+not_found_handling = "single-page-application"
 ```
 
 ### Environment-Specific Configuration
 
-```typescript
-// ✅ Good: Environment-aware configuration
-export interface InfrastructureProps {
-  environment: 'development' | 'staging' | 'production';
-  domainName: string;
-}
+Use `wrangler.toml` environments for different deployment targets:
 
-export class HomepageStack extends Stack {
-  constructor(scope: Construct, id: string, props: InfrastructureProps) {
-    super(scope, id, props);
+```toml
+# ✅ Good: Environment-aware wrangler config
+[env.production]
+name = "homepage-prod"
+routes = [
+  { pattern = "vait.au", custom_domain = true },
+  { pattern = "www.vait.au", custom_domain = true },
+]
 
-    const removalPolicy = props.environment === 'production' ? Removal.RETAIN : Removal.DESTROY;
-
-    const bucket = new s3.Bucket(this, 'WebsiteBucket', {
-      bucketName: `${props.environment}-${props.domainName}`,
-      removalPolicy,
-      versioned: true,
-      encryption: s3.BucketEncryption.S3_MANAGED,
-    });
-  }
-}
+[env.staging]
+name = "homepage-staging"
+routes = [
+  { pattern = "staging.vait.au", custom_domain = true },
+]
 ```
 
-### Resource Naming Conventions
+### Resource Naming
 
-```typescript
-// ✅ Good: Consistent resource naming
-const RESOURCE_PREFIX = 'vait-homepage';
-
-export class HomepageStack extends Stack {
-  constructor(scope: Construct, id: string, props: InfrastructureProps) {
-    super(scope, id, props);
-
-    // Use descriptive, consistent names
-    const websiteBucket = new s3.Bucket(this, `${RESOURCE_PREFIX}-website-bucket`, {
-      bucketName: `${props.environment}.vait-homepage.com`,
-    });
-
-    const cloudfrontDistribution = new cloudfront.Distribution(this, `${RESOURCE_PREFIX}-cdn-distribution`, {
-      /* config */
-    });
-
-    const sslCertificate = new certmgr.Certificate(this, `${RESOURCE_PREFIX}-ssl-cert`, {
-      /* config */
-    });
-  }
-}
+```toml
+# ✅ Good: Consistent naming conventions
+name = "homepage"              # Kebab-case, descriptive
+compatibility_date = "2026-02-19"
 ```
 
 ## Security Best Practices
 
-### IAM Role Configuration
+### HTTPS Configuration
+
+Cloudflare Workers automatically enforce HTTPS at the edge. Additional security headers can be configured via Workers:
 
 ```typescript
-// ✅ Good: Least privilege IAM roles
-export class DeploymentRole extends Role {
-  constructor(scope: Construct, id: string, environment: string) {
-    super(scope, id, {
-      assumedBy: new AccountRootPrincipal(),
-      roleName: `${environment}-vait-homepage-deployment-role`,
-      inlinePolicies: {
-        S3Access: new PolicyDocument({
-          statements: [
-            new PolicyStatement({
-              effect: Effect.ALLOW,
-              actions: ['s3:GetObject', 's3:PutObject', 's3:DeleteObject'],
-              resources: [`arn:aws:s3:::${environment}.vait-homepage.com/*`],
-            }),
-            new PolicyStatement({
-              effect: Effect.ALLOW,
-              actions: ['cloudfront:CreateInvalidation'],
-              resources: ['*'],
-            }),
-          ],
-        }),
-      },
+// ✅ Good: Security headers via Cloudflare Workers
+export default {
+  async fetch(request: Request): Promise<Response> {
+    const response = await env.ASSETS.fetch(request);
+
+    const headers = new Headers(response.headers);
+    headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubdomains; preload');
+    headers.set('X-Content-Type-Options', 'nosniff');
+    headers.set('X-Frame-Options', 'DENY');
+    headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+    headers.set('X-XSS-Protection', '1; mode=block');
+
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
     });
-  }
-}
+  },
+};
 ```
 
-### S3 Security Configuration
+### DDoS Protection
 
-```typescript
-// ✅ Good: Secure S3 bucket configuration
-export class SecureWebsiteBucket extends s3.Bucket {
-  constructor(scope: Construct, id: string, bucketName: string) {
-    super(scope, id, {
-      bucketName,
-      blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
-      encryption: s3.BucketEncryption.S3_MANAGED,
-      enforceSSL: true,
-      versioned: true,
-      lifecycleRules: [
-        {
-          id: 'DeleteOldVersions',
-          enabled: true,
-          noncurrentVersionTransitions: [
-            {
-              storageClass: s3.StorageClass.GLACIER,
-              transitionAfter: Duration.days(30),
-            },
-          ],
-          noncurrentVersionExpiration: Duration.days(90),
-        },
-      ],
-      publicReadPolicy: false, // Private access only
-    });
-  }
-}
-```
-
-### CloudFront Security Headers
-
-```typescript
-// ✅ Good: Security headers via CloudFront
-export class SecureCloudFrontDistribution extends cloudfront.Distribution {
-  constructor(scope: Construct, id: string, origin: origins.Origin) {
-    super(scope, id, {
-      defaultBehavior: {
-        origin,
-        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
-        responseHeadersPolicy: new cloudfront.ResponseHeadersPolicy(scope, 'SecurityHeaders', {
-          securityHeadersBehavior: {
-            strictTransportSecurity: {
-              accessControlMaxAge: Duration.days(365),
-              includeSubdomains: true,
-              preload: true,
-            },
-            contentTypeOptions: { override: true },
-            frameOptions: {
-              frameOption: cloudfront.HeadersFrameOption.DENY,
-              override: true,
-            },
-            referrerPolicy: {
-              referrerPolicy: cloudfront.HeadersReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
-              override: true,
-            },
-            xssProtection: { protection: true, modeBlock: true, override: true },
-          },
-        }),
-      },
-    });
-  }
-}
-```
+Cloudflare provides built-in DDoS protection at the edge — no additional configuration required. All traffic passes through Cloudflare's global network which filters malicious requests before they reach the Worker.
 
 ## Deployment Patterns
 
-### Multi-Environment Setup
+### Static Asset Deployment
 
-```typescript
-// ✅ Good: Environment-specific stacks
-const app = new cdk.App();
-
-// Development environment
-new HomepageStack(app, 'VaitHomepageDev', {
-  environment: 'development',
-  domainName: 'dev.vait-homepage.com',
-  env: {
-    account: process.env.DEV_ACCOUNT,
-    region: 'us-east-1',
-  },
-});
-
-// Production environment
-new HomepageStack(app, 'VaitHomepageProd', {
-  environment: 'production',
-  domainName: 'vait-homepage.com',
-  env: {
-    account: process.env.PROD_ACCOUNT,
-    region: 'us-east-1',
-  },
-});
+```bash
+# ✅ Good: Build and deploy
+pnpm run build    # Compile frontend to dist/
+pnpm run deploy   # wrangler deploy
 ```
 
-### Blue-Green Deployment Strategy
+### Rollback Strategy
 
-```typescript
-// ✅ Good: Blue-green deployment with CloudFront
-export class BlueGreenDeployment extends Construct {
-  constructor(scope: Construct, id: string) {
-    super(scope, id);
+```bash
+# Rollback to previous version
+wrangler rollback
 
-    // Blue environment (current)
-    const blueBucket = new s3.Bucket(this, 'BlueBucket', {
-      bucketName: 'vait-homepage-blue',
-    });
-
-    // Green environment (new)
-    const greenBucket = new s3.Bucket(this, 'GreenBucket', {
-      bucketName: 'vait-homepage-green',
-    });
-
-    // CloudFront with origin failover
-    const distribution = new cloudfront.Distribution(this, 'Distribution', {
-      defaultBehavior: {
-        origin: new origins.S3Origin(blueBucket),
-        originGroups: {
-          primaryOriginId: blueBucket.originId,
-          fallbackOriginId: greenBucket.originId,
-        },
-      },
-    });
-  }
-}
+# Rollback to specific version
+wrangler rollback --version <version-id>
 ```
 
 ## Cost Optimisation
 
-### S3 Lifecycle Management
+Cloudflare Workers pricing is based on requests and compute duration:
 
-```typescript
-// ✅ Good: Cost-effective S3 lifecycle rules
-export class OptimizedS3Bucket extends s3.Bucket {
-  constructor(scope: Construct, id: string, bucketName: string) {
-    super(scope, id, {
-      bucketName,
-      lifecycleRules: [
-        {
-          id: 'IntelligentTiering',
-          enabled: true,
-          transitions: [
-            {
-              storageClass: s3.StorageClass.INTELLIGENT_TIERING,
-              transitionAfter: Duration.days(30),
-            },
-          ],
-        },
-        {
-          id: 'ArchiveOldVersions',
-          enabled: true,
-          noncurrentVersionTransitions: [
-            {
-              storageClass: s3.StorageClass.GLACIER,
-              transitionAfter: Duration.days(90),
-            },
-          ],
-        },
-      ],
-      intelligentTieringConfig: {
-        status: s3.IntelligentTieringStatus.ENABLED,
-      },
-    });
-  }
-}
-```
+- **Free Tier**: 100,000 requests/day, 10ms CPU time per request
+- **Paid Tier**: Unlimited requests, 30s CPU time per request
+- **Static Assets**: No additional cost for asset serving via Workers
 
-### CloudFront Cost Optimisation
-
-```typescript
-// ✅ Good: Optimized CloudFront configuration
-export class CostOptimizedDistribution extends cloudfront.Distribution {
-  constructor(scope: Construct, id: string, origin: origins.Origin) {
-    super(scope, id, {
-      defaultBehavior: {
-        origin,
-        cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
-        compress: true, // Enable compression
-        allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
-        cachedMethods: cloudfront.CachedMethods.CACHE_GET_HEAD_OPTIONS,
-      },
-      priceClass: cloudfront.PriceClass.PRICE_CLASS_100, // Use cheapest edge locations
-      httpVersion: cloudfront.HttpVersion.HTTP2, // HTTP/2 for better performance
-      enableLogging: true,
-      logBucket: new s3.Bucket(scope, 'AccessLogsBucket', {
-        bucketName: 'vait-homepage-access-logs',
-        lifecycleRules: [
-          {
-            id: 'DeleteOldLogs',
-            enabled: true,
-            expiration: Duration.days(90),
-          },
-        ],
-      }),
-    });
-  }
-}
-```
+No lifecycle management needed — Cloudflare handles storage and caching automatically.
 
 ## Monitoring & Observability
 
-### CloudWatch Alarms
+### Workers Observability
 
-```typescript
-// ✅ Good: Comprehensive monitoring setup
-export class MonitoringSetup extends Construct {
-  constructor(scope: Construct, id: string, distribution: cloudfront.Distribution) {
-    super(scope, id);
+Configured in `wrangler.toml`:
 
-    // Error rate alarm
-    new cloudwatch.Alarm(this, 'HighErrorRate', {
-      metric: new cloudwatch.Metric({
-        namespace: 'AWS/CloudFront',
-        metricName: '4xxErrorRate',
-        statistic: 'Average',
-        period: Duration.minutes(5),
-        dimensionsMap: {
-          DistributionId: distribution.distributionId,
-        },
-      }),
-      threshold: 5, // 5% error rate
-      evaluationPeriods: 2,
-      alarmDescription: 'High error rate detected',
-    });
+```toml
+[observability]
+enabled = true
+head_sampling_rate = 1
 
-    // Latency alarm
-    new cloudwatch.Alarm(this, 'HighLatency', {
-      metric: new cloudwatch.Metric({
-        namespace: 'AWS/CloudFront',
-        metricName: 'TotalLatency',
-        statistic: 'Average',
-        period: Duration.minutes(5),
-        dimensionsMap: {
-          DistributionId: distribution.distributionId,
-        },
-      }),
-      threshold: 1000, // 1 second
-      evaluationPeriods: 3,
-      alarmDescription: 'High latency detected',
-    });
-  }
-}
+[observability.logs]
+invocation_logs = true
 ```
 
-### Custom Metrics
+### Key Metrics
 
-```typescript
-// ✅ Good: Custom CloudWatch metrics
-export class CustomMetrics extends Construct {
-  constructor(scope: Construct, id: string) {
-    super(scope, id);
+- **Request count**: Total requests per Worker
+- **Error rate**: 5xx and 4xx response ratios
+- **Latency**: P50, P95, P99 response times
+- **CPU time**: Worker execution duration
 
-    // Deployment success metric
-    const deploymentMetric = new cloudwatch.Metric({
-      namespace: 'VAIT/Homepage',
-      metricName: 'DeploymentSuccess',
-      statistic: 'Sum',
-      period: Duration.minutes(1),
-    });
-
-    // Publish deployment metric
-    new cloudwatch.Alarm(this, 'DeploymentFailure', {
-      metric: deploymentMetric,
-      threshold: 0,
-      comparisonOperator: cloudwatch.ComparisonOperator.LESS_THAN_THRESHOLD,
-      evaluationPeriods: 1,
-      alarmDescription: 'Deployment failed',
-    });
-  }
-}
-```
+Available via Cloudflare Dashboard or GraphQL Analytics API.
 
 ## Testing Infrastructure
 
-### CDK Unit Tests
+### Worker Tests with Vitest
 
 ```typescript
-// ✅ Good: CDK stack testing
-import { Template } from 'aws-cdk-lib/assertions';
-import { HomepageStack } from '../lib/homepage-stack';
+// ✅ Good: Testing Cloudflare Workers
+import { describe, it, expect } from 'vitest';
 
-describe('HomepageStack', () => {
-  let template: Template;
-
-  beforeAll(() => {
-    const app = new cdk.App();
-    const stack = new HomepageStack(app, 'TestStack', {
-      environment: 'test',
-      domainName: 'test.vait-homepage.com',
-    });
-    template = Template.fromStack(stack);
+describe('Worker response', () => {
+  it('should return 200 for valid routes', async () => {
+    const request = new Request('https://vait.au/');
+    const response = await worker.fetch(request);
+    expect(response.status).toBe(200);
   });
 
-  it('should create S3 bucket', () => {
-    template.hasResourceProperties('AWS::S3::Bucket', {
-      BucketName: 'test.vait-homepage.com',
-      PublicAccessBlockConfiguration: {
-        BlockPublicAcls: true,
-        BlockPublicPolicy: true,
-        IgnorePublicAcls: true,
-        RestrictPublicBuckets: true,
-      },
-    });
-  });
-
-  it('should create CloudFront distribution', () => {
-    template.hasResourceProperties('AWS::CloudFront::Distribution', {
-      DistributionConfig: {
-        DefaultCacheBehavior: {
-          ViewerProtocolPolicy: 'redirect-to-https',
-          TargetOriginId: expect.any(String),
-        },
-      },
-    });
-  });
-
-  it('should enforce HTTPS', () => {
-    template.hasResourceProperties('AWS::CloudFront::Distribution', {
-      DistributionConfig: {
-        DefaultCacheBehavior: {
-          ViewerProtocolPolicy: 'redirect-to-https',
-        },
-      },
-    });
+  it('should return 200 for SPA fallback', async () => {
+    const request = new Request('https://vait.au/unknown-route');
+    const response = await worker.fetch(request);
+    expect(response.status).toBe(200);
   });
 });
 ```
 
 ## Cross References
 
-- **Infrastructure Overview**: See `docs/infrastructure.md` for detailed architecture
+- **Infrastructure Overview**: See `docs/explanation/02-infrastructure.md` for detailed architecture
 - **Commands Reference**: See `commands.md` for deployment commands
 - **Engineering Principles**: See `engineering-principles.md` for decision framework
 - **Security Considerations**: See `special-considerations.md` for security guidelines
 
 ## Anti-Patterns to Avoid
 
-### CDK Anti-Patterns
+### Deployment Anti-Patterns
 
-```typescript
-// ❌ Bad: Hard-coded values
-const bucket = new s3.Bucket(this, 'Bucket', {
-  bucketName: 'vait-homepage', // Hard-coded
-  removalPolicy: Removal.DESTROY, // Always destroy
-});
+```bash
+# ❌ Bad: Deploying without building
+pnpm run deploy  # Missing pnpm run build step
 
-// ✅ Good: Environment-aware configuration
-const bucket = new s3.Bucket(this, 'Bucket', {
-  bucketName: `${props.environment}.vait-homepage.com`,
-  removalPolicy: props.environment === 'production' ? Removal.RETAIN : Removal.DESTROY,
-});
+# ✅ Good: Build then deploy
+pnpm run build && pnpm run deploy
+```
+
+### Configuration Anti-Patterns
+
+```toml
+# ❌ Bad: Missing SPA fallback
+[assets]
+directory = "dist"
+# no not_found_handling
+
+# ✅ Good: SPA fallback handled
+[assets]
+directory = "dist"
+not_found_handling = "single-page-application"
 ```
 
 ### Security Anti-Patterns
 
-```typescript
-// ❌ Bad: Public S3 bucket
-const bucket = new s3.Bucket(this, 'Bucket', {
-  publicReadPolicy: true, // Security risk!
-  blockPublicAccess: BlockPublicAccess.BLOCK_NONE,
-});
+```toml
+# ❌ Bad: Disabling observability in production
+[observability]
+enabled = false  # No visibility into production issues
 
-// ✅ Good: Private bucket with CloudFront access
-const bucket = new s3.Bucket(this, 'Bucket', {
-  blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
-  encryption: s3.BucketEncryption.S3_MANAGED,
-});
+# ✅ Good: Production observability
+[observability]
+enabled = true
+head_sampling_rate = 0.1  # 10% sampling for cost balance
 ```
 
-These infrastructure guidelines ensure secure, cost-effective, and maintainable AWS deployments for the VAIT Homepage project.
+These infrastructure guidelines ensure secure, cost-effective, and maintainable Cloudflare Workers deployments for the VAIT Homepage project.

@@ -467,7 +467,7 @@ export const TouchFriendlyCarousel = ({ items }: { items: CarouselItem[] }) => {
 
 ## Deployment Considerations
 
-### AWS S3/CloudFront Configuration
+### Cloudflare Workers Configuration
 
 ```typescript
 // ✅ Good: Environment-aware configuration
@@ -650,7 +650,7 @@ export const secureApiClient = {
 - **Architecture**: See `docs/architecture.md` for technology stack details
 - **Engineering Principles**: See `engineering-principles.md` for security and performance guidelines
 - **Patterns**: See `patterns.md` for implementation patterns
-- **Infrastructure**: See `infra/` directory for AWS deployment configurations
+- **Infrastructure**: See `wrangler.toml` for Cloudflare Workers deployment configuration
 
 ## Compliance and Legal
 

@@ -25,7 +25,7 @@ pnpm run build
 pnpm run preview
 
 # Build outputs to dist/ directory
-# Optimised for AWS S3/CloudFront deployment
+# Optimised for Cloudflare Workers deployment
 ```
 
 ### Testing Commands
@@ -157,53 +157,18 @@ npx tsr validate
 
 ## Infrastructure Commands
 
-### AWS CDK Commands
+### Cloudflare Deploy
 
 ```bash
-# Navigate to infrastructure directory
-cd infra/
-
-# Install CDK dependencies
-pnpm install
-
-# Watch for changes and compile
-pnpm run watch
-
-# Synthesize CloudFormation template
-npx cdk synth
-
-# Deploy infrastructure
-npx cdk deploy
-
-# Compare deployed stack with current state
-npx cdk diff
-
-# Destroy infrastructure (use with caution)
-npx cdk destroy
-
-# List all stacks
-npx cdk list
-```
-
-### Environment-Specific Deployment
-
-```bash
-# Deploy to development environment
-cd infra/ && npx cdk deploy VaitHomepageDev --profile dev
-
-# Deploy to production environment
-cd infra/ && npx cdk deploy VaitHomepageProd --profile prod
-
-# Deploy with parameters
-npx cdk deploy --parameters Environment=production
+# Build and deploy to Cloudflare Workers
+pnpm run build && pnpm run deploy
 ```
 
 ### Local Infrastructure Development
 
 ```bash
 # Start local development environment
-# Uses Vite's built-in dev server
-# No local infrastructure setup required
+pnpm run dev
 
 # For API mocking, use MSW (Mock Service Worker)
 pnpm run msw:init  # (run once during setup)
@@ -358,15 +323,15 @@ pnpm run build
 # Test production build locally
 pnpm run preview
 
-# Deploy to AWS (via CDK)
-cd infra/ && pnpm run cdk deploy
+# Deploy to Cloudflare Workers
+pnpm run deploy
 ```
 
 ## Cross References
 
 - **Development Workflow**: See `docs/development.md#workflow`
 - **Testing Strategy**: See `docs/testing.md#running-tests`
-- **Infrastructure**: See `infra/README.md` for AWS CDK commands
+- **Infrastructure**: See `wrangler.toml` for Cloudflare Workers configuration
 - **Code Style**: See `code-style.md` for formatting and linting patterns
 
 ## Command Aliases (Optional)

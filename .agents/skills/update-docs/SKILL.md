@@ -63,7 +63,7 @@ For each category, note which documentation locations are affected using the map
 | Marketing UI / brand / layout | `DESIGN.md`, `docs/index.md`, `docs/explanation/01-architecture.md`, `docs/how-to/01-development.md`, `docs/how-to/02-contributing.md`, `AGENTS.md` |
 | New dependency                | `README.md`, `AGENTS.md` (tech stack), `docs/reference/01-project-reference.md`                                                                     |
 | New command/script            | `README.md`, `AGENTS.md` (commands), `docs/reference/01-project-reference.md`, `.agents/rules/commands.md`                                          |
-| Infrastructure change         | `docs/explanation/02-infrastructure.md`, `docs/how-to/03-deployment.md`, `.agents/rules/infrastructure.md`                                          |
+| Infrastructure change         | `docs/explanation/02-infrastructure.md`, `docs/how-to/03-deployment.md`, `.agents/rules/infrastructure.md`, `wrangler.toml`                         |
 | New route                     | `AGENTS.md` (project structure), `docs/reference/01-project-reference.md`                                                                           |
 | New skill/rule                | `AGENTS.md` (available skills/rules)                                                                                                                |
 | Test changes                  | `docs/how-to/01-development.md`, `docs/reference/01-project-reference.md`                                                                           |

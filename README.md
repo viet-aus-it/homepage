@@ -14,7 +14,7 @@ A not-for-profit landing page for Viet-Au IT professionals in Australia. Built f
 - **State/Router:** [TanStack Router](https://tanstack.com/router), [React Query](https://tanstack.com/query), [Zod](https://zod.dev/)
 - **Testing:** [Vitest](https://vitest.dev/), [Testing Library](https://testing-library.com/)
 - **Lint/Format:** [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)
-- **Infrastructure:** [AWS CDK](https://docs.aws.amazon.com/cdk/) (TypeScript), [S3](https://aws.amazon.com/s3/) + [CloudFront](https://aws.amazon.com/cloudfront/)
+- **Infrastructure:** [Cloudflare Workers](https://workers.cloudflare.com/)
 - **CI/CD:** [GitHub Actions](https://docs.github.com/en/actions)
 
 ## Quickstart
@@ -42,7 +42,7 @@ pnpm run build
 ## Project Structure
 
 - `.github/` – CI/CD workflows
-- `infra/` – Infrastructure as code (AWS CDK)
+- `wrangler.toml` – Cloudflare Workers configuration
 - `public/` – Static assets
 - `src/` – App source code (components, pages, hooks, services, types, utils)
 
@@ -58,8 +58,8 @@ See [docs/index.md](docs/index.md) for more details.
 
 ## Infrastructure
 
-- [AWS CDK](https://docs.aws.amazon.com/cdk/) (TypeScript)
-- See [infra/README.md](infra/README.md) and [docs/explanation/02-infrastructure.md](docs/explanation/02-infrastructure.md)
+- [Cloudflare Workers](https://workers.cloudflare.com/)
+- See [docs/explanation/02-infrastructure.md](docs/explanation/02-infrastructure.md)
 
 ## CI/CD
 

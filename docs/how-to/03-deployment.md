@@ -1,50 +1,39 @@
 # Deployment
 
-How to deploy the VAIT Homepage to AWS and Cloudflare Workers.
+How to deploy the VAIT Homepage to Cloudflare Workers.
 
-> **Migration Notice**: This project currently supports dual deployment to both [AWS CDK](https://docs.aws.amazon.com/cdk/) and [Cloudflare Workers](https://workers.cloudflare.com/). The longer-term goal is to migrate entirely to Cloudflare Workers.
+## Prerequisites
 
-## Development Deployment (AWS)
+- Node.js 24+ and pnpm 11+
+- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/) (included as dev dependency)
 
-```bash
-# Navigate to infrastructure directory
-cd infra/
-
-# Install dependencies
-pnpm install
-
-# Watch for changes (development)
-pnpm run watch
-
-# Deploy to development account
-npx cdk deploy --profile dev
-```
-
-## Production Deployment (AWS)
+## Build
 
 ```bash
 # Build frontend assets
-cd ../ && pnpm run build
+pnpm run build
 
-# Deploy infrastructure
-cd infra/ && npx cdk deploy --profile prod
-
-# CloudFront cache invalidation happens automatically
-# New content available within minutes
+# Output goes to dist/ directory
 ```
 
-## Deployment Pipeline
+## Deploy to Cloudflare Workers
 
-1. **Build**: `pnpm run build` compiles frontend assets with [Vite](https://vite.dev/)
-2. **Synth**: `npx cdk synth` generates [CloudFormation](https://aws.amazon.com/cloudformation/) template
-3. **Deploy**: `npx cdk deploy` provisions AWS resources
-4. **Invalidate**: [CloudFront](https://aws.amazon.com/cloudfront/) cache invalidation for new content
+```bash
+# Deploy to Cloudflare Workers
+pnpm run deploy
+```
 
-## CI/CD Integration
+This runs `wrangler deploy`, which uploads the built assets and deploys the worker configuration defined in `wrangler.toml`.
 
-- **[GitHub Actions](https://docs.github.com/en/actions)**: Automated deployment on merge to main
-- **Environment Promotion**: Staging → Production workflow
-- **Rollback**: Previous version restoration via [S3](https://aws.amazon.com/s3/) versioning
+## Rollback
+
+```bash
+# Rollback to previous version
+wrangler rollback
+
+# Rollback to specific version
+wrangler rollback --version <version-id>
+```
 
 ---
 

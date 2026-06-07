@@ -7,9 +7,7 @@
     "prepare": "pnpm run githooks:init",
     "githooks:init": "husky",
     "dev": "vite",
-    "dev:cf": "DEPLOY_TO_CLOUDFLARE=true pnpm run dev",
     "build": "vite build",
-    "build:cf": "DEPLOY_TO_CLOUDFLARE=true pnpm run build",
     "preview": "vite preview",
     "typecheck": "tsc",
     "test": "vitest",
@@ -23,7 +21,7 @@
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
     "ci": "oxlint && oxfmt --check",
-    "deploy:cf": "wrangler deploy"
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.16",
@@ -43,6 +41,7 @@
     "react-error-boundary": "^6.1.2",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.0",
+    "vite-plugin-babel": "^1.7.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
