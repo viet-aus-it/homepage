@@ -6,11 +6,5 @@
   "code_actions_on_format": {
     "source.fixAll.oxlint": true,
     "source.organizeImports.oxc": true
-  },
-  "language_servers": ["oxlint", "..."],
-  "formatter": {
-    "language_server": {
-      "name": "oxlint"
-    }
   }
 }
