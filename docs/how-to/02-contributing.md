@@ -5,7 +5,7 @@ Thank you for your interest in contributing to the VAIT Homepage project!
 ## Getting Started
 
 - Read the [Getting Started](../tutorials/01-getting-started.md) tutorial for setup and first-run instructions.
-- Make sure your environment matches the requirements ([Node.js](https://nodejs.org/) 22+, [pnpm](https://pnpm.io/) 10+).
+- Make sure your environment matches the requirements ([Node.js](https://nodejs.org/) 24+, [pnpm](https://pnpm.io/) 11+).
 
 ## Proposing Changes
 

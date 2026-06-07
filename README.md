@@ -17,7 +17,7 @@ A not-for-profit landing page for Viet-Au IT professionals in Australia. Built f
 
 ## Quickstart
 ```sh
-# Install dependencies (Node.js 22+, pnpm 10+ required)
+# Install dependencies (Node.js 24+, pnpm 11+ required)
 pnpm install
 
 # Start local dev server
