@@ -1,16 +1,16 @@
 {
   "auto_install_extensions": {
-    "biome": true,
+    "oxc": true,
     "html": true
   },
   "code_actions_on_format": {
-    "source.fixAll.biome": true,
-    "source.organizeImports.biome": true
+    "source.fixAll.oxlint": true,
+    "source.organizeImports.oxc": true
   },
-  "language_servers": ["biome", "..."],
+  "language_servers": ["oxlint", "..."],
   "formatter": {
     "language_server": {
-      "name": "biome"
+      "name": "oxlint"
     }
   }
 }
