@@ -56,7 +56,7 @@ function SectionWithImage({ sectionId, title, description, imageSrc, imageAlt, r
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:items-center md:gap-16">
         <div className={`max-w-lg md:max-w-none ${textOrder}`}>
           <Badge variant="secondary" className="mb-4">{`#${sectionId}`}</Badge>
-          <h2 className="text-2xl font-semibold text-brand-yellow-dark sm:text-3xl">{title}</h2>
+          <h2 className="text-2xl font-display font-semibold text-brand-yellow-dark sm:text-3xl">{title}</h2>
           <p className="mt-4 text-gray-700">{description}</p>
           {children}
         </div>
