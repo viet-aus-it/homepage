@@ -56,7 +56,7 @@ function IndexPage() {
     document.title = `${ORGANISATION.SHORT_NAME} - ${ORGANISATION.NAME}`;
   }, []);
   return (
-    <div className="min-h-screen flex flex-col bg-stone-50 text-brand-dark-gray">
+    <div className="min-h-screen flex flex-col bg-stone-50 text-brand-near-black">
       <FuturisticBackground />
 
       <NavBar />
