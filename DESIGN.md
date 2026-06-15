@@ -1,6 +1,6 @@
 ## Overview
 
-The VAIT homepage is the public face of **Vietnamese Australians in Information Technology Inc.** — a not-for-profit community for Viet-Au IT professionals in Australia. The base atmosphere is a **warm cream-and-stone canvas** (`{colors.canvas}` — stone-50 / `#fafaf9`) with a **fixed animated gradient backdrop** (`{component.futuristic-background}`) and **charcoal ink** for reading. Where many community sites default to cold corporate blue, VAIT leads with **brand yellow** (`{colors.brand-yellow}` — `#f4df4d`) as the single high-voltage accent — echoed in the tick-and-star logo, section headings, footer type, and the primary Discord CTA.
+The VAIT homepage is the public face of **Vietnamese Australians in Information Technology Inc.** — a not-for-profit community for Viet-Au IT professionals in Australia. The base atmosphere is a **warm cream-and-stone canvas** (`{colors.canvas}` — stone-50 / `#fafaf9`) with a **fixed animated gradient backdrop** (`{component.futuristic-background}`) and **charcoal ink** for reading. Where many community sites default to cold corporate blue, VAIT leads with **brand yellow** (`{colors.brand-yellow}` — `#F5C518`) as the single high-voltage accent — echoed in the tick-and-star logo, section headings, footer type, and the primary Discord CTA.
 
 Type voice runs the **system UI stack** (shadcn/Tailwind default sans) at **semibold display weights** for hero and section titles, with **tracking-tight** on headlines. There is no licensed display face yet; hierarchy is carried by size steps (36px → 60px hero) and colour (yellow-dark for section h2, gray-700 for body).
 
@@ -9,7 +9,7 @@ Component voltage comes from three anchors: the **floating pill nav** (`{compone
 **Key Characteristics:**
 
 - Warm stone canvas (`{colors.canvas}`) plus cream gradient backdrop (`{colors.backdrop-from}` — `#fffbea` → white → `#fef9ef`).
-- Brand yellow accent (`{colors.brand-yellow}` — `#f4df4d`) on CTAs, footer ink, and section titles; gray scale for structure (`{colors.brand-gray}`, `{colors.brand-gray-dark}`).
+- Brand yellow accent (`{colors.brand-yellow}` — `#F5C518`) on CTAs, footer ink, and section titles; gray scale for structure (`{colors.brand-gray}`, `{colors.brand-gray-dark}`).
 - Tick-and-star **VAIT logo** SVG (`{component.logo}`) with three colourways: full colour, gray, dark-gray.
 - **Discord** as the single primary conversion path (`{component.join-community-cta}`).
 - Generous pill radii: `{rounded.full}` for nav and CTA, `{rounded.2xl}` for the content shell, `{rounded.md}` for shadcn defaults.
@@ -18,13 +18,22 @@ Component voltage comes from three anchors: the **floating pill nav** (`{compone
 
 ## Colors
 
-### Brand & Accent
+Sourced from the **VAIT Branding Guidelines**. HEX/RGB drive screen; CMYK/PMS are for print (recorded here for reference, not used in CSS).
 
-- **Brand Yellow** (`{colors.brand-yellow}` — `#f4df4d`): Primary CTA fill, footer headline text, logo primary ticks. Logo source also lists `#F5DF4D` — treat as the same family; CSS token is canonical for the site.
-- **Brand Yellow Dark** (`{colors.brand-yellow-dark}` — `#e0c944`): Section h2 emphasis (`text-brand-yellow-dark`).
-- **Brand Yellow Darker** (`{colors.brand-yellow-darker}` — `#c7b139`): Deeper yellow for future badges or hover depth (utility classes exist; lightly used today).
-- **Brand Gray** (`{colors.brand-gray}` — `#959595`): Footer divider, secondary logo paths, CTA hover background. Logo secondary: `#939597`.
-- **Brand Gray Dark** (`{colors.brand-gray-dark}` — `#1c1c1c`): Footer background, CTA label ink, hero subtitle (`text-brand-dark-gray` in components — maps to this token).
+#### Primary
+
+- **VAIT Yellow** (`{colors.brand-yellow}` — `#F5C518`, RGB 245·197·24, CMYK 0·20·90·4, PMS 109 C): Primary CTA fill, logo primary ticks, accent. The single high-voltage brand colour.
+- **Yellow Tint** (`{colors.brand-yellow-tint}` — `#FDF3C0`, RGB 253·243·192, CMYK 0·4·24·1): Soft yellow wash for tinted surfaces/backgrounds.
+- **Yellow Shade** (`{colors.brand-yellow-shade}` — `#C9A010`, RGB 201·160·16, CMYK 0·20·92·21, PMS 1235 C): Deeper yellow for emphasis and hover depth. `{colors.brand-yellow-dark}` is a **deprecated alias** of this token, kept so existing `*-brand-yellow-dark` usages resolve.
+
+#### Neutrals
+
+Neutrals anchor text, backgrounds, and UI chrome without competing with the primary yellow.
+
+- **Near Black** (`{colors.brand-near-black}` — `#1A1A1A`, RGB 26·26·26, CMYK 0·0·0·90, PMS Black 6 C): Dark surfaces (footer), charcoal ink, CTA label, hero subtitle.
+- **Dark Gray** (`{colors.brand-gray-dark}` — `#4A4A4A`, RGB 74·74·74, CMYK 0·0·0·71): Secondary text and UI chrome.
+- **Mid Gray** (`{colors.brand-gray}` — `#8A8A8A`, RGB 138·138·138, CMYK 0·0·0·46, PMS Cool Gray 7 C): Dividers, secondary logo paths, CTA hover background.
+- **Light Gray** (`{colors.brand-gray-light}` — `#E8E8E4`, RGB 232·232·228, CMYK 0·0·2·9): Light surfaces and borders.
 
 ### Surface
 
@@ -43,7 +52,7 @@ Component voltage comes from three anchors: the **floating pill nav** (`{compone
 - **Ink** (`{colors.ink}` — `{colors.foreground}`): Default body from shadcn theme (~near-black oklch).
 - **Body** (`{colors.body}` — `gray-700`): Section descriptions in `{component.section-with-image}`.
 - **Muted** (`{colors.muted}` — `{colors.muted-foreground}`): shadcn muted copy where used.
-- **On Yellow** (`{colors.on-yellow}` — `{colors.brand-gray-dark}`): CTA label on yellow button.
+- **On Yellow** (`{colors.on-yellow}` — `{colors.brand-near-black}`): CTA label on yellow button.
 - **On Dark** (`{colors.on-dark}` — `{colors.brand-yellow}`): Footer primary line on charcoal.
 
 ### Semantic (shadcn)
@@ -225,8 +234,6 @@ Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editor
 ## Known Gaps
 
 - No custom webfont or formal `{typography.*}` CSS variables — sizes live in Tailwind classes only.
-- `text-brand-dark-gray` is used in components but the utility is named `text-brand-gray-dark` — align naming in a follow-up.
-- `{colors.brand-yellow}` vs logo `#F5DF4D` are slightly different hex values; consolidate to one token.
 - Dark mode tokens exist in `:root` / `.dark` but the marketing page does not toggle dark theme.
 - Blob animation timings and `prefers-reduced-motion` overrides are not formalised.
 - Form inputs and validation states are shadcn defaults — not extracted for marketing.
