@@ -1,7 +1,7 @@
 export const LOGO_COLOURS = {
-  PRIMARY: '#F5DF4D',
-  SECONDARY: '#939597',
-  DARK_GRAY: '#1C1C1C',
+  PRIMARY: '#F5C518',
+  SECONDARY: '#8A8A8A',
+  DARK_GRAY: '#1A1A1A',
 } as const;
 
 type LogoColour = 'colour' | 'gray' | 'dark-gray';
