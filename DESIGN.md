@@ -2,7 +2,7 @@
 
 The VAIT homepage is the public face of **Vietnamese Australians in Information Technology Inc.** — a not-for-profit community for Viet-Au IT professionals in Australia. The base atmosphere is a **warm cream-and-stone canvas** (`{colors.canvas}` — stone-50 / `#fafaf9`) with a **fixed animated gradient backdrop** (`{component.futuristic-background}`) and **charcoal ink** for reading. Where many community sites default to cold corporate blue, VAIT leads with **brand yellow** (`{colors.brand-yellow}` — `#F5C518`) as the single high-voltage accent — echoed in the tick-and-star logo, section headings, footer type, and the primary Discord CTA.
 
-Type voice runs the **system UI stack** (shadcn/Tailwind default sans) at **semibold display weights** for hero and section titles, with **tracking-tight** on headlines. There is no licensed display face yet; hierarchy is carried by size steps (36px → 60px hero) and colour (yellow-dark for section h2, gray-700 for body).
+Type voice runs **Montserrat** (display/headings) and **Inter** (body), both self-hosted via `@fontsource-variable/*`. Hierarchy is carried by size steps (36px → 60px hero), weight (Bold 700 for h1, SemiBold 600 for h2), and colour (yellow-dark for section h2, gray-700 for body).
 
 Component voltage comes from three anchors: the **floating pill nav** (`{component.nav-bar}`), the **full-viewport hero** with community CTA, and a **white elevated content shell** (`{component.content-shell}`) that holds alternating image/text bands. The **dark charcoal footer** (`{component.footer}`) inverts the warm page — yellow legal text on gray-dark — so the site closes with institutional weight, not another cream band.
 
@@ -65,30 +65,31 @@ Neutrals anchor text, backgrounds, and UI chrome without competing with the prim
 
 ### Font Family
 
-The system uses the **Tailwind/shadcn default sans stack** (system UI). No custom webfont is loaded in `index.html`. Headlines rely on **weight and size**, not a display face.
+Two typefaces from the **VAIT Branding Guidelines**, self-hosted via `@fontsource-variable/*` npm packages (no Google Fonts network requests):
+
+- **Montserrat Variable** (`{typography.font-display}` — CSS token `--font-display`): Display / headings. Tailwind utility: `font-display`.
+- **Inter Variable** (`{typography.font-sans}` — CSS token `--font-sans`): Body, captions, UI chrome. Tailwind utility: `font-sans`. Applied globally via `body { font-sans }`.
+
+Both tokens are registered in `src/index.css` `@theme inline` and installed as `@fontsource-variable/montserrat` + `@fontsource-variable/inter`.
 
 ### Hierarchy
 
-| Token                          | Size                              | Weight        | Line Height | Letter Spacing | Use                                       |
-| ------------------------------ | --------------------------------- | ------------- | ----------- | -------------- | ----------------------------------------- |
-| `{typography.display-hero}`    | 36–60px (`text-4xl` → `text-6xl`) | 600           | 1.2         | tight          | Hero h1                                   |
-| `{typography.display-subhero}` | 30–36px (`text-3xl` → `text-4xl`) | 400 (default) | default     | tight          | Hero h2 / subtitle                        |
-| `{typography.title-section}`   | 24–30px (`text-2xl` → `text-3xl`) | 600           | default     | 0              | Section h2 — brand yellow-dark            |
-| `{typography.body}`            | 16px (default)                    | 400           | default     | 0              | Section descriptions (`text-gray-700`)    |
-| `{typography.footer}`          | 14px (`text-sm`)                  | 400           | default     | 0              | Footer legal lines                        |
-| `{typography.button-cta}`      | 18px (`text-lg`)                  | 600           | default     | 0              | Join Community CTA                        |
-| `{typography.nav-link}`        | 14px (`text-sm`)                  | 500           | default     | 0              | Desktop nav items (shadcn NavigationMenu) |
-| `{typography.badge}`           | 12px (`text-xs`)                  | 500           | default     | 0              | Section anchor badges (`#{sectionId}`)    |
+| Token                           | Size                              | Face       | Weight | Line Height | Letter Spacing | Use                                                           |
+| ------------------------------- | --------------------------------- | ---------- | ------ | ----------- | -------------- | ------------------------------------------------------------- |
+| `{typography.display-hero}`     | 36–60px (`text-4xl` → `text-6xl`) | Montserrat | 700    | 1.2         | tight          | Hero h1 (`font-display font-bold`)                            |
+| `{typography.display-subtitle}` | 30–36px (`text-3xl` → `text-4xl`) | Montserrat | 600    | default     | tight          | Hero h2 / subtitle (`font-display font-semibold`)             |
+| `{typography.title-section}`    | 24–30px (`text-2xl` → `text-3xl`) | Montserrat | 600    | default     | 0              | Section h2 — brand yellow-dark (`font-display font-semibold`) |
+| `{typography.body}`             | 16px (default)                    | Inter      | 400    | default     | 0              | Section descriptions (`text-gray-700`)                        |
+| `{typography.footer}`           | 14px (`text-sm`)                  | Inter      | 400    | default     | 0              | Footer legal lines                                            |
+| `{typography.button-cta}`       | 18px (`text-lg`)                  | Inter      | 600    | default     | 0              | Join Community CTA                                            |
+| `{typography.nav-link}`         | 14px (`text-sm`)                  | Inter      | 500    | default     | 0              | Desktop nav items (shadcn NavigationMenu)                     |
+| `{typography.badge}`            | 12px (`text-xs`)                  | Inter      | 500    | default     | 0              | Section anchor badges (`#{sectionId}`)                        |
 
 ### Principles
 
 - **One accent colour in type**: yellow-dark for section titles; avoid introducing a second headline colour without updating tokens.
-- **Hero subtitle** uses charcoal (`{colors.brand-gray-dark}`), not muted gray — keeps the value prop readable on warm backgrounds.
-- **Semibold** is the ceiling for marketing headlines; heavier weights are unnecessary on the system stack.
-
-### Note on Font Substitutes
-
-When a display face is introduced, prefer a **warm, slightly rounded sans** (e.g. DM Sans, Plus Jakarta Sans) that harmonises with yellow without competing with the logo ticks. Until then, tighten tracking on display sizes only.
+- **Hero subtitle** uses charcoal (`{colors.brand-near-black}`), not muted gray — keeps the value prop readable on backgrounds.
+- **Montserrat is display-only**: apply `font-display` to h1/h2/h3 headings; leave body, nav, and buttons on Inter.
 
 ## Layout
 
@@ -163,7 +164,7 @@ Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editor
 
 **`futuristic-background`** — `fixed inset-0 z-0` gradient layer with two pulsing blobs and subtle line texture. Sits behind all page content.
 
-**`hero`** — `min-h-screen` centred band; h1 `{typography.display-hero}`, h2 `{typography.display-subhero}`, embeds `{component.join-community-cta}`.
+**`hero`** — `min-h-screen` centred band; h1 `{typography.display-hero}`, h2 `{typography.display-subtitle}`, embeds `{component.join-community-cta}`.
 
 **`content-shell`** — `bg-white rounded-2xl shadow-md p-8 my-8 max-w-screen-lg` wrapping all `{component.section-with-image}` blocks.
 
@@ -233,7 +234,7 @@ Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editor
 
 ## Known Gaps
 
-- No custom webfont or formal `{typography.*}` CSS variables — sizes live in Tailwind classes only.
+- Typography CSS variables (`--font-display`, `--font-sans`) and fonts are set; formal `{typography.*}` size/spacing tokens are not yet extracted to CSS variables — sizes still live in Tailwind classes only.
 - Dark mode tokens exist in `:root` / `.dark` but the marketing page does not toggle dark theme.
 - Blob animation timings and `prefers-reduced-motion` overrides are not formalised.
 - Form inputs and validation states are shadcn defaults — not extracted for marketing.
