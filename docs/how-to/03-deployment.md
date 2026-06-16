@@ -1,110 +1,86 @@
 # Deployment
 
-How to deploy the VAIT Homepage to AWS and Cloudflare Workers.
+How to deploy the VAIT Homepage.
 
-> **Migration Notice**: This project currently supports dual deployment to both [AWS CDK](https://docs.aws.amazon.com/cdk/) and [Cloudflare Workers](https://workers.cloudflare.com/). The longer-term goal is to migrate entirely to Cloudflare Workers.
+Production is hosted on [Cloudflare Workers](https://workers.cloudflare.com/) at `vait.au`. The Worker is connected to the `viet-aus-it/homepage` GitHub repository and deploys from the Cloudflare dashboard — not via a deploy workflow in this repo.
 
-## Staging Deployment (Cloudflare)
+> **Legacy AWS**: [AWS CDK](https://docs.aws.amazon.com/cdk/) infrastructure under `infra/` and [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) still exist while the AWS stack is retired. They are not the primary production path for `vait.au`.
 
-Staging runs on Cloudflare at **https://staging.vait.au** and deploys automatically when changes are pushed to the `staging` branch.
+## Production (Cloudflare)
 
-### Branch flow
+**Domains:** `vait.au`, `www.vait.au`, `home.vait.au` (see `wrangler.toml`).
 
-1. Merge feature work into `staging` for QA on `staging.vait.au`.
-2. When ready, merge `staging` into `master` for production.
+**Trigger:** merge to `master`.
 
-### First-time setup
+**Cloudflare project:** Workers & Pages → `homepage` → Settings → Build.
 
-After the staging infrastructure merges to `master`, create the deploy branch:
+| Setting           | Value                                                                     |
+| ----------------- | ------------------------------------------------------------------------- |
+| Production branch | `master`                                                                  |
+| Build command     | `pnpm run ci && pnpm run test && pnpm run typecheck && pnpm run build:cf` |
+| Deploy command    | `pnpm run deploy:cf`                                                      |
+| Version command   | `npx wrangler versions upload`                                            |
+| Root directory    | `/`                                                                       |
 
-```bash
-git checkout master && git pull
-git checkout -b staging
-git push -u origin staging
-```
+After merge, check **Deployments** in the Cloudflare dashboard for build status.
 
-Configure these GitHub secrets (recommended: `staging` GitHub Environment):
+### Manual production deploy
 
-| Secret                  | Purpose                                                          |
-| ----------------------- | ---------------------------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`  | Wrangler deploy auth (Workers Scripts Edit, Workers Routes Edit) |
-| `CLOUDFLARE_ACCOUNT_ID` | Target Cloudflare account                                        |
-
-### Manual staging deploy
-
-```bash
-# Build for Cloudflare and deploy to staging.vait.au
-pnpm run deploy:cf:staging
-```
-
-Requires local `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` environment variables (or `wrangler login`).
-
-### CI/CD
-
-- **[GitHub Actions](https://docs.github.com/en/actions)**: [`.github/workflows/deploy-staging.yml`](../.github/workflows/deploy-staging.yml) runs on push to `staging`
-- **Search indexing**: `public/robots-staging.txt` is copied to `dist/robots.txt` before staging deploys
-
-## Development Deployment (AWS)
-
-```bash
-# Navigate to infrastructure directory
-cd infra/
-
-# Install dependencies
-pnpm install
-
-# Watch for changes (development)
-pnpm run watch
-
-# Deploy to development account
-npx cdk deploy --profile dev
-```
-
-## Production Deployment (AWS)
-
-```bash
-# Build frontend assets
-cd ../ && pnpm run build
-
-# Deploy infrastructure
-cd infra/ && npx cdk deploy --profile prod
-
-# CloudFront cache invalidation happens automatically
-# New content available within minutes
-```
-
-## Cloudflare production (manual)
-
-Production Cloudflare routes (`vait.au`, `www.vait.au`, `home.vait.au`) are configured in `wrangler.toml`. Deploy manually until production Cloudflare CI replaces AWS on `master`:
+For emergencies or local verification (requires `wrangler login` or Cloudflare API credentials):
 
 ```bash
 pnpm run deploy:cf
 ```
 
-## Deployment Pipeline
+## Preview deployments (pre-production QA)
 
-### AWS (current production on `master`)
+[Preview URLs](https://developers.cloudflare.com/workers/configuration/previews/) are enabled in `wrangler.toml` (`preview_urls = true`, `workers_dev = true`).
 
-1. **Build**: `pnpm run build` compiles frontend assets with [Vite](https://vite.dev/)
-2. **Synth**: `npx cdk synth` generates [CloudFormation](https://aws.amazon.com/cloudformation/) template
-3. **Deploy**: `npx cdk deploy` provisions AWS resources
-4. **Invalidate**: [CloudFront](https://aws.amazon.com/cloudfront/) cache invalidation for new content
+**Trigger:** open or update a pull request, or push to a non-production branch (`Builds for non-production branches` is enabled in the Cloudflare project).
 
-### Cloudflare staging (on `staging` branch)
+**How it works:**
 
-1. **Build**: `pnpm run build:cf` compiles with the Cloudflare Vite plugin
-2. **Robots**: `robots-staging.txt` copied to `dist/robots.txt`
-3. **Deploy**: `wrangler deploy --env staging` publishes to `homepage-staging` at `staging.vait.au`
+1. Cloudflare runs the same build pipeline as production.
+2. `npx wrangler versions upload` publishes a preview version (not production routes).
+3. Cloudflare posts **branch** and **commit** preview links as a comment on the pull request.
+4. The branch preview URL stays stable across commits; it always serves the latest version of that branch.
 
-## CI/CD Integration
+Preview URLs use the `workers.dev` subdomain — not `vait.au`. Custom preview domains are not supported yet.
 
-- **Production (AWS)**: Automated deployment on merge to `master`
-- **Staging (Cloudflare)**: Automated deployment on push to `staging`
-- **Rollback**: Previous version restoration via [S3](https://aws.amazon.com/s3/) versioning (AWS) or Cloudflare deployment history (staging)
+### Testing a change before merge
+
+1. Push a feature branch and open a PR against `master`.
+2. Wait for the Cloudflare build on the PR (and GitHub Actions lint/test).
+3. Open the preview link from the Cloudflare comment on the PR.
+4. Merge to `master` when QA passes — production deploys automatically.
+
+No GitHub secrets or `staging` branch are required.
+
+## Local development
+
+```bash
+# Standard Vite dev server
+pnpm run dev
+
+# Vite with Cloudflare plugin (closer to production Worker behaviour)
+pnpm run dev:cf
+```
+
+## Legacy AWS deployment
+
+The CDK stack previously served `vietausit.com`. It remains in the repo for teardown, not for `vait.au`.
+
+```bash
+cd infra/
+pnpm install
+npx cdk deploy --profile prod   # requires AWS credentials
+```
+
+GitHub Actions on `master` may still run CDK deploy until the AWS stack is removed.
 
 ---
 
 See also:
 
-- [Infrastructure](../explanation/02-infrastructure.md) — Architecture and security details
+- [Infrastructure](../explanation/02-infrastructure.md) — Cloudflare and legacy AWS architecture
 - [Project Reference](../reference/01-project-reference.md) — All commands

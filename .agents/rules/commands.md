@@ -364,18 +364,15 @@ cd infra/ && pnpm run cdk deploy
 
 ### Cloudflare Deployment
 
+Production deploys automatically when changes merge to `master` (Cloudflare Git integration). Pre-production QA uses [Preview URLs](https://developers.cloudflare.com/workers/configuration/previews/) on pull requests — see [Deployment](../../docs/how-to/03-deployment.md).
+
 ```bash
 # Build for Cloudflare Workers
 pnpm run build:cf
 
-# Deploy to staging.vait.au (manual)
-pnpm run deploy:cf:staging
-
-# Deploy to production Cloudflare routes (manual, until prod CI lands)
+# Manual production deploy (emergency / local only)
 pnpm run deploy:cf
 ```
-
-Staging deploys automatically on push to the `staging` branch via `.github/workflows/deploy-staging.yml`. Requires `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` GitHub secrets.
 
 ## Cross References
 
