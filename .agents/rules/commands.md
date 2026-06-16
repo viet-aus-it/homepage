@@ -370,8 +370,8 @@ Production deploys automatically when changes merge to `master` (Cloudflare Git 
 # Build for Cloudflare Workers
 pnpm run build:cf
 
-# Manual production deploy (emergency / local only)
-pnpm run deploy:cf
+# Manual production deploy (emergency / local only; build first)
+pnpm run build:cf && wrangler deploy
 ```
 
 ## Cross References

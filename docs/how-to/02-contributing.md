@@ -9,7 +9,7 @@ Thank you for your interest in contributing to the VAIT Homepage project!
 
 ## Proposing Changes
 
-- Fork the repository or create a new branch from `main`.
+- Fork the repository or create a new branch from `master`.
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) for branch and commit naming.
 - Keep changes focused and atomic.
 
@@ -17,6 +17,7 @@ Thank you for your interest in contributing to the VAIT Homepage project!
 
 - Open a pull request with a clear title and description.
 - Ensure your code passes all checks (lint, test, build).
+- For UI changes, use the **branch preview URL** posted by Cloudflare on the PR (see [Deployment](./03-deployment.md#preview-deployments-pre-production-qa)).
 - Be open to feedback and iterate as needed.
 
 ## Documentation

@@ -28,10 +28,10 @@ After merge, check **Deployments** in the Cloudflare dashboard for build status.
 
 ### Manual production deploy
 
-For emergencies or local verification (requires `wrangler login` or Cloudflare API credentials):
+For emergencies or local verification (requires `wrangler login` or Cloudflare API credentials). The Cloudflare build pipeline already runs `build:cf` before `deploy:cf`; locally, build first:
 
 ```bash
-pnpm run deploy:cf
+pnpm run build:cf && wrangler deploy
 ```
 
 ## Preview deployments (pre-production QA)
