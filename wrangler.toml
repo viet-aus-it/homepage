@@ -29,3 +29,26 @@ head_sampling_rate = 1
 
 [observability.logs]
 invocation_logs = true
+
+[env.staging]
+name = "homepage-staging"
+compatibility_date = "2026-02-19"
+compatibility_flags = ["nodejs_compat"]
+upload_source_maps = true
+workers_dev = false
+preview_urls = false
+
+[[env.staging.routes]]
+pattern = "staging.vait.au"
+custom_domain = true
+
+[env.staging.assets]
+directory = "dist"
+not_found_handling = "single-page-application"
+
+[env.staging.observability]
+enabled = true
+head_sampling_rate = 1
+
+[env.staging.observability.logs]
+invocation_logs = true
