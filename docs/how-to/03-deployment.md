@@ -25,10 +25,10 @@ git push -u origin staging
 
 Configure these GitHub secrets (recommended: `staging` GitHub Environment):
 
-| Secret | Purpose |
-| ------ | ------- |
-| `CLOUDFLARE_API_TOKEN` | Wrangler deploy auth (Workers Scripts Edit, Workers Routes Edit) |
-| `CLOUDFLARE_ACCOUNT_ID` | Target Cloudflare account |
+| Secret                  | Purpose                                                          |
+| ----------------------- | ---------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | Wrangler deploy auth (Workers Scripts Edit, Workers Routes Edit) |
+| `CLOUDFLARE_ACCOUNT_ID` | Target Cloudflare account                                        |
 
 ### Manual staging deploy
 

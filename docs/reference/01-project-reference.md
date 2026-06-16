@@ -21,20 +21,20 @@ Quick-reference lookup for the VAIT Homepage tech stack, commands, project struc
 
 ## Commands
 
-| Command                  | Purpose                                                         |
-| ------------------------ | --------------------------------------------------------------- |
-| `pnpm run dev`           | Start development server                                        |
-| `pnpm run build`         | Build for production                                            |
-| `pnpm run test`          | Run tests (watch mode)                                          |
-| `pnpm run test:run`      | Run tests once                                                  |
-| `pnpm run test:CI`       | Run tests with coverage                                         |
-| `pnpm run lint`          | Check for lint/format issues                                    |
-| `pnpm run lint:fix`      | Auto-fix lint/format issues                                     |
-| `pnpm run typecheck`     | Run [TypeScript](https://www.typescriptlang.org/) type checking |
-| `pnpm run githooks:init` | Initialise [Husky](https://typicode.github.io/husky/) git hooks |
-| `pnpm run build:cf`      | Build for Cloudflare Workers deployment                         |
-| `pnpm run deploy:cf`     | Build and deploy to Cloudflare production routes                |
-| `pnpm run deploy:cf:staging` | Build and deploy to `staging.vait.au`                     |
+| Command                      | Purpose                                                         |
+| ---------------------------- | --------------------------------------------------------------- |
+| `pnpm run dev`               | Start development server                                        |
+| `pnpm run build`             | Build for production                                            |
+| `pnpm run test`              | Run tests (watch mode)                                          |
+| `pnpm run test:run`          | Run tests once                                                  |
+| `pnpm run test:CI`           | Run tests with coverage                                         |
+| `pnpm run lint`              | Check for lint/format issues                                    |
+| `pnpm run lint:fix`          | Auto-fix lint/format issues                                     |
+| `pnpm run typecheck`         | Run [TypeScript](https://www.typescriptlang.org/) type checking |
+| `pnpm run githooks:init`     | Initialise [Husky](https://typicode.github.io/husky/) git hooks |
+| `pnpm run build:cf`          | Build for Cloudflare Workers deployment                         |
+| `pnpm run deploy:cf`         | Build and deploy to Cloudflare production routes                |
+| `pnpm run deploy:cf:staging` | Build and deploy to `staging.vait.au`                           |
 
 ## Project Structure
 
