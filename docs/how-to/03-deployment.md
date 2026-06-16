@@ -53,21 +53,33 @@ Preview URLs use the `workers.dev` subdomain — not `vait.au`. Custom preview d
 
 Cloudflare **Build watch paths** (Settings → Build) control whether a push triggers a Workers build. Use this to avoid preview deploys on doc-only PRs.
 
+Wildcards match across path separators — `docs/*` covers nested paths such as `docs/how-to/03-deployment.md` ([Pages build watch paths](https://developers.cloudflare.com/pages/configuration/build-watch-paths/), same UI for Workers projects).
+
 **Include paths:** `*`
 
 **Exclude paths** (comma-separated, paste into the dashboard):
 
 ```text
-docs/how-to/*, docs/explanation/*, docs/reference/*, docs/tutorials/*, docs/index.md, .agents/rules/*, .agents/skills/*, .github/workflows/*, .github/actions/*, .github/CODEOWNERS, .github/PULL_REQUEST_TEMPLATE.md, infra/*, infra/lib/*, infra/bin/*, README.md, AGENTS.md, DESIGN.md, LICENSE, skills-lock.json, .cursor/*, .vscode/*, .zed/*, .husky/*, .gitignore, .editorconfig, .nvmrc, .tool-versions
+docs/*, .agents/*, .github/*, infra/*, *.md, .cursor/*, .vscode/*, .zed/*, .husky/*, LICENSE, skills-lock.json, .gitignore, .editorconfig, .nvmrc, .tool-versions
 ```
+
+| Pattern                                           | Skips builds for                                  |
+| ------------------------------------------------- | ------------------------------------------------- |
+| `docs/*`                                          | All documentation under `docs/`                   |
+| `.agents/*`                                       | Agent rules and skills                            |
+| `.github/*`                                       | GitHub Actions workflows and templates            |
+| `infra/*`                                         | Legacy AWS CDK (not used for `vait.au`)           |
+| `*.md`                                            | Markdown anywhere (e.g. `README.md`, `DESIGN.md`) |
+| `.cursor/*`, `.vscode/*`, `.zed/*`, `.husky/*`    | Editor and git hook config                        |
+| `LICENSE`, `skills-lock.json`, `.gitignore`, etc. | Repo metadata                                     |
 
 | Change type                                                        | Cloudflare build | GitHub Actions (lint/test) |
 | ------------------------------------------------------------------ | ---------------- | -------------------------- |
 | `src/`, `public/`, `wrangler.toml`, `package.json`, Vite/TS config | Yes              | Yes                        |
-| `docs/`, `.agents/`, `infra/`, root `*.md`, editor/git config      | No               | Yes (on PR)                |
+| Paths covered by excludes above                                    | No               | Yes (on PR)                |
 | Mixed code + docs                                                  | Yes              | Yes                        |
 
-Paths are evaluated per [Build watch paths](https://developers.cloudflare.com/workers/ci-cd/builds/build-watch-paths/): excludes are checked first; if every changed file is excluded, the build is skipped.
+Excludes are checked first; if every changed file in a push matches an exclude, the build is skipped ([Workers build watch paths](https://developers.cloudflare.com/workers/ci-cd/builds/build-watch-paths/)).
 
 To skip a build for a specific commit regardless of paths, add **`[skip ci]`** to the commit message (case-insensitive). GitHub Actions does not honour this tag — only Cloudflare Workers Builds.
 
