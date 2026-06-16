@@ -1,0 +1,35 @@
+name: 'Deployment Action: Cloudflare staging'
+
+on:
+  push:
+    branches:
+      - staging
+
+concurrency:
+  group: staging-deploy
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-staging:
+    name: Deploy to staging.vait.au
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up project
+        uses: ./.github/actions/setup-node-deps
+
+      - name: Build for Cloudflare
+        run: pnpm run build:cf
+
+      - name: Deploy to Cloudflare staging
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: wrangler deploy --env staging
