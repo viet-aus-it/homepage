@@ -2,11 +2,32 @@
 
 This document explains the VAIT Homepage infrastructure architecture, security model, and migration strategy.
 
-> **Migration Notice**: This project currently supports dual deployment to both [AWS CDK](https://docs.aws.amazon.com/cdk/) and [Cloudflare Workers](https://workers.cloudflare.com/). The longer-term goal is to remove the AWS deployment entirely in favour of Cloudflare.
+## Cloudflare Workers (production)
 
-## Architecture
+The public site at `vait.au` is served by the **`homepage`** Worker in the VAIT Cloudflare account.
 
-The VAIT Homepage uses a serverless architecture optimised for performance, security, and scalability:
+```
+┌──────────────────────┐     ┌─────────────────────────┐
+│  GitHub              │     │  Cloudflare Worker      │
+│  viet-aus-it/homepage│────▶│  homepage               │
+│  branch: master      │     │                         │
+└──────────────────────┘     │  • vait.au              │
+                             │  • www.vait.au          │
+                             │  • home.vait.au         │
+                             │  • dist/ (SPA assets)   │
+                             └─────────────────────────┘
+```
+
+- **Configuration:** [`wrangler.toml`](../../wrangler.toml) — routes, assets, `preview_urls`
+- **Deploy:** Cloudflare dashboard Git build (see [Deployment](../how-to/03-deployment.md))
+- **Pre-production:** Preview URLs on pull requests (`workers.dev`, not custom domains)
+- **Observability:** Workers Logs enabled in the Cloudflare dashboard
+
+## Legacy AWS (being retired)
+
+> The CDK stack below served `vietausit.com`. Production traffic is on Cloudflare; AWS resources are candidates for removal.
+
+The VAIT Homepage previously used a serverless AWS architecture:
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐

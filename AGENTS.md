@@ -21,7 +21,7 @@ You are working on the VAIT Homepage, the official website for the Viet-Aus IT c
 - **Tech Stack**: [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/), [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/), [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html), [Vitest](https://vitest.dev/)
 - **Architecture**: Component-based architecture with type-safe routing and state management
 - **Visual design**: [DESIGN.md](DESIGN.md) — tokens, components, and do's/don'ts for the public homepage (warm canvas, brand yellow, shadcn/Tailwind)
-- **Infrastructure**: [AWS CDK](https://docs.aws.amazon.com/cdk/), [S3](https://aws.amazon.com/s3/), [CloudFront](https://aws.amazon.com/cloudfront/) for deployment
+- **Infrastructure**: [Cloudflare Workers](https://workers.cloudflare.com/) (production); legacy [AWS CDK](https://docs.aws.amazon.com/cdk/) in `infra/`
 
 ## Change Management Philosophy
 
@@ -102,7 +102,8 @@ Load a skill when its trigger condition matches the task:
 - [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/)
 - [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/)
 - [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) for linting and formatting, [Vitest](https://vitest.dev/) for testing
-- [AWS CDK](https://docs.aws.amazon.com/cdk/), [S3](https://aws.amazon.com/s3/), [CloudFront](https://aws.amazon.com/cloudfront/) for deployment
+- [Cloudflare Workers](https://workers.cloudflare.com/) for production hosting
+- [AWS CDK](https://docs.aws.amazon.com/cdk/) in `infra/` (legacy, being retired)
 
 ### Essential Commands
 

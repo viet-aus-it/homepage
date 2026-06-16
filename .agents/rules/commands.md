@@ -362,6 +362,18 @@ pnpm run preview
 cd infra/ && pnpm run cdk deploy
 ```
 
+### Cloudflare Deployment
+
+Production deploys automatically when changes merge to `master` (Cloudflare Git integration). Pre-production QA uses [Preview URLs](https://developers.cloudflare.com/workers/configuration/previews/) on pull requests — see [Deployment](../../docs/how-to/03-deployment.md).
+
+```bash
+# Build for Cloudflare Workers
+pnpm run build:cf
+
+# Manual production deploy (emergency / local only; build first)
+pnpm run build:cf && wrangler deploy
+```
+
 ## Cross References
 
 - **Development Workflow**: See `docs/development.md#workflow`

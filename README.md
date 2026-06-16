@@ -14,8 +14,8 @@ A not-for-profit landing page for Viet-Au IT professionals in Australia. Built f
 - **State/Router:** [TanStack Router](https://tanstack.com/router), [React Query](https://tanstack.com/query), [Zod](https://zod.dev/)
 - **Testing:** [Vitest](https://vitest.dev/), [Testing Library](https://testing-library.com/)
 - **Lint/Format:** [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html)
-- **Infrastructure:** [AWS CDK](https://docs.aws.amazon.com/cdk/) (TypeScript), [S3](https://aws.amazon.com/s3/) + [CloudFront](https://aws.amazon.com/cloudfront/)
-- **CI/CD:** [GitHub Actions](https://docs.github.com/en/actions)
+- **Infrastructure:** [Cloudflare Workers](https://workers.cloudflare.com/) (production on `vait.au`); legacy [AWS CDK](https://docs.aws.amazon.com/cdk/) under `infra/`
+- **CI/CD:** [GitHub Actions](https://docs.github.com/en/actions) (lint/test); Cloudflare Workers Builds (deploy)
 
 ## Quickstart
 
@@ -58,12 +58,13 @@ See [docs/index.md](docs/index.md) for more details.
 
 ## Infrastructure
 
-- [AWS CDK](https://docs.aws.amazon.com/cdk/) (TypeScript)
-- See [infra/README.md](infra/README.md) and [docs/explanation/02-infrastructure.md](docs/explanation/02-infrastructure.md)
+- Production: [Cloudflare Workers](https://workers.cloudflare.com/) — see [docs/how-to/03-deployment.md](docs/how-to/03-deployment.md)
+- Legacy: [AWS CDK](https://docs.aws.amazon.com/cdk/) — see [infra/README.md](infra/README.md) and [docs/explanation/02-infrastructure.md](docs/explanation/02-infrastructure.md)
 
 ## CI/CD
 
-- Automated via [GitHub Actions](https://docs.github.com/en/actions)
+- [GitHub Actions](https://docs.github.com/en/actions) — lint, test, typecheck on pull requests
+- Cloudflare Workers Builds — production deploys on `master`, preview URLs on PRs
 - See [docs/how-to/03-deployment.md](docs/how-to/03-deployment.md)
 
 ## Contributing
