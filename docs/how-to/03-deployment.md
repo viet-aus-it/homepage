@@ -36,7 +36,7 @@ pnpm run build:cf && wrangler deploy
 
 ## Preview deployments (pre-production QA)
 
-[Preview URLs](https://developers.cloudflare.com/workers/configuration/previews/) are enabled in `wrangler.toml` (`preview_urls = true`, `workers_dev = true`).
+[Preview URLs](https://developers.cloudflare.com/workers/configuration/previews/) are enabled in `wrangler.toml` (`preview_urls = true`). The generic `workers.dev` route stays off (`workers_dev = false`); only branch/commit preview URLs are used for QA.
 
 **Trigger:** open or update a pull request, or push to a non-production branch (`Builds for non-production branches` is enabled in the Cloudflare project).
 
