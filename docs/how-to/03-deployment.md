@@ -14,13 +14,15 @@ Production is hosted on [Cloudflare Workers](https://workers.cloudflare.com/) at
 
 **Cloudflare project:** Workers & Pages → `homepage` → Settings → Build.
 
-| Setting           | Value                                                                     |
-| ----------------- | ------------------------------------------------------------------------- |
-| Production branch | `master`                                                                  |
-| Build command     | `pnpm run ci && pnpm run test && pnpm run typecheck && pnpm run build:cf` |
-| Deploy command    | `pnpm run deploy:cf`                                                      |
-| Version command   | `npx wrangler versions upload`                                            |
-| Root directory    | `/`                                                                       |
+| Setting           | Value                                                                                 |
+| ----------------- | ------------------------------------------------------------------------------------- |
+| Production branch | `master`                                                                              |
+| Build command     | `pnpm run ci && pnpm run test && pnpm run typecheck && pnpm run build:cf`             |
+| Deploy command    | `pnpm run deploy:cf`                                                                  |
+| Version command   | `npx wrangler versions upload`                                                        |
+| Root directory    | `/`                                                                                   |
+| Include paths     | `*`                                                                                   |
+| Exclude paths     | See [Skipping preview and production builds](#skipping-preview-and-production-builds) |
 
 After merge, check **Deployments** in the Cloudflare dashboard for build status.
 
@@ -46,6 +48,28 @@ pnpm run deploy:cf
 4. The branch preview URL stays stable across commits; it always serves the latest version of that branch.
 
 Preview URLs use the `workers.dev` subdomain — not `vait.au`. Custom preview domains are not supported yet.
+
+### Skipping preview and production builds
+
+Cloudflare **Build watch paths** (Settings → Build) control whether a push triggers a Workers build. Use this to avoid preview deploys on doc-only PRs.
+
+**Include paths:** `*`
+
+**Exclude paths** (comma-separated, paste into the dashboard):
+
+```text
+docs/how-to/*, docs/explanation/*, docs/reference/*, docs/tutorials/*, docs/index.md, .agents/rules/*, .agents/skills/*, .github/workflows/*, .github/actions/*, .github/CODEOWNERS, .github/PULL_REQUEST_TEMPLATE.md, infra/*, infra/lib/*, infra/bin/*, README.md, AGENTS.md, DESIGN.md, LICENSE, skills-lock.json, .cursor/*, .vscode/*, .zed/*, .husky/*, .gitignore, .editorconfig, .nvmrc, .tool-versions
+```
+
+| Change type                                                        | Cloudflare build | GitHub Actions (lint/test) |
+| ------------------------------------------------------------------ | ---------------- | -------------------------- |
+| `src/`, `public/`, `wrangler.toml`, `package.json`, Vite/TS config | Yes              | Yes                        |
+| `docs/`, `.agents/`, `infra/`, root `*.md`, editor/git config      | No               | Yes (on PR)                |
+| Mixed code + docs                                                  | Yes              | Yes                        |
+
+Paths are evaluated per [Build watch paths](https://developers.cloudflare.com/workers/ci-cd/builds/build-watch-paths/): excludes are checked first; if every changed file is excluded, the build is skipped.
+
+To skip a build for a specific commit regardless of paths, add **`[skip ci]`** to the commit message (case-insensitive). GitHub Actions does not honour this tag — only Cloudflare Workers Builds.
 
 ### Testing a change before merge
 
