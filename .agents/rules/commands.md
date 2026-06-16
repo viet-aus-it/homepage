@@ -362,6 +362,21 @@ pnpm run preview
 cd infra/ && pnpm run cdk deploy
 ```
 
+### Cloudflare Deployment
+
+```bash
+# Build for Cloudflare Workers
+pnpm run build:cf
+
+# Deploy to staging.vait.au (manual)
+pnpm run deploy:cf:staging
+
+# Deploy to production Cloudflare routes (manual, until prod CI lands)
+pnpm run deploy:cf
+```
+
+Staging deploys automatically on push to the `staging` branch via `.github/workflows/deploy-staging.yml`. Requires `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` GitHub secrets.
+
 ## Cross References
 
 - **Development Workflow**: See `docs/development.md#workflow`
