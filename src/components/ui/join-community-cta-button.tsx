@@ -20,7 +20,7 @@ function JoinCommunityCTAButton({ ctaText = 'Join our Community' }: JoinCommunit
       <Button
         asChild
         size="lg"
-        className="bg-brand-yellow text-brand-dark-gray hover:bg-brand-gray hover:text-white font-semibold text-lg px-8 py-4 rounded-full shadow-lg transition-colors duration-200"
+        className="bg-brand-yellow text-brand-near-black hover:bg-brand-gray hover:text-white font-semibold text-lg px-8 py-4 rounded-full shadow-lg transition-colors duration-200"
       >
         <a href={ORGANISATION.DISCORD_URL} target="_blank" rel="noopener noreferrer" aria-label="Join our Community">
           {ctaText} <DiscordLogo className="h-5! w-5!" />

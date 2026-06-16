@@ -74,12 +74,18 @@
   --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
   --sidebar-border: oklch(0.923 0.003 48.717);
   --sidebar-ring: oklch(0.709 0.01 56.259);
-  /* Brand Colors */
-  --brand-yellow: #f4df4d;
-  --brand-yellow-dark: #e0c944;
-  --brand-yellow-darker: #c7b139;
-  --brand-gray: #959595;
-  --brand-gray-dark: #1c1c1c;
+  /* Brand Colors — VAIT Branding Guidelines */
+  /* Primary */
+  --brand-yellow: #f5c518;
+  --brand-yellow-tint: #fdf3c0;
+  --brand-yellow-shade: #c9a010;
+  /* Neutrals (darkest → lightest) */
+  --brand-near-black: #1a1a1a;
+  --brand-gray-dark: #4a4a4a;
+  --brand-gray: #8a8a8a;
+  --brand-gray-light: #e8e8e4;
+  /* Deprecated alias — kept so existing `*-brand-yellow-dark` usages resolve to the new shade */
+  --brand-yellow-dark: var(--brand-yellow-shade);
 }
 
 .dark {
@@ -114,12 +120,18 @@
   --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.553 0.013 58.071);
-  /* Brand Colors (same as light for now, can be adjusted for dark mode) */
-  --brand-yellow: #f4df4d;
-  --brand-yellow-dark: #e0c944;
-  --brand-yellow-darker: #c7b139;
-  --brand-gray: #959595;
-  --brand-gray-dark: #1c1c1c;
+  /* Brand Colors — VAIT Branding Guidelines (same as light for now, can be adjusted for dark mode) */
+  /* Primary */
+  --brand-yellow: #f5c518;
+  --brand-yellow-tint: #fdf3c0;
+  --brand-yellow-shade: #c9a010;
+  /* Neutrals (darkest → lightest) */
+  --brand-near-black: #1a1a1a;
+  --brand-gray-dark: #4a4a4a;
+  --brand-gray: #8a8a8a;
+  --brand-gray-light: #e8e8e4;
+  /* Deprecated alias — kept so existing `*-brand-yellow-dark` usages resolve to the new shade */
+  --brand-yellow-dark: var(--brand-yellow-shade);
 }
 
 @layer base {
@@ -132,23 +144,44 @@
 }
 
 @layer utilities {
+  /* Primary */
   .bg-brand-yellow {
     background-color: var(--brand-yellow);
   }
   .text-brand-yellow {
     color: var(--brand-yellow);
   }
+  .bg-brand-yellow-tint {
+    background-color: var(--brand-yellow-tint);
+  }
+  .text-brand-yellow-tint {
+    color: var(--brand-yellow-tint);
+  }
+  .bg-brand-yellow-shade {
+    background-color: var(--brand-yellow-shade);
+  }
+  .text-brand-yellow-shade {
+    color: var(--brand-yellow-shade);
+  }
+  /* Deprecated alias — resolves to the shade */
   .bg-brand-yellow-dark {
     background-color: var(--brand-yellow-dark);
   }
   .text-brand-yellow-dark {
     color: var(--brand-yellow-dark);
   }
-  .bg-brand-yellow-darker {
-    background-color: var(--brand-yellow-darker);
+  /* Neutrals */
+  .bg-brand-near-black {
+    background-color: var(--brand-near-black);
   }
-  .text-brand-yellow-darker {
-    color: var(--brand-yellow-darker);
+  .text-brand-near-black {
+    color: var(--brand-near-black);
+  }
+  .bg-brand-gray-dark {
+    background-color: var(--brand-gray-dark);
+  }
+  .text-brand-gray-dark {
+    color: var(--brand-gray-dark);
   }
   .bg-brand-gray {
     background-color: var(--brand-gray);
@@ -156,10 +189,10 @@
   .text-brand-gray {
     color: var(--brand-gray);
   }
-  .bg-brand-gray-dark {
-    background-color: var(--brand-gray-dark);
+  .bg-brand-gray-light {
+    background-color: var(--brand-gray-light);
   }
-  .text-brand-gray-dark {
-    color: var(--brand-gray-dark);
+  .text-brand-gray-light {
+    color: var(--brand-gray-light);
   }
 }
