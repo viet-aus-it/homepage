@@ -23,8 +23,7 @@
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
     "ci": "oxlint && oxfmt --check",
-    "deploy:cf": "pnpm run build:cf && wrangler deploy",
-    "deploy:cf:staging": "pnpm run build:cf && cp public/robots-staging.txt dist/robots.txt && wrangler deploy --env staging"
+    "deploy:cf": "pnpm run build:cf && wrangler deploy"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.16",
