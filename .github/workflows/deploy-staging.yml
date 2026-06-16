@@ -28,6 +28,9 @@ jobs:
       - name: Build for Cloudflare
         run: pnpm run build:cf
 
+      - name: Block search indexing on staging
+        run: cp public/robots-staging.txt dist/robots.txt
+
       - name: Deploy to Cloudflare staging
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
