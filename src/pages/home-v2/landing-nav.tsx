@@ -1,5 +1,5 @@
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { DiscordLogo } from '@/components/ui/icons';
 import Logo from '@/components/ui/logo';
@@ -13,28 +13,36 @@ interface LandingNavProps {
 }
 
 /**
- * Dark landing-page navigation with logo, optional primary links, and Discord CTA.
+ * Sticky landing nav — transparent at page top, solid dark background when scrolled.
  */
 function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navLinks = getEnabledNavLinks(PRIMARY_NAV, homePath);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <header className="relative z-10">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-6 md:px-12" aria-label="Primary">
+    <header
+      className={cn(
+        'sticky top-0 z-50 w-full transition-colors duration-200',
+        scrolled ? 'border-b border-white/8 bg-brand-near-black' : 'border-b border-transparent bg-transparent'
+      )}
+    >
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-12" aria-label="Primary">
         <a href={homePath} className="flex items-center gap-2.5">
           <Logo className="h-8 w-auto" colour="colour" aria-hidden />
-          <span className="font-display text-xl font-extrabold tracking-tight text-white">VAIT</span>
+          <span className="font-display text-xl font-semibold tracking-tight text-white">VAIT</span>
         </a>
 
         <div className="hidden items-center gap-9 text-[15px] font-medium text-[#cfcfcf] md:flex">
           {navLinks.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="transition-colors hover:text-white"
-              {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
+            <a key={item.label} href={item.href} className="transition-colors hover:text-white">
               {item.label}
             </a>
           ))}
@@ -51,7 +59,10 @@ function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
 
         <button
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-xl border border-white/15 bg-white/8 md:hidden"
+          className={cn(
+            'inline-flex size-11 items-center justify-center rounded-xl border md:hidden',
+            scrolled ? 'border-white/15 bg-white/8' : 'border-white/15 bg-white/8'
+          )}
           aria-expanded={menuOpen}
           aria-controls="landing-mobile-menu"
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -61,7 +72,7 @@ function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
         </button>
       </nav>
 
-      <div id="landing-mobile-menu" className={cn('border-b border-white/8 px-5 pb-7 md:hidden', menuOpen ? 'block' : 'hidden')}>
+      <div id="landing-mobile-menu" className={cn('border-t border-white/8 bg-brand-near-black px-5 pb-7 md:hidden', menuOpen ? 'block' : 'hidden')}>
         {navLinks.length > 0 && (
           <div className="flex flex-col gap-0 text-[17px] font-semibold text-[#e6e6e6]">
             {navLinks.map((item, index) => (
@@ -70,7 +81,6 @@ function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
                 href={item.href}
                 className={cn('py-3.5', index < navLinks.length - 1 && 'border-b border-white/7')}
                 onClick={() => setMenuOpen(false)}
-                {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
                 {item.label}
               </a>

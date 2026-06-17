@@ -3,6 +3,8 @@ import { MapPin } from 'lucide-react';
 import { DiscordLogo } from '@/components/ui/icons';
 import { COMMUNITY_MEMBER_COUNT } from '@/lib/community-stats';
 import { ORGANISATION } from '@/lib/constants';
+import { cn } from '@/lib/utils';
+import { HOME_SECTION_INNER } from '@/pages/home-v2/home-section';
 
 const HERO_IMAGE = '/images/bbq-albert-park.png';
 
@@ -17,7 +19,7 @@ function HomeHero() {
         aria-hidden
       />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-9 px-5 pb-14 pt-2 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:px-12 md:pb-24 md:pt-4">
+      <div className={cn(HOME_SECTION_INNER, 'relative grid items-center gap-9 pt-4 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:pt-6')}>
         <div>
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-brand-yellow/30 bg-brand-yellow/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.11em] text-brand-yellow">
             <span className="inline-block size-1.5 rounded-full bg-brand-yellow" aria-hidden />
@@ -62,7 +64,7 @@ function HomeHero() {
             <img
               src={HERO_IMAGE}
               alt="VAIT members at the Albert Park BBQ"
-              className="hero-photo-img block h-[300px] w-full object-cover md:h-[440px]"
+              className="block h-[300px] w-full object-cover md:h-[440px]"
               width={640}
               height={440}
               fetchPriority="high"
@@ -74,7 +76,7 @@ function HomeHero() {
             </div>
           </div>
 
-          <div className="stat-float mt-4 flex items-center gap-3 rounded-[14px] bg-white p-4 shadow-[0_16px_34px_rgba(0,0,0,0.3)] md:absolute md:-bottom-5 md:-right-5 md:mt-0 md:px-5 md:py-4">
+          <div className="mt-4 flex items-center gap-3 rounded-[14px] bg-white p-4 shadow-[0_16px_34px_rgba(0,0,0,0.3)] md:absolute md:-bottom-5 md:-right-5 md:mt-0 md:px-5 md:py-4">
             <div className="font-display text-[28px] font-extrabold leading-none text-brand-near-black">{COMMUNITY_MEMBER_COUNT}</div>
             <div className="text-xs leading-snug text-brand-gray">
               members

@@ -1,15 +1,20 @@
 import { DiscordLogo } from '@/components/ui/icons';
 import Logo from '@/components/ui/logo';
 import { ORGANISATION } from '@/lib/constants';
-import { FOOTER_EXPLORE, FOOTER_FOLLOW, FOOTER_GET_INVOLVED, getEnabledNavLinks, HOME_PATH } from '@/lib/site-nav';
+import type { SiteNavItem } from '@/lib/site-nav';
+import { FOOTER_EXPLORE, FOOTER_FOLLOW, FOOTER_GET_INVOLVED, getEnabledNavLinks, HOME_PATH, resolveNavHref } from '@/lib/site-nav';
+import { HOME_SECTION_INNER } from '@/pages/home-v2/home-section';
 
 interface FooterLinkColumnProps {
   title: string;
-  items: ReturnType<typeof getEnabledNavLinks>;
+  items: readonly SiteNavItem[];
 }
 
 function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
-  if (items.length === 0) {
+  const links = getEnabledNavLinks(items, HOME_PATH);
+  const pendingLabels = items.filter((item) => item.enabled && !resolveNavHref(item, HOME_PATH)).map((item) => item.label);
+
+  if (links.length === 0 && pendingLabels.length === 0) {
     return null;
   }
 
@@ -17,7 +22,7 @@ function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
     <div>
       <p className="mb-4 font-display text-[13px] font-bold tracking-[0.06em] uppercase text-white">{title}</p>
       <ul className="flex flex-col gap-2.5 text-[14.5px]">
-        {items.map((item) => (
+        {links.map((item) => (
           <li key={item.label}>
             <a
               href={item.href}
@@ -26,6 +31,11 @@ function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
             >
               {item.label}
             </a>
+          </li>
+        ))}
+        {pendingLabels.map((label) => (
+          <li key={label} className="text-[#6a6a6a]">
+            {label}
           </li>
         ))}
       </ul>
@@ -37,19 +47,16 @@ function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
  * Four-column redesign footer for the v2 landing page.
  */
 function HomeV2Footer() {
-  const exploreLinks = getEnabledNavLinks(FOOTER_EXPLORE, HOME_PATH);
-  const involvedLinks = getEnabledNavLinks(FOOTER_GET_INVOLVED, HOME_PATH);
-  const followLinks = getEnabledNavLinks(FOOTER_FOLLOW, HOME_PATH);
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-brand-footer-dark px-5 py-14 text-[#9a9a9a] md:px-12">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 border-b border-[#2a2a2a] pb-12 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
-          <div>
+    <footer className="bg-brand-footer-dark text-[#9a9a9a]">
+      <div className={HOME_SECTION_INNER}>
+        <div className="flex flex-col gap-10 border-b border-[#2a2a2a] pb-12 lg:flex-row lg:items-start">
+          <div className="lg:max-w-sm lg:flex-1">
             <div className="mb-4 flex items-center gap-2.5">
               <Logo className="h-[30px] w-auto" colour="colour" aria-hidden />
-              <span className="font-display text-[19px] font-extrabold tracking-tight text-white">VAIT</span>
+              <span className="font-display text-[19px] font-semibold tracking-tight text-white">VAIT</span>
             </div>
             <p className="mb-4 max-w-[280px] text-[14.5px] leading-relaxed">Vietnamese Aussies in I.T. Community. Technology. Culture. Going since 2017.</p>
             <a
@@ -63,9 +70,12 @@ function HomeV2Footer() {
             </a>
           </div>
 
-          <FooterLinkColumn title="Explore" items={exploreLinks} />
-          <FooterLinkColumn title="Get involved" items={involvedLinks} />
-          <FooterLinkColumn title="Follow" items={followLinks} />
+          <FooterLinkColumn title="Get involved" items={FOOTER_GET_INVOLVED} />
+
+          <div className="flex gap-12 lg:ml-auto">
+            <FooterLinkColumn title="Explore" items={FOOTER_EXPLORE} />
+            <FooterLinkColumn title="Follow" items={FOOTER_FOLLOW} />
+          </div>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3 pt-6 text-[12.5px] text-[#6a6a6a]">

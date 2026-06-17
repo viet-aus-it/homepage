@@ -1,17 +1,19 @@
 import { DiscordLogo } from '@/components/ui/icons';
 import { ORGANISATION } from '@/lib/constants';
+import { cn } from '@/lib/utils';
+import { HOME_SECTION_INNER } from '@/pages/home-v2/home-section';
 
 /**
  * Dark centred Discord call-to-action band.
  */
 function HomeCtaBand() {
   return (
-    <section className="relative overflow-hidden bg-brand-near-black px-5 py-14 md:px-12 md:py-24">
+    <section className="relative overflow-hidden bg-brand-near-black">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1.5px)] bg-size-[24px_24px]"
         aria-hidden
       />
-      <div className="relative mx-auto max-w-3xl text-center">
+      <div className={cn(HOME_SECTION_INNER, 'relative max-w-3xl text-center')}>
         <h2 className="font-display text-[clamp(2.125rem,7vw,3.5rem)] font-extrabold leading-[1.03] tracking-[-0.03em] text-white">
           Your people are
           <br />
