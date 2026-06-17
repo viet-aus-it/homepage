@@ -4,7 +4,7 @@ import { DiscordLogo } from '@/components/ui/icons';
 import { COMMUNITY_MEMBER_COUNT } from '@/lib/community-stats';
 import { ORGANISATION } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import { HOME_SECTION_INNER } from '@/pages/home-v2/home-section';
+import { HOME_SECTION_INNER, LANDING_NAV_CLEARANCE } from '@/pages/home-v2/home-section';
 
 const HERO_IMAGE = '/images/bbq-albert-park.png';
 
@@ -13,13 +13,13 @@ const HERO_IMAGE = '/images/bbq-albert-park.png';
  */
 function HomeHero() {
   return (
-    <section className="relative overflow-hidden bg-brand-near-black">
+    <section className={cn('relative overflow-hidden bg-brand-near-black', LANDING_NAV_CLEARANCE)}>
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.045)_1px,transparent_1.5px)] bg-size-[24px_24px]"
         aria-hidden
       />
 
-      <div className={cn(HOME_SECTION_INNER, 'relative grid items-center gap-9 pt-4 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:pt-6')}>
+      <div className={cn(HOME_SECTION_INNER, 'relative grid items-center gap-9 pt-0 md:grid-cols-[1.05fr_0.95fr] md:gap-14')}>
         <div>
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-brand-yellow/30 bg-brand-yellow/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.11em] text-brand-yellow">
             <span className="inline-block size-1.5 rounded-full bg-brand-yellow" aria-hidden />

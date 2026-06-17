@@ -49,8 +49,8 @@ function HomeV2Page() {
 
   return (
     <div className="min-h-screen bg-white text-brand-near-black">
+      <LandingNav />
       <div className="bg-brand-near-black">
-        <LandingNav />
         <HomeHero />
       </div>
       <main>

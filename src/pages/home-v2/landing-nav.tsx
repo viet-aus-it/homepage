@@ -13,7 +13,7 @@ interface LandingNavProps {
 }
 
 /**
- * Sticky landing nav — transparent at page top, solid dark background when scrolled.
+ * Fixed landing nav — overlays the hero with a transparent bar, solid dark background when scrolled.
  */
 function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,7 +30,7 @@ function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 w-full transition-colors duration-200',
+        'fixed inset-x-0 top-0 z-50 min-h-landing-nav w-full transition-colors duration-200',
         scrolled ? 'border-b border-white/8 bg-brand-near-black' : 'border-b border-transparent bg-transparent'
       )}
     >
