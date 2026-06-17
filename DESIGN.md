@@ -240,3 +240,45 @@ Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editor
 - Form inputs and validation states are shadcn defaults — not extracted for marketing.
 - Additional routes (`not-found`, future pages) are not fully specified in this document.
 - In-app or member portal UI is out of scope — this file covers the public homepage only.
+
+## Home v2 landing (`/v2` staging)
+
+Staging redesign at `/v2` until promotion to `/`. Production `/` still uses the legacy warm-canvas layout documented above.
+
+### Surfaces and tokens
+
+| Token                             | CSS variable                    | Value                               | Use                                                              |
+| --------------------------------- | ------------------------------- | ----------------------------------- | ---------------------------------------------------------------- |
+| `{colors.brand-surface-warm}`     | `--brand-surface-warm`          | `#fbfaf6`                           | Pillars / community reach background                             |
+| `{colors.brand-border-warm}`      | `--brand-border-warm`           | `#eceae3`                           | Section borders on warm surfaces                                 |
+| `{colors.brand-footer-dark}`      | `--brand-footer-dark`           | `#141414`                           | v2 footer background                                             |
+| `{colors.brand-on-dark-muted}`    | `--brand-text-on-dark-muted`    | `#b9b9b9`                           | Body copy on dark hero / CTA                                     |
+| `{colors.brand-on-dark-subtle}`   | `--brand-text-on-dark-subtle`   | `#9a9a9a`                           | Secondary copy on dark surfaces                                  |
+| `{colors.brand-on-dark-emphasis}` | `--brand-text-on-dark-emphasis` | `#e6e6e6`                           | Emphasis text on dark surfaces                                   |
+| `{colors.brand-nav-muted}`        | `--brand-text-nav-muted`        | `#cfcfcf`                           | Desktop nav link default colour                                  |
+| `{colors.brand-footer-dim}`       | `--brand-text-footer-dim`       | `#9a9a9a`                           | Footer pending labels and legal subline (WCAG AA on footer dark) |
+| `{colors.brand-yellow-emphasis}`  | `--brand-text-yellow-emphasis`  | `#7a6406`                           | Labels on yellow stat cards                                      |
+| `{colors.brand-surface-elevated}` | `--brand-surface-elevated`      | `#2a2a2a`                           | Elevated dark card gradients                                     |
+| `{colors.brand-discord-online}`   | `--brand-discord-online`        | `#3ba55d`                           | Live member indicator dot                                        |
+| `{spacing.landing-nav}`           | `--landing-nav-height`          | `5.25rem` mobile / `4.5rem` desktop | Fixed nav bar height and hero clearance                          |
+
+Tailwind utilities: `pt-landing-nav`, `min-h-landing-nav`, `text-brand-on-dark-muted`, etc. Defined in `src/index.css`.
+
+### Components
+
+**`landing-nav`** — Fixed top bar (`position: fixed`). Transparent over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Internal links use TanStack Router `Link`; Discord uses external `<a>`.
+
+**`home-hero`** — Dark split hero with dot-grid texture, community photo, member badge. Section uses `{spacing.landing-nav}` top padding (`LANDING_NAV_CLEARANCE`) so content clears the fixed nav while the dark background extends under it.
+
+**`home-section`** — Section shell: outer `section` owns surface styles; inner container owns `{HOME_SECTION_INNER}` spacing. Export `LANDING_NAV_CLEARANCE` for hero offset.
+
+**`home-marquee`** — Yellow hashtag band; duplicate track for infinite scroll; second track hidden under `prefers-reduced-motion`.
+
+**`home-v2-footer`** — Four-column footer on `{colors.brand-footer-dark}`. Disabled nav items render as dim pending labels (not removed). Follow column uses empty external URLs until social links are configured.
+
+### Staging behaviour
+
+- Route: `/v2` (`src/routes/v2/index.tsx` → `src/pages/home-v2/`).
+- `HOME_PATH = '/v2'` in `src/lib/site-nav.ts` — flip to `/` on promotion.
+- Page sets `noindex, nofollow` via robots meta; restored on unmount.
+- Skip link targets `#main-content`.
