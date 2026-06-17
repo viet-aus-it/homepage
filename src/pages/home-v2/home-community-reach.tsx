@@ -1,4 +1,5 @@
 import { COMMUNITY_STATS } from '@/lib/community-stats';
+import { cn } from '@/lib/utils';
 import HomeSection from '@/pages/home-v2/home-section';
 
 function statCardClasses(variant: (typeof COMMUNITY_STATS)[number]['variant']) {
@@ -6,8 +7,6 @@ function statCardClasses(variant: (typeof COMMUNITY_STATS)[number]['variant']) {
     case 'dark':
       return 'bg-brand-near-black text-white';
     case 'yellow':
-      return 'bg-brand-yellow text-brand-near-black';
-    case 'highlight':
       return 'bg-brand-yellow text-brand-near-black';
     default:
       return 'border border-brand-border-warm bg-white';
@@ -17,12 +16,16 @@ function statCardClasses(variant: (typeof COMMUNITY_STATS)[number]['variant']) {
 function statLabelClasses(variant: (typeof COMMUNITY_STATS)[number]['variant']) {
   switch (variant) {
     case 'dark':
-      return 'text-[#9a9a9a]';
+      return 'text-brand-on-dark-subtle';
     case 'yellow':
-      return 'font-semibold text-[#7a6406]';
+      return 'font-semibold text-brand-yellow-emphasis';
     default:
       return 'text-brand-gray';
   }
+}
+
+function statValueClasses(variant: (typeof COMMUNITY_STATS)[number]['variant']) {
+  return cn('font-display text-[30px] font-extrabold leading-none', variant === 'dark' && 'text-brand-yellow');
 }
 
 /**
@@ -42,9 +45,9 @@ function HomeCommunityReach() {
 
         <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3">
           {COMMUNITY_STATS.map((stat) => (
-            <div key={stat.label} className={`rounded-[14px] p-5 ${statCardClasses(stat.variant)}`}>
-              <div className={`font-display text-[30px] font-extrabold leading-none ${stat.variant === 'dark' ? 'text-brand-yellow' : ''}`}>{stat.value}</div>
-              <div className={`mt-1.5 text-[13px] ${statLabelClasses(stat.variant)}`}>{stat.label}</div>
+            <div key={stat.label} className={cn('rounded-[14px] p-5', statCardClasses(stat.variant))}>
+              <div className={statValueClasses(stat.variant)}>{stat.value}</div>
+              <div className={cn('mt-1.5 text-[13px]', statLabelClasses(stat.variant))}>{stat.label}</div>
             </div>
           ))}
         </div>

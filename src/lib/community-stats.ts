@@ -2,7 +2,7 @@
 export interface CommunityStat {
   value: string;
   label: string;
-  variant?: 'default' | 'dark' | 'yellow' | 'highlight';
+  variant?: 'default' | 'dark' | 'yellow';
 }
 
 export const COMMUNITY_MEMBER_COUNT = '1,448';
