@@ -28,8 +28,8 @@ function Hero({ title, subtitle }: HeroProps) {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-6 overflow-hidden">
       <div className="relative z-[1] text-center max-w-screen-md">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold !leading-[1.2] tracking-tight">{title}</h1>
-        <h2 className="mt-6 text-3xl md:text-4xl tracking-tight text-brand-near-black">{subtitle}</h2>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold leading-[1.2]! tracking-tight text-balance">{title}</h1>
+        <h2 className="mt-6 text-3xl md:text-4xl font-display font-semibold tracking-tight text-brand-near-black text-balance">{subtitle}</h2>
         <JoinCommunityCTAButton />
       </div>
     </section>

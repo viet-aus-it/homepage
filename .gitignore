@@ -22,6 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.cursor/*
 
 # Test Coverage
 coverage
@@ -32,3 +33,9 @@ public/mockServiceWorker.js
 
 # Wrangler cache
 .wrangler
+
+# Scratch / planning notes
+tmp
+
+# Playwright MCP artifacts
+.playwright-mcp
