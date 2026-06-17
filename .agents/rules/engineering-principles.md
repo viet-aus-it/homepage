@@ -344,7 +344,7 @@ export const Button = ({
 
 ### Cloudflare Workers
 
-- **Infrastructure as Code**: Use `wrangler.toml` for Worker configuration
+- **Infrastructure as Code**: Use `wrangler.jsonc` for Worker configuration
 - **Least privilege**: Grant minimum necessary permissions to all resources
 - **Cost optimisation**: Use appropriate Cloudflare plan and caching
 

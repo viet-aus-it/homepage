@@ -18,7 +18,7 @@ The public site at `vait.au` is served by the **`homepage`** Worker in the VAIT 
                              └─────────────────────────┘
 ```
 
-- **Configuration:** [`wrangler.toml`](../../wrangler.toml) — routes, assets, `preview_urls`
+- **Configuration:** [`wrangler.jsonc`](../../wrangler.jsonc) — routes, assets, `preview_urls`
 - **Deploy:** Cloudflare dashboard Git build (see [Deployment](../how-to/03-deployment.md))
 - **Pre-production:** Preview URLs on pull requests (`workers.dev`, not custom domains)
 - **Observability:** Workers Logs enabled in the Cloudflare dashboard

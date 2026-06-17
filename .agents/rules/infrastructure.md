@@ -4,12 +4,12 @@ This document provides comprehensive infrastructure guidelines for the VAIT Home
 
 ## Cloudflare Workers Architecture
 
-The VAIT Homepage runs as a [Cloudflare Worker](https://developers.cloudflare.com/workers/) serving static SPA assets. The Worker is configured in [`wrangler.toml`](../../wrangler.toml).
+The VAIT Homepage runs as a [Cloudflare Worker](https://developers.cloudflare.com/workers/) serving static SPA assets. The Worker is configured in [`wrangler.jsonc`](../../wrangler.jsonc).
 
 ### Worker Configuration
 
-```toml
-# wrangler.toml — key settings
+```jsonc
+// wrangler.jsonc — key settings
 name = "homepage"
 main = "dist/index.html"
 compatibility_date = "..."
@@ -38,7 +38,7 @@ Deploys automatically via Cloudflare dashboard Git integration when changes merg
 
 ### Pre-production (Preview URLs)
 
-Enabled in `wrangler.toml` via `preview_urls = true`. Cloudflare posts preview links as comments on pull requests.
+Enabled in `wrangler.jsonc` via `preview_urls = true`. Cloudflare posts preview links as comments on pull requests.
 
 ### Manual deploy
 
@@ -125,7 +125,7 @@ pnpm run build && pnpm run deploy
 
 ### Security Anti-Patterns
 
-- Avoid storing secrets in `wrangler.toml` or environment files committed to git
+- Avoid storing secrets in `wrangler.jsonc` or environment files committed to git
 - Never disable HTTPS at the Cloudflare edge
 - Do not expose internal service URLs or API keys in client-side code
 
