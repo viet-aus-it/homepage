@@ -1,0 +1,91 @@
+import { MapPin } from 'lucide-react';
+
+import { DiscordLogo } from '@/components/ui/icons';
+import { COMMUNITY_MEMBER_COUNT } from '@/lib/community-stats';
+import { ORGANISATION } from '@/lib/constants';
+
+const HERO_IMAGE = '/images/bbq-albert-park.png';
+
+/**
+ * Dark split-layout hero with community photo and member stat badge.
+ */
+function HomeHero() {
+  return (
+    <section className="relative overflow-hidden bg-brand-near-black">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.045)_1px,transparent_1.5px)] bg-size-[24px_24px]"
+        aria-hidden
+      />
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-9 px-5 pb-14 pt-2 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:px-12 md:pb-24 md:pt-4">
+        <div>
+          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-brand-yellow/30 bg-brand-yellow/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.11em] text-brand-yellow">
+            <span className="inline-block size-1.5 rounded-full bg-brand-yellow" aria-hidden />
+            Vietnamese Aussies in I.T. · since 2017
+          </div>
+
+          <h1 className="font-display text-[clamp(2.625rem,9vw,4.875rem)] font-extrabold leading-[0.98] tracking-[-0.035em] text-white">
+            Community.
+            <br />
+            Technology.
+            <br />
+            <span className="text-brand-yellow">Culture.</span>
+          </h1>
+
+          <p className="mt-6 max-w-[480px] text-[clamp(1rem,1.5vw,1.1875rem)] leading-relaxed text-[#b9b9b9]">
+            The Viet-Aussie tech group chat that grew up. {COMMUNITY_MEMBER_COUNT} of us shipping code, trading job leads, and arguing over the best trà sữa.
+            Eight years deep, just getting started.
+          </p>
+
+          <div className="mt-8 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
+            <a
+              href={ORGANISATION.DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-brand-yellow px-7 py-4 text-base font-bold text-brand-near-black transition hover:-translate-y-0.5 hover:shadow-[0_10px_26px_rgba(245,197,24,0.32)]"
+            >
+              <DiscordLogo className="size-5!" aria-hidden />
+              Join the community
+            </a>
+          </div>
+
+          <div className="mt-8 inline-flex items-center gap-2.5">
+            <span className="inline-block size-2.5 animate-vait-blink rounded-full bg-[#3ba55d]" aria-hidden />
+            <span className="text-sm text-[#9a9a9a]">
+              <strong className="font-semibold text-[#e6e6e6]">{COMMUNITY_MEMBER_COUNT} members</strong> · active in every state &amp; territory
+            </span>
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="relative overflow-hidden rounded-[18px] border border-white/10">
+            <img
+              src={HERO_IMAGE}
+              alt="VAIT members at the Albert Park BBQ"
+              className="hero-photo-img block h-[300px] w-full object-cover md:h-[440px]"
+              width={640}
+              height={440}
+              fetchPriority="high"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-brand-near-black/55 via-transparent to-transparent" aria-hidden />
+            <div className="absolute bottom-4 left-4 flex items-center gap-2 text-xs font-medium text-white">
+              <MapPin className="size-4 text-brand-yellow" aria-hidden />
+              Winter Warm-Up BBQ · Albert Park, Naarm/Melbourne
+            </div>
+          </div>
+
+          <div className="stat-float mt-4 flex items-center gap-3 rounded-[14px] bg-white p-4 shadow-[0_16px_34px_rgba(0,0,0,0.3)] md:absolute md:-bottom-5 md:-right-5 md:mt-0 md:px-5 md:py-4">
+            <div className="font-display text-[28px] font-extrabold leading-none text-brand-near-black">{COMMUNITY_MEMBER_COUNT}</div>
+            <div className="text-xs leading-snug text-brand-gray">
+              members
+              <br />
+              &amp; counting
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default HomeHero;
