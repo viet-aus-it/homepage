@@ -34,7 +34,7 @@ function HomeHero() {
             <span className="text-brand-yellow">Culture.</span>
           </h1>
 
-          <p className="mt-6 max-w-[480px] text-[clamp(1rem,1.5vw,1.1875rem)] leading-relaxed text-[#b9b9b9]">
+          <p className="mt-6 max-w-[480px] text-[clamp(1rem,1.5vw,1.1875rem)] leading-relaxed text-brand-on-dark-muted">
             The Viet-Aussie tech group chat that grew up. {COMMUNITY_MEMBER_COUNT} of us shipping code, trading job leads, and arguing over the best trà sữa.
             Eight years deep, just getting started.
           </p>
@@ -52,9 +52,9 @@ function HomeHero() {
           </div>
 
           <div className="mt-8 inline-flex items-center gap-2.5">
-            <span className="inline-block size-2.5 animate-vait-blink rounded-full bg-[#3ba55d]" aria-hidden />
-            <span className="text-sm text-[#9a9a9a]">
-              <strong className="font-semibold text-[#e6e6e6]">{COMMUNITY_MEMBER_COUNT} members</strong> · active in every state &amp; territory
+            <span className="inline-block size-2.5 animate-vait-blink rounded-full bg-brand-discord-online" aria-hidden />
+            <span className="text-sm text-brand-on-dark-subtle">
+              <strong className="font-semibold text-brand-on-dark-emphasis">{COMMUNITY_MEMBER_COUNT} members</strong> · active in every state &amp; territory
             </span>
           </div>
         </div>

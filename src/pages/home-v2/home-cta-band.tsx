@@ -19,7 +19,7 @@ function HomeCtaBand() {
           <br />
           already in the chat.
         </h2>
-        <p className="mx-auto mt-5 max-w-[520px] text-[clamp(1rem,1.6vw,1.1875rem)] leading-relaxed text-[#b9b9b9]">
+        <p className="mx-auto mt-5 max-w-[520px] text-[clamp(1rem,1.6vw,1.1875rem)] leading-relaxed text-brand-on-dark-muted">
           Free to join, always has been. Say hi in <span className="whitespace-nowrap">#introduce-yourself</span> (we don&apos;t bite, much).
         </p>
         <a

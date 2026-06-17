@@ -44,6 +44,14 @@
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Montserrat Variable', ui-sans-serif, system-ui, sans-serif;
   --spacing-landing-nav: var(--landing-nav-height);
+  --color-brand-on-dark-muted: var(--brand-text-on-dark-muted);
+  --color-brand-on-dark-subtle: var(--brand-text-on-dark-subtle);
+  --color-brand-on-dark-emphasis: var(--brand-text-on-dark-emphasis);
+  --color-brand-nav-muted: var(--brand-text-nav-muted);
+  --color-brand-footer-dim: var(--brand-text-footer-dim);
+  --color-brand-yellow-emphasis: var(--brand-text-yellow-emphasis);
+  --color-brand-surface-elevated: var(--brand-surface-elevated);
+  --color-brand-discord-online: var(--brand-discord-online);
 }
 
 :root {
@@ -97,6 +105,16 @@
   --brand-yellow-dark: var(--brand-yellow-shade);
   /* Fixed landing nav bar height (py-5 + control row; mobile menu button is taller). */
   --landing-nav-height: 5.25rem;
+  /* Redesign text and surfaces on dark backgrounds */
+  --brand-text-on-dark-muted: #b9b9b9;
+  --brand-text-on-dark-subtle: #9a9a9a;
+  --brand-text-on-dark-emphasis: #e6e6e6;
+  --brand-text-nav-muted: #cfcfcf;
+  --brand-text-footer-dim: #9a9a9a;
+  --brand-text-yellow-emphasis: #7a6406;
+  --brand-border-footer: #2a2a2a;
+  --brand-surface-elevated: #2a2a2a;
+  --brand-discord-online: #3ba55d;
 }
 
 @media (min-width: 768px) {
@@ -252,6 +270,36 @@
   }
   .bg-brand-footer-dark {
     background-color: var(--brand-footer-dark);
+  }
+  .text-brand-on-dark-muted {
+    color: var(--brand-text-on-dark-muted);
+  }
+  .text-brand-on-dark-subtle {
+    color: var(--brand-text-on-dark-subtle);
+  }
+  .text-brand-on-dark-emphasis {
+    color: var(--brand-text-on-dark-emphasis);
+  }
+  .text-brand-nav-muted {
+    color: var(--brand-text-nav-muted);
+  }
+  .text-brand-footer-dim {
+    color: var(--brand-text-footer-dim);
+  }
+  .text-brand-yellow-emphasis {
+    color: var(--brand-text-yellow-emphasis);
+  }
+  .bg-brand-surface-elevated {
+    background-color: var(--brand-surface-elevated);
+  }
+  .from-brand-surface-elevated {
+    --tw-gradient-from: var(--brand-surface-elevated);
+  }
+  .border-brand-footer {
+    border-color: var(--brand-border-footer);
+  }
+  .bg-brand-discord-online {
+    background-color: var(--brand-discord-online);
   }
   .animate-vait-marquee {
     animation: vait-marquee 30s linear infinite;
