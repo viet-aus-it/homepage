@@ -16,7 +16,7 @@ function EventPreviewCardArticle({ event }: EventPreviewCardArticleProps) {
     <article
       className={cn(
         'overflow-hidden rounded-[18px] border border-brand-border-warm transition hover:-translate-y-1',
-        isRecurring ? 'bg-brand-near-black hover:shadow-[0_20px_44px_rgba(0,0,0,0.16)]' : 'bg-white hover:shadow-[0_20px_44px_rgba(0,0,0,0.09)]'
+        isRecurring ? 'bg-brand-surface-elevated hover:shadow-[0_20px_44px_rgba(0,0,0,0.16)]' : 'bg-white hover:shadow-[0_20px_44px_rgba(0,0,0,0.09)]'
       )}
     >
       <div className="relative h-[230px]">
@@ -37,10 +37,10 @@ function EventPreviewCardArticle({ event }: EventPreviewCardArticleProps) {
         <p className="text-[13px] text-white/85 sm:text-right">{event.schedule}</p>
       </div>
 
-      <div className="px-7 py-6">
+      <div className={cn('px-7 py-6', isRecurring && 'text-brand-on-dark-muted')}>
         <h3 className={cn('font-display text-2xl font-bold tracking-[-0.01em]', isRecurring && 'text-white')}>{event.title}</h3>
-        <p className={cn('mt-2.5 text-[15px] leading-relaxed', isRecurring ? 'text-brand-on-dark-muted' : 'text-brand-gray-dark')}>{event.description}</p>
-        <div className="mt-4 flex flex-wrap items-center gap-4 text-[13.5px] text-brand-gray">
+        <p className={cn('mt-2.5 text-[15px] leading-relaxed', !isRecurring && 'text-brand-gray-dark')}>{event.description}</p>
+        <div className={cn('mt-4 flex flex-wrap items-center gap-4 text-[13.5px]', isRecurring ? 'text-brand-on-dark-subtle' : 'text-brand-gray')}>
           <span className="inline-flex items-center gap-1.5">
             <Users className="size-4" aria-hidden /> {event.interested} interested
           </span>
