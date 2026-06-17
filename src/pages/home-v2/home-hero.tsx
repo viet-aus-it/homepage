@@ -2,10 +2,9 @@ import { MapPin } from 'lucide-react';
 
 import DiscordCtaLink from '@/components/ui/discord-cta-link';
 import { COMMUNITY_MEMBER_COUNT } from '@/lib/community-stats';
+import { BBQ_ALBERT_PARK_IMAGE } from '@/lib/image-assets';
 import { cn } from '@/lib/utils';
 import { HOME_SECTION_INNER, LANDING_NAV_CLEARANCE } from '@/pages/home-v2/home-section';
-
-const HERO_IMAGE = '/images/bbq-albert-park.png';
 
 /**
  * Dark split-layout hero with community photo and member stat badge.
@@ -55,11 +54,11 @@ function HomeHero() {
         <div className="relative">
           <div className="relative overflow-hidden rounded-[18px] border border-white/10">
             <img
-              src={HERO_IMAGE}
-              alt="VAIT members at the Albert Park BBQ"
+              src={BBQ_ALBERT_PARK_IMAGE.heroSrc}
+              alt={BBQ_ALBERT_PARK_IMAGE.alt}
               className="block h-[300px] w-full object-cover md:h-[440px]"
-              width={640}
-              height={440}
+              width={1280}
+              height={960}
               fetchPriority="high"
             />
             <div className="absolute inset-0 bg-linear-to-t from-brand-near-black/55 via-transparent to-transparent" aria-hidden />

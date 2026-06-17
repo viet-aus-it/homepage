@@ -1,3 +1,5 @@
+import { BBQ_ALBERT_PARK_IMAGE } from '@/lib/image-assets';
+
 /** Static event preview card for the v2 landing page. */
 export interface EventPreviewCard {
   id: string;
@@ -22,8 +24,8 @@ export const EVENT_PREVIEW_CARDS: EventPreviewCard[] = [
     description: 'Warming up winter the only sensible way: lighting a fire and grilling everything in sight. Bring an appetite, leave with new mates.',
     interested: 13,
     host: 'Jing Vu',
-    imageSrc: '/images/bbq-albert-park.png',
-    imageAlt: 'VAIT Winter Warm-Up BBQ',
+    imageSrc: BBQ_ALBERT_PARK_IMAGE.cardSrc,
+    imageAlt: BBQ_ALBERT_PARK_IMAGE.alt,
     variant: 'featured',
   },
   {
