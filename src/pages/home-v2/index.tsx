@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { ORGANISATION } from '@/lib/constants';
 import HomeCommunityReach from '@/pages/home-v2/home-community-reach';
 import HomeCtaBand from '@/pages/home-v2/home-cta-band';
 import HomeEventsPreview from '@/pages/home-v2/home-events-preview';
@@ -9,15 +10,13 @@ import HomePillars from '@/pages/home-v2/home-pillars';
 import HomeV2Footer from '@/pages/home-v2/home-v2-footer';
 import LandingNav from '@/pages/home-v2/landing-nav';
 
-const V2_PAGE_TITLE = 'VAIT — Community. Technology. Culture.';
-const V2_META_DESCRIPTION = 'The Viet-Aussie tech group chat that grew up. Community, technology, and culture for Vietnamese Australians in IT.';
+const PAGE_TITLE = `${ORGANISATION.SHORT_NAME} — Community. Technology. Culture.`;
+const META_DESCRIPTION = 'The Viet-Aussie tech group chat that grew up. Community, technology, and culture for Vietnamese Australians in IT.';
 
-/**
- * Staging landing page at `/v2` — full redesign pending promotion to `/`.
- */
+/** Production landing page — promoted from `/v2` staging. */
 function HomeV2Page() {
   useEffect(() => {
-    document.title = V2_PAGE_TITLE;
+    document.title = PAGE_TITLE;
 
     let metaDescription = document.querySelector('meta[name="description"]');
     const createdDescription = !metaDescription;
@@ -26,23 +25,11 @@ function HomeV2Page() {
       metaDescription.setAttribute('name', 'description');
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute('content', V2_META_DESCRIPTION);
-
-    let robotsMeta = document.querySelector('meta[name="robots"]');
-    const createdRobots = !robotsMeta;
-    if (!robotsMeta) {
-      robotsMeta = document.createElement('meta');
-      robotsMeta.setAttribute('name', 'robots');
-      document.head.appendChild(robotsMeta);
-    }
-    robotsMeta.setAttribute('content', 'noindex, nofollow');
+    metaDescription.setAttribute('content', META_DESCRIPTION);
 
     return () => {
       if (createdDescription && metaDescription?.parentNode) {
         metaDescription.parentNode.removeChild(metaDescription);
-      }
-      if (createdRobots && robotsMeta?.parentNode) {
-        robotsMeta.parentNode.removeChild(robotsMeta);
       }
     };
   }, []);

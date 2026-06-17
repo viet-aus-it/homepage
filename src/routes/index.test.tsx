@@ -1,11 +1,11 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import IndexPage from '../pages/index-page';
+import HomeV2Page from '../pages/home-v2';
 
 describe('Index Route', () => {
-  it('should render the IndexPage component', () => {
-    const { container } = render(<IndexPage />);
-    expect(container.textContent).toContain('Empowering Vietnamese Australians IT Professionals');
+  it('renders the redesigned landing page hero', () => {
+    render(<HomeV2Page />);
+    expect(screen.getByRole('heading', { level: 1, name: /Community\./i })).toBeInTheDocument();
   });
 });

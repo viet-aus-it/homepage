@@ -1,20 +1,24 @@
 ## Overview
 
-The VAIT homepage is the public face of **Vietnamese Australians in Information Technology Inc.** — a not-for-profit community for Viet-Au IT professionals in Australia. The base atmosphere is a **warm cream-and-stone canvas** (`{colors.canvas}` — stone-50 / `#fafaf9`) with a **fixed animated gradient backdrop** (`{component.futuristic-background}`) and **charcoal ink** for reading. Where many community sites default to cold corporate blue, VAIT leads with **brand yellow** (`{colors.brand-yellow}` — `#F5C518`) as the single high-voltage accent — echoed in the tick-and-star logo, section headings, footer type, and the primary Discord CTA.
+The VAIT homepage is the public face of **Vietnamese Australians in Information Technology Inc.** — a not-for-profit community for Viet-Au IT professionals in Australia. The redesign (2026) leads with a **dark hero-first landing** (`#1A1A1A`) and **off-white section bands** (`#FBFAF6`, `#FFFFFF`), with **brand yellow** (`{colors.brand-yellow}` — `#F5C518`) as the high-voltage accent on CTAs, marquee band, and highlights.
 
-Type voice runs **Montserrat** (display/headings) and **Inter** (body), both self-hosted via `@fontsource-variable/*`. Hierarchy is carried by size steps (36px → 60px hero), weight (Bold 700 for h1, SemiBold 600 for h2), and colour (yellow-dark for section h2, gray-700 for body).
+Type voice runs **Montserrat** (display/headings) and **Inter** (body), both self-hosted via `@fontsource-variable/*`. The hero h1 uses Montserrat ExtraBold (~78px desktop): “Community. Technology. Culture.” Body and UI chrome stay on Inter.
 
-Component voltage comes from three anchors: the **floating pill nav** (`{component.nav-bar}`), the **full-viewport hero** with community CTA, and a **white elevated content shell** (`{component.content-shell}`) that holds alternating image/text bands. The **dark charcoal footer** (`{component.footer}`) inverts the warm page — yellow legal text on gray-dark — so the site closes with institutional weight, not another cream band.
+Component anchors: **inline dark landing nav** (`{component.landing-nav}`) with Discord pill; **split hero** with community photo and floating stat card; **yellow marquee** of Discord channel tags; **pillar cards**, **community reach stats**, **events preview**, **dark CTA band**, and **four-column footer** (`{component.home-footer}`).
 
 **Key Characteristics:**
 
-- Warm stone canvas (`{colors.canvas}`) plus cream gradient backdrop (`{colors.backdrop-from}` — `#fffbea` → white → `#fef9ef`).
-- Brand yellow accent (`{colors.brand-yellow}` — `#F5C518`) on CTAs, footer ink, and section titles; gray scale for structure (`{colors.brand-gray}`, `{colors.brand-gray-dark}`).
-- Tick-and-star **VAIT logo** SVG (`{component.logo}`) with three colourways: full colour, gray, dark-gray.
-- **Discord** as the single primary conversion path (`{component.join-community-cta}`).
-- Generous pill radii: `{rounded.full}` for nav and CTA, `{rounded.2xl}` for the content shell, `{rounded.md}` for shadcn defaults.
-- Alternating **7/5-style** two-column sections (`{component.section-with-image}`) with real community photography.
-- Footer is **dark** (`{colors.brand-gray-dark}`) — deliberate contrast to the warm page body.
+- Dark hero canvas (`{colors.brand-near-black}`) with dot-grid texture; warm off-white content sections.
+- Brand yellow accent on CTAs, marquee, stat highlights, and footer Discord chip.
+- Tick-and-star **VAIT logo** SVG (`{component.logo}`) — colour variant on dark backgrounds.
+- **Discord** as the primary conversion path (`https://chat.vait.au`).
+- Progressive nav: primary links use `{lib.site-nav}` `enabled` flags — only rendered when the destination exists.
+- Section eyebrow labels: uppercase, `{colors.brand-yellow-shade}`, letter-spaced.
+- Footer `{colors.brand-footer-dark}` (`#141414`) with Explore / Get involved / Follow columns.
+
+### Staging route (Epic A)
+
+During incremental delivery the full page ships at **`/v2`** (`noindex`) until promotion PR merges; legacy `/` is unchanged. After promotion, `/v2` redirects to `/`.
 
 ## Colors
 
@@ -34,6 +38,9 @@ Neutrals anchor text, backgrounds, and UI chrome without competing with the prim
 - **Dark Gray** (`{colors.brand-gray-dark}` — `#4A4A4A`, RGB 74·74·74, CMYK 0·0·0·71): Secondary text and UI chrome.
 - **Mid Gray** (`{colors.brand-gray}` — `#8A8A8A`, RGB 138·138·138, CMYK 0·0·0·46, PMS Cool Gray 7 C): Dividers, secondary logo paths, CTA hover background.
 - **Light Gray** (`{colors.brand-gray-light}` — `#E8E8E4`, RGB 232·232·228, CMYK 0·0·2·9): Light surfaces and borders.
+- **Surface Warm** (`{colors.brand-surface-warm}` — `#FBFAF6`): Pillar cards and community reach band.
+- **Border Warm** (`{colors.brand-border-warm}` — `#ECEAE3`): Section borders and card outlines.
+- **Footer Dark** (`{colors.brand-footer-dark}` — `#141414`): Footer background.
 
 ### Surface
 

@@ -82,5 +82,5 @@ export const FOOTER_FOLLOW: SiteNavItem[] = [
   { label: 'Facebook', external: '', enabled: false },
 ];
 
-/** Home route path (`/v2` during staging, `/` after promotion). */
-export const HOME_PATH = '/v2';
+/** Home route path (`/` after promotion). */
+export const HOME_PATH = '/';
