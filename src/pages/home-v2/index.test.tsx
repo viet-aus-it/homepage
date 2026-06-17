@@ -59,6 +59,15 @@ describe('HomeV2Page', () => {
     expect(screen.getByRole('link', { name: 'Facebook' })).toHaveAttribute('href', 'https://www.facebook.com/vietausit');
   });
 
+  it('renders event preview cards with marketing images', async () => {
+    await renderHomeV2Route();
+
+    expect(screen.getByRole('heading', { level: 3, name: 'VAIT Winter Warm-Up BBQ' })).toBeInTheDocument();
+    expect(screen.getByText('Hosted by Luan Nguyen')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /climbing session in Brunswick/i })).toHaveAttribute('src', '/images/northern-climbing.webp');
+    expect(screen.getAllByRole('img', { name: /Albert Park BBQ/i }).every((img) => img.getAttribute('src') === '/images/bbq-albert-park.webp')).toBe(true);
+  });
+
   it('provides a skip to content link', async () => {
     await renderHomeV2Route();
 

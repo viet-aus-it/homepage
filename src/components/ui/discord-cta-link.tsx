@@ -5,19 +5,14 @@ import { DiscordLogo } from '@/components/ui/icons';
 import { ORGANISATION } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
-const SOLID_HOVER_SHADOW = 'hover:shadow-[0_8px_20px_rgba(245,197,24,0.3)]';
-const OUTLINED_HOVER_SHADOW = 'hover:shadow-[0_8px_20px_rgba(245,197,24,0.25)]';
-
 const discordCtaLinkVariants = cva(
   'inline-flex items-center rounded-full transition motion-reduce:transition-none motion-reduce:hover:translate-y-0 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]',
   {
     variants: {
       variant: {
-        solid: cn('bg-brand-yellow font-bold text-brand-near-black', SOLID_HOVER_SHADOW),
-        outlined: cn(
-          'border border-brand-yellow/30 bg-brand-yellow/12 font-semibold text-brand-yellow hover:border-brand-yellow/50 hover:bg-brand-yellow/20',
-          OUTLINED_HOVER_SHADOW
-        ),
+        solid: 'bg-brand-yellow font-bold text-brand-near-black hover:shadow-[0_8px_20px_rgba(245,197,24,0.3)]',
+        outlined:
+          'border border-brand-yellow/30 bg-brand-yellow/12 font-semibold text-brand-yellow hover:border-brand-yellow/50 hover:bg-brand-yellow/20 hover:shadow-[0_8px_20px_rgba(245,197,24,0.25)]',
       },
       size: {
         sm: 'gap-2 px-4 py-[9px] text-sm [&_svg]:size-4!',
@@ -33,16 +28,12 @@ const discordCtaLinkVariants = cva(
   }
 );
 
-/** Props for {@link DiscordCtaLink}. */
 export interface DiscordCtaLinkProps extends VariantProps<typeof discordCtaLinkVariants> {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
 }
 
-/**
- * External Discord CTA link — solid yellow (nav/hero) or outlined ghost (footer on dark).
- */
 function DiscordCtaLink({ children, variant, size, className, onClick }: DiscordCtaLinkProps) {
   return (
     <a

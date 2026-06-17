@@ -1,8 +1,7 @@
 import { MapPin } from 'lucide-react';
 
 import DiscordCtaLink from '@/components/ui/discord-cta-link';
-import { COMMUNITY_MEMBER_COUNT } from '@/lib/community-stats';
-import { BBQ_ALBERT_PARK_IMAGE } from '@/lib/image-assets';
+import { COMMUNITY_MEMBER_COUNT, MARKETING_IMAGES } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { HOME_SECTION_INNER, LANDING_NAV_CLEARANCE } from '@/pages/home-v2/home-section';
 
@@ -54,8 +53,8 @@ function HomeHero() {
         <div className="relative">
           <div className="relative overflow-hidden rounded-[18px] border border-white/10">
             <img
-              src={BBQ_ALBERT_PARK_IMAGE.heroSrc}
-              alt={BBQ_ALBERT_PARK_IMAGE.alt}
+              src={MARKETING_IMAGES.bbqAlbertPark.src}
+              alt={MARKETING_IMAGES.bbqAlbertPark.alt}
               className="block h-[300px] w-full object-cover md:h-[440px]"
               width={1280}
               height={960}

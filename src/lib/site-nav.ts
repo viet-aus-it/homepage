@@ -1,5 +1,4 @@
-import { ORGANISATION } from '@/lib/constants';
-import { SOCIAL_LINKS } from '@/lib/social-links';
+import { ORGANISATION, SOCIAL_LINKS } from '@/lib/constants';
 
 /** Primary or footer navigation item with progressive enablement. */
 export interface SiteNavItem {

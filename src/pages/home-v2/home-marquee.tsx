@@ -1,5 +1,19 @@
-import { DISCORD_CHANNEL_TAGS } from '@/lib/discord-channels';
 import { cn } from '@/lib/utils';
+
+const DISCORD_CHANNEL_TAGS = [
+  '#programming',
+  '#python',
+  '#data-ai-ml',
+  '#js-ts-node-and-friends',
+  '#security',
+  '#ui-ux-design-pm',
+  '#food-and-beverages',
+  '#vait-got-talent',
+  '#gaming-chat',
+  '#coding-challenge-chat',
+  '#book-club',
+  '#vroom-vroom',
+] as const;
 
 function MarqueeTrack({ ariaHidden = false, className }: { ariaHidden?: boolean; className?: string }) {
   return (

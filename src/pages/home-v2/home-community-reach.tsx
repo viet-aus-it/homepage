@@ -1,31 +1,29 @@
-import { COMMUNITY_STATS } from '@/lib/community-stats';
+import { COMMUNITY_STATS, type CommunityStat } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import HomeSection from '@/pages/home-v2/home-section';
 
-function statCardClasses(variant: (typeof COMMUNITY_STATS)[number]['variant']) {
-  switch (variant) {
-    case 'dark':
-      return 'bg-brand-near-black text-white';
-    case 'yellow':
-      return 'bg-brand-yellow text-brand-near-black';
-    default:
-      return 'border border-brand-border-warm bg-white';
-  }
-}
+type StatVariant = NonNullable<CommunityStat['variant']> | 'default';
 
-function statLabelClasses(variant: (typeof COMMUNITY_STATS)[number]['variant']) {
-  switch (variant) {
-    case 'dark':
-      return 'text-brand-on-dark-subtle';
-    case 'yellow':
-      return 'font-semibold text-brand-yellow-emphasis';
-    default:
-      return 'text-brand-gray';
-  }
-}
+const STAT_VARIANT_STYLES: Record<StatVariant, { card: string; label: string; valueAccent: boolean }> = {
+  default: {
+    card: 'border border-brand-border-warm bg-white',
+    label: 'text-brand-gray',
+    valueAccent: false,
+  },
+  dark: {
+    card: 'bg-brand-near-black text-white',
+    label: 'text-brand-on-dark-subtle',
+    valueAccent: true,
+  },
+  yellow: {
+    card: 'bg-brand-yellow text-brand-near-black',
+    label: 'font-semibold text-brand-yellow-emphasis',
+    valueAccent: false,
+  },
+};
 
-function statValueClasses(variant: (typeof COMMUNITY_STATS)[number]['variant']) {
-  return cn('font-display text-[30px] font-extrabold leading-none', variant === 'dark' && 'text-brand-yellow');
+function statVariantStyles(variant?: CommunityStat['variant']) {
+  return STAT_VARIANT_STYLES[variant ?? 'default'];
 }
 
 /**
@@ -44,12 +42,16 @@ function HomeCommunityReach() {
         </div>
 
         <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3">
-          {COMMUNITY_STATS.map((stat) => (
-            <div key={stat.label} className={cn('rounded-[14px] p-5', statCardClasses(stat.variant))}>
-              <div className={statValueClasses(stat.variant)}>{stat.value}</div>
-              <div className={cn('mt-1.5 text-[13px]', statLabelClasses(stat.variant))}>{stat.label}</div>
-            </div>
-          ))}
+          {COMMUNITY_STATS.map((stat) => {
+            const styles = statVariantStyles(stat.variant);
+
+            return (
+              <div key={stat.label} className={cn('rounded-[14px] p-5', styles.card)}>
+                <div className={cn('font-display text-[30px] font-extrabold leading-none', styles.valueAccent && 'text-brand-yellow')}>{stat.value}</div>
+                <div className={cn('mt-1.5 text-[13px]', styles.label)}>{stat.label}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </HomeSection>

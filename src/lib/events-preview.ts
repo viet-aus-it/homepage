@@ -1,4 +1,4 @@
-import { BBQ_ALBERT_PARK_IMAGE, NORTHERN_CLIMBING_IMAGE } from '@/lib/image-assets';
+import { MARKETING_IMAGES } from '@/lib/constants';
 
 /** Static event preview card for the v2 landing page. */
 export interface EventPreviewCard {
@@ -24,8 +24,8 @@ export const EVENT_PREVIEW_CARDS: EventPreviewCard[] = [
     description: 'Warming up winter the only sensible way: lighting a fire and grilling everything in sight. Bring an appetite, leave with new mates.',
     interested: 13,
     host: 'Jing Vu',
-    imageSrc: BBQ_ALBERT_PARK_IMAGE.cardSrc,
-    imageAlt: BBQ_ALBERT_PARK_IMAGE.alt,
+    imageSrc: MARKETING_IMAGES.bbqAlbertPark.src,
+    imageAlt: MARKETING_IMAGES.bbqAlbertPark.alt,
     variant: 'featured',
   },
   {
@@ -36,9 +36,9 @@ export const EVENT_PREVIEW_CARDS: EventPreviewCard[] = [
     description:
       "Chalk up every week with the North-side crew. Top rope, bouldering, then trà sữa on the way home. Never climbed? Doesn't matter, and you can hire shoes there.",
     interested: 6,
-    host: 'Luann',
-    imageSrc: NORTHERN_CLIMBING_IMAGE.cardSrc,
-    imageAlt: NORTHERN_CLIMBING_IMAGE.alt,
+    host: 'Luan Nguyen',
+    imageSrc: MARKETING_IMAGES.northernClimbing.src,
+    imageAlt: MARKETING_IMAGES.northernClimbing.alt,
     variant: 'recurring',
   },
 ];
