@@ -34,7 +34,10 @@ export function resolveNavHref(item: SiteNavItem, homePath: string): string | un
   if (item.hash) {
     return `${homePath}${item.hash}`;
   }
-  return homePath;
+  if (import.meta.env.DEV) {
+    console.warn(`[site-nav] Nav item "${item.label}" has no destination configured.`);
+  }
+  return undefined;
 }
 
 /**
