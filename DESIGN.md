@@ -266,7 +266,9 @@ Tailwind utilities: `pt-landing-nav`, `min-h-landing-nav`, `text-brand-on-dark-m
 
 ### Components
 
-**`landing-nav`** — Fixed top bar (`position: fixed`). Transparent over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Internal links use TanStack Router `Link`; Discord uses external `<a>`.
+**`discord-cta-link`** — Shared Discord CTA with `variant="solid"` (yellow fill, dark text) or `variant="outlined"` (ghost on dark footer). Sizes: `sm` | `md` | `lg` | `xl`. Hover lift, glow, and active press on both variants.
+
+**`landing-nav`** — Fixed top bar (`position: fixed`). Transparent over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Internal links use TanStack Router `Link`; Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`.
 
 **`home-hero`** — Dark split hero with dot-grid texture, community photo, member badge. Section uses `{spacing.landing-nav}` top padding (`LANDING_NAV_CLEARANCE`) so content clears the fixed nav while the dark background extends under it.
 
@@ -274,7 +276,7 @@ Tailwind utilities: `pt-landing-nav`, `min-h-landing-nav`, `text-brand-on-dark-m
 
 **`home-marquee`** — Yellow hashtag band; duplicate track for infinite scroll; second track hidden under `prefers-reduced-motion`.
 
-**`home-v2-footer`** — Four-column footer on `{colors.brand-footer-dark}`. Disabled nav items render as dim pending labels (not removed). Follow column uses empty external URLs until social links are configured.
+**`home-v2-footer`** — Three-column footer on `{colors.brand-footer-dark}` (brand blurb, Explore, Follow). Follow column uses empty external URLs until social links are configured.
 
 ### Staging behaviour
 
