@@ -52,11 +52,11 @@ describe('HomeV2Page', () => {
     expect(screen.queryByRole('link', { name: /All events/i })).not.toBeInTheDocument();
   });
 
-  it('shows pending social labels in Follow column', async () => {
+  it('links Follow column social profiles', async () => {
     await renderHomeV2Route();
 
-    expect(screen.getByText('LinkedIn')).toBeInTheDocument();
-    expect(screen.getByText('Facebook')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', 'https://www.linkedin.com/company/vietausit/about/');
+    expect(screen.getByRole('link', { name: 'Facebook' })).toHaveAttribute('href', 'https://www.facebook.com/vietausit');
   });
 
   it('provides a skip to content link', async () => {

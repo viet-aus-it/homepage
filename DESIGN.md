@@ -276,7 +276,7 @@ Tailwind utilities: `pt-landing-nav`, `min-h-landing-nav`, `text-brand-on-dark-m
 
 **`home-marquee`** — Yellow hashtag band; duplicate track for infinite scroll; second track hidden under `prefers-reduced-motion`.
 
-**`home-v2-footer`** — Three-column footer on `{colors.brand-footer-dark}` (brand blurb, Explore, Follow). Follow column uses empty external URLs until social links are configured.
+**`home-v2-footer`** — Three-column footer on `{colors.brand-footer-dark}` (brand blurb, Explore, Follow). Follow column links Discord, LinkedIn, and Facebook from `SOCIAL_LINKS`.
 
 ### Staging behaviour
 

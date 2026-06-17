@@ -3,6 +3,7 @@ import Logo from '@/components/ui/logo';
 import { ORGANISATION } from '@/lib/constants';
 import type { SiteNavItem } from '@/lib/site-nav';
 import { FOOTER_EXPLORE, FOOTER_FOLLOW, getEnabledNavLinks, HOME_PATH, resolveNavHref } from '@/lib/site-nav';
+import { cn } from '@/lib/utils';
 import { HOME_SECTION_INNER } from '@/pages/home-v2/home-section';
 
 interface FooterLinkColumnProps {
@@ -57,7 +58,7 @@ function HomeV2Footer() {
 
   return (
     <footer className="bg-brand-footer-dark text-brand-on-dark-subtle">
-      <div className={HOME_SECTION_INNER}>
+      <div className={cn(HOME_SECTION_INNER, 'pb-6 md:pb-8')}>
         <div className="flex flex-col gap-10 border-b border-brand-footer pb-12 lg:flex-row lg:items-start">
           <div className="lg:max-w-sm lg:flex-1">
             <div className="mb-4 flex items-center gap-2.5">

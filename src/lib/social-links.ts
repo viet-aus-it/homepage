@@ -1,7 +1,7 @@
 /**
- * External social profile URLs — empty string until confirmed; enable links when set.
+ * External social profile URLs.
  */
 export const SOCIAL_LINKS = {
-  LINKEDIN_URL: '',
-  FACEBOOK_URL: '',
+  LINKEDIN_URL: 'https://www.linkedin.com/company/vietausit/about/',
+  FACEBOOK_URL: 'https://www.facebook.com/vietausit',
 } as const;
