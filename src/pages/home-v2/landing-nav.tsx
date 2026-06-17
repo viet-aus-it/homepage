@@ -2,9 +2,8 @@ import { Link } from '@tanstack/react-router';
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-import { DiscordLogo } from '@/components/ui/icons';
+import DiscordCtaLink from '@/components/ui/discord-cta-link';
 import Logo from '@/components/ui/logo';
-import { ORGANISATION } from '@/lib/constants';
 import type { SiteNavLink } from '@/lib/site-nav';
 import { getEnabledNavLinks, HOME_PATH, PRIMARY_NAV } from '@/lib/site-nav';
 import { cn } from '@/lib/utils';
@@ -79,15 +78,9 @@ function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
           {navLinks.map((item) => (
             <NavLinkItem key={item.label} item={item} homePath={homePath} className="transition-colors hover:text-white" />
           ))}
-          <a
-            href={ORGANISATION.DISCORD_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-5 py-2.5 font-bold text-brand-near-black transition hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(245,197,24,0.3)]"
-          >
-            <DiscordLogo className="size-[18px]!" aria-hidden />
+          <DiscordCtaLink variant="outlined" size="md">
             Join Discord
-          </a>
+          </DiscordCtaLink>
         </div>
 
         <button
@@ -120,15 +113,9 @@ function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
             ))}
           </div>
         )}
-        <a
-          href={ORGANISATION.DISCORD_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 flex items-center justify-center gap-2 rounded-full bg-brand-yellow px-5 py-4 text-base font-bold text-brand-near-black"
-        >
-          <DiscordLogo className="size-5!" aria-hidden />
+        <DiscordCtaLink variant="outlined" size="md" className="mt-4 w-full justify-center py-4 text-base">
           Join Discord
-        </a>
+        </DiscordCtaLink>
       </div>
     </header>
   );

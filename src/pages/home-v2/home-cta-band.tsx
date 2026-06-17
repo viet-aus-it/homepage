@@ -1,5 +1,4 @@
-import { DiscordLogo } from '@/components/ui/icons';
-import { ORGANISATION } from '@/lib/constants';
+import DiscordCtaLink from '@/components/ui/discord-cta-link';
 import { cn } from '@/lib/utils';
 import { HOME_SECTION_INNER } from '@/pages/home-v2/home-section';
 
@@ -22,15 +21,9 @@ function HomeCtaBand() {
         <p className="mx-auto mt-5 max-w-[520px] text-[clamp(1rem,1.6vw,1.1875rem)] leading-relaxed text-brand-on-dark-muted">
           Free to join, always has been. Say hi in <span className="whitespace-nowrap">#introduce-yourself</span> (we don&apos;t bite, much).
         </p>
-        <a
-          href={ORGANISATION.DISCORD_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-9 inline-flex items-center gap-2.5 rounded-full bg-brand-yellow px-8 py-4 text-[17px] font-bold text-brand-near-black transition hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(245,197,24,0.32)]"
-        >
-          <DiscordLogo className="size-[22px]!" aria-hidden />
+        <DiscordCtaLink variant="solid" size="xl" className="mt-9">
           Join the VAIT Discord
-        </a>
+        </DiscordCtaLink>
       </div>
     </section>
   );

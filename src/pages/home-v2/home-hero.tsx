@@ -1,8 +1,7 @@
 import { MapPin } from 'lucide-react';
 
-import { DiscordLogo } from '@/components/ui/icons';
+import DiscordCtaLink from '@/components/ui/discord-cta-link';
 import { COMMUNITY_MEMBER_COUNT } from '@/lib/community-stats';
-import { ORGANISATION } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { HOME_SECTION_INNER, LANDING_NAV_CLEARANCE } from '@/pages/home-v2/home-section';
 
@@ -40,15 +39,9 @@ function HomeHero() {
           </p>
 
           <div className="mt-8 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
-            <a
-              href={ORGANISATION.DISCORD_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-brand-yellow px-7 py-4 text-base font-bold text-brand-near-black transition hover:-translate-y-0.5 hover:shadow-[0_10px_26px_rgba(245,197,24,0.32)]"
-            >
-              <DiscordLogo className="size-5!" aria-hidden />
+            <DiscordCtaLink variant="solid" size="lg" className="justify-center">
               Join the community
-            </a>
+            </DiscordCtaLink>
           </div>
 
           <div className="mt-8 inline-flex items-center gap-2.5">
