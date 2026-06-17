@@ -2,7 +2,9 @@
 
 How to deploy the VAIT Homepage.
 
-Production is hosted on [Cloudflare Workers](https://workers.cloudflare.com/) at `vait.au`. The Worker is connected to the `viet-aus-it/homepage` GitHub repository and deploys from the Cloudflare dashboard — not via a deploy workflow in this repo.
+Production is hosted on [Cloudflare Workers](https://workers.cloudflare.com/) at `vait.au`. The Worker is connected to the `viet-aus-it/homepage` GitHub repository and deploys from the Cloudflare dashboard — not via GitHub Actions.
+
+> **Note:** The build configuration (build command, deploy command, watch paths) is set in the Cloudflare dashboard — this is **clickops** and cannot be configured as infrastructure-as-code. This is because the [Cloudflare Vite plugin](https://developers.cloudflare.com/workers/libraries/vite-plugin/) is a build-time dependency that only runs inside the Cloudflare Workers Build environment, so the build pipeline must be configured there rather than in `wrangler.toml` or a workflow file.
 
 ## Production (Cloudflare)
 
