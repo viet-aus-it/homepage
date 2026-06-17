@@ -13,8 +13,9 @@ interface FooterLinkColumnProps {
 function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
   const links = getEnabledNavLinks(items, HOME_PATH);
   const pendingLabels = items.filter((item) => item.enabled && !resolveNavHref(item, HOME_PATH)).map((item) => item.label);
+  const upcomingLabels = items.filter((item) => !item.enabled).map((item) => item.label);
 
-  if (links.length === 0 && pendingLabels.length === 0) {
+  if (links.length === 0 && pendingLabels.length === 0 && upcomingLabels.length === 0) {
     return null;
   }
 
@@ -26,7 +27,7 @@ function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
           <li key={item.label}>
             <a
               href={item.href}
-              className="text-[#9a9a9a] transition-colors hover:text-brand-yellow"
+              className="text-brand-on-dark-subtle transition-colors hover:text-brand-yellow"
               {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               {item.label}
@@ -34,7 +35,12 @@ function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
           </li>
         ))}
         {pendingLabels.map((label) => (
-          <li key={label} className="text-[#6a6a6a]">
+          <li key={label} className="text-brand-footer-dim">
+            {label}
+          </li>
+        ))}
+        {upcomingLabels.map((label) => (
+          <li key={label} className="text-brand-footer-dim">
             {label}
           </li>
         ))}
@@ -50,9 +56,9 @@ function HomeV2Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-brand-footer-dark text-[#9a9a9a]">
+    <footer className="bg-brand-footer-dark text-brand-on-dark-subtle">
       <div className={HOME_SECTION_INNER}>
-        <div className="flex flex-col gap-10 border-b border-[#2a2a2a] pb-12 lg:flex-row lg:items-start">
+        <div className="flex flex-col gap-10 border-b border-brand-footer pb-12 lg:flex-row lg:items-start">
           <div className="lg:max-w-sm lg:flex-1">
             <div className="mb-4 flex items-center gap-2.5">
               <Logo className="h-[30px] w-auto" colour="colour" aria-hidden />
@@ -78,7 +84,7 @@ function HomeV2Footer() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-6 text-[12.5px] text-[#6a6a6a]">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-6 text-[12.5px] text-brand-footer-dim">
           <p>
             © {currentYear} {ORGANISATION.NAME} · ABN {ORGANISATION.ABN} · Assoc. No. (VIC) {ORGANISATION.ASSOCIATION_NUMBER}
           </p>
