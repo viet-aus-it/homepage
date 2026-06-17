@@ -26,6 +26,7 @@ function HomeV2Page() {
       metaDescription.setAttribute('name', 'description');
       document.head.appendChild(metaDescription);
     }
+    const previousDescriptionContent = metaDescription.getAttribute('content');
     metaDescription.setAttribute('content', V2_META_DESCRIPTION);
 
     let robotsMeta = document.querySelector('meta[name="robots"]');
@@ -35,25 +36,41 @@ function HomeV2Page() {
       robotsMeta.setAttribute('name', 'robots');
       document.head.appendChild(robotsMeta);
     }
+    const previousRobotsContent = robotsMeta.getAttribute('content');
     robotsMeta.setAttribute('content', 'noindex, nofollow');
 
     return () => {
-      if (createdDescription && metaDescription?.parentNode) {
-        metaDescription.parentNode.removeChild(metaDescription);
+      if (createdDescription) {
+        metaDescription?.parentNode?.removeChild(metaDescription);
+      } else if (previousDescriptionContent !== null) {
+        metaDescription?.setAttribute('content', previousDescriptionContent);
+      } else {
+        metaDescription?.removeAttribute('content');
       }
-      if (createdRobots && robotsMeta?.parentNode) {
-        robotsMeta.parentNode.removeChild(robotsMeta);
+
+      if (createdRobots) {
+        robotsMeta?.parentNode?.removeChild(robotsMeta);
+      } else if (previousRobotsContent !== null) {
+        robotsMeta?.setAttribute('content', previousRobotsContent);
+      } else {
+        robotsMeta?.removeAttribute('content');
       }
     };
   }, []);
 
   return (
     <div className="min-h-screen bg-white text-brand-near-black">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-brand-yellow focus:px-4 focus:py-2 focus:font-semibold focus:text-brand-near-black"
+      >
+        Skip to content
+      </a>
       <LandingNav />
       <div className="bg-brand-near-black">
         <HomeHero />
       </div>
-      <main>
+      <main id="main-content">
         <HomeMarquee />
         <HomePillars />
         <HomeCommunityReach />
