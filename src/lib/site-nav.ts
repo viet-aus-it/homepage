@@ -72,14 +72,6 @@ export const FOOTER_EXPLORE: SiteNavItem[] = [
   { label: 'Resources', to: '/resources', enabled: false },
 ];
 
-/** Footer Get involved column. */
-export const FOOTER_GET_INVOLVED: SiteNavItem[] = [
-  { label: 'Become a member', to: '/join', enabled: false },
-  { label: 'Host an event', to: '/events', enabled: false },
-  { label: 'Volunteer', to: '/about', enabled: false },
-  { label: 'Partner with us', to: '/about', enabled: false },
-];
-
 /** Footer Follow column — social URLs from {@link SOCIAL_LINKS} when set. */
 export const FOOTER_FOLLOW: SiteNavItem[] = [
   { label: 'Discord', external: ORGANISATION.DISCORD_URL, enabled: true },

@@ -1,8 +1,8 @@
-import { DiscordLogo } from '@/components/ui/icons';
+import DiscordCtaLink from '@/components/ui/discord-cta-link';
 import Logo from '@/components/ui/logo';
 import { ORGANISATION } from '@/lib/constants';
 import type { SiteNavItem } from '@/lib/site-nav';
-import { FOOTER_EXPLORE, FOOTER_FOLLOW, FOOTER_GET_INVOLVED, getEnabledNavLinks, HOME_PATH, resolveNavHref } from '@/lib/site-nav';
+import { FOOTER_EXPLORE, FOOTER_FOLLOW, getEnabledNavLinks, HOME_PATH, resolveNavHref } from '@/lib/site-nav';
 import { HOME_SECTION_INNER } from '@/pages/home-v2/home-section';
 
 interface FooterLinkColumnProps {
@@ -50,7 +50,7 @@ function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
 }
 
 /**
- * Four-column redesign footer for the v2 landing page.
+ * Redesign footer for the v2 landing page.
  */
 function HomeV2Footer() {
   const currentYear = new Date().getFullYear();
@@ -65,20 +65,12 @@ function HomeV2Footer() {
               <span className="font-display text-[19px] font-semibold tracking-tight text-white">VAIT</span>
             </div>
             <p className="mb-4 max-w-[280px] text-[14.5px] leading-relaxed">Vietnamese Aussies in I.T. Community. Technology. Culture. Going since 2017.</p>
-            <a
-              href={ORGANISATION.DISCORD_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-brand-yellow/30 bg-brand-yellow/12 px-4 py-2 text-sm font-semibold text-brand-yellow"
-            >
-              <DiscordLogo className="size-4!" aria-hidden />
+            <DiscordCtaLink variant="outlined" size="sm">
               Join our Discord
-            </a>
+            </DiscordCtaLink>
           </div>
 
-          <FooterLinkColumn title="Get involved" items={FOOTER_GET_INVOLVED} />
-
-          <div className="flex gap-12 lg:ml-auto">
+          <div className="flex w-full justify-between gap-8 sm:w-auto sm:justify-start sm:gap-16 lg:ml-auto lg:gap-20">
             <FooterLinkColumn title="Explore" items={FOOTER_EXPLORE} />
             <FooterLinkColumn title="Follow" items={FOOTER_FOLLOW} />
           </div>

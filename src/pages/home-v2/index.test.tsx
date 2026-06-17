@@ -59,13 +59,6 @@ describe('HomeV2Page', () => {
     expect(screen.getByText('Facebook')).toBeInTheDocument();
   });
 
-  it('shows upcoming Get involved footer labels', async () => {
-    await renderHomeV2Route();
-
-    expect(screen.getByText('Become a member')).toBeInTheDocument();
-    expect(screen.getByText('Host an event')).toBeInTheDocument();
-  });
-
   it('provides a skip to content link', async () => {
     await renderHomeV2Route();
 
