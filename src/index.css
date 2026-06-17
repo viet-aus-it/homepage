@@ -43,6 +43,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Montserrat Variable', ui-sans-serif, system-ui, sans-serif;
+  --spacing-landing-nav: var(--landing-nav-height);
 }
 
 :root {
@@ -94,6 +95,14 @@
   --brand-footer-dark: #141414;
   /* Deprecated alias — kept so existing `*-brand-yellow-dark` usages resolve to the new shade */
   --brand-yellow-dark: var(--brand-yellow-shade);
+  /* Fixed landing nav bar height (py-5 + control row; mobile menu button is taller). */
+  --landing-nav-height: 5.25rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --landing-nav-height: 4.5rem;
+  }
 }
 
 .dark {

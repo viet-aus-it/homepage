@@ -5,6 +5,9 @@ import { cn } from '@/lib/utils';
 /** Shared horizontal + vertical padding for landing sections (inner container only). */
 export const HOME_SECTION_INNER = 'mx-auto w-full max-w-7xl px-5 py-16 md:px-12 md:py-24';
 
+/** Top padding for sections whose content starts below the fixed landing nav. */
+export const LANDING_NAV_CLEARANCE = 'pt-landing-nav';
+
 interface HomeSectionProps {
   id?: string;
   /** Background, borders, overflow — no spacing. */
