@@ -44,6 +44,8 @@
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Montserrat Variable', ui-sans-serif, system-ui, sans-serif;
   --spacing-landing-nav: var(--landing-nav-height);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-near-black: var(--brand-near-black);
   --color-brand-on-dark-muted: var(--brand-text-on-dark-muted);
   --color-brand-on-dark-subtle: var(--brand-text-on-dark-subtle);
   --color-brand-on-dark-emphasis: var(--brand-text-on-dark-emphasis);
