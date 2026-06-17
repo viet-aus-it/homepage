@@ -25,7 +25,6 @@ pnpm run build
 pnpm run preview
 
 # Build outputs to dist/ directory
-# Optimised for AWS S3/CloudFront deployment
 ```
 
 ### Testing Commands
@@ -157,52 +156,21 @@ npx tsr validate
 
 ## Infrastructure Commands
 
-### AWS CDK Commands
+### Cloudflare Commands
 
 ```bash
-# Navigate to infrastructure directory
-cd infra/
+# Deploy to Cloudflare Workers
+pnpm run deploy
 
-# Install CDK dependencies
-pnpm install
-
-# Watch for changes and compile
-pnpm run watch
-
-# Synthesize CloudFormation template
-npx cdk synth
-
-# Deploy infrastructure
-npx cdk deploy
-
-# Compare deployed stack with current state
-npx cdk diff
-
-# Destroy infrastructure (use with caution)
-npx cdk destroy
-
-# List all stacks
-npx cdk list
-```
-
-### Environment-Specific Deployment
-
-```bash
-# Deploy to development environment
-cd infra/ && npx cdk deploy VaitHomepageDev --profile dev
-
-# Deploy to production environment
-cd infra/ && npx cdk deploy VaitHomepageProd --profile prod
-
-# Deploy with parameters
-npx cdk deploy --parameters Environment=production
+# Set up Cloudflare secrets (local development)
+npx wrangler secret put <KEY>
 ```
 
 ### Local Infrastructure Development
 
 ```bash
 # Start local development environment
-# Uses Vite's built-in dev server
+# Uses Vite's built-in dev server with Cloudflare plugin
 # No local infrastructure setup required
 
 # For API mocking, use MSW (Mock Service Worker)
@@ -358,8 +326,8 @@ pnpm run build
 # Test production build locally
 pnpm run preview
 
-# Deploy to AWS (via CDK)
-cd infra/ && pnpm run cdk deploy
+# Deploy to Cloudflare Workers
+pnpm run deploy
 ```
 
 ### Cloudflare Deployment
@@ -367,18 +335,14 @@ cd infra/ && pnpm run cdk deploy
 Production deploys automatically when changes merge to `master` (Cloudflare Git integration). Pre-production QA uses [Preview URLs](https://developers.cloudflare.com/workers/configuration/previews/) on pull requests — see [Deployment](../../docs/how-to/03-deployment.md).
 
 ```bash
-# Build for Cloudflare Workers
-pnpm run build:cf
-
 # Manual production deploy (emergency / local only; build first)
-pnpm run build:cf && wrangler deploy
+pnpm run build && pnpm run deploy
 ```
 
 ## Cross References
 
 - **Development Workflow**: See `docs/development.md#workflow`
 - **Testing Strategy**: See `docs/testing.md#running-tests`
-- **Infrastructure**: See `infra/README.md` for AWS CDK commands
 - **Code Style**: See `code-style.md` for formatting and linting patterns
 
 ## Command Aliases (Optional)

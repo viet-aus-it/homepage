@@ -15,7 +15,7 @@ Welcome to the VAIT Homepage documentation, organised following the [Diataxis](h
 ## Explanation
 
 - [Architecture](./explanation/01-architecture.md) — Design decisions, tech stack rationale, and project structure
-- [Infrastructure](./explanation/02-infrastructure.md) — Cloudflare production architecture and legacy AWS CDK
+- [Infrastructure](./explanation/02-infrastructure.md) — Cloudflare Workers architecture
 
 ## Reference
 

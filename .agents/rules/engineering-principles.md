@@ -342,12 +342,11 @@ export const Button = ({
 
 ## Infrastructure Principles
 
-### AWS Architecture
+### Cloudflare Workers
 
-- **Infrastructure as Code**: Use AWS CDK for all infrastructure definitions
+- **Infrastructure as Code**: Use `wrangler.jsonc` for Worker configuration
 - **Least privilege**: Grant minimum necessary permissions to all resources
-- **Cost optimisation**: Use appropriate AWS services and sizing
-- **Monitoring**: Implement proper logging and monitoring
+- **Cost optimisation**: Use appropriate Cloudflare plan and caching
 
 ### Deployment Principles
 
@@ -359,7 +358,7 @@ export const Button = ({
 ### Data Management
 
 - **Caching strategy**: Use appropriate caching layers for performance
-- **CDN usage**: Leverage CloudFront for static asset delivery
+- **CDN usage**: Leverage Cloudflare CDN for static asset delivery
 - **Backup procedures**: Implement regular backup and recovery processes
 - **Data privacy**: Comply with relevant data protection regulations
 

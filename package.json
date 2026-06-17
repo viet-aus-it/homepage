@@ -7,9 +7,7 @@
     "prepare": "pnpm run githooks:init",
     "githooks:init": "husky",
     "dev": "vite",
-    "dev:cf": "DEPLOY_TO_CLOUDFLARE=true pnpm run dev",
     "build": "vite build",
-    "build:cf": "DEPLOY_TO_CLOUDFLARE=true pnpm run build",
     "preview": "vite preview",
     "typecheck": "tsc",
     "test": "vitest",
@@ -23,7 +21,7 @@
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
     "ci": "oxlint && oxfmt --check",
-    "deploy:cf": "wrangler deploy"
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",

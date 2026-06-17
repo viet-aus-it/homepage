@@ -1,6 +1,5 @@
 packages:
   - .
-  - infra
 
 allowBuilds:
   esbuild: true

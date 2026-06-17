@@ -15,7 +15,6 @@ Quick-reference lookup for the VAIT Homepage tech stack, commands, project struc
 | [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) | Linting and formatting         | Latest      |
 | [Vitest](https://vitest.dev/)                                                                                   | Testing framework              | Latest      |
 | [Testing Library](https://testing-library.com/)                                                                 | Component testing              | Latest      |
-| [AWS CDK](https://docs.aws.amazon.com/cdk/)                                                                     | Infrastructure as code         | Latest      |
 | [Cloudflare Workers](https://workers.cloudflare.com/)                                                           | Production hosting (`vait.au`) | Latest      |
 | [GitHub Actions](https://docs.github.com/en/actions)                                                            | CI/CD                          | N/A         |
 
@@ -32,14 +31,12 @@ Quick-reference lookup for the VAIT Homepage tech stack, commands, project struc
 | `pnpm run lint:fix`      | Auto-fix lint/format issues                                            |
 | `pnpm run typecheck`     | Run [TypeScript](https://www.typescriptlang.org/) type checking        |
 | `pnpm run githooks:init` | Initialise [Husky](https://typicode.github.io/husky/) git hooks        |
-| `pnpm run build:cf`      | Build for Cloudflare Workers deployment                                |
-| `pnpm run deploy:cf`     | Deploy built assets to Cloudflare (`wrangler deploy`; CI builds first) |
+| `pnpm run deploy`        | Deploy built assets to Cloudflare (`wrangler deploy`; CI builds first) |
 
 ## Project Structure
 
 ```
 src/           — Application source code (components, pages, hooks, services, types, utils)
-infra/         — Infrastructure as code (AWS CDK)
 public/        — Static assets
 .github/       — CI/CD workflows (GitHub Actions)
 docs/          — Project documentation (Diataxis framework)

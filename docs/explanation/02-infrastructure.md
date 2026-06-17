@@ -1,6 +1,6 @@
 # Infrastructure
 
-This document explains the VAIT Homepage infrastructure architecture, security model, and migration strategy.
+This document explains the VAIT Homepage infrastructure architecture.
 
 ## Cloudflare Workers (production)
 
@@ -18,91 +18,27 @@ The public site at `vait.au` is served by the **`homepage`** Worker in the VAIT 
                              └─────────────────────────┘
 ```
 
-- **Configuration:** [`wrangler.toml`](../../wrangler.toml) — routes, assets, `preview_urls`
+- **Configuration:** [`wrangler.jsonc`](../../wrangler.jsonc) — routes, assets, `preview_urls`
 - **Deploy:** Cloudflare dashboard Git build (see [Deployment](../how-to/03-deployment.md))
 - **Pre-production:** Preview URLs on pull requests (`workers.dev`, not custom domains)
 - **Observability:** Workers Logs enabled in the Cloudflare dashboard
 
-## Legacy AWS (being retired)
-
-> The CDK stack below served `vietausit.com`. Production traffic is on Cloudflare; AWS resources are candidates for removal.
-
-The VAIT Homepage previously used a serverless AWS architecture:
-
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Route53       │    │   CloudFront     │    │   S3 Bucket     │
-│   (DNS)         │───▶│   (CDN)          │───▶│   (Static)      │
-│                 │    │                  │    │                 │
-│ • vietausit.com │    │ • HTTPS          │    │ • dist/         │
-│ • www.          │    │ • Cache          │    │ • Private       │
-│ • home.         │    │ • Security       │    │ • Versioned     │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-```
-
-## AWS Resources
-
-### [S3](https://aws.amazon.com/s3/) Bucket (`home.vietausit.com`)
-
-- **Purpose**: Static asset storage and hosting
-- **Access**: Private (only accessible via [CloudFront](https://aws.amazon.com/cloudfront/))
-- **Versioning**: Enabled for backup and rollback
-- **Encryption**: Server-side encryption enabled
-- **Lifecycle**: Configured for optimal storage management
-
-### CloudFront Distribution
-
-- **Purpose**: Content Delivery Network with global edge locations
-- **Features**: HTTPS enforcement, caching optimisation, security headers, geographic distribution
-- **Cache Behaviour**: Optimised for different asset types (HTML, JS, CSS, images)
-
-### [Route 53](https://aws.amazon.com/route53/) DNS
-
-- **Managed Domains**: `vietausit.com`, `www.vietausit.com`, `home.vietausit.com`
-- **Records**: A records pointing to CloudFront distribution
-- **SSL**: DNS-validated certificates via [AWS Certificate Manager](https://aws.amazon.com/certificate-manager/)
-
-## CDK Stack Structure
-
-### HomepageStack (`infra/lib/homepage-stack.ts`)
-
-Main stack containing S3 bucket, CloudFront distribution, Route 53 records, and SSL certificates.
-
-### CertStack (`infra/lib/cert-stack.ts`)
-
-SSL certificate management stack. Creates and validates certificates for all domain variants.
-
-### Constants (`infra/lib/constants.ts`)
-
-Domain and configuration constants (`BASE_DOMAIN`, `SITE_DOMAIN`, `WWW_DOMAIN`).
-
 ## Security
 
-- **HTTPS**: Strict Transport Security ([HSTS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)) enforced
+- **HTTPS**: Strict Transport Security ([HSTS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)) enforced by Cloudflare
 - **Content Security Policy**: Prevents XSS attacks
-- **X-Frame-Options**: Clickjacking protection
-- **IAM Roles**: Least privilege principle for all AWS resources
-- **Encryption**: At-rest and in-transit encryption
-- **Compliance**: GDPR and Australian Privacy Act adherence
+- **Encryption**: At-rest and in-transit encryption via Cloudflare
 
 ## Performance Optimisation
 
-- **CloudFront Cache TTL**: Optimised per content type
-- **Compression**: Gzip and Brotli enabled
-- **HTTP/2**: Modern protocol support
-- **S3 Intelligent-Tiering**: Cost-effective storage management
+- **Cloudflare CDN**: Global edge network with automatic caching
+- **Compression**: Automatic Gzip and Brotli
+- **HTTP/2 and HTTP/3**: Modern protocol support
 
 ## Monitoring
 
-- **[CloudWatch](https://aws.amazon.com/cloudwatch/)**: Request counts, error rates, latency metrics
-- **Alarms**: Performance and availability alerts
-- **Cost Management**: Monthly spending alerts and regular usage reviews
-
-## Disaster Recovery
-
-- **S3 Versioning**: Automatic file versioning for point-in-time restore
-- **Cross-Region Replication**: Multi-region options available
-- **Health Checks**: Automated monitoring with graceful failover
+- **Workers Logs**: Enabled in the Cloudflare dashboard
+- **Cloudflare Analytics**: Request counts, error rates, bandwidth metrics
 
 ---
 
