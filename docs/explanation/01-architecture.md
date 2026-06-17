@@ -21,7 +21,6 @@ The VAIT Homepage is a static landing page for the Vietnamese Australians in Inf
 
 ```
 src/           — Application source code (components, pages, hooks, services, types, utils)
-infra/         — Infrastructure as code (AWS CDK)
 public/        — Static assets
 .github/       — CI/CD workflows (GitHub Actions)
 docs/          — Project documentation (Diataxis framework)
@@ -52,5 +51,5 @@ When changing landing-page visuals, read `DESIGN.md` first and update it in the 
 See also:
 
 - [Design System](../../DESIGN.md) — Full visual design reference
-- [Infrastructure](./02-infrastructure.md) — Cloudflare production and legacy AWS
+- [Infrastructure](./02-infrastructure.md) — Cloudflare Workers architecture
 - [Project Reference](../reference/01-project-reference.md) — Tech stack versions and commands

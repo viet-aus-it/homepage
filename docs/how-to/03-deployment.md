@@ -4,8 +4,6 @@ How to deploy the VAIT Homepage.
 
 Production is hosted on [Cloudflare Workers](https://workers.cloudflare.com/) at `vait.au`. The Worker is connected to the `viet-aus-it/homepage` GitHub repository and deploys from the Cloudflare dashboard — not via a deploy workflow in this repo.
 
-> **Legacy AWS**: [AWS CDK](https://docs.aws.amazon.com/cdk/) infrastructure under `infra/` and [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) still exist while the AWS stack is retired. They are not the primary production path for `vait.au`.
-
 ## Production (Cloudflare)
 
 **Domains:** `vait.au`, `www.vait.au`, `home.vait.au` (see `wrangler.toml`).
@@ -17,8 +15,8 @@ Production is hosted on [Cloudflare Workers](https://workers.cloudflare.com/) at
 | Setting           | Value                                                                                 |
 | ----------------- | ------------------------------------------------------------------------------------- |
 | Production branch | `master`                                                                              |
-| Build command     | `pnpm run ci && pnpm run test && pnpm run typecheck && pnpm run build:cf`             |
-| Deploy command    | `pnpm run deploy:cf`                                                                  |
+| Build command     | `pnpm run ci && pnpm run test && pnpm run typecheck && pnpm run build`                |
+| Deploy command    | `pnpm run deploy`                                                                     |
 | Version command   | `npx wrangler versions upload`                                                        |
 | Root directory    | `/`                                                                                   |
 | Include paths     | `*`                                                                                   |
@@ -28,10 +26,10 @@ After merge, check **Deployments** in the Cloudflare dashboard for build status.
 
 ### Manual production deploy
 
-For emergencies or local verification (requires `wrangler login` or Cloudflare API credentials). The Cloudflare build pipeline already runs `build:cf` before `deploy:cf`; locally, build first:
+For emergencies or local verification (requires `wrangler login` or Cloudflare API credentials). The Cloudflare build pipeline already builds before deploy; locally, build first:
 
 ```bash
-pnpm run build:cf && wrangler deploy
+pnpm run build && wrangler deploy
 ```
 
 ## Preview deployments (pre-production QA)
@@ -60,7 +58,7 @@ Wildcards match across path separators — `docs/*` covers nested paths such as 
 **Exclude paths** (comma-separated, paste into the dashboard):
 
 ```text
-docs/*, .agents/*, .github/*, infra/*, *.md, .cursor/*, .vscode/*, .zed/*, .husky/*, LICENSE, skills-lock.json, .gitignore, .editorconfig, .nvmrc, .tool-versions
+docs/*, .agents/*, .github/*, *.md, .cursor/*, .vscode/*, .zed/*, .husky/*, LICENSE, skills-lock.json, .gitignore, .editorconfig, .nvmrc, .tool-versions
 ```
 
 | Pattern                                           | Skips builds for                                  |
@@ -68,7 +66,6 @@ docs/*, .agents/*, .github/*, infra/*, *.md, .cursor/*, .vscode/*, .zed/*, .husk
 | `docs/*`                                          | All documentation under `docs/`                   |
 | `.agents/*`                                       | Agent rules and skills                            |
 | `.github/*`                                       | GitHub Actions workflows and templates            |
-| `infra/*`                                         | Legacy AWS CDK (not used for `vait.au`)           |
 | `*.md`                                            | Markdown anywhere (e.g. `README.md`, `DESIGN.md`) |
 | `.cursor/*`, `.vscode/*`, `.zed/*`, `.husky/*`    | Editor and git hook config                        |
 | `LICENSE`, `skills-lock.json`, `.gitignore`, etc. | Repo metadata                                     |
@@ -95,28 +92,13 @@ No GitHub secrets or `staging` branch are required.
 ## Local development
 
 ```bash
-# Standard Vite dev server
+# Standard Vite dev server (always uses Cloudflare plugin)
 pnpm run dev
-
-# Vite with Cloudflare plugin (closer to production Worker behaviour)
-pnpm run dev:cf
 ```
-
-## Legacy AWS deployment
-
-The CDK stack previously served `vietausit.com`. It remains in the repo for teardown, not for `vait.au`.
-
-```bash
-cd infra/
-pnpm install
-npx cdk deploy --profile prod   # requires AWS credentials
-```
-
-GitHub Actions on `master` may still run CDK deploy until the AWS stack is removed.
 
 ---
 
 See also:
 
-- [Infrastructure](../explanation/02-infrastructure.md) — Cloudflare and legacy AWS architecture
+- [Infrastructure](../explanation/02-infrastructure.md) — Cloudflare Workers architecture
 - [Project Reference](../reference/01-project-reference.md) — All commands
