@@ -1,4 +1,4 @@
-import { BBQ_ALBERT_PARK_IMAGE } from '@/lib/image-assets';
+import { BBQ_ALBERT_PARK_IMAGE, NORTHERN_CLIMBING_IMAGE } from '@/lib/image-assets';
 
 /** Static event preview card for the v2 landing page. */
 export interface EventPreviewCard {
@@ -37,6 +37,8 @@ export const EVENT_PREVIEW_CARDS: EventPreviewCard[] = [
       "Chalk up every week with the North-side crew. Top rope, bouldering, then trà sữa on the way home. Never climbed? Doesn't matter, and you can hire shoes there.",
     interested: 6,
     host: 'Luann',
+    imageSrc: NORTHERN_CLIMBING_IMAGE.cardSrc,
+    imageAlt: NORTHERN_CLIMBING_IMAGE.alt,
     variant: 'recurring',
   },
 ];

@@ -4,3 +4,9 @@ export const BBQ_ALBERT_PARK_IMAGE = {
   cardSrc: '/images/bbq-albert-park-card.webp',
   alt: 'VAIT members at the Albert Park BBQ',
 } as const;
+
+export const NORTHERN_CLIMBING_IMAGE = {
+  heroSrc: '/images/northern-climbing-hero.webp',
+  cardSrc: '/images/northern-climbing-card.webp',
+  alt: 'VAIT members at a climbing session in Brunswick',
+} as const;

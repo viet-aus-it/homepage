@@ -1,4 +1,4 @@
-import { Calendar, Clock, Mountain, Users } from 'lucide-react';
+import { Calendar, Clock, Users } from 'lucide-react';
 
 import { EVENT_PREVIEW_CARDS } from '@/lib/events-preview';
 import HomeSection from '@/pages/home-v2/home-section';
@@ -46,9 +46,24 @@ function HomeEventsPreview() {
 
         {recurringEvent && (
           <article className="overflow-hidden rounded-[18px] border border-brand-border-warm bg-brand-near-black transition hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(0,0,0,0.16)]">
-            <div className="relative flex h-[230px] items-center justify-center overflow-hidden bg-linear-to-br from-brand-surface-elevated to-brand-near-black">
-              <div className="absolute inset-0 bg-[radial-gradient(rgba(245,197,24,0.16)_1.5px,transparent_1.6px)] bg-size-[18px_18px]" aria-hidden />
-              <Mountain className="relative size-[74px] text-brand-yellow" strokeWidth={1.4} aria-hidden />
+            <div className="relative h-[230px]">
+              {recurringEvent.imageSrc ? (
+                <>
+                  <img
+                    src={recurringEvent.imageSrc}
+                    alt={recurringEvent.imageAlt ?? recurringEvent.title}
+                    className="size-full object-cover"
+                    width={800}
+                    height={800}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-brand-near-black/55 via-transparent to-transparent" aria-hidden />
+                </>
+              ) : (
+                <div className="flex size-full items-center justify-center bg-linear-to-br from-brand-surface-elevated to-brand-near-black">
+                  <div className="absolute inset-0 bg-[radial-gradient(rgba(245,197,24,0.16)_1.5px,transparent_1.6px)] bg-size-[18px_18px]" aria-hidden />
+                </div>
+              )}
               <span className="absolute top-4 left-4 rounded-full border border-brand-yellow/40 bg-brand-yellow/15 px-3 py-1.5 font-display text-xs font-bold tracking-wide uppercase text-brand-yellow">
                 {recurringEvent.badge}
               </span>
