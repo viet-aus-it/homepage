@@ -53,7 +53,7 @@ export function getEnabledNavLinks(items: readonly SiteNavItem[], homePath: stri
 /** Primary header navigation — enable items as routes ship. */
 export const PRIMARY_NAV: SiteNavItem[] = [
   { label: 'Community', to: '/community', enabled: false },
-  { label: 'Events', hash: '#events-preview', enabled: false },
+  { label: 'Events', hash: '#events-preview', enabled: true },
   { label: 'About', to: '/about', enabled: false },
   { label: 'Resources', to: '/resources', enabled: false },
   { label: 'Join', to: '/join', enabled: false },
@@ -62,7 +62,7 @@ export const PRIMARY_NAV: SiteNavItem[] = [
 /** Footer Explore column. */
 export const FOOTER_EXPLORE: SiteNavItem[] = [
   { label: 'Community', to: '/community', enabled: false },
-  { label: 'Events', hash: '#events-preview', enabled: false },
+  { label: 'Events', hash: '#events-preview', enabled: true },
   { label: 'About', to: '/about', enabled: false },
   { label: 'Resources', to: '/resources', enabled: false },
 ];
