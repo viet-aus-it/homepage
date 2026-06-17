@@ -33,7 +33,7 @@ function statValueClasses(variant: (typeof COMMUNITY_STATS)[number]['variant']) 
  */
 function HomeCommunityReach() {
   return (
-    <HomeSection id="community-reach" className="border-t border-brand-border-warm bg-brand-surface-warm">
+    <HomeSection id="community-reach" className="border-y border-brand-border-warm bg-brand-surface-warm">
       <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-brand-yellow-shade">Where we&apos;re based</p>
