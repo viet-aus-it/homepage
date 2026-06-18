@@ -1,0 +1,2 @@
+# Mark TanStack Router output so GitHub collapses it in PR diffs.
+src/routeTree.gen.ts linguist-generated=true
