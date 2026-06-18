@@ -1,3 +1,9 @@
+// AUTO-GENERATED FILE — DO NOT EDIT
+
+// TanStack Router route tree; regenerated from src/routes/ via `pnpm dev` or `npx tsr generate`.
+
+// Excluded from oxlint, oxfmt, and Vitest coverage (see repo config).
+
 /* eslint-disable */
 
 // @ts-nocheck
