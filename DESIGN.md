@@ -276,7 +276,7 @@ Tailwind utilities: `pt-landing-nav`, `min-h-landing-nav`, `text-brand-on-dark-m
 
 **`home-marquee`** — Yellow hashtag band; duplicate track for infinite scroll; second track hidden under `prefers-reduced-motion`.
 
-**`home-v2-footer`** — Three-column footer on `{colors.brand-footer-dark}` (brand blurb, Explore, Follow). Follow links: `FOOTER_FOLLOW` in `src/lib/site-nav.ts` (URLs from `SOCIAL_LINKS` in `constants.ts`; short links managed in [static-sites](https://github.com/viet-aus-it/static-sites)).
+**`home-v2-footer`** — Three-column footer on `{colors.brand-footer-dark}` (`4fr / 1fr / 1fr` grid at `lg`): brand blurb + Discord CTA, Explore, Follow. Bottom bar stacks legal copy (copyright, ABN, tagline) beside the **ACNC Registered Charity Tick** (reverse mono, 76px height, links to the ACNC charity register). Follow links: `FOOTER_FOLLOW` in `src/lib/site-nav.ts` (URLs from `SOCIAL_LINKS` in `constants.ts`; short links managed in [static-sites](https://github.com/viet-aus-it/static-sites)). ACNC asset and URLs: `ACNC` in `constants.ts`; logo at `public/images/acnc-registered-charity-reverse.png`.
 
 ### Staging behaviour
 

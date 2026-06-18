@@ -67,8 +67,6 @@ export const PRIMARY_NAV: SiteNavItem[] = [
 export const FOOTER_EXPLORE: SiteNavItem[] = [
   { label: 'Community', hash: '#community-reach', enabled: true },
   { label: 'Events', hash: '#events-preview', enabled: true },
-  { label: 'About', to: '/about', enabled: false },
-  { label: 'Resources', to: '/resources', enabled: false },
 ];
 
 /** Footer Follow column — social URLs from {@link SOCIAL_LINKS} when set. */
