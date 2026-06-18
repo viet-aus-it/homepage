@@ -7,9 +7,14 @@ export const ORGANISATION = {
   DISCORD_URL: 'https://chat.vait.au/',
 } as const;
 
+/**
+ * Short-link destinations for public social profiles.
+ * Managed in https://github.com/viet-aus-it/static-sites — update redirects there, then sync URLs here.
+ */
 export const SOCIAL_LINKS = {
-  LINKEDIN_URL: 'https://www.linkedin.com/company/vietausit/about/',
-  FACEBOOK_URL: 'https://www.facebook.com/vietausit',
+  FACEBOOK_URL: 'https://fb.vait.au',
+  LINKEDIN_URL: 'https://linkedin.vait.au',
+  YOUTUBE_URL: 'https://yt.vait.au',
 } as const;
 
 export const COMMUNITY_MEMBER_COUNT = '1,448';

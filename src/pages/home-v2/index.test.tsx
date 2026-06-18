@@ -2,6 +2,7 @@ import { screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import { ORGANISATION } from '@/lib/constants';
+import { FOOTER_FOLLOW, getEnabledNavLinks, HOME_PATH } from '@/lib/site-nav';
 import { renderHomeV2Route } from '@/test-utils/render-home-v2-route';
 
 describe('HomeV2Page', () => {
@@ -55,8 +56,9 @@ describe('HomeV2Page', () => {
   it('links Follow column social profiles', async () => {
     await renderHomeV2Route();
 
-    expect(screen.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', 'https://www.linkedin.com/company/vietausit/about/');
-    expect(screen.getByRole('link', { name: 'Facebook' })).toHaveAttribute('href', 'https://www.facebook.com/vietausit');
+    for (const { label, href } of getEnabledNavLinks(FOOTER_FOLLOW, HOME_PATH)) {
+      expect(screen.getByRole('link', { name: label })).toHaveAttribute('href', href);
+    }
   });
 
   it('renders event preview cards with marketing images', async () => {

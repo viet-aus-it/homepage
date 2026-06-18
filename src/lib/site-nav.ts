@@ -74,8 +74,9 @@ export const FOOTER_EXPLORE: SiteNavItem[] = [
 /** Footer Follow column — social URLs from {@link SOCIAL_LINKS} when set. */
 export const FOOTER_FOLLOW: SiteNavItem[] = [
   { label: 'Discord', external: ORGANISATION.DISCORD_URL, enabled: true },
-  { label: 'LinkedIn', external: SOCIAL_LINKS.LINKEDIN_URL, enabled: true },
   { label: 'Facebook', external: SOCIAL_LINKS.FACEBOOK_URL, enabled: true },
+  { label: 'LinkedIn', external: SOCIAL_LINKS.LINKEDIN_URL, enabled: true },
+  { label: 'YouTube', external: SOCIAL_LINKS.YOUTUBE_URL, enabled: true },
 ];
 
 /** Home route path (`/v2` during staging, `/` after promotion). */
