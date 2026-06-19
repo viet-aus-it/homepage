@@ -15,7 +15,7 @@ Thank you for your interest in contributing to the VAIT Homepage project!
 
 ## Code Review
 
-- Open a pull request with a clear title and description.
+- Open a pull request with a clear title and description. Follow `.github/PULL_REQUEST_TEMPLATE.md` (Context, Changes, Checklist). See the [vait-create-pr skill](../../.agents/skills/vait-create-pr/SKILL.md) for AI-assisted drafting.
 - Ensure your code passes all checks (lint, test, build).
 - For UI changes, use the **branch preview URL** posted by Cloudflare on the PR (see [Deployment](./03-deployment.md#preview-deployments-pre-production-qa)).
 - Be open to feedback and iterate as needed.

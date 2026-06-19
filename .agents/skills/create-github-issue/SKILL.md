@@ -186,4 +186,5 @@ When assigning work to Cursor or Claude Code, include in the prompt:
 
 - Issue form template: `.github/ISSUE_TEMPLATE/task.yml`
 - Pull request template: `.github/PULL_REQUEST_TEMPLATE.md` (aligned **Context** section)
+- Pull request skill: `.agents/skills/vait-create-pr/SKILL.md`
 - Contributing guide: `docs/how-to/02-contributing.md`
