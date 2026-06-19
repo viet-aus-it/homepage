@@ -11,7 +11,7 @@ Thank you for your interest in contributing to the VAIT Homepage project!
 
 - Fork the repository or create a new branch from `master`.
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) for branch and commit naming.
-- Keep changes focused and atomic.
+- Keep changes focused and atomic. See the [vait-commit skill](../../.agents/skills/vait-commit/SKILL.md) for staging and [Conventional Commits](https://www.conventionalcommits.org/) format.
 
 ## Code Review
 

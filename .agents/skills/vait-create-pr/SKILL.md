@@ -4,7 +4,7 @@
 
 Standardise how VAIT team members and AI agents open pull requests so every PR explains *why* the change exists, *what* changed, and *what was verified*. Works in **Cursor** and **Claude Code** via the `.agents/skills/` manifest in [AGENTS.md](../../../AGENTS.md).
 
-Pair with [create-github-issue](../create-github-issue/SKILL.md) when closing a tracked issue.
+Pair with [vait-commit](../vait-commit/SKILL.md) for atomic commits before opening a PR. Pair with [create-github-issue](../create-github-issue/SKILL.md) when closing a tracked issue.
 
 ## Trigger Condition
 
