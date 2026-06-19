@@ -1,0 +1,47 @@
+name: Task
+description: Propose scoped work with context, acceptance criteria, and explicit exclusions
+title: '[TASK] '
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for features, chores, docs, and bugs. Keep **Context** focused on *why*; put verifiable outcomes in **In Scope / Done When**; use **Out of Scope** to bound AI-assisted work.
+
+        See [create-github-issue skill](.agents/skills/create-github-issue/SKILL.md) for guidance.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why do we need this? What problem does it solve or what value does it add? Who benefits?
+      placeholder: |
+        Example: Contributors cannot find how to QA branch previews. Cloudflare posts preview URLs on PRs, but this is undocumented, causing repeated questions in team chat.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: in_scope
+    attributes:
+      label: In Scope / Done When
+      description: When can we consider this done? List acceptance criteria as a checklist — each item must be verifiable.
+      placeholder: |
+        - [ ] docs/how-to/03-deployment.md explains how to find and use preview URLs
+        - [ ] docs/how-to/02-contributing.md links to the preview section
+        - [ ] Lint, typecheck, and tests pass (if code changes)
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of Scope
+      description: Be deliberate about scope. De-scope irrelevant work; tie exclusions back to the why in Context where helpful.
+      placeholder: |
+        - Changing Cloudflare configuration (separate infra issue)
+        - Adding automated visual regression tests
+      render: markdown
+    validations:
+      required: true

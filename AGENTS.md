@@ -39,7 +39,10 @@ All changes must be:
 ```
 .agents/
   skills/
-    update-docs/SKILL.md  # Documentation audit and update workflow
+    create-github-issue/SKILL.md  # Structured GitHub issue authoring (Context / Scope / Out of Scope)
+    vait-commit/SKILL.md            # Atomic Conventional Commits with explicit staging
+    vait-create-pr/SKILL.md         # Structured pull request authoring (Context / Changes / Checklist)
+    update-docs/SKILL.md            # Documentation audit and update workflow
   rules/           # Domain-specific guidelines and constraints
     commands.md
     code-style.md
@@ -93,6 +96,9 @@ Load these rules when working on relevant domains:
 
 Load a skill when its trigger condition matches the task:
 
+- **[create-github-issue](.agents/skills/create-github-issue/SKILL.md)** — Draft and file GitHub issues with Context, In Scope / Done When, and Out of Scope. Trigger: user asks to create, draft, or standardise an issue.
+- **[vait-commit](.agents/skills/vait-commit/SKILL.md)** — Stage and commit with explicit file paths, atomic units, and Conventional Commits. Trigger: user asks to commit or write a commit message.
+- **[vait-create-pr](.agents/skills/vait-create-pr/SKILL.md)** — Draft and open pull requests with Context, Changes, and Checklist per `.github/PULL_REQUEST_TEMPLATE.md`. Trigger: user asks to create, draft, or open a PR, or runs `/create-pr`.
 - **[update-docs](.agents/skills/update-docs/SKILL.md)** — Audit and update docs after code changes. Trigger: user asks to update, sync, or audit documentation.
 
 ## Quick Reference
