@@ -7,6 +7,14 @@ export const ORGANISATION = {
   DISCORD_URL: 'https://chat.vait.au/',
 } as const;
 
+/** ACNC Registered Charity Tick — usage per https://www.acnc.gov.au/charity/registered-charity-tick/information-charities */
+export const ACNC = {
+  CHARITY_REGISTER_URL: 'https://www.acnc.gov.au/charity/charities/6a81d930-583d-f011-8779-002248112f30/profile',
+  LOGO_SRC: '/images/acnc-registered-charity-reverse.png',
+  LOGO_ALT: 'Registered with the Australian Charities and Not-for-profits Commission',
+  LOGO_TITLE: 'VAIT is a charity registered with the Australian Charities and Not-for-profits Commission',
+} as const;
+
 /**
  * Short-link destinations for public social profiles.
  * Managed in https://github.com/viet-aus-it/static-sites — update redirects there, then sync URLs here.

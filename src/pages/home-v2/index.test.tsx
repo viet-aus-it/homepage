@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { ORGANISATION } from '@/lib/constants';
+import { ACNC, ORGANISATION } from '@/lib/constants';
 import { FOOTER_FOLLOW, getEnabledNavLinks, HOME_PATH } from '@/lib/site-nav';
 import { renderHomeV2Route } from '@/test-utils/render-home-v2-route';
 
@@ -59,6 +59,16 @@ describe('HomeV2Page', () => {
     for (const { label, href } of getEnabledNavLinks(FOOTER_FOLLOW, HOME_PATH)) {
       expect(screen.getByRole('link', { name: label })).toHaveAttribute('href', href);
     }
+  });
+
+  it('renders the ACNC registered charity tick with required link and alt text', async () => {
+    await renderHomeV2Route();
+
+    const acncLink = screen.getByRole('link', { name: ACNC.LOGO_ALT });
+    expect(acncLink).toHaveAttribute('href', ACNC.CHARITY_REGISTER_URL);
+    expect(acncLink).toHaveAttribute('target', '_blank');
+    expect(acncLink).toHaveAttribute('title', ACNC.LOGO_TITLE);
+    expect(screen.getByRole('img', { name: ACNC.LOGO_ALT })).toHaveAttribute('src', ACNC.LOGO_SRC);
   });
 
   it('renders event preview cards with marketing images', async () => {
