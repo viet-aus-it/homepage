@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Standardise how VAIT team members and AI agents open pull requests so every PR explains *why* the change exists, *what* changed, and *what was verified*. Works in **Cursor** and **Claude Code** via the `.agents/skills/` manifest in [AGENTS.md](../../../AGENTS.md).
+Standardise how VAIT team members and AI agents open pull requests so every PR explains _why_ the change exists, _what_ changed, and _what was verified_. Works in **Cursor** and **Claude Code** via the `.agents/skills/` manifest in [AGENTS.md](../../../AGENTS.md).
 
 Pair with [vait-commit](../vait-commit/SKILL.md) for atomic commits before opening a PR. Pair with [create-github-issue](../create-github-issue/SKILL.md) when closing a tracked issue.
 
@@ -64,7 +64,17 @@ git diff --stat origin/master...HEAD
 
 Read the diff for the core changes. Identify the linked issue from commit messages or branch name.
 
-### Step 2: Draft the PR body
+### Step 2: Run pre-PR checks
+
+**Do not create or update a PR until these pass:**
+
+```bash
+pnpm run lint:fix && pnpm run typecheck
+```
+
+If `lint:fix` reformats files, stage and commit the formatting changes first (use [vait-commit](../vait-commit/SKILL.md)). A PR must not be opened while the branch has lint or typecheck failures.
+
+### Step 3: Draft the PR body
 
 Use this template verbatim for section headings:
 
@@ -89,23 +99,24 @@ Use this template verbatim for section headings:
 - [ ] Documentation updated (if needed)
 ```
 
-### Step 3: Quality check
+### Step 4: Quality check
 
 Before submitting, verify:
 
-- [ ] **Context** explains *why*, not a repeat of **Changes**
+- [ ] `pnpm run lint:fix && pnpm run typecheck` pass on the branch
+- [ ] **Context** explains _why_, not a repeat of **Changes**
 - [ ] **Changes** focuses on reviewer-relevant deltas
 - [ ] Issue link present when work tracks an issue
 - [ ] **Checklist** reflects what was actually run
 - [ ] Title follows [Conventional Commits](https://www.conventionalcommits.org/) (e.g. `feat:`, `fix:`, `chore:`, `docs:`)
 
-### Step 4: Push the branch
+### Step 5: Push the branch
 
 ```bash
 git push -u origin "$(git branch --show-current)"
 ```
 
-### Step 5: Create the pull request
+### Step 6: Create the pull request
 
 ```bash
 gh pr create \
@@ -133,7 +144,7 @@ Use `gh pr edit` to update an existing PR body. Add `--base master` if the defau
 
 Include `Closes #N` in the PR body or title when the PR should close an issue on merge.
 
-### Step 6: Summarise for the user
+### Step 7: Summarise for the user
 
 After `gh pr create` or `gh pr edit` succeeds, return the PR URL directly:
 
@@ -178,11 +189,11 @@ After `gh pr create` or `gh pr edit` succeeds, return the PR URL directly:
 
 ## Runtime compatibility
 
-| Runtime | How to load |
-| ------- | ----------- |
-| **Cursor** | Skill listed in AGENTS.md; invoke via `/create-pr` command or when trigger matches |
-| **Claude Code** | Same path via AGENTS.md universal manifest; emulate `.agents/` even if not auto-loaded |
-| **Human contributors** | GitHub pre-fills `.github/PULL_REQUEST_TEMPLATE.md` when opening a PR |
+| Runtime                | How to load                                                                            |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| **Cursor**             | Skill listed in AGENTS.md; invoke via `/create-pr` command or when trigger matches     |
+| **Claude Code**        | Same path via AGENTS.md universal manifest; emulate `.agents/` even if not auto-loaded |
+| **Human contributors** | GitHub pre-fills `.github/PULL_REQUEST_TEMPLATE.md` when opening a PR                  |
 
 ## Related artefacts
 

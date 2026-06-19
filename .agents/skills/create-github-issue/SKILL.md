@@ -89,7 +89,7 @@ Use this template verbatim for section headings:
 
 Before submitting, verify:
 
-- [ ] **Context** explains *why*, not *how*
+- [ ] **Context** explains _why_, not _how_
 - [ ] Every **In Scope / Done When** item is testable or observable
 - [ ] **Out of Scope** names at least one exclusion when the request is broad
 - [ ] No duplicate content across sections
@@ -176,11 +176,11 @@ When assigning work to Cursor or Claude Code, include in the prompt:
 
 ## Runtime compatibility
 
-| Runtime | How to load |
-| ------- | ----------- |
-| **Cursor** | Skill listed in AGENTS.md; agent reads `.agents/skills/create-github-issue/SKILL.md` when trigger matches |
-| **Claude Code** | Same path via AGENTS.md universal manifest; emulate `.agents/` even if not auto-loaded |
-| **Human contributors** | Use the **Task** template at `.github/ISSUE_TEMPLATE/task.yml` when opening issues on GitHub |
+| Runtime                | How to load                                                                                               |
+| ---------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Cursor**             | Skill listed in AGENTS.md; agent reads `.agents/skills/create-github-issue/SKILL.md` when trigger matches |
+| **Claude Code**        | Same path via AGENTS.md universal manifest; emulate `.agents/` even if not auto-loaded                    |
+| **Human contributors** | Use the **Task** template at `.github/ISSUE_TEMPLATE/task.yml` when opening issues on GitHub              |
 
 ## Related artefacts
 

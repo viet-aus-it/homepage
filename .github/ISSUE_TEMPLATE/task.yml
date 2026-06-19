@@ -1,6 +1,6 @@
 name: Task
 description: Propose scoped work with context, acceptance criteria, and explicit exclusions
-title: "[TASK] "
+title: '[TASK] '
 labels: []
 body:
   - type: markdown

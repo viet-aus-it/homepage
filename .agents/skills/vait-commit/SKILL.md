@@ -35,18 +35,18 @@ Load this skill when the user asks to:
 
 ### Types
 
-| Type | When to use |
-| ---- | ----------- |
-| `feat` | New feature or user-visible behaviour |
-| `fix` | Bug fix |
-| `docs` | Documentation only |
-| `chore` | Tooling, config, skills, templates, deps |
+| Type       | When to use                                             |
+| ---------- | ------------------------------------------------------- |
+| `feat`     | New feature or user-visible behaviour                   |
+| `fix`      | Bug fix                                                 |
+| `docs`     | Documentation only                                      |
+| `chore`    | Tooling, config, skills, templates, deps                |
 | `refactor` | Code change that neither fixes a bug nor adds a feature |
-| `test` | Adding or correcting tests |
-| `build` | Build system or deployment config |
-| `ci` | CI workflow changes |
-| `style` | Formatting, no logic change |
-| `perf` | Performance improvement |
+| `test`     | Adding or correcting tests                              |
+| `build`    | Build system or deployment config                       |
+| `ci`       | CI workflow changes                                     |
+| `style`    | Formatting, no logic change                             |
+| `perf`     | Performance improvement                                 |
 
 Append `!` after the type for breaking changes (e.g. `feat!: remove legacy API`).
 
@@ -54,7 +54,7 @@ Append `!` after the type for breaking changes (e.g. `feat!: remove legacy API`)
 
 - **Subject**: lowercase, imperative mood, no trailing period, max ~72 characters
 - **Scope** (optional): area affected, e.g. `feat(hero):`, `docs(contributing):`
-- **Body**: explain *why*; keep concise (~5 lines max); bullet points when listing related changes
+- **Body**: explain _why_; keep concise (~5 lines max); bullet points when listing related changes
 - **No emojis** in subject or body
 - **Australian English** in body text
 - Link issues in body when relevant: `Closes #N`, `Relates to #N`
@@ -102,12 +102,12 @@ git add src/components/Hero.tsx src/components/Hero.test.tsx
 
 One commit = one logically complete, reviewable unit.
 
-| Do commit together | Do not combine |
-| ------------------ | -------------- |
-| A feature and its tests | Two unrelated features |
-| A fix and the test proving it | A feature and drive-by refactors in other files |
+| Do commit together                     | Do not combine                                       |
+| -------------------------------------- | ---------------------------------------------------- |
+| A feature and its tests                | Two unrelated features                               |
+| A fix and the test proving it          | A feature and drive-by refactors in other files      |
 | A skill and its AGENTS.md registration | Formatting-only changes mixed with behaviour changes |
-| Docs that describe the same change | Issue template and unrelated component fix |
+| Docs that describe the same change     | Issue template and unrelated component fix           |
 
 When multiple unrelated changes exist, make **separate commits** with explicit staging for each.
 
@@ -126,11 +126,13 @@ Identify which files belong to the requested commit. Exclude anything unrelated.
 
 ### Step 2: Pre-commit checks
 
-When the commit includes code (not docs/templates-only):
+**Always run before committing** — `oxfmt` covers markdown, YAML, and code:
 
 ```bash
 pnpm run lint:fix && pnpm run typecheck
 ```
+
+If `lint:fix` reformats staged or unstaged files, include those paths in this commit. Do not commit with formatting drift.
 
 Pre-commit hooks run on commit; do not skip hooks (`--no-verify`) unless the user explicitly requests it.
 
@@ -145,7 +147,7 @@ Confirm the staged set matches the intended atomic unit.
 
 ### Step 4: Draft the message
 
-Analyse staged changes. Focus the message on *why*. Follow Conventional Commits and recent repo style from `git log`.
+Analyse staged changes. Focus the message on _why_. Follow Conventional Commits and recent repo style from `git log`.
 
 ### Step 5: Commit
 
@@ -197,16 +199,16 @@ Before committing, verify:
 - [ ] Only relevant files are staged (no `git add .`)
 - [ ] Staged changes form one atomic unit
 - [ ] Message follows Conventional Commits
-- [ ] Body explains *why* where non-obvious
+- [ ] Body explains _why_ where non-obvious
 - [ ] No secrets or `.env` files staged
-- [ ] Lint and typecheck pass (for code changes)
+- [ ] `pnpm run lint:fix && pnpm run typecheck` pass
 - [ ] `git log -1` looks correct after commit
 
 ## Runtime compatibility
 
-| Runtime | How to load |
-| ------- | ----------- |
-| **Cursor** | Skill listed in AGENTS.md; invoke when user asks to commit |
+| Runtime         | How to load                                                                            |
+| --------------- | -------------------------------------------------------------------------------------- |
+| **Cursor**      | Skill listed in AGENTS.md; invoke when user asks to commit                             |
 | **Claude Code** | Same path via AGENTS.md universal manifest; emulate `.agents/` even if not auto-loaded |
 
 ## Related artefacts
