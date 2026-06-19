@@ -30,7 +30,7 @@ Thank you for your interest in contributing to the VAIT Homepage project!
 ## Where to Ask for Help
 
 - Use the team chat or open a GitHub Discussion for questions.
-- For bugs or feature requests, open an issue.
+- For bugs or feature requests, open an issue using the **Task** template (`.github/ISSUE_TEMPLATE/task.yml`). See the [create-github-issue skill](../../.agents/skills/create-github-issue/SKILL.md) for section guidance.
 
 ---
 

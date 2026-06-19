@@ -39,7 +39,8 @@ All changes must be:
 ```
 .agents/
   skills/
-    update-docs/SKILL.md  # Documentation audit and update workflow
+    create-github-issue/SKILL.md  # Structured GitHub issue authoring (Context / Scope / Out of Scope)
+    update-docs/SKILL.md            # Documentation audit and update workflow
   rules/           # Domain-specific guidelines and constraints
     commands.md
     code-style.md
@@ -93,6 +94,7 @@ Load these rules when working on relevant domains:
 
 Load a skill when its trigger condition matches the task:
 
+- **[create-github-issue](.agents/skills/create-github-issue/SKILL.md)** — Draft and file GitHub issues with Context, In Scope / Done When, and Out of Scope. Trigger: user asks to create, draft, or standardise an issue.
 - **[update-docs](.agents/skills/update-docs/SKILL.md)** — Audit and update docs after code changes. Trigger: user asks to update, sync, or audit documentation.
 
 ## Quick Reference

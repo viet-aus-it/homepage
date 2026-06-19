@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Contributing guide
+    url: https://github.com/viet-aus-it/homepage/blob/master/docs/how-to/02-contributing.md
+    about: Setup, conventions, and how to propose changes
+  - name: Ask a question
+    url: https://github.com/viet-aus-it/homepage/discussions
+    about: Use Discussions for questions that are not actionable tasks
