@@ -224,10 +224,10 @@ src/components/ui/button/
 ### Page Structure
 
 ```
-src/pages/index-page/
+src/pages/home-v2/
 ├── index.tsx         # Page component
 ├── index.test.tsx    # Page tests
-└── [styles].css      # Page-specific styles (if needed)
+└── [section].tsx     # Section components
 ```
 
 ## Error Handling
