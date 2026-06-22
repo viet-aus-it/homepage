@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 const NAV_SCROLL_THRESHOLD_PX = 24;
 
 interface LandingNavProps {
-  /** Base path for hash links (`/v2` during staging, `/` after promotion). */
+  /** Base path for hash links (typically `/`). */
   homePath?: string;
 }
 

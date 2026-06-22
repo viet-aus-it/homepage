@@ -21,7 +21,7 @@ export interface SiteNavLink extends SiteNavItem {
 /**
  * Resolves the href for a nav item against a home base path.
  * @param item - Navigation item configuration.
- * @param homePath - Base path for hash links (`/` after promotion, `/v2` during staging).
+ * @param homePath - Base path for hash links (typically `/`).
  */
 export function resolveNavHref(item: SiteNavItem, homePath: string): string | undefined {
   if (item.external) {
@@ -77,5 +77,5 @@ export const FOOTER_FOLLOW: SiteNavItem[] = [
   { label: 'YouTube', external: SOCIAL_LINKS.YOUTUBE_URL, enabled: true },
 ];
 
-/** Home route path (`/v2` during staging, `/` after promotion). */
-export const HOME_PATH = '/v2';
+/** Home route path. */
+export const HOME_PATH = '/';
