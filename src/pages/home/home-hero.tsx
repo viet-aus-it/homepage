@@ -3,14 +3,14 @@ import { MapPin } from 'lucide-react';
 import DiscordCtaLink from '@/components/ui/discord-cta-link';
 import { COMMUNITY_MEMBER_COUNT, MARKETING_IMAGES } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import { HOME_SECTION_INNER, LANDING_NAV_CLEARANCE } from '@/pages/home-v2/home-section';
+import { HOME_SECTION_INNER, HOME_NAV_CLEARANCE } from '@/pages/home/home-section';
 
 /**
  * Dark split-layout hero with community photo and member stat badge.
  */
 function HomeHero() {
   return (
-    <section className={cn('relative overflow-hidden bg-brand-near-black', LANDING_NAV_CLEARANCE)}>
+    <section className={cn('relative overflow-hidden bg-brand-near-black', HOME_NAV_CLEARANCE)}>
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.045)_1px,transparent_1.5px)] bg-size-[24px_24px]"
         aria-hidden

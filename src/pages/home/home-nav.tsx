@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 
 const NAV_SCROLL_THRESHOLD_PX = 24;
 
-interface LandingNavProps {
+interface HomeNavProps {
   /** Base path for hash links (typically `/`). */
   homePath?: string;
 }
@@ -47,9 +47,9 @@ function NavLinkItem({ item, homePath, className, onNavigate }: NavLinkItemProps
 }
 
 /**
- * Fixed landing nav — overlays the hero with a transparent bar, solid dark background when scrolled.
+ * Fixed homepage nav — overlays the hero with a transparent bar, solid dark background when scrolled.
  */
-function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
+function HomeNav({ homePath = HOME_PATH }: HomeNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navLinks = getEnabledNavLinks(PRIMARY_NAV, homePath);
@@ -64,7 +64,7 @@ function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 min-h-landing-nav w-full transition-colors duration-200',
+        'fixed inset-x-0 top-0 z-50 min-h-home-nav w-full transition-colors duration-200',
         scrolled ? 'border-b border-white/8 bg-brand-near-black' : 'border-b border-transparent bg-transparent'
       )}
     >
@@ -87,7 +87,7 @@ function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
           type="button"
           className="inline-flex size-11 items-center justify-center rounded-xl border border-white/15 bg-white/8 md:hidden"
           aria-expanded={menuOpen}
-          aria-controls="landing-mobile-menu"
+          aria-controls="home-mobile-menu"
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMenuOpen((open) => !open)}
         >
@@ -96,7 +96,7 @@ function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
       </nav>
 
       <div
-        id="landing-mobile-menu"
+        id="home-mobile-menu"
         aria-hidden={!menuOpen}
         className={cn('border-t border-white/8 bg-brand-near-black px-5 pb-7 md:hidden', menuOpen ? 'block' : 'hidden')}
       >
@@ -121,4 +121,4 @@ function LandingNav({ homePath = HOME_PATH }: LandingNavProps) {
   );
 }
 
-export default LandingNav;
+export default HomeNav;

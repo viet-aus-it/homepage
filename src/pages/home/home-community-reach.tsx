@@ -1,6 +1,6 @@
 import { COMMUNITY_STATS, type CommunityStat } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import HomeSection from '@/pages/home-v2/home-section';
+import HomeSection from '@/pages/home/home-section';
 
 type StatVariant = NonNullable<CommunityStat['variant']> | 'default';
 

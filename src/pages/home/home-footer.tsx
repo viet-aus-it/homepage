@@ -49,9 +49,9 @@ function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
 }
 
 /**
- * Redesign footer for the v2 landing page.
+ * Homepage footer — three-column layout on dark background.
  */
-function HomeV2Footer() {
+function HomeFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -97,4 +97,4 @@ function HomeV2Footer() {
   );
 }
 
-export default HomeV2Footer;
+export default HomeFooter;

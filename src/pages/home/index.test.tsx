@@ -5,7 +5,7 @@ import { ACNC, ORGANISATION } from '@/lib/constants';
 import { FOOTER_FOLLOW, getEnabledNavLinks, HOME_PATH } from '@/lib/site-nav';
 import { renderHomeRoute } from '@/test-utils/render-home-route';
 
-describe('HomeV2Page', () => {
+describe('HomePage', () => {
   it('renders hero heading and Discord links', async () => {
     await renderHomeRoute();
     expect(screen.getByRole('heading', { level: 1, name: /Community\./i })).toBeInTheDocument();

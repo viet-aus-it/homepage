@@ -1,6 +1,6 @@
 import { MARKETING_IMAGES } from '@/lib/constants';
 
-/** Static event preview card for the v2 landing page. */
+/** Static event preview card for the homepage. */
 export interface EventPreviewCard {
   id: string;
   badge: string;

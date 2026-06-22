@@ -43,7 +43,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Montserrat Variable', ui-sans-serif, system-ui, sans-serif;
-  --spacing-landing-nav: var(--landing-nav-height);
+  --spacing-home-nav: var(--home-nav-height);
   --color-brand-yellow: var(--brand-yellow);
   --color-brand-near-black: var(--brand-near-black);
   --color-brand-on-dark-muted: var(--brand-text-on-dark-muted);
@@ -105,8 +105,8 @@
   --brand-footer-dark: #141414;
   /* Deprecated alias — kept so existing `*-brand-yellow-dark` usages resolve to the new shade */
   --brand-yellow-dark: var(--brand-yellow-shade);
-  /* Fixed landing nav bar height (py-5 + control row; mobile menu button is taller). */
-  --landing-nav-height: 5.25rem;
+  /* Fixed home nav bar height (py-5 + control row; mobile menu button is taller). */
+  --home-nav-height: 5.25rem;
   /* Redesign text and surfaces on dark backgrounds */
   --brand-text-on-dark-muted: #b9b9b9;
   --brand-text-on-dark-subtle: #9a9a9a;
@@ -121,7 +121,7 @@
 
 @media (min-width: 768px) {
   :root {
-    --landing-nav-height: 4.5rem;
+    --home-nav-height: 4.5rem;
   }
 }
 

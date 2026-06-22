@@ -3,7 +3,7 @@ import { Users } from 'lucide-react';
 import type { EventPreviewCard } from '@/lib/events-preview';
 import { EVENT_PREVIEW_CARDS } from '@/lib/events-preview';
 import { cn } from '@/lib/utils';
-import HomeSection from '@/pages/home-v2/home-section';
+import HomeSection from '@/pages/home/home-section';
 
 interface EventPreviewCardArticleProps {
   event: EventPreviewCard;

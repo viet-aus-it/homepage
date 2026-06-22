@@ -1,14 +1,14 @@
-import HomeCommunityReach from '@/pages/home-v2/home-community-reach';
-import HomeCtaBand from '@/pages/home-v2/home-cta-band';
-import HomeEventsPreview from '@/pages/home-v2/home-events-preview';
-import HomeHero from '@/pages/home-v2/home-hero';
-import HomeMarquee from '@/pages/home-v2/home-marquee';
-import HomePillars from '@/pages/home-v2/home-pillars';
-import HomeV2Footer from '@/pages/home-v2/home-v2-footer';
-import LandingNav from '@/pages/home-v2/landing-nav';
+import HomeCommunityReach from '@/pages/home/home-community-reach';
+import HomeCtaBand from '@/pages/home/home-cta-band';
+import HomeEventsPreview from '@/pages/home/home-events-preview';
+import HomeFooter from '@/pages/home/home-footer';
+import HomeHero from '@/pages/home/home-hero';
+import HomeMarquee from '@/pages/home/home-marquee';
+import HomeNav from '@/pages/home/home-nav';
+import HomePillars from '@/pages/home/home-pillars';
 
 /** Production homepage at `/`. */
-function HomeV2Page() {
+function HomePage() {
   return (
     <div className="min-h-screen bg-white text-brand-near-black">
       <a
@@ -17,7 +17,7 @@ function HomeV2Page() {
       >
         Skip to content
       </a>
-      <LandingNav />
+      <HomeNav />
       <div className="bg-brand-near-black">
         <HomeHero />
       </div>
@@ -28,9 +28,9 @@ function HomeV2Page() {
         <HomeEventsPreview />
         <HomeCtaBand />
       </main>
-      <HomeV2Footer />
+      <HomeFooter />
     </div>
   );
 }
 
-export default HomeV2Page;
+export default HomePage;
