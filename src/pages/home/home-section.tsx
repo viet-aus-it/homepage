@@ -2,11 +2,11 @@ import type { ReactNode } from 'react';
 
 import { cn } from '@/lib/utils';
 
-/** Shared horizontal + vertical padding for landing sections (inner container only). */
+/** Shared horizontal + vertical padding for homepage sections (inner container only). */
 export const HOME_SECTION_INNER = 'mx-auto w-full max-w-7xl px-5 py-16 md:px-12 md:py-24';
 
-/** Top padding for sections whose content starts below the fixed landing nav. */
-export const LANDING_NAV_CLEARANCE = 'pt-landing-nav';
+/** Top padding for sections whose content starts below the fixed home nav. */
+export const HOME_NAV_CLEARANCE = 'pt-home-nav';
 
 interface HomeSectionProps {
   id?: string;
@@ -20,7 +20,7 @@ interface HomeSectionProps {
 }
 
 /**
- * Landing section shell: outer `section` owns surface styles; inner container owns spacing.
+ * Homepage section shell: outer `section` owns surface styles; inner container owns spacing.
  */
 function HomeSection({ id, className, innerClassName, children, fullBleed = false }: HomeSectionProps) {
   if (fullBleed) {

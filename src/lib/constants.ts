@@ -26,7 +26,7 @@ export const SOCIAL_LINKS = {
 } as const;
 
 /**
- * Community reach figures for the v2 landing page.
+ * Community reach figures for the homepage.
  *
  * Values are pre-formatted strings (e.g. `1,448`, `8/8`) rather than numbers run through
  * `Intl.NumberFormat` or similar. The counts are static marketing copy that changes rarely,

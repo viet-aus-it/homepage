@@ -1,6 +1,6 @@
 import DiscordCtaLink from '@/components/ui/discord-cta-link';
 import { cn } from '@/lib/utils';
-import { HOME_SECTION_INNER } from '@/pages/home-v2/home-section';
+import { HOME_SECTION_INNER } from '@/pages/home/home-section';
 
 /**
  * Dark centred Discord call-to-action band.

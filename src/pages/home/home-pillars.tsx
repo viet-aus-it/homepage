@@ -1,6 +1,6 @@
 import { Activity, CalendarCheck, MessagesSquare } from 'lucide-react';
 
-import HomeSection from '@/pages/home-v2/home-section';
+import HomeSection from '@/pages/home/home-section';
 
 const PILLARS = [
   {

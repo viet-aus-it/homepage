@@ -39,10 +39,10 @@ DESIGN.md      — Homepage visual design system (repository root)
 
 Marketing UI is documented in [DESIGN.md](../../DESIGN.md) at the repository root (not under `docs/`). That file is the source of truth for:
 
-- Brand colours (`--brand-*` in `src/index.css`) and warm canvas/backdrop treatment
-- Named homepage components (`nav-bar`, `hero`, `content-shell`, `join-community-cta`, etc.)
+- Brand colours (`--brand-*` in `src/index.css`) and landing page surfaces (dark hero, warm mid-page bands, dark footer)
+- Named homepage components (`home-nav`, `home-hero`, `home-section`, `discord-cta-link`, `home-footer`, etc.)
 - Typography hierarchy, spacing, and responsive breakpoints
-- Do's and don'ts (e.g. brand yellow for emphasis only, dark footer, Discord as primary CTA)
+- Do's and don'ts (e.g. brand yellow for emphasis only, dark hero/footer bookends, Discord as primary CTA)
 
 When changing landing-page visuals, read `DESIGN.md` first and update it in the same pull request if tokens or component contracts change.
 
