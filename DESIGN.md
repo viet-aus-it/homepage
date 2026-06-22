@@ -174,9 +174,9 @@ Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editor
 
 ### Logo
 
-**`logo`** — SVG tick-and-star mark. Variants: `colour` (yellow + gray ticks), `gray`, `dark-gray` (charcoal + gray). Props: standard SVG attributes (`className`, `width`, `height`).
+**`logo`** — SVG tick-and-star mark rendered by `src/components/ui/logo.tsx` (`{component.logo}`). Variants: `colour` (yellow + gray ticks), `gray`, `dark-gray` (charcoal + gray). Props: standard SVG attributes (`className`, `width`, `height`).
 
-**Favicon assets** — Browser chrome and iOS home-screen icons use a **dedicated favicon mark** (rounded `{colors.brand-gray-dark}` tile, yellow `#F5C518` + white ticks) for legibility at 16×16 / 32×32 — separate from the full `{component.logo}` used in-app. Design source: `tmp/logo-favicon.svg` (not served). One set for all routes (`/`, `/v2`, etc.), declared in `index.html`:
+**Favicon assets** — Browser chrome and iOS home-screen icons use a **dedicated favicon mark** (rounded `{colors.brand-gray-dark}` tile, yellow `#F5C518` + white ticks) for legibility at 16×16 / 32×32 — separate from `{component.logo}` above. Design source: `tmp/logo-favicon.svg` (not served). One set for all routes (`/`, `/v2`, etc.), declared in `index.html`:
 
 | File                   | Size      | Usage                                      |
 | ---------------------- | --------- | ------------------------------------------ |
@@ -185,7 +185,7 @@ Depth is **atmospheric** (gradient blobs) plus **one card elevation** for editor
 | `favicon-16x16.png`    | 16×16     | PNG fallback                               |
 | `apple-touch-icon.png` | 180×180   | iOS home screen (`rel="apple-touch-icon"`) |
 
-Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html` also sets `theme-color` to `{colors.canvas}` (`#fafaf9`). In-app `{component.logo}` remains unchanged.
+Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html` also sets `theme-color` to `{colors.canvas}` (`#fafaf9`).
 
 ### Tabs / Badges
 
