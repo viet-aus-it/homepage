@@ -224,7 +224,7 @@ src/components/ui/button/
 ### Page Structure
 
 ```
-src/pages/home-v2/
+src/pages/home/
 ├── index.tsx         # Page component
 ├── index.test.tsx    # Page tests
 └── [section].tsx     # Section components

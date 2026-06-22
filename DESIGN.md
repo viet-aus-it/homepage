@@ -1,21 +1,21 @@
 ## Overview
 
-The VAIT homepage is the public face of **Vietnamese Australians in Information Technology Inc.** — a not-for-profit community for Viet-Au IT professionals in Australia. The page opens on a **white canvas** with a **fixed dark navigation bar** (`{component.landing-nav}`) over a **near-black hero band** (`{component.home-hero}`). Brand yellow (`{colors.brand-yellow}` — `#F5C518`) punctuates CTAs, the marquee band, and stat cards against charcoal and warm stone surfaces.
+The VAIT homepage is the public face of **Vietnamese Australians in Information Technology Inc.** — a not-for-profit community for Viet-Au IT professionals in Australia. The page opens on a **white canvas** with a **fixed dark navigation bar** (`{component.home-nav}`) over a **near-black hero band** (`{component.home-hero}`). Brand yellow (`{colors.brand-yellow}` — `#F5C518`) punctuates CTAs, the marquee band, and stat cards against charcoal and warm stone surfaces.
 
 Type voice runs **Montserrat** (display/headings) and **Inter** (body), both self-hosted via `@fontsource-variable/*`. Hierarchy is carried by size steps, weight (Bold 700 for h1, SemiBold 600 for section titles), and colour (yellow emphasis on stat cards, muted grays on dark surfaces).
 
-The page stacks vertically: dark hero → yellow hashtag marquee → warm-surface pillars and community reach → events preview → dark CTA band → three-column dark footer (`{component.home-v2-footer}`). **Discord** is the single primary conversion path (`{component.discord-cta-link}`).
+The page stacks vertically: dark hero → yellow hashtag marquee → warm-surface pillars and community reach → events preview → dark CTA band → three-column dark footer (`{component.home-footer}`). **Discord** is the single primary conversion path (`{component.discord-cta-link}`).
 
 **Key Characteristics:**
 
 - White page floor with dark hero and footer bookends; warm stone bands (`{colors.brand-surface-warm}`) for mid-page sections.
 - Brand yellow accent on CTAs, marquee, and stat labels; near-black for hero and nav scroll state.
 - Tick-and-star **VAIT logo** SVG (`{component.logo}`) with three colourways: full colour, gray, dark-gray.
-- Fixed landing nav with transparent-to-solid scroll transition; mobile sheet with ARIA toggles.
+- Fixed home nav with transparent-to-solid scroll transition; mobile sheet with ARIA toggles.
 - Real community photography in hero and event cards.
 - Skip link targets `#main-content`; title and description set in `index.html`.
 
-**Route:** `/` via `src/routes/index.tsx` → `src/pages/home-v2/`. Navigation hash links resolve against `HOME_PATH = '/'` in `src/lib/site-nav.ts`.
+**Route:** `/` via `src/routes/index.tsx` → `src/pages/home/`. Navigation hash links resolve against `HOME_PATH = '/'` in `src/lib/site-nav.ts`.
 
 ## Colors
 
@@ -96,9 +96,9 @@ Both tokens are registered in `src/index.css` `@theme inline` and installed as `
 ### Spacing System
 
 - **Base unit:** 4px (Tailwind default).
-- **Landing nav height** (`{spacing.landing-nav}` — `--landing-nav-height`): `5.25rem` mobile / `4.5rem` desktop. Utilities: `pt-landing-nav`, `min-h-landing-nav`.
+- **Home nav height** (`{spacing.home-nav}` — `--home-nav-height`): `5.25rem` mobile / `4.5rem` desktop. Utilities: `pt-home-nav`, `min-h-home-nav`.
 - **Section padding:** Defined per section via `{component.home-section}` inner container (`HOME_SECTION_INNER`).
-- **Hero clearance:** `LANDING_NAV_CLEARANCE` exported from `{component.home-section}` so hero content clears the fixed nav.
+- **Hero clearance:** `HOME_NAV_CLEARANCE` exported from `{component.home-section}` so hero content clears the fixed nav.
 
 ### Grid & Container
 
@@ -135,7 +135,7 @@ Depth is **surface contrast** plus **CTA hover glow** — not a multi-shadow mar
 
 ### Navigation
 
-**`landing-nav`** — Fixed top bar (`position: fixed`). Transparent over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Internal links use TanStack Router `Link`; hash links resolve via `HOME_PATH` in `src/lib/site-nav.ts`. Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`.
+**`home-nav`** — Fixed top bar (`position: fixed`). Transparent over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Internal links use TanStack Router `Link`; hash links resolve via `HOME_PATH` in `src/lib/site-nav.ts`. Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`.
 
 ### CTAs
 
@@ -143,13 +143,13 @@ Depth is **surface contrast** plus **CTA hover glow** — not a multi-shadow mar
 
 ### Page sections
 
-**`home-hero`** — Dark split hero with dot-grid texture, community photo, member badge. Section uses `{spacing.landing-nav}` top padding (`LANDING_NAV_CLEARANCE`) so content clears the fixed nav while the dark background extends under it.
+**`home-hero`** — Dark split hero with dot-grid texture, community photo, member badge. Section uses `{spacing.home-nav}` top padding (`HOME_NAV_CLEARANCE`) so content clears the fixed nav while the dark background extends under it.
 
-**`home-section`** — Section shell: outer `section` owns surface styles; inner container owns `{HOME_SECTION_INNER}` spacing. Export `LANDING_NAV_CLEARANCE` for hero offset.
+**`home-section`** — Section shell: outer `section` owns surface styles; inner container owns `{HOME_SECTION_INNER}` spacing. Export `HOME_NAV_CLEARANCE` for hero offset.
 
 **`home-marquee`** — Yellow hashtag band; duplicate track for infinite scroll; second track hidden under `prefers-reduced-motion`.
 
-**`home-v2-footer`** — Three-column footer on `{colors.brand-footer-dark}` (`4fr / 1fr / 1fr` grid at `lg`): brand blurb + Discord CTA, Explore, Follow. Bottom bar stacks legal copy (copyright, ABN, tagline) beside the **ACNC Registered Charity Tick** (reverse mono, 76px height, links to the ACNC charity register). Follow links: `FOOTER_FOLLOW` in `src/lib/site-nav.ts` (URLs from `SOCIAL_LINKS` in `constants.ts`; short links managed in [static-sites](https://github.com/viet-aus-it/static-sites)). ACNC asset and URLs: `ACNC` in `constants.ts`; logo at `public/images/acnc-registered-charity-reverse.png`.
+**`home-footer`** — Three-column footer on `{colors.brand-footer-dark}` (`4fr / 1fr / 1fr` grid at `lg`): brand blurb + Discord CTA, Explore, Follow. Bottom bar stacks legal copy (copyright, ABN, tagline) beside the **ACNC Registered Charity Tick** (reverse mono, 76px height, links to the ACNC charity register). Follow links: `FOOTER_FOLLOW` in `src/lib/site-nav.ts` (URLs from `SOCIAL_LINKS` in `constants.ts`; short links managed in [static-sites](https://github.com/viet-aus-it/static-sites)). ACNC asset and URLs: `ACNC` in `constants.ts`; logo at `public/images/acnc-registered-charity-reverse.png`.
 
 ### Logo
 
@@ -189,11 +189,11 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 
 ### Breakpoints
 
-| Name             | Width    | Key Changes                                                               |
-| ---------------- | -------- | ------------------------------------------------------------------------- |
-| Mobile           | < 768px  | `{component.landing-nav}` mobile sheet; hero stacks; footer columns stack |
-| Tablet / Desktop | ≥ 768px  | Full horizontal nav; hero split layout; footer three-column grid          |
-| Wide             | ≥ 1024px | `max-w-screen-lg` containers centred with side margin via `mx-auto`       |
+| Name             | Width    | Key Changes                                                            |
+| ---------------- | -------- | ---------------------------------------------------------------------- |
+| Mobile           | < 768px  | `{component.home-nav}` mobile sheet; hero stacks; footer columns stack |
+| Tablet / Desktop | ≥ 768px  | Full horizontal nav; hero split layout; footer three-column grid       |
+| Wide             | ≥ 1024px | `max-w-screen-lg` containers centred with side margin via `mx-auto`    |
 
 ### Touch Targets
 
@@ -208,9 +208,9 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 
 ## Iteration Guide
 
-1. Focus on **one component** per change — reference keys above (`{component.landing-nav}`, etc.).
+1. Focus on **one component** per change — reference keys above (`{component.home-nav}`, etc.).
 2. Map new colours to CSS variables in `src/index.css` (`--brand-*`) and add utilities in `@layer utilities` — avoid inline hex in components.
-3. When adding pages, reuse `{component.landing-nav}` + `{component.home-v2-footer}` pattern before inventing new shells.
+3. When adding pages, reuse `{component.home-nav}` + `{component.home-footer}` pattern before inventing new shells.
 4. Nav and footer link changes belong in `src/lib/site-nav.ts` — not hard-coded in presentational components.
 5. Logo colour changes must update `LOGO_COLOURS` in `{component.logo}` and CSS tokens together.
 6. Display typography changes should update the hierarchy table in this file in the same PR.
