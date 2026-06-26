@@ -1,6 +1,6 @@
-import MarketingSection from '@/components/marketing/marketing-section';
-import SectionHeader from '@/components/marketing/section-header';
-import StatCard from '@/components/marketing/stat-card';
+import PageSection from '@/components/site/page-section';
+import SectionHeader from '@/components/site/section-header';
+import StatCard from '@/components/site/stat-card';
 import { COMMUNITY_STATS } from '@/lib/constants';
 
 /**
@@ -8,7 +8,7 @@ import { COMMUNITY_STATS } from '@/lib/constants';
  */
 function HomeCommunityReach() {
   return (
-    <MarketingSection id="community-reach" className="border-y border-brand-border-warm bg-brand-surface-warm">
+    <PageSection id="community-reach" className="border-y border-brand-border-warm bg-brand-surface-warm">
       <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <SectionHeader
           constrained
@@ -23,7 +23,7 @@ function HomeCommunityReach() {
           ))}
         </div>
       </div>
-    </MarketingSection>
+    </PageSection>
   );
 }
 

@@ -1,6 +1,6 @@
 import { MapPin } from 'lucide-react';
 
-import { MARKETING_NAV_CLEARANCE, MARKETING_SECTION_INNER } from '@/components/marketing/marketing-section';
+import { PAGE_NAV_CLEARANCE, PAGE_SECTION_INNER } from '@/components/site/page-section';
 import DiscordCtaLink from '@/components/ui/discord-cta-link';
 import { COMMUNITY_MEMBER_COUNT, MARKETING_IMAGES } from '@/lib/constants';
 import { cn } from '@/lib/utils';
@@ -10,13 +10,13 @@ import { cn } from '@/lib/utils';
  */
 function HomeHero() {
   return (
-    <section className={cn('relative overflow-hidden bg-brand-near-black', MARKETING_NAV_CLEARANCE)}>
+    <section className={cn('relative overflow-hidden bg-brand-near-black', PAGE_NAV_CLEARANCE)}>
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.045)_1px,transparent_1.5px)] bg-size-[24px_24px]"
         aria-hidden
       />
 
-      <div className={cn(MARKETING_SECTION_INNER, 'relative grid items-center gap-9 pt-0 md:grid-cols-[1.05fr_0.95fr] md:gap-14')}>
+      <div className={cn(PAGE_SECTION_INNER, 'relative grid items-center gap-9 pt-0 md:grid-cols-[1.05fr_0.95fr] md:gap-14')}>
         <div>
           <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-brand-yellow/30 bg-brand-yellow/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.11em] text-brand-yellow">
             <span className="inline-block size-1.5 rounded-full bg-brand-yellow" aria-hidden />

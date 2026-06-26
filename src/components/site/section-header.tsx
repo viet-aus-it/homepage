@@ -12,7 +12,7 @@ interface SectionHeaderProps {
 }
 
 /**
- * Reusable eyebrow + heading + optional lede block for marketing sections.
+ * Reusable eyebrow + heading + optional lede block for site page sections.
  */
 function SectionHeader({ eyebrow, title, description, className, constrained = false }: SectionHeaderProps) {
   return (

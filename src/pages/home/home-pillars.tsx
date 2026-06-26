@@ -1,7 +1,7 @@
 import { Activity, CalendarCheck, MessagesSquare } from 'lucide-react';
 
-import MarketingSection from '@/components/marketing/marketing-section';
-import SectionHeader from '@/components/marketing/section-header';
+import PageSection from '@/components/site/page-section';
+import SectionHeader from '@/components/site/section-header';
 
 const PILLARS = [
   {
@@ -28,7 +28,7 @@ const PILLARS = [
  */
 function HomePillars() {
   return (
-    <MarketingSection className="bg-white">
+    <PageSection className="bg-white">
       <SectionHeader eyebrow="What you get" title="Help when you're stuck. Mates when you're not." className="max-w-[620px]" />
 
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -45,7 +45,7 @@ function HomePillars() {
           </article>
         ))}
       </div>
-    </MarketingSection>
+    </PageSection>
   );
 }
 

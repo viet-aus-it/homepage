@@ -1,5 +1,5 @@
-import SiteFooter from '@/components/marketing/site-footer';
-import SiteNav from '@/components/marketing/site-nav';
+import SiteFooter from '@/components/site/site-footer';
+import SiteNav from '@/components/site/site-nav';
 import HomeCommunityReach from '@/pages/home/home-community-reach';
 import HomeCtaBand from '@/pages/home/home-cta-band';
 import HomeEventsPreview from '@/pages/home/home-events-preview';

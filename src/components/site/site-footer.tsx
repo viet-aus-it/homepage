@@ -54,7 +54,7 @@ interface SiteFooterProps {
 }
 
 /**
- * Shared marketing footer — three-column layout on dark background.
+ * Shared site footer — three-column layout on dark background.
  */
 function SiteFooter({ homePath = HOME_PATH }: SiteFooterProps) {
   const currentYear = new Date().getFullYear();

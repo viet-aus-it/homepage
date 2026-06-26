@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
-import SiteNav from '@/components/marketing/site-nav';
+import SiteNav from '@/components/site/site-nav';
 import type { SiteNavItem } from '@/lib/site-nav';
 
 async function renderSiteNav(

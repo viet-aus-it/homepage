@@ -1,7 +1,7 @@
 import { Users } from 'lucide-react';
 
-import MarketingSection from '@/components/marketing/marketing-section';
-import SectionHeader from '@/components/marketing/section-header';
+import PageSection from '@/components/site/page-section';
+import SectionHeader from '@/components/site/section-header';
 import type { EventPreviewCard } from '@/lib/events-preview';
 import { EVENT_PREVIEW_CARDS } from '@/lib/events-preview';
 import { cn } from '@/lib/utils';
@@ -59,14 +59,14 @@ function HomeEventsPreview() {
   const [featuredEvent, recurringEvent] = EVENT_PREVIEW_CARDS;
 
   return (
-    <MarketingSection id="events-preview" className="bg-white">
+    <PageSection id="events-preview" className="bg-white">
       <SectionHeader eyebrow="What's on" title="Come hang out IRL." />
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
         {featuredEvent && <EventPreviewCardArticle event={featuredEvent} />}
         {recurringEvent && <EventPreviewCardArticle event={recurringEvent} />}
       </div>
-    </MarketingSection>
+    </PageSection>
   );
 }
 
