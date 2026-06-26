@@ -54,6 +54,13 @@ export function getEnabledNavLinks(items: readonly SiteNavItem[], homePath: stri
     .filter((item): item is SiteNavLink => item !== null);
 }
 
+/**
+ * Whether a nav item should render as the active route (bold + underline on inner pages).
+ */
+export function isNavLinkActive(item: SiteNavLink, activePath: string): boolean {
+  return item.to === activePath;
+}
+
 /** Primary header navigation — enable items as routes ship. */
 export const PRIMARY_NAV: SiteNavItem[] = [
   { label: 'Community', hash: '#community-reach', enabled: true },
