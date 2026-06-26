@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { getEnabledNavLinks, PRIMARY_NAV, resolveNavHref } from '@/lib/site-nav';
+import { getEnabledNavLinks, isNavLinkActive, PRIMARY_NAV, resolveNavHref } from '@/lib/site-nav';
 
 describe('resolveNavHref', () => {
   it('returns external url when non-empty', () => {
@@ -47,5 +47,17 @@ describe('getEnabledNavLinks', () => {
   it('resolves hash links against homePath="/"', () => {
     const links = getEnabledNavLinks(PRIMARY_NAV, '/');
     expect(links.find((item) => item.label === 'Community')?.href).toBe('/#community-reach');
+  });
+});
+
+describe('isNavLinkActive', () => {
+  it('returns true when route path matches active path', () => {
+    const link = { label: 'Community', to: '/community', enabled: true, href: '/community' };
+    expect(isNavLinkActive(link, '/community')).toBe(true);
+  });
+
+  it('returns false for hash-only items', () => {
+    const link = { label: 'Events', hash: '#events-preview', enabled: true, href: '/#events-preview' };
+    expect(isNavLinkActive(link, '/')).toBe(false);
   });
 });
