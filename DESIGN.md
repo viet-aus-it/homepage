@@ -15,7 +15,7 @@ The page stacks vertically: dark hero → yellow hashtag marquee → warm-surfac
 - Real community photography in hero and event cards.
 - Skip link targets `#main-content`; title and description set in `index.html`.
 
-**Route:** `/` homepage. Hash links in navigation resolve against the site root path.
+**Routes:** `/` homepage; **`/community`** merged About & Community page. Hash links in navigation resolve against the site root path; route links use TanStack Router `to` paths (configured in central nav).
 
 Shared layout structure for public routes is described in [ADR 0001: Shared site layout components](./docs/adr/0001-shared-site-layout-components.md). Visual contracts below use component keys only — not implementation paths.
 
@@ -139,7 +139,12 @@ Structural roles and naming for shared layout pieces are fixed in [ADR 0001](./d
 
 ### Navigation
 
-**`site-nav`** — Shared fixed or sticky top bar for public site pages. **`landing`** variant: fixed over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. **`inner`** variant: sticky dark frosted bar for secondary public routes with active-route underline. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`. Nav destinations are configured centrally, not hard-coded in the component.
+**`site-nav`** — Shared fixed or sticky top bar for public site pages. Two variants:
+
+- **`landing`** — Fixed over the dark homepage hero; transparent at page top, solid `{colors.brand-near-black}` after scroll. Used on `/`.
+- **`inner`** — Sticky dark frosted bar (`backdrop-blur`) for secondary routes. Active route shows yellow underline via `isNavLinkActive`. Used on `/community`.
+
+Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`. Nav destinations are configured centrally, not hard-coded in the component.
 
 ### CTAs
 
@@ -171,6 +176,28 @@ Structural roles and naming for shared layout pieces are fixed in [ADR 0001](./d
 | `apple-touch-icon.png` | 180×180   | iOS home screen (`rel="apple-touch-icon"`) |
 
 Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html` sets `theme-color` to `#ffffff` (page background).
+
+### Community page (`/community`)
+
+Static copy and data live in the community content module. Page sets `document.title` and meta description on mount.
+
+**Layout:** White canvas, `{component.site-nav}` `variant="inner"`, skip link → `#main-content`, `{component.site-footer}`. Section order:
+
+| Section key            | Surface / notes                                                               |
+| ---------------------- | ----------------------------------------------------------------------------- |
+| `community-hero`       | Dark hero band; headline + credibility stats                                  |
+| `community-experience` | Warm surface; four experience cards                                           |
+| `community-reach`      | Warm surface; CSS cartogram + proportional bar chart (`reachBarWidthPercent`) |
+| `community-timeline`   | Vertical milestone timeline                                                   |
+| `community-rings`      | Three belonging rings (Grow / Connect / Build)                                |
+| `community-team`       | Board + contributors; `id="team"` anchor for in-page nav                      |
+| `community-pillars`    | Warm surface; Grow / Connect / Build pillar cards                             |
+| `community-values`     | Values grid                                                                   |
+| `community-cta`        | Dark `{component.cta-band}`; Discord only (no member CTA until `/join` ships) |
+
+**Cross-links:** Homepage community-reach section links to `/community` (“See the whole map →”). `PRIMARY_NAV` and `FOOTER_EXPLORE` Community entries use `to: '/community'`.
+
+**Placeholders:** Team photos use placeholder images until real photography is available.
 
 ## Do's and Don'ts
 
@@ -216,7 +243,7 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 
 1. Focus on **one component** per change — reference keys above (`{component.site-nav}`, etc.).
 2. Map new colours to CSS variables in `src/index.css` (`--brand-*`) and add utilities in `@layer utilities` — avoid inline hex in components.
-3. When adding pages, reuse `{component.site-nav}` + `{component.site-footer}` with the appropriate nav variant.
+3. When adding pages, reuse `{component.site-nav}` + `{component.site-footer}` with the appropriate nav variant (`landing` vs `inner`).
 4. Nav and footer link changes belong in `src/lib/site-nav.ts` — not hard-coded in presentational components.
 5. Logo colour changes must update `LOGO_COLOURS` in `{component.logo}` and CSS tokens together.
 6. Display typography changes should update the hierarchy table in this file in the same PR.
@@ -227,6 +254,6 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 - Dark mode tokens exist in `:root` / `.dark` but the public site does not toggle dark theme.
 - Marquee animation timings and `prefers-reduced-motion` overrides are not formalised beyond hiding the duplicate track.
 - Form inputs and validation states are shadcn defaults — not extracted for public site pages.
-- Additional routes (`not-found`, future pages) are not fully specified in this document.
+- Additional routes (`not-found`, future pages such as `/join`) are not fully specified beyond `/community` in this document.
 - Open Graph and structured data meta tags are not yet implemented.
 - In-app or member portal UI is out of scope — this file covers the public site.
