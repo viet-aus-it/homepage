@@ -15,7 +15,7 @@ The page stacks vertically: dark hero → yellow hashtag marquee → warm-surfac
 - Real community photography in hero and event cards.
 - Skip link targets `#main-content`; title and description set in `index.html`.
 
-**Route:** `/` via `src/routes/index.tsx` → `src/pages/home/`. Navigation hash links resolve against `HOME_PATH = '/'` in `src/lib/site-nav.ts`.
+**Route:** `/` via `src/routes/index.tsx` → `src/pages/home/`. **`/community`** via `src/routes/community.tsx` → `src/pages/community/` (merged About & Community). Navigation hash links resolve against `HOME_PATH = '/'` in `src/lib/site-nav.ts`; route links use TanStack Router `to` paths.
 
 ## Colors
 
@@ -135,7 +135,12 @@ Depth is **surface contrast** plus **CTA hover glow** — not a multi-shadow mar
 
 ### Navigation
 
-**`site-nav`** (`src/components/site/site-nav.tsx`) — Shared fixed/sticky top bar for public site pages. **`landing`** variant: fixed over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. **`inner`** variant: sticky dark frosted bar for secondary routes. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Internal links use TanStack Router `Link`; hash links resolve via `HOME_PATH` in `src/lib/site-nav.ts`. Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`.
+**`site-nav`** (`src/components/site/site-nav.tsx`) — Shared fixed/sticky top bar for public site pages. Two variants:
+
+- **`landing`** — Fixed over the dark homepage hero; transparent at page top, solid `{colors.brand-near-black}` after scroll (`NAV_SCROLL_THRESHOLD_PX`). Used on `/`.
+- **`inner`** — Sticky dark frosted bar (`backdrop-blur`) for secondary routes. Active route shows yellow underline via `isNavLinkActive`. Used on `/community`.
+
+Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Internal links use TanStack Router `Link`; hash links resolve via `HOME_PATH` in `src/lib/site-nav.ts`. Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`. Nav items configured in `src/lib/site-nav.ts`.
 
 ### CTAs
 
@@ -167,6 +172,28 @@ Depth is **surface contrast** plus **CTA hover glow** — not a multi-shadow mar
 | `apple-touch-icon.png` | 180×180   | iOS home screen (`rel="apple-touch-icon"`) |
 
 Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html` sets `theme-color` to `#ffffff` (page background).
+
+### Community page (`/community`)
+
+**Route:** `src/routes/community.tsx` → `src/pages/community/index.tsx`. Static copy and data live in `src/lib/community-content.ts`. Page sets `document.title` and `meta[name="description"]` on mount.
+
+**Layout:** White canvas, `{component.site-nav}` `variant="inner"`, skip link → `#main-content`, `{component.site-footer}`. Section order:
+
+| Section key            | Component                  | Surface / notes                                                               |
+| ---------------------- | -------------------------- | ----------------------------------------------------------------------------- |
+| `community-hero`       | `community-hero.tsx`       | Dark hero band; headline + credibility stats                                  |
+| `community-experience` | `community-experience.tsx` | Warm surface; four experience cards                                           |
+| `community-reach`      | `community-reach.tsx`      | Warm surface; CSS cartogram + proportional bar chart (`reachBarWidthPercent`) |
+| `community-timeline`   | `community-timeline.tsx`   | Vertical milestone timeline                                                   |
+| `community-rings`      | `community-rings.tsx`      | Three belonging rings (Grow / Connect / Build)                                |
+| `community-team`       | `community-team.tsx`       | Board + contributors; `id="team"` anchor for in-page nav                      |
+| `community-pillars`    | `community-pillars.tsx`    | Warm surface; Grow / Connect / Build pillar cards                             |
+| `community-values`     | `community-values.tsx`     | Values grid                                                                   |
+| `community-cta`        | `community-cta.tsx`        | Dark `{component.cta-band}`; Discord only (no member CTA until `/join` ships) |
+
+**Cross-links:** Homepage `home-community-reach` links to `/community` (“See the whole map →”). `PRIMARY_NAV` and `FOOTER_EXPLORE` Community entries use `to: '/community'`.
+
+**Placeholders:** Team photos use `dummyimage.com` via `teamPlaceholderSrc()` until real photography is available.
 
 ## Do's and Don'ts
 
@@ -212,7 +239,7 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 
 1. Focus on **one component** per change — reference keys above (`{component.site-nav}`, etc.).
 2. Map new colours to CSS variables in `src/index.css` (`--brand-*`) and add utilities in `@layer utilities` — avoid inline hex in components.
-3. When adding pages, reuse `{component.site-nav}` + `{component.site-footer}` with the appropriate nav variant.
+3. When adding pages, reuse `{component.site-nav}` + `{component.site-footer}` with the appropriate nav variant (`landing` vs `inner`).
 4. Nav and footer link changes belong in `src/lib/site-nav.ts` — not hard-coded in presentational components.
 5. Logo colour changes must update `LOGO_COLOURS` in `{component.logo}` and CSS tokens together.
 6. Display typography changes should update the hierarchy table in this file in the same PR.
@@ -223,6 +250,6 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 - Dark mode tokens exist in `:root` / `.dark` but the public site does not toggle dark theme.
 - Marquee animation timings and `prefers-reduced-motion` overrides are not formalised beyond hiding the duplicate track.
 - Form inputs and validation states are shadcn defaults — not extracted for public site pages.
-- Additional routes (`not-found`, future pages) are not fully specified in this document.
+- Additional routes (`not-found`, future pages such as `/join`) are not fully specified beyond `/community` in this document.
 - Open Graph and structured data meta tags are not yet implemented.
 - In-app or member portal UI is out of scope — this file covers the public homepage only.
