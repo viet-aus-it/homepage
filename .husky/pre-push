@@ -1,1 +1,2 @@
+./scripts/lint-gate.sh --since-head
 npx lint-prepush

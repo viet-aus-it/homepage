@@ -17,6 +17,7 @@
     "test:preview": "vitest-preview",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix && oxfmt --write",
+    "lint:gate": "pnpm run lint:fix && pnpm run ci",
     "lint:fix:unsafe": "oxlint --fix-dangerously && oxfmt --write",
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
