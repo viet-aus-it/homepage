@@ -45,6 +45,8 @@ All changes must be:
     vait-create-pr/SKILL.md         # Structured pull request authoring (Context / Changes / Checklist)
     update-docs/SKILL.md            # Documentation audit and update workflow
   rules/           # Domain-specific guidelines and constraints
+    references.md            # Shared doc/rules map — load with every rule
+    architecture-decisions.md
     commands.md
     code-style.md
     patterns.md
@@ -52,7 +54,6 @@ All changes must be:
     communication.md
     special-considerations.md
     infrastructure.md
-    architecture-decisions.md
 DESIGN.md                # Visual design system (public site UI — read before layout or brand changes)
 docs/
   index.md               # Documentation hub (Diataxis framework)
@@ -73,6 +74,7 @@ docs/
    - Once loaded, obey the process and output format defined inside the skill file so the final response stays consistent.
    - Skills are located in `.agents/skills/[skill-name]/SKILL.md`
 5. **Rules**:
+   - **Always load [references.md](.agents/rules/references.md)** together with any domain rule — it holds shared documentation links and the rules/skills index. Do not rely on duplicate cross-reference lists inside individual rules.
    - Rules are long-lived constraints (API guidelines, coding practices, etc.). Whenever a task touches those domains, read the matching file under `.agents/rules/`.
    - Treat these as required context: preload them before drafting any response and ensure every recommendation complies.
    - Rules are located in `.agents/rules/[rule-name].md`
@@ -82,8 +84,9 @@ docs/
 
 ## Available Rules
 
-Load these rules when working on relevant domains:
+Load these rules when working on relevant domains. **Always load [references.md](.agents/rules/references.md) as well.**
 
+- **[references.md](.agents/rules/references.md)** — Shared documentation links and rules/skills index (load with every other rule)
 - **[architecture-decisions.md](.agents/rules/architecture-decisions.md)** — Where structural decisions live (ADRs); do not duplicate ADR content in other rules
 - **[commands.md](.agents/rules/commands.md)** - Complete reference of available pnpm commands and workflows
 - **[code-style.md](.agents/rules/code-style.md)** - Code formatting, TypeScript conventions, React patterns

@@ -512,17 +512,13 @@ export const ExpensiveComponent = React.memo<Props>(
 
 When building or refactoring **public routes** (homepage, community, and future marketing-style pages):
 
-- **Structural composition** (shared nav, footer, section shells, naming of layout layers): follow [docs/adr/README.md](../../docs/adr/README.md) and [architecture-decisions.md](./architecture-decisions.md). Do not encode those decisions in this patterns file.
-- **Visual contracts** (colours, typography, component keys): follow [DESIGN.md](../../DESIGN.md).
+- **Structural composition** (shared nav, footer, section shells, naming of layout layers): follow [architecture-decisions.md](./architecture-decisions.md) and applicable ADRs listed in [references.md](./references.md).
+- **Visual contracts** (colours, typography, component keys): follow [DESIGN.md](../../DESIGN.md) via [references.md](./references.md).
 - **Route-specific sections** live under the page module; reuse shared site components instead of copying chrome.
 
-## Cross References
+## Related rules
 
-- **Structural decisions**: [docs/adr/README.md](../../docs/adr/README.md) and [architecture-decisions.md](./architecture-decisions.md)
-- **Code style**: [code-style.md](./code-style.md) for implementation standards
-- **Engineering principles**: [engineering-principles.md](./engineering-principles.md) for architectural guidance
-- **Testing reference**: [docs/reference/01-project-reference.md](../../docs/reference/01-project-reference.md)
-- **Commands**: [commands.md](./commands.md) for development workflow commands
+Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
 
 ## Anti-Patterns to Avoid
 

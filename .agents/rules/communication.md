@@ -331,12 +331,9 @@ This document provides communication guidelines for AI agents working on the VAI
 - **Reference existing**: Link to current documentation rather than duplicating
 - **Version awareness**: Consider impact of changes on existing docs
 
-## Cross References
+## Related rules
 
-- **Code Style**: See `code-style.md` for coding and formatting standards
-- **Commands**: See `commands.md` for command-line communication patterns
-- **Development**: See `docs/how-to/01-development.md` for team workflow patterns
-- **Contributing**: See `docs/how-to/02-contributing.md` for collaboration guidelines
+Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
 
 ## Agent-Specific Guidelines
 

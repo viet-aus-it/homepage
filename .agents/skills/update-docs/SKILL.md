@@ -23,7 +23,7 @@ When user asks to:
 | `docs/adr/`       | Architecture Decision Records (structural rationale)          | Index in `README.md`; no implementation code — agents also use [architecture-decisions.md](../rules/architecture-decisions.md) |
 | `docs/`           | User-facing docs ([Diataxis](https://diataxis.fr/) framework) | Tutorials, how-to guides, explanation, reference                                                                               |
 | `AGENTS.md`       | Agent control manifest                                        | Project structure, tech stack, available skills/rules, commands                                                                |
-| `.agents/rules/`  | Domain-specific guidelines                                    | Code style, patterns, commands, engineering principles, communication, special considerations, infrastructure                  |
+| `.agents/rules/`  | Domain-specific guidelines                                    | Load [references.md](../rules/references.md) with any rule; see its rules index                                                |
 | `.agents/skills/` | Task-specific toolkits                                        | Each skill's SKILL.md                                                                                                          |
 
 ## Workflow
@@ -61,7 +61,7 @@ For each category, note which documentation locations are affected using the map
 | Change Type                     | Docs to Check                                                                                                                                       |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | New feature/component           | `README.md`, `docs/explanation/01-architecture.md`, `AGENTS.md` (project structure)                                                                 |
-| Structural / module boundary    | `docs/adr/` (new or updated ADR), `docs/explanation/01-architecture.md`, `AGENTS.md`                                                                |
+| Structural / module boundary    | `docs/adr/` (new or updated ADR), `.agents/rules/references.md`, `docs/explanation/01-architecture.md`, `AGENTS.md`                                 |
 | Public site UI / brand / layout | `DESIGN.md`, `docs/index.md`, `docs/explanation/01-architecture.md`, `docs/how-to/01-development.md`, `docs/how-to/02-contributing.md`, `AGENTS.md` |
 | New dependency                  | `README.md`, `AGENTS.md` (tech stack), `docs/reference/01-project-reference.md`                                                                     |
 | New command/script              | `README.md`, `AGENTS.md` (commands), `docs/reference/01-project-reference.md`, `.agents/rules/commands.md`                                          |
@@ -120,6 +120,7 @@ pnpm run lint
 - [ ] Changes categorised by documentation impact
 - [ ] `README.md` checked and updated
 - [ ] `DESIGN.md` checked when UI tokens, components, or layout change
+- [ ] `.agents/rules/references.md` updated when adding rules, skills, or top-level doc paths
 - [ ] `docs/adr/` checked or updated when structural conventions change (do not duplicate ADR text in rules or AGENTS.md)
 - [ ] `docs/` files checked and updated for affected topics
 - [ ] `AGENTS.md` checked: project structure, tech stack, skills, rules, commands

@@ -8,8 +8,8 @@ This document provides comprehensive code style guidelines for the VAIT Homepage
 - **Readability first**: Code should be self-documenting where possible
 - **Type safety**: Leverage TypeScript to catch errors at compile time
 - **Performance awareness**: Write code that renders efficiently
-- **Visual design**: Public site UI must follow [DESIGN.md](../../DESIGN.md); use `--brand-*` tokens from the brand token layer, not ad hoc hex in components
-- **Structural layout**: Shared layers, public route composition, and module boundaries are defined in [docs/adr/README.md](../../docs/adr/README.md) — read applicable ADRs before changing them; see [architecture-decisions.md](./architecture-decisions.md)
+- **Visual design**: Public site UI must follow [DESIGN.md](../../DESIGN.md) (see [references.md](./references.md)); use `--brand-*` tokens from the brand token layer, not ad hoc hex in components
+- **Structural layout**: Follow applicable ADRs (see [architecture-decisions.md](./architecture-decisions.md) and [references.md](./references.md))
 
 ## TypeScript Configuration
 
@@ -347,12 +347,9 @@ export const App = () => {
 };
 ```
 
-## Cross References
+## Related rules
 
-- **Structural decisions**: [docs/adr/README.md](../../docs/adr/README.md) and [architecture-decisions.md](./architecture-decisions.md)
-- **Development workflow**: [docs/how-to/01-development.md](../../docs/how-to/01-development.md)
-- **Architecture overview**: [docs/explanation/01-architecture.md](../../docs/explanation/01-architecture.md)
-- **Current commands**: See [AGENTS.md](../../AGENTS.md) for essential commands
+Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
 
 ## Tool Configuration
 

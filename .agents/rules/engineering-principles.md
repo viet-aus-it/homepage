@@ -362,13 +362,9 @@ export const Button = ({
 - **Backup procedures**: Implement regular backup and recovery processes
 - **Data privacy**: Comply with relevant data protection regulations
 
-## Cross References
+## Related rules
 
-- **Structural decisions**: [docs/adr/README.md](../../docs/adr/README.md) and [architecture-decisions.md](./architecture-decisions.md)
-- **Architecture overview**: [docs/explanation/01-architecture.md](../../docs/explanation/01-architecture.md)
-- **Code style**: [code-style.md](./code-style.md) for implementation patterns
-- **Testing**: [docs/reference/01-project-reference.md](../../docs/reference/01-project-reference.md) for testing tools
-- **Development workflow**: [docs/how-to/01-development.md](../../docs/how-to/01-development.md)
+Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
 
 ## Decision Framework
 

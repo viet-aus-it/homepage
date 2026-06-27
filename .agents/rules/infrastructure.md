@@ -129,9 +129,6 @@ pnpm run build && pnpm run deploy
 - Never disable HTTPS at the Cloudflare edge
 - Do not expose internal service URLs or API keys in client-side code
 
-## Cross References
+## Related rules
 
-- **Structural decisions**: [docs/adr/README.md](../../docs/adr/README.md) and [architecture-decisions.md](./architecture-decisions.md)
-- **Commands reference**: [commands.md](./commands.md) for deployment commands
-- **Engineering principles**: [engineering-principles.md](./engineering-principles.md) for decision framework
-- **Security considerations**: [special-considerations.md](./special-considerations.md) for security guidelines
+Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.

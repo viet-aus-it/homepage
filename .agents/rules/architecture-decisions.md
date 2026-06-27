@@ -46,8 +46,6 @@ Add or update an ADR in the same pull request when the change:
 
 Follow the process in [docs/adr/README.md](../../docs/adr/README.md). Link the ADR from [Architecture](../../docs/explanation/01-architecture.md) when it affects how contributors navigate the project.
 
-## Cross references
+## Related rules
 
-- **Visual design rule**: [code-style.md](./code-style.md) — public site UI tokens and components
-- **Documentation audit**: [update-docs skill](../skills/update-docs/SKILL.md) — when to update ADRs vs DESIGN.md
-- **Tech stack overview**: [docs/explanation/01-architecture.md](../../docs/explanation/01-architecture.md)
+Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
