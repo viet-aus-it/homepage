@@ -57,18 +57,19 @@ Group changes by their documentation impact:
 
 For each category, note which documentation locations are affected using the mapping:
 
-| Change Type                   | Docs to Check                                                                                                                                       |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| New feature/component         | `README.md`, `docs/explanation/01-architecture.md`, `AGENTS.md` (project structure)                                                                 |
-| Marketing UI / brand / layout | `DESIGN.md`, `docs/index.md`, `docs/explanation/01-architecture.md`, `docs/how-to/01-development.md`, `docs/how-to/02-contributing.md`, `AGENTS.md` |
-| New dependency                | `README.md`, `AGENTS.md` (tech stack), `docs/reference/01-project-reference.md`                                                                     |
-| New command/script            | `README.md`, `AGENTS.md` (commands), `docs/reference/01-project-reference.md`, `.agents/rules/commands.md`                                          |
-| Infrastructure change         | `docs/explanation/02-infrastructure.md`, `docs/how-to/03-deployment.md`, `.agents/rules/infrastructure.md`                                          |
-| New route                     | `AGENTS.md` (project structure), `docs/reference/01-project-reference.md`                                                                           |
-| New skill/rule                | `AGENTS.md` (available skills/rules)                                                                                                                |
-| Test changes                  | `docs/how-to/01-development.md`, `docs/reference/01-project-reference.md`                                                                           |
-| CI/CD change                  | `docs/how-to/03-deployment.md`, `docs/reference/01-project-reference.md`                                                                            |
-| Config/env var change         | `docs/reference/01-project-reference.md`, `README.md`                                                                                               |
+| Change Type                     | Docs to Check                                                                                                                                       |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| New feature/component           | `README.md`, `docs/explanation/01-architecture.md`, `AGENTS.md` (project structure)                                                                 |
+| Structural / module boundary    | `docs/adr/` (new or updated ADR), `docs/explanation/01-architecture.md`, `AGENTS.md`                                                                |
+| Public site UI / brand / layout | `DESIGN.md`, `docs/index.md`, `docs/explanation/01-architecture.md`, `docs/how-to/01-development.md`, `docs/how-to/02-contributing.md`, `AGENTS.md` |
+| New dependency                  | `README.md`, `AGENTS.md` (tech stack), `docs/reference/01-project-reference.md`                                                                     |
+| New command/script              | `README.md`, `AGENTS.md` (commands), `docs/reference/01-project-reference.md`, `.agents/rules/commands.md`                                          |
+| Infrastructure change           | `docs/explanation/02-infrastructure.md`, `docs/how-to/03-deployment.md`, `.agents/rules/infrastructure.md`                                          |
+| New route                       | `AGENTS.md` (project structure), `docs/reference/01-project-reference.md`                                                                           |
+| New skill/rule                  | `AGENTS.md` (available skills/rules)                                                                                                                |
+| Test changes                    | `docs/how-to/01-development.md`, `docs/reference/01-project-reference.md`                                                                           |
+| CI/CD change                    | `docs/how-to/03-deployment.md`, `docs/reference/01-project-reference.md`                                                                            |
+| Config/env var change           | `docs/reference/01-project-reference.md`, `README.md`                                                                                               |
 
 ### Step 3: Audit Each Location
 
@@ -144,6 +145,7 @@ Current `docs/` structure:
 - **`how-to/`**: `01-development`, `02-contributing`, `03-deployment`
 - **`explanation/`**: `01-architecture`, `02-infrastructure`
 - **`reference/`**: `01-project-reference`
+- **`adr/`**: Architecture Decision Records (structural decisions; index in `README.md`)
 
 When updating docs, do not mix content types. Move how-to steps out of reference docs, move reference tables out of explanation docs, etc.
 

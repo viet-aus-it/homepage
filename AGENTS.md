@@ -51,9 +51,10 @@ All changes must be:
     communication.md
     special-considerations.md
     infrastructure.md
-DESIGN.md                # Visual design system (homepage UI — read before marketing UI changes)
+DESIGN.md                # Visual design system (public site UI — read before layout or brand changes)
 docs/
   index.md               # Documentation hub (Diataxis framework)
+  adr/                   # Architecture Decision Records (structural decisions)
   tutorials/             # Learning-oriented guides
   how-to/                # Goal-oriented recipes
   explanation/           # Understanding-oriented discussion
@@ -63,7 +64,7 @@ docs/
 ## Execution Protocol
 
 1. **Always read this file first** before starting a task so you know which skills or rules to load from `.agents/`.
-2. **Visual / marketing UI** (colours, typography, layout, new homepage sections, brand components): read [DESIGN.md](DESIGN.md) before editing `src/components/` or `src/pages/`. Update `DESIGN.md` in the same pull request when you add or change design tokens, named components, or documented behaviour.
+2. **Visual / public site UI** (colours, typography, layout, new homepage sections, brand components): read [DESIGN.md](DESIGN.md) before editing `src/components/` or `src/pages/`. Update `DESIGN.md` in the same pull request when you add or change design tokens, named components, or documented behaviour. Structural decisions (module boundaries, shared layout layers) also need an [ADR](docs/adr/README.md).
 3. **Skills**:
    - Load a skill only if its trigger condition matches the task. Example: code review tasks must load `skills/code-review/SKILL.md`.
    - Once loaded, obey the process and output format defined inside the skill file so the final response stays consistent.
@@ -128,7 +129,7 @@ pnpm run typecheck    # Run TypeScript type checking
 - **Type safety**: Strict TypeScript with no `any`
 - **Performance first**: [Core Web Vitals](https://web.dev/articles/vitals) optimisation
 - **Accessibility**: [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/) AA compliance
-- **Visual consistency**: Follow [DESIGN.md](DESIGN.md) for marketing UI; keep tokens in `src/index.css` (`--brand-*`)
+- **Visual consistency**: Follow [DESIGN.md](DESIGN.md) for public site UI; keep tokens in `src/index.css` (`--brand-*`)
 
 ## Rules vs. Skills at a Glance
 
