@@ -1,162 +1,37 @@
-# VAIT Homepage (Team VAIT)
+# VAIT Homepage — Agent Manifest
 
-## Universal Agents Control Manifest
+`PROJECT_CONTEXT_SIGNATURE: "VAIT_HOMEPAGE_AGENTS_v1.0"`
 
-All agents must emulate `.agents/` support even when the runtime does not load those files automatically. Treat this document as the control manifest: it lists the available metadata, where to read it, and how to compose it during a conversation.
+Official site for **Vietnamese Australians in IT** (not-for-profit community). Stack: React 19, Vite, TypeScript, TanStack Router, Zod, Oxlint/Oxfmt, Vitest, Cloudflare Workers. Australian English.
 
-## About the Project
+Emulate `.agents/` even when the runtime does not load it automatically.
 
-You are working on the VAIT Homepage, the official website for the Viet-Aus IT community. The project values:
+## Load policy
 
-- **Community-first**: Building features that serve the VAIT community
-- **User experience**: Fast, accessible, and responsive web design
-- **Code quality**: Clean, maintainable, and well-tested code
-- **Modern stack**: Using cutting-edge frontend technologies
-- **Performance**: Optimised for [Core Web Vitals](https://web.dev/articles/vitals) and mobile devices
+**Default: this file only.** Do not preload domain rules, skills, `references.md`, or `.agents/README.md`.
 
-## Role & Technical Context
+| Trigger                                  | Also load                                                                                                                         |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| UI / `src/components/` / `src/pages/`    | [DESIGN.md](DESIGN.md)                                                                                                            |
+| Shared layout, routes, module boundaries | [docs/adr/README.md](docs/adr/README.md) + applicable ADRs + [architecture-decisions.md](.agents/rules/architecture-decisions.md) |
+| Domain work (see below)                  | Matching `.agents/rules/<name>.md` + [references.md](.agents/rules/references.md)                                                 |
+| Commit / PR / issue / docs audit         | Matching `.agents/skills/*/SKILL.md`                                                                                              |
+| Extend agent config                      | [.agents/README.md](.agents/README.md) + [references.md](.agents/rules/references.md)                                             |
 
-- **Domain**: Community homepage showcasing VAIT events, membership, and resources
-- **Team**: VAIT (Vietnamese Australians in Information Technology community)
-- **Tech Stack**: [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/), [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/), [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html), [Vitest](https://vitest.dev/)
-- **Architecture**: Component-based architecture with type-safe routing and state management
-- **Visual design**: [DESIGN.md](DESIGN.md) — tokens, component keys, and do's/don'ts for the public site (warm canvas, brand yellow, shadcn/Tailwind)
-- **Structural decisions**: [docs/adr/README.md](docs/adr/README.md) — accepted ADRs for module boundaries and shared layout; rules and skills point here instead of duplicating structure
-- **Infrastructure**: [Cloudflare Workers](https://workers.cloudflare.com/) (production)
+**Domain rules** (one at a time, not all): `commands`, `code-style`, `patterns`, `engineering-principles`, `communication`, `special-considerations`, `infrastructure`.
 
-## Change Management Philosophy
+**Skills:** `create-github-issue`, `vait-commit`, `vait-create-pr`, `update-docs`.
 
-All changes must be:
+Full path index: [references.md](.agents/rules/references.md).
 
-- **Atomic**: The smallest possible and logically complete unit of change
-- **Safe**: Reviewed, tested, and production-ready
-- **Tested**: Component tests required for new features, integration tests for user workflows
-- **Linted**: Must pass `pnpm run lint:fix && pnpm run typecheck` before commit
-- **Documented**: Clear commit messages following [Conventional Commits](https://www.conventionalcommits.org/); new features must include doc updates following the [Diataxis](https://diataxis.fr/) framework; structural changes must add or update an [ADR](docs/adr/README.md) (see [architecture-decisions.md](.agents/rules/architecture-decisions.md))
-- **Delivered**: Merged via pull request after review
+## Mandatory
 
-## Project Structure
+1. Before commit/push/PR: `pnpm run lint:gate` — auto-fix then verify (`ci`); fix remaining lint errors manually until it passes. Husky runs `scripts/lint-gate.sh`. Also `pnpm run typecheck` (+ `pnpm run test:run` when behaviour changed).
+2. Visual → update [DESIGN.md](DESIGN.md). Structural → add/update [ADR](docs/adr/README.md). Do not copy either into rules.
+3. Atomic commits/PRs; Conventional Commits; explicit `git add` when committing.
 
-```
-.agents/
-  skills/
-    create-github-issue/SKILL.md  # Structured GitHub issue authoring (Context / Scope / Out of Scope)
-    vait-commit/SKILL.md            # Atomic Conventional Commits with explicit staging
-    vait-create-pr/SKILL.md         # Structured pull request authoring (Context / Changes / Checklist)
-    update-docs/SKILL.md            # Documentation audit and update workflow
-  rules/           # Domain-specific guidelines and constraints
-    references.md            # Shared doc/rules map — load with every rule
-    architecture-decisions.md
-    commands.md
-    code-style.md
-    patterns.md
-    engineering-principles.md
-    communication.md
-    special-considerations.md
-    infrastructure.md
-DESIGN.md                # Visual design system (public site UI — read before layout or brand changes)
-docs/
-  index.md               # Documentation hub (Diataxis framework)
-  adr/                   # Architecture Decision Records (structural decisions)
-  tutorials/             # Learning-oriented guides
-  how-to/                # Goal-oriented recipes
-  explanation/           # Understanding-oriented discussion
-  reference/             # Information-oriented lookup
-```
+## Response
 
-## Execution Protocol
+Name loaded rules/skills. Ask if constraints conflict.
 
-1. **Always read this file first** before starting a task so you know which skills or rules to load from `.agents/`.
-2. **Structural / architectural work** (shared layout layers, new public routes, module boundaries, cross-route naming): read [docs/adr/README.md](docs/adr/README.md) and every applicable **Accepted** ADR; load [architecture-decisions.md](.agents/rules/architecture-decisions.md). Do not rely on rules or skills for structural facts — they point at ADRs to avoid drift.
-3. **Visual / public site UI** (colours, typography, layout, new sections, brand components): read [DESIGN.md](DESIGN.md) before editing `src/components/` or `src/pages/`. Update `DESIGN.md` in the same pull request when you add or change design tokens, named components, or documented behaviour.
-4. **Skills**:
-   - Load a skill only if its trigger condition matches the task. Example: code review tasks must load `skills/code-review/SKILL.md`.
-   - Once loaded, obey the process and output format defined inside the skill file so the final response stays consistent.
-   - Skills are located in `.agents/skills/[skill-name]/SKILL.md`
-5. **Rules**:
-   - **Always load [references.md](.agents/rules/references.md)** together with any domain rule — it holds shared documentation links and the rules/skills index. Do not rely on duplicate cross-reference lists inside individual rules.
-   - Rules are long-lived constraints (API guidelines, coding practices, etc.). Whenever a task touches those domains, read the matching file under `.agents/rules/`.
-   - Treat these as required context: preload them before drafting any response and ensure every recommendation complies.
-   - Rules are located in `.agents/rules/[rule-name].md`
-6. **Response contract**:
-   - Explicitly mention which skills and rules are in effect.
-   - Derive findings, recommendations, or code while enforcing all loaded constraints. If conflicts arise, ask for clarification before diverging.
-
-## Available Rules
-
-Load these rules when working on relevant domains. **Always load [references.md](.agents/rules/references.md) as well.**
-
-- **[references.md](.agents/rules/references.md)** — Shared documentation links and rules/skills index (load with every other rule)
-- **[architecture-decisions.md](.agents/rules/architecture-decisions.md)** — Where structural decisions live (ADRs); do not duplicate ADR content in other rules
-- **[commands.md](.agents/rules/commands.md)** - Complete reference of available pnpm commands and workflows
-- **[code-style.md](.agents/rules/code-style.md)** - Code formatting, TypeScript conventions, React patterns
-- **[patterns.md](.agents/rules/patterns.md)** - React, TanStack Router, and testing patterns
-- **[engineering-principles.md](.agents/rules/engineering-principles.md)** - Clean code, performance, security, decision framework
-- **[communication.md](.agents/rules/communication.md)** - Communication style and output expectations
-- **[special-considerations.md](.agents/rules/special-considerations.md)** - Browser compatibility, SEO, accessibility, deployment
-- **[infrastructure.md](.agents/rules/infrastructure.md)** - Cloudflare Workers patterns, deployment strategies, and operational best practices
-
-## Visual Design System
-
-- **[DESIGN.md](DESIGN.md)** — Canonical reference for visual contracts: colour tokens (`{colors.*}`), typography scale, layout, elevation, component keys (`{component.*}`), responsive behaviour, iteration guide, and known gaps. Pair with **[code-style.md](.agents/rules/code-style.md)** and **[special-considerations.md](.agents/rules/special-considerations.md)** for accessibility and implementation detail.
-
-## Architecture Decision Records
-
-- **[docs/adr/README.md](docs/adr/README.md)** — Index of accepted structural decisions (module boundaries, shared layout, naming). Read applicable ADRs before structural work; add or update an ADR when conventions change. Agent rules and skills **link here** instead of restating layout decisions — see **[architecture-decisions.md](.agents/rules/architecture-decisions.md)**.
-
-## Available Skills
-
-Load a skill when its trigger condition matches the task:
-
-- **[create-github-issue](.agents/skills/create-github-issue/SKILL.md)** — Draft and file GitHub issues with Context, In Scope / Done When, and Out of Scope. Trigger: user asks to create, draft, or standardise an issue.
-- **[vait-commit](.agents/skills/vait-commit/SKILL.md)** — Stage and commit with explicit file paths, atomic units, and Conventional Commits. Trigger: user asks to commit or write a commit message.
-- **[vait-create-pr](.agents/skills/vait-create-pr/SKILL.md)** — Draft and open pull requests with Context, Changes, and Checklist per `.github/PULL_REQUEST_TEMPLATE.md`. Trigger: user asks to create, draft, or open a PR, or runs `/create-pr`.
-- **[update-docs](.agents/skills/update-docs/SKILL.md)** — Audit and update docs after code changes. Trigger: user asks to update, sync, or audit documentation.
-
-## Quick Reference
-
-### Tech Stack
-
-- [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/)
-- [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/)
-- [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) for linting and formatting, [Vitest](https://vitest.dev/) for testing
-- [Cloudflare Workers](https://workers.cloudflare.com/) for production hosting
-
-### Essential Commands
-
-```bash
-pnpm run dev          # Start development server
-pnpm run build        # Build for production
-pnpm run test         # Run tests (watch mode)
-pnpm run test:run     # Run tests once
-pnpm run lint:fix     # Fix code formatting and linting
-pnpm run typecheck    # Run TypeScript type checking
-```
-
-### Key Principles
-
-- **Atomic changes**: Smallest logical units
-- **Test coverage**: Component and integration tests
-- **Type safety**: Strict TypeScript with no `any`
-- **Performance first**: [Core Web Vitals](https://web.dev/articles/vitals) optimisation
-- **Accessibility**: [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/) AA compliance
-- **Structural consistency**: Follow [docs/adr/README.md](docs/adr/README.md) for shared layout and module boundaries; add an ADR when those conventions change
-- **Visual consistency**: Follow [DESIGN.md](DESIGN.md) for public site UI; keep tokens in `src/index.css` (`--brand-*`)
-
-## Rules vs. Skills at a Glance
-
-| Aspect           | Rules                                             | Skills                                                                     |
-| ---------------- | ------------------------------------------------- | -------------------------------------------------------------------------- |
-| Purpose          | Concise written instructions covering a domain.   | Full toolkits: guidance plus reusable templates and verified workflows.    |
-| Execution effort | Agent interprets and implements from scratch.     | Drop-in code, docs, and checklists shorten build time.                     |
-| Complexity focus | Describes guardrails; depends on agent expertise. | Encodes battle-tested patterns for tricky or specialized scenarios.        |
-| Maintenance      | Update the prose rule as policies evolve.         | Refresh the whole package (docs + sample code) when better solutions ship. |
-
-Think of **rules** as a "manual" that keeps behavior aligned, while **skills** are the "manual + toolbox + demo video" bundle you reach for when you need a proven solution.
-
-## Extending the Manifest
-
-- Additional **skills** (architecture review, test planning, etc.) or **rules** (team code style, compliance requirements) can be added under the existing folders.
-- Keep this file updated so future agents know when to load each artifact and how to combine them safely.
-
-Remember: You're supporting the VAIT community homepage. Focus on clean, performant, and accessible code that serves the community well. When in doubt, follow existing patterns in the codebase, [DESIGN.md](DESIGN.md) for visual work, [docs/adr/README.md](docs/adr/README.md) for structural work, and the relevant rules.
+**Drift:** Structure lives in ADRs; visuals in DESIGN.md; links in `references.md` — not duplicated across rule files.

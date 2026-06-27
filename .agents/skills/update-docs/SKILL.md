@@ -16,15 +16,16 @@ When user asks to:
 
 ## Documentation Locations
 
-| Location          | Content                                                       | Key Sections                                                                                                                   |
-| ----------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `README.md`       | Project overview, setup, tech stack                           | Overview, quick start, commands                                                                                                |
-| `DESIGN.md`       | Public site visual design system                              | Colours, typography, component keys, do's/don'ts                                                                               |
-| `docs/adr/`       | Architecture Decision Records (structural rationale)          | Index in `README.md`; no implementation code — agents also use [architecture-decisions.md](../rules/architecture-decisions.md) |
-| `docs/`           | User-facing docs ([Diataxis](https://diataxis.fr/) framework) | Tutorials, how-to guides, explanation, reference                                                                               |
-| `AGENTS.md`       | Agent control manifest                                        | Project structure, tech stack, available skills/rules, commands                                                                |
-| `.agents/rules/`  | Domain-specific guidelines                                    | Load [references.md](../rules/references.md) with any rule; see its rules index                                                |
-| `.agents/skills/` | Task-specific toolkits                                        | Each skill's SKILL.md                                                                                                          |
+| Location            | Content                                                       | Key Sections                                                                                                                   |
+| ------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `README.md`         | Project overview, setup, tech stack                           | Overview, quick start, commands                                                                                                |
+| `DESIGN.md`         | Public site visual design system                              | Colours, typography, component keys, do's/don'ts                                                                               |
+| `docs/adr/`         | Architecture Decision Records (structural rationale)          | Index in `README.md`; no implementation code — agents also use [architecture-decisions.md](../rules/architecture-decisions.md) |
+| `docs/`             | User-facing docs ([Diataxis](https://diataxis.fr/) framework) | Tutorials, how-to guides, explanation, reference                                                                               |
+| `AGENTS.md`         | Agent manifest (keep minimal)                                 | Routing, mandatory rules only                                                                                                  |
+| `.agents/README.md` | Maintainer guide for agent config                             | Where to add what — not for coding sessions                                                                                    |
+| `.agents/rules/`    | Domain guidelines                                             | On demand per [AGENTS.md](../../AGENTS.md); index in [references.md](../rules/references.md)                                   |
+| `.agents/skills/`   | Task-specific toolkits                                        | Each skill's SKILL.md                                                                                                          |
 
 ## Workflow
 
@@ -121,6 +122,7 @@ pnpm run lint
 - [ ] `README.md` checked and updated
 - [ ] `DESIGN.md` checked when UI tokens, components, or layout change
 - [ ] `.agents/rules/references.md` updated when adding rules, skills, or top-level doc paths
+- [ ] `.agents/README.md` or `AGENTS.md` updated when changing loading model or mandatory rules
 - [ ] `docs/adr/` checked or updated when structural conventions change (do not duplicate ADR text in rules or AGENTS.md)
 - [ ] `docs/` files checked and updated for affected topics
 - [ ] `AGENTS.md` checked: project structure, tech stack, skills, rules, commands

@@ -1,5 +1,7 @@
 # Communication Guidelines
 
+> Load only when response style matters — skip for pure coding tasks. Routing: [AGENTS.md](../../AGENTS.md).
+
 This document provides communication guidelines for AI agents working on the VAIT Homepage project, ensuring consistent, clear, and effective interactions.
 
 ## Core Communication Principles
@@ -330,10 +332,6 @@ This document provides communication guidelines for AI agents working on the VAI
 - **Keep current**: Update communication patterns as project evolves
 - **Reference existing**: Link to current documentation rather than duplicating
 - **Version awareness**: Consider impact of changes on existing docs
-
-## Related rules
-
-Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
 
 ## Agent-Specific Guidelines
 

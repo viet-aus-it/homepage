@@ -1,5 +1,7 @@
 # Code Style Guidelines
 
+> Load only for TypeScript/React editing — not with other domain rules. Routing: [AGENTS.md](../../AGENTS.md).
+
 This document provides comprehensive code style guidelines for the VAIT Homepage project, building upon the existing Oxlint and Oxfmt configuration and development conventions.
 
 ## Core Principles
@@ -8,8 +10,8 @@ This document provides comprehensive code style guidelines for the VAIT Homepage
 - **Readability first**: Code should be self-documenting where possible
 - **Type safety**: Leverage TypeScript to catch errors at compile time
 - **Performance awareness**: Write code that renders efficiently
-- **Visual design**: Public site UI must follow [DESIGN.md](../../DESIGN.md) (see [references.md](./references.md)); use `--brand-*` tokens from the brand token layer, not ad hoc hex in components
-- **Structural layout**: Follow applicable ADRs (see [architecture-decisions.md](./architecture-decisions.md) and [references.md](./references.md))
+- **Visual design**: [DESIGN.md](../../DESIGN.md); `--brand-*` tokens, not ad hoc hex
+- **Structure**: ADRs via [architecture-decisions.md](./architecture-decisions.md) — not this file
 
 ## TypeScript Configuration
 
@@ -346,10 +348,6 @@ export const App = () => {
   );
 };
 ```
-
-## Related rules
-
-Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
 
 ## Tool Configuration
 

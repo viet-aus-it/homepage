@@ -1,5 +1,7 @@
 # Development Patterns
 
+> Load only for React/router/testing work — not with other domain rules. Routing: [AGENTS.md](../../AGENTS.md).
+
 This document provides comprehensive development patterns for the VAIT Homepage project, expanding upon existing testing documentation and establishing React/TypeScript best practices.
 
 ## React Component Patterns
@@ -512,13 +514,9 @@ export const ExpensiveComponent = React.memo<Props>(
 
 When building or refactoring **public routes** (homepage, community, and future marketing-style pages):
 
-- **Structural composition** (shared nav, footer, section shells, naming of layout layers): follow [architecture-decisions.md](./architecture-decisions.md) and applicable ADRs listed in [references.md](./references.md).
-- **Visual contracts** (colours, typography, component keys): follow [DESIGN.md](../../DESIGN.md) via [references.md](./references.md).
-- **Route-specific sections** live under the page module; reuse shared site components instead of copying chrome.
-
-## Related rules
-
-Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
+- **Structural composition**: [architecture-decisions.md](./architecture-decisions.md) + ADRs — not this file
+- **Visual contracts**: [DESIGN.md](../../DESIGN.md)
+- **Route sections**: page module; reuse shared site components
 
 ## Anti-Patterns to Avoid
 

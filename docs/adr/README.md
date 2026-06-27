@@ -4,7 +4,7 @@ This directory tracks significant architectural and structural decisions for the
 
 Records follow a lightweight [Architecture Decision Record (ADR)](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions) format adapted for this project.
 
-**Agents and contributors:** [AGENTS.md](../../AGENTS.md), [.agents/rules/references.md](../../.agents/rules/references.md), and [.agents/rules/architecture-decisions.md](../../.agents/rules/architecture-decisions.md) point here for structural decisions. Rules and skills must not duplicate ADR content — update the ADR index when conventions change.
+**Agents:** [AGENTS.md](../../AGENTS.md) (routing) · [.agents/rules/references.md](../../.agents/rules/references.md) (index) · [architecture-decisions.md](../../.agents/rules/architecture-decisions.md) (ADR workflow). Do not duplicate ADR body text in rules.
 
 ## Index
 

@@ -1,5 +1,7 @@
 # Engineering Principles
 
+> Load only for trade-off / architecture decisions — not with other domain rules. Routing: [AGENTS.md](../../AGENTS.md).
+
 This document outlines the engineering principles that guide development of the VAIT Homepage project, building upon the established architecture and technology stack.
 
 ## Core Principles
@@ -361,10 +363,6 @@ export const Button = ({
 - **CDN usage**: Leverage Cloudflare CDN for static asset delivery
 - **Backup procedures**: Implement regular backup and recovery processes
 - **Data privacy**: Comply with relevant data protection regulations
-
-## Related rules
-
-Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
 
 ## Decision Framework
 

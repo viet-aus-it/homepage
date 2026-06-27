@@ -1,5 +1,7 @@
 # Infrastructure Guidelines
 
+> Load only for Cloudflare/deploy work — not with other domain rules. Routing: [AGENTS.md](../../AGENTS.md).
+
 This document provides comprehensive infrastructure guidelines for the VAIT Homepage project, covering Cloudflare Workers patterns, deployment strategies, and operational best practices.
 
 ## Cloudflare Workers Architecture
@@ -128,7 +130,3 @@ pnpm run build && pnpm run deploy
 - Avoid storing secrets in `wrangler.jsonc` or environment files committed to git
 - Never disable HTTPS at the Cloudflare edge
 - Do not expose internal service URLs or API keys in client-side code
-
-## Related rules
-
-Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
