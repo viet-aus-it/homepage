@@ -16,14 +16,15 @@ When user asks to:
 
 ## Documentation Locations
 
-| Location          | Content                                                       | Key Sections                                                                                                  |
-| ----------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `README.md`       | Project overview, setup, tech stack                           | Overview, quick start, commands                                                                               |
-| `DESIGN.md`       | Homepage visual design system                                 | Colours, typography, components, do's/don'ts                                                                  |
-| `docs/`           | User-facing docs ([Diataxis](https://diataxis.fr/) framework) | Tutorials, how-to guides, explanation, reference                                                              |
-| `AGENTS.md`       | Agent control manifest                                        | Project structure, tech stack, available skills/rules, commands                                               |
-| `.agents/rules/`  | Domain-specific guidelines                                    | Code style, patterns, commands, engineering principles, communication, special considerations, infrastructure |
-| `.agents/skills/` | Task-specific toolkits                                        | Each skill's SKILL.md                                                                                         |
+| Location          | Content                                                       | Key Sections                                                                                                                   |
+| ----------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `README.md`       | Project overview, setup, tech stack                           | Overview, quick start, commands                                                                                                |
+| `DESIGN.md`       | Public site visual design system                              | Colours, typography, component keys, do's/don'ts                                                                               |
+| `docs/adr/`       | Architecture Decision Records (structural rationale)          | Index in `README.md`; no implementation code — agents also use [architecture-decisions.md](../rules/architecture-decisions.md) |
+| `docs/`           | User-facing docs ([Diataxis](https://diataxis.fr/) framework) | Tutorials, how-to guides, explanation, reference                                                                               |
+| `AGENTS.md`       | Agent control manifest                                        | Project structure, tech stack, available skills/rules, commands                                                                |
+| `.agents/rules/`  | Domain-specific guidelines                                    | Code style, patterns, commands, engineering principles, communication, special considerations, infrastructure                  |
+| `.agents/skills/` | Task-specific toolkits                                        | Each skill's SKILL.md                                                                                                          |
 
 ## Workflow
 
@@ -119,6 +120,7 @@ pnpm run lint
 - [ ] Changes categorised by documentation impact
 - [ ] `README.md` checked and updated
 - [ ] `DESIGN.md` checked when UI tokens, components, or layout change
+- [ ] `docs/adr/` checked or updated when structural conventions change (do not duplicate ADR text in rules or AGENTS.md)
 - [ ] `docs/` files checked and updated for affected topics
 - [ ] `AGENTS.md` checked: project structure, tech stack, skills, rules, commands
 - [ ] `.agents/rules/` checked for affected rules

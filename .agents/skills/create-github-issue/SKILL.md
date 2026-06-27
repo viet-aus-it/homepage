@@ -49,6 +49,15 @@ Answer **what we are deliberately not doing** in this issue. Include:
 
 Ground exclusions in the **Context** — if something is out of scope, briefly say why (e.g. "Separate issue: needs design review first").
 
+### Structural or architectural issues
+
+When the issue introduces or changes **module boundaries, shared layout layers, or cross-route conventions**, include in **In Scope / Done When**:
+
+- Applicable [ADR(s)](../../docs/adr/README.md) read or authored (rationale only — no implementation code in the ADR)
+- [DESIGN.md](../../../DESIGN.md) updated when visual component keys or tokens change
+
+Do not restate ADR decisions in the issue body; link to the ADR record once it exists.
+
 ## Workflow
 
 ### Step 1: Gather inputs

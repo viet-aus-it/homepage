@@ -131,6 +131,7 @@ pnpm run build && pnpm run deploy
 
 ## Cross References
 
-- **Commands Reference**: See `commands.md` for deployment commands
-- **Engineering Principles**: See `engineering-principles.md` for decision framework
-- **Security Considerations**: See `special-considerations.md` for security guidelines
+- **Structural decisions**: [docs/adr/README.md](../../docs/adr/README.md) and [architecture-decisions.md](./architecture-decisions.md)
+- **Commands reference**: [commands.md](./commands.md) for deployment commands
+- **Engineering principles**: [engineering-principles.md](./engineering-principles.md) for decision framework
+- **Security considerations**: [special-considerations.md](./special-considerations.md) for security guidelines

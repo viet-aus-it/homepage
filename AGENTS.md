@@ -20,7 +20,8 @@ You are working on the VAIT Homepage, the official website for the Viet-Aus IT c
 - **Team**: VAIT (Vietnamese Australians in Information Technology community)
 - **Tech Stack**: [React](https://react.dev/) 19, [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/), [TanStack Router](https://tanstack.com/router), [Zod](https://zod.dev/), [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html), [Vitest](https://vitest.dev/)
 - **Architecture**: Component-based architecture with type-safe routing and state management
-- **Visual design**: [DESIGN.md](DESIGN.md) — tokens, components, and do's/don'ts for the public homepage (warm canvas, brand yellow, shadcn/Tailwind)
+- **Visual design**: [DESIGN.md](DESIGN.md) — tokens, component keys, and do's/don'ts for the public site (warm canvas, brand yellow, shadcn/Tailwind)
+- **Structural decisions**: [docs/adr/README.md](docs/adr/README.md) — accepted ADRs for module boundaries and shared layout; rules and skills point here instead of duplicating structure
 - **Infrastructure**: [Cloudflare Workers](https://workers.cloudflare.com/) (production)
 
 ## Change Management Philosophy
@@ -31,7 +32,7 @@ All changes must be:
 - **Safe**: Reviewed, tested, and production-ready
 - **Tested**: Component tests required for new features, integration tests for user workflows
 - **Linted**: Must pass `pnpm run lint:fix && pnpm run typecheck` before commit
-- **Documented**: Clear commit messages following [Conventional Commits](https://www.conventionalcommits.org/); new features must include doc updates following the [Diataxis](https://diataxis.fr/) framework
+- **Documented**: Clear commit messages following [Conventional Commits](https://www.conventionalcommits.org/); new features must include doc updates following the [Diataxis](https://diataxis.fr/) framework; structural changes must add or update an [ADR](docs/adr/README.md) (see [architecture-decisions.md](.agents/rules/architecture-decisions.md))
 - **Delivered**: Merged via pull request after review
 
 ## Project Structure
@@ -51,6 +52,7 @@ All changes must be:
     communication.md
     special-considerations.md
     infrastructure.md
+    architecture-decisions.md
 DESIGN.md                # Visual design system (public site UI — read before layout or brand changes)
 docs/
   index.md               # Documentation hub (Diataxis framework)
@@ -64,16 +66,17 @@ docs/
 ## Execution Protocol
 
 1. **Always read this file first** before starting a task so you know which skills or rules to load from `.agents/`.
-2. **Visual / public site UI** (colours, typography, layout, new homepage sections, brand components): read [DESIGN.md](DESIGN.md) before editing `src/components/` or `src/pages/`. Update `DESIGN.md` in the same pull request when you add or change design tokens, named components, or documented behaviour. Structural decisions (module boundaries, shared layout layers) also need an [ADR](docs/adr/README.md).
-3. **Skills**:
+2. **Structural / architectural work** (shared layout layers, new public routes, module boundaries, cross-route naming): read [docs/adr/README.md](docs/adr/README.md) and every applicable **Accepted** ADR; load [architecture-decisions.md](.agents/rules/architecture-decisions.md). Do not rely on rules or skills for structural facts — they point at ADRs to avoid drift.
+3. **Visual / public site UI** (colours, typography, layout, new sections, brand components): read [DESIGN.md](DESIGN.md) before editing `src/components/` or `src/pages/`. Update `DESIGN.md` in the same pull request when you add or change design tokens, named components, or documented behaviour.
+4. **Skills**:
    - Load a skill only if its trigger condition matches the task. Example: code review tasks must load `skills/code-review/SKILL.md`.
    - Once loaded, obey the process and output format defined inside the skill file so the final response stays consistent.
    - Skills are located in `.agents/skills/[skill-name]/SKILL.md`
-4. **Rules**:
+5. **Rules**:
    - Rules are long-lived constraints (API guidelines, coding practices, etc.). Whenever a task touches those domains, read the matching file under `.agents/rules/`.
    - Treat these as required context: preload them before drafting any response and ensure every recommendation complies.
    - Rules are located in `.agents/rules/[rule-name].md`
-5. **Response contract**:
+6. **Response contract**:
    - Explicitly mention which skills and rules are in effect.
    - Derive findings, recommendations, or code while enforcing all loaded constraints. If conflicts arise, ask for clarification before diverging.
 
@@ -81,6 +84,7 @@ docs/
 
 Load these rules when working on relevant domains:
 
+- **[architecture-decisions.md](.agents/rules/architecture-decisions.md)** — Where structural decisions live (ADRs); do not duplicate ADR content in other rules
 - **[commands.md](.agents/rules/commands.md)** - Complete reference of available pnpm commands and workflows
 - **[code-style.md](.agents/rules/code-style.md)** - Code formatting, TypeScript conventions, React patterns
 - **[patterns.md](.agents/rules/patterns.md)** - React, TanStack Router, and testing patterns
@@ -91,7 +95,11 @@ Load these rules when working on relevant domains:
 
 ## Visual Design System
 
-- **[DESIGN.md](DESIGN.md)** — Canonical reference for the public homepage: colour tokens (`{colors.*}`), typography scale, layout, elevation, component keys (`{component.*}`), responsive behaviour, iteration guide, and known gaps. Pair with **[code-style.md](.agents/rules/code-style.md)** and **[special-considerations.md](.agents/rules/special-considerations.md)** for accessibility and implementation detail.
+- **[DESIGN.md](DESIGN.md)** — Canonical reference for visual contracts: colour tokens (`{colors.*}`), typography scale, layout, elevation, component keys (`{component.*}`), responsive behaviour, iteration guide, and known gaps. Pair with **[code-style.md](.agents/rules/code-style.md)** and **[special-considerations.md](.agents/rules/special-considerations.md)** for accessibility and implementation detail.
+
+## Architecture Decision Records
+
+- **[docs/adr/README.md](docs/adr/README.md)** — Index of accepted structural decisions (module boundaries, shared layout, naming). Read applicable ADRs before structural work; add or update an ADR when conventions change. Agent rules and skills **link here** instead of restating layout decisions — see **[architecture-decisions.md](.agents/rules/architecture-decisions.md)**.
 
 ## Available Skills
 
@@ -129,6 +137,7 @@ pnpm run typecheck    # Run TypeScript type checking
 - **Type safety**: Strict TypeScript with no `any`
 - **Performance first**: [Core Web Vitals](https://web.dev/articles/vitals) optimisation
 - **Accessibility**: [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/) AA compliance
+- **Structural consistency**: Follow [docs/adr/README.md](docs/adr/README.md) for shared layout and module boundaries; add an ADR when those conventions change
 - **Visual consistency**: Follow [DESIGN.md](DESIGN.md) for public site UI; keep tokens in `src/index.css` (`--brand-*`)
 
 ## Rules vs. Skills at a Glance
@@ -147,4 +156,4 @@ Think of **rules** as a "manual" that keeps behavior aligned, while **skills** a
 - Additional **skills** (architecture review, test planning, etc.) or **rules** (team code style, compliance requirements) can be added under the existing folders.
 - Keep this file updated so future agents know when to load each artifact and how to combine them safely.
 
-Remember: You're supporting the VAIT community homepage. Focus on clean, performant, and accessible code that serves the community well. When in doubt, follow existing patterns in the codebase, [DESIGN.md](DESIGN.md) for visual work, and the relevant rules.
+Remember: You're supporting the VAIT community homepage. Focus on clean, performant, and accessible code that serves the community well. When in doubt, follow existing patterns in the codebase, [DESIGN.md](DESIGN.md) for visual work, [docs/adr/README.md](docs/adr/README.md) for structural work, and the relevant rules.

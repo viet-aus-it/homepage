@@ -9,6 +9,7 @@ This document provides comprehensive code style guidelines for the VAIT Homepage
 - **Type safety**: Leverage TypeScript to catch errors at compile time
 - **Performance awareness**: Write code that renders efficiently
 - **Visual design**: Public site UI must follow [DESIGN.md](../../DESIGN.md); use `--brand-*` tokens from the brand token layer, not ad hoc hex in components
+- **Structural layout**: Shared layers, public route composition, and module boundaries are defined in [docs/adr/README.md](../../docs/adr/README.md) — read applicable ADRs before changing them; see [architecture-decisions.md](./architecture-decisions.md)
 
 ## TypeScript Configuration
 
@@ -223,11 +224,15 @@ src/components/ui/button/
 
 ### Page Structure
 
+Public routes compose page-specific sections with shared site layout components. **Which layers exist and how they combine** is recorded in [docs/adr/README.md](../../docs/adr/README.md), not in this file.
+
+Typical layout:
+
 ```
-src/pages/home/
-├── index.tsx         # Page component
-├── index.test.tsx    # Page tests
-└── [section].tsx     # Section components
+src/pages/[route]/
+├── index.tsx         # Page composer
+├── index.test.tsx    # Route smoke / integration tests
+└── [section].tsx     # Route-specific sections
 ```
 
 ## Error Handling
@@ -344,10 +349,10 @@ export const App = () => {
 
 ## Cross References
 
-- **Development Workflow**: See `docs/development.md#conventions`
-- **Testing Patterns**: See `docs/testing.md`
-- **Architecture Overview**: See `docs/architecture.md`
-- **Current Commands**: See `AGENTS.md` for essential commands
+- **Structural decisions**: [docs/adr/README.md](../../docs/adr/README.md) and [architecture-decisions.md](./architecture-decisions.md)
+- **Development workflow**: [docs/how-to/01-development.md](../../docs/how-to/01-development.md)
+- **Architecture overview**: [docs/explanation/01-architecture.md](../../docs/explanation/01-architecture.md)
+- **Current commands**: See [AGENTS.md](../../AGENTS.md) for essential commands
 
 ## Tool Configuration
 

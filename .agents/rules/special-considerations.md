@@ -647,10 +647,11 @@ export const secureApiClient = {
 
 ## Cross References
 
-- **Architecture**: See `docs/architecture.md` for technology stack details
-- **Engineering Principles**: See `engineering-principles.md` for security and performance guidelines
-- **Patterns**: See `patterns.md` for implementation patterns
-- **Infrastructure**: See `infra/` directory for AWS deployment configurations
+- **Structural decisions**: [docs/adr/README.md](../../docs/adr/README.md) and [architecture-decisions.md](./architecture-decisions.md)
+- **Architecture overview**: [docs/explanation/01-architecture.md](../../docs/explanation/01-architecture.md)
+- **Engineering principles**: [engineering-principles.md](./engineering-principles.md) for security and performance guidelines
+- **Patterns**: [patterns.md](./patterns.md) for implementation patterns
+- **Infrastructure**: [infrastructure.md](./infrastructure.md) for Cloudflare Workers deployment
 
 ## Compliance and Legal
 

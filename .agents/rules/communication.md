@@ -161,7 +161,7 @@ This document provides communication guidelines for AI agents working on the VAI
 
 # Example:
 
-"The current routing structure uses basic React Router. Migrating to TanStack Router provides better type safety and code splitting. We can migrate incrementally starting with the main routes. See docs/architecture.md for current setup."
+"The routing stack uses TanStack Router with type-safe routes and code splitting. See [docs/explanation/01-architecture.md](../../docs/explanation/01-architecture.md) for the overview and [docs/adr/README.md](../../docs/adr/README.md) when adding public routes or shared layout."
 ```
 
 ## Error Reporting and Debugging
