@@ -126,15 +126,15 @@ Identify which files belong to the requested commit. Exclude anything unrelated.
 
 ### Step 2: Pre-commit checks
 
-**Always run before committing** — `oxfmt` covers markdown, YAML, and code:
+**Always run before committing:**
 
 ```bash
-pnpm run lint:fix && pnpm run typecheck
+pnpm run lint:gate && pnpm run typecheck
 ```
 
-If `lint:fix` reformats staged or unstaged files, include those paths in this commit. Do not commit with formatting drift.
+`lint:gate` runs `lint:fix` then `ci` (Oxlint + Oxfmt check). Fix any errors Oxlint/Oxfmt cannot auto-resolve, then re-run until both pass. If `lint:gate` reformats files, stage those paths in this commit.
 
-Pre-commit hooks run on commit; do not skip hooks (`--no-verify`) unless the user explicitly requests it.
+The pre-commit hook runs `scripts/lint-gate.sh` and blocks when auto-fixes need re-staging. Do not skip hooks (`--no-verify`) unless the user explicitly requests it.
 
 ### Step 3: Stage explicitly
 
@@ -201,7 +201,7 @@ Before committing, verify:
 - [ ] Message follows Conventional Commits
 - [ ] Body explains _why_ where non-obvious
 - [ ] No secrets or `.env` files staged
-- [ ] `pnpm run lint:fix && pnpm run typecheck` pass
+- [ ] `pnpm run lint:gate && pnpm run typecheck` pass
 - [ ] `git log -1` looks correct after commit
 
 ## Runtime compatibility

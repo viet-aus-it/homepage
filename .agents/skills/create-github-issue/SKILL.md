@@ -175,7 +175,7 @@ When assigning work to Cursor or Claude Code, include in the prompt:
 - [ ] Hero section displays the next future event (title, date, registration link)
 - [ ] Graceful empty state when no upcoming events
 - [ ] Component tests cover populated and empty states
-- [ ] `pnpm run lint:fix && pnpm run typecheck && pnpm run test:run` pass
+- [ ] `pnpm run lint:gate && pnpm run typecheck && pnpm run test:run` pass
 
 **Out of Scope:**
 

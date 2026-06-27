@@ -70,10 +70,10 @@ Read the diff for the core changes. Identify the linked issue from commit messag
 **Do not create or update a PR until these pass:**
 
 ```bash
-pnpm run lint:fix && pnpm run typecheck
+pnpm run lint:gate && pnpm run typecheck
 ```
 
-If `lint:fix` reformats files, stage and commit the formatting changes first (use [vait-commit](../vait-commit/SKILL.md)). A PR must not be opened while the branch has lint or typecheck failures.
+`lint:gate` auto-fixes then verifies with `ci`. Fix any remaining lint errors manually before retrying. If it reformats files, stage and commit those changes first (use [vait-commit](../vait-commit/SKILL.md)). The pre-push hook runs the same gate before `lint-prepush`.
 
 ### Step 3: Draft the PR body
 
@@ -105,7 +105,7 @@ Use this template verbatim for section headings:
 
 Before submitting, verify:
 
-- [ ] `pnpm run lint:fix && pnpm run typecheck` pass on the branch
+- [ ] `pnpm run lint:gate && pnpm run typecheck` pass on the branch
 - [ ] **Context** explains _why_, not a repeat of **Changes**
 - [ ] **Changes** focuses on reviewer-relevant deltas
 - [ ] Issue link present when work tracks an issue

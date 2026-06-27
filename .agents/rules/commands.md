@@ -1,5 +1,7 @@
 # Commands Reference
 
+> Load only for pnpm/git/CI tasks — not with other domain rules. Routing: [AGENTS.md](../../AGENTS.md).
+
 This document provides comprehensive command guidelines for the VAIT Homepage project, expanding upon the essential commands in AGENTS.md with agent-specific workflows and patterns.
 
 ## Core Development Commands
@@ -54,6 +56,9 @@ pnpm run lint
 
 # Auto-fix formatting and linting issues
 pnpm run lint:fix
+
+# Auto-fix then verify (required before commit/push; enforced by husky)
+pnpm run lint:gate
 
 # Unsafe auto-fix (may break code)
 pnpm run lint:fix:unsafe
@@ -112,15 +117,26 @@ git add .
 # 2. Run full test suite
 pnpm run test:run
 
-# 3. Run lint and typecheck
-pnpm run lint:fix && pnpm run typecheck
+# 3. Run lint gate and typecheck (fix any remaining lint errors manually)
+pnpm run lint:gate && pnpm run typecheck
 
 # 4. Build to ensure production compatibility
 pnpm run build
 
-# 5. Commit (pre-commit hooks will run additional checks)
+# 5. Commit (pre-commit hook runs scripts/lint-gate.sh)
 git commit -m "feat: add new feature"
 ```
+
+### Git hooks (husky)
+
+Enforced at commit/push — do not bypass with `--no-verify` unless the user explicitly requests it.
+
+| Hook       | Script                                                              | Behaviour                                                                                                 |
+| ---------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| pre-commit | [scripts/lint-gate.sh](../../scripts/lint-gate.sh) `--working-tree` | `lint:fix` → `ci`; blocks if auto-fixes need re-staging                                                   |
+| pre-push   | same script `--since-head`, then `lint-prepush`                     | Blocks push when committed code still needs lint fixes; runs tests/typecheck on changed files vs `master` |
+
+Agent/human shortcut: `pnpm run lint:gate` (= `lint:fix` + `ci`).
 
 ## TanStack Router Commands
 
@@ -339,10 +355,6 @@ Production deploys automatically when changes merge to `master` (Cloudflare Git 
 pnpm run build && pnpm run deploy
 ```
 
-## Related rules
-
-Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
-
 ## Command Aliases (Optional)
 
 Add these to your shell profile for convenience:
@@ -352,16 +364,16 @@ Add these to your shell profile for convenience:
 alias vdev='pnpm run dev'
 alias vbuild='pnpm run build'
 alias vtest='pnpm run test'
-alias vlint='pnpm run lint:fix'
+alias vlint='pnpm run lint:gate'
 alias vtype='pnpm run typecheck'
-alias vcheck='pnpm run lint:fix && pnpm run typecheck'
+alias vcheck='pnpm run lint:gate && pnpm run typecheck'
 ```
 
 ## Agent Command Patterns
 
 When working as an AI agent, follow these patterns:
 
-1. **Always run checks before committing**: `pnpm run lint:fix && pnpm run typecheck`
+1. **Always run checks before committing**: `pnpm run lint:gate && pnpm run typecheck` (hooks enforce `scripts/lint-gate.sh`)
 2. **Test frequently**: Run `pnpm run test` in watch mode during development
 3. **Build before PR**: Ensure `pnpm run build` succeeds
 4. **Use descriptive commit messages**: Follow conventional commit format
