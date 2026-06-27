@@ -24,9 +24,16 @@ src/           — Application source code (components, pages, hooks, services, 
 public/        — Static assets
 .github/       — CI/CD workflows (GitHub Actions)
 docs/          — Project documentation (Diataxis framework)
+docs/adr/      — Architecture Decision Records (structural decisions; no implementation code)
 .agents/       — AI agent rules and skills
-DESIGN.md      — Homepage visual design system (repository root)
+DESIGN.md      — Public site visual design system (repository root)
 ```
+
+## Architecture Decision Records
+
+Significant structural choices are recorded under [docs/adr/](./adr/README.md). ADRs explain **why** (for example shared site layout components, naming conventions, module boundaries). They intentionally omit code and file paths so they do not drift when refactors land.
+
+The first accepted record, [ADR 0001: Shared site layout components](./adr/0001-shared-site-layout-components.md), covers extracting reusable navigation, footer, and section primitives for all public routes.
 
 ## Design Principles
 
@@ -37,19 +44,22 @@ DESIGN.md      — Homepage visual design system (repository root)
 
 ## Visual Design
 
-Marketing UI is documented in [DESIGN.md](../../DESIGN.md) at the repository root (not under `docs/`). That file is the source of truth for:
+Public site UI (colours, typography, layout, component keys) is documented in [DESIGN.md](../../DESIGN.md) at the repository root. That file is the source of truth for:
 
-- Brand colours (`--brand-*` in `src/index.css`) and landing page surfaces (dark hero, warm mid-page bands, dark footer)
-- Named homepage components (`home-nav`, `home-hero`, `home-section`, `discord-cta-link`, `home-footer`, etc.)
+- Brand colours and landing page surfaces (dark hero, warm mid-page bands, dark footer)
+- Named components (`{component.site-nav}`, `{component.page-section}`, `{component.home-hero}`, `{component.discord-cta-link}`, `{component.site-footer}`, and related keys)
 - Typography hierarchy, spacing, and responsive breakpoints
-- Do's and don'ts (e.g. brand yellow for emphasis only, dark hero/footer bookends, Discord as primary CTA)
+- Do's and don'ts (for example brand yellow for emphasis only, dark hero/footer bookends, Discord as primary CTA)
 
-When changing landing-page visuals, read `DESIGN.md` first and update it in the same pull request if tokens or component contracts change.
+Structural layout decisions — such as why shared site components exist and how public routes compose them — are recorded in [ADRs](../adr/README.md), starting with [ADR 0001](../adr/0001-shared-site-layout-components.md). ADRs hold rationale; DESIGN.md holds visual contracts. Neither stores implementation code.
+
+When changing public-site visuals, read `DESIGN.md` first and update it in the same pull request if tokens or documented component behaviour change. When introducing a new structural pattern (new module boundary, naming convention, or cross-route layer), add or update an ADR.
 
 ---
 
 See also:
 
 - [Design System](../../DESIGN.md) — Full visual design reference
+- [Architecture Decision Records](../adr/README.md) — Structural decisions (ADRs)
 - [Infrastructure](./02-infrastructure.md) — Cloudflare Workers architecture
 - [Project Reference](../reference/01-project-reference.md) — Tech stack versions and commands

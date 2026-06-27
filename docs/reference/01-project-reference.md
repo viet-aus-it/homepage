@@ -47,11 +47,12 @@ AGENTS.md      — AI agent control manifest
 
 ## Design Documentation
 
-| Document                                          | Purpose                                                                                  |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| [DESIGN.md](../../DESIGN.md)                      | Homepage visual design: colour tokens, typography, named components, layout, do's/don'ts |
-| [Architecture](../explanation/01-architecture.md) | Tech stack rationale and link to visual design                                           |
-| Brand tokens in code                              | `src/index.css` (`--brand-*`), utilities in `@layer utilities`                           |
+| Document                                          | Purpose                                                                                     |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| [DESIGN.md](../../DESIGN.md)                      | Public site visual design: colour tokens, typography, named components, layout, do's/don'ts |
+| [Architecture](../explanation/01-architecture.md) | Tech stack rationale and link to visual design                                              |
+| [ADRs](../adr/README.md)                          | Accepted structural decisions (rationale without implementation code)                       |
+| Brand tokens in code                              | CSS custom properties and utilities for `--brand-*` tokens                                  |
 
 ## Testing Tools
 
