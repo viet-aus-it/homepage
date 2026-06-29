@@ -32,14 +32,7 @@ function CommunityRings() {
         <div className="flex flex-col gap-2">
           {BELONGING_RINGS.map((ring, index) => (
             <div key={ring.number} className={cn('grid grid-cols-[54px_1fr] gap-5 py-6', index < BELONGING_RINGS.length - 1 && 'border-b border-[#E7E4DA]')}>
-              <div
-                className={cn(
-                  'font-display text-[30px] font-extrabold leading-none',
-                  ring.accent === 'dark' ? 'text-brand-near-black' : 'text-brand-yellow-shade'
-                )}
-              >
-                {ring.number}
-              </div>
+              <div className="font-display text-[30px] font-extrabold leading-none text-brand-near-black">{ring.number}</div>
               <div>
                 <h3 className="font-display text-xl font-bold">{ring.title}</h3>
                 <p className="mt-1.5 text-[15.5px] leading-relaxed text-brand-gray-dark">
