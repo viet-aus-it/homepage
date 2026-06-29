@@ -215,10 +215,10 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 ## Iteration Guide
 
 1. Focus on **one component** per change — reference keys above (`{component.site-nav}`, etc.).
-2. Map new colours to CSS variables in the brand token layer and add utilities — avoid inline hex in components.
+2. Map new colours to CSS variables in `src/index.css` (`--brand-*`) and add utilities in `@layer utilities` — avoid inline hex in components.
 3. When adding pages, reuse `{component.site-nav}` + `{component.site-footer}` with the appropriate nav variant.
-4. Nav and footer link changes belong in central nav configuration — not hard-coded in presentational components.
-5. Logo colour changes must update `{component.logo}` variants and CSS tokens together.
+4. Nav and footer link changes belong in `src/lib/site-nav.ts` — not hard-coded in presentational components.
+5. Logo colour changes must update `LOGO_COLOURS` in `{component.logo}` and CSS tokens together.
 6. Display typography changes should update the hierarchy table in this file in the same PR.
 
 ## Known Gaps
