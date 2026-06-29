@@ -47,8 +47,9 @@ Answer **what was verified**. Start from the template defaults and tailor:
 - [ ] Lint and formatting checks pass
 - [ ] Tests pass (if applicable)
 - [ ] Documentation updated (if needed)
+- [ ] ADR added or updated (if structural conventions changed)
 
-Mark items `[x]` only when genuinely completed. Add project-specific items (e.g. DESIGN.md updated for UI changes) when relevant.
+Mark items `[x]` only when genuinely completed. Add project-specific items when relevant (for example `DESIGN.md` updated for UI changes, [ADR](../../docs/adr/README.md) added or updated for structural changes).
 
 ## Workflow
 
@@ -97,6 +98,7 @@ Use this template verbatim for section headings:
 - [ ] Lint and formatting checks pass
 - [ ] Tests pass (if applicable)
 - [ ] Documentation updated (if needed)
+- [ ] ADR added or updated (if structural conventions changed)
 ```
 
 ### Step 4: Quality check
@@ -136,6 +138,7 @@ gh pr create \
 - [ ] Lint and formatting checks pass
 - [ ] Tests pass (if applicable)
 - [ ] Documentation updated (if needed)
+- [ ] ADR added or updated (if structural conventions changed)
 EOF
 )"
 ```

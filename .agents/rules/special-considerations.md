@@ -1,5 +1,7 @@
 # Special Considerations
 
+> Load only for SEO, a11y, browser, or security work — not with other domain rules. Routing: [AGENTS.md](../../AGENTS.md).
+
 This document outlines special considerations and constraints specific to the VAIT Homepage project, building upon the established architecture and technology stack.
 
 ## Browser Compatibility
@@ -644,13 +646,6 @@ export const secureApiClient = {
   },
 };
 ```
-
-## Cross References
-
-- **Architecture**: See `docs/architecture.md` for technology stack details
-- **Engineering Principles**: See `engineering-principles.md` for security and performance guidelines
-- **Patterns**: See `patterns.md` for implementation patterns
-- **Infrastructure**: See `infra/` directory for AWS deployment configurations
 
 ## Compliance and Legal
 
