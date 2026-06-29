@@ -33,7 +33,6 @@ export interface BelongingRing {
   number: string;
   title: string;
   description: string;
-  accent?: 'yellow' | 'dark';
   link?: { label: string; href: string };
 }
 
@@ -162,20 +161,17 @@ export const BELONGING_RINGS: BelongingRing[] = [
     number: '01',
     title: 'Anyone, free forever',
     description: `Hop into the Discord and you're in. Every channel, every event, no fee. That's all ${COMMUNITY_MEMBER_COUNT} of us.`,
-    accent: 'yellow',
   },
   {
     number: '02',
     title: 'Paid members get a say',
     description:
       'Everything above, plus a vote at the AGM and the right to stand for the board or join the volunteer crew. Members shape where VAIT heads next.',
-    accent: 'yellow',
   },
   {
     number: '03',
     title: 'The team runs it',
     description: 'A board and a crew of contributors, all drawn from paid members, all volunteers. Meet them below.',
-    accent: 'dark',
     link: { label: 'Meet the team ↓', href: '#team' },
   },
 ];
@@ -191,7 +187,7 @@ export const CONTRIBUTOR_MEMBERS: ContributorMember[] = [
   { name: 'Jing Vu', role: 'Event Organiser · Victoria', subtitle: 'Data Analyst - Melbourne', initials: 'JV' },
   { name: 'Hung Tran', role: 'Committee Member', subtitle: 'Senior ML Engineer - Canva', initials: 'HT' },
   { name: 'Daniel Nguyen', role: 'Committee Member', subtitle: 'Senior Data Engineer - Mantel', initials: 'DN' },
-  { name: 'Phuong Bui', role: 'Committee Member', initials: 'PB' },
+  { name: 'Phuong Bui', role: 'Committee Member', subtitle: 'Senior Software Engineer - GPC', initials: 'PB' },
 ];
 
 export const CREDIBILITY_STATS: CredibilityStat[] = [
