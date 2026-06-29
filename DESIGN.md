@@ -15,7 +15,9 @@ The page stacks vertically: dark hero → yellow hashtag marquee → warm-surfac
 - Real community photography in hero and event cards.
 - Skip link targets `#main-content`; title and description set in `index.html`.
 
-**Route:** `/` via `src/routes/index.tsx` → `src/pages/home/`. Navigation hash links resolve against `HOME_PATH = '/'` in `src/lib/site-nav.ts`.
+**Route:** `/` homepage. Hash links in navigation resolve against the site root path.
+
+Shared layout structure for public routes is described in [ADR 0001: Shared site layout components](./docs/adr/0001-shared-site-layout-components.md). Visual contracts below use component keys only — not implementation paths.
 
 ## Colors
 
@@ -96,9 +98,9 @@ Both tokens are registered in `src/index.css` `@theme inline` and installed as `
 ### Spacing System
 
 - **Base unit:** 4px (Tailwind default).
-- **Home nav height** (`{spacing.home-nav}` — `--home-nav-height`): `5.25rem` mobile / `4.5rem` desktop. Utilities: `pt-home-nav`, `min-h-home-nav`.
-- **Section padding:** Defined per section via `{component.home-section}` inner container (`HOME_SECTION_INNER`).
-- **Hero clearance:** `HOME_NAV_CLEARANCE` exported from `{component.home-section}` so hero content clears the fixed nav.
+- **Home nav height** (`{spacing.home-nav}`): `5.25rem` mobile / `4.5rem` desktop.
+- **Section padding:** Defined per section via `{component.page-section}` inner container.
+- **Hero clearance:** Extra top padding on `{component.home-hero}` so content clears the fixed landing nav.
 
 ### Grid & Container
 
@@ -133,9 +135,11 @@ Depth is **surface contrast** plus **CTA hover glow** — not a multi-shadow mar
 
 ## Components
 
+Structural roles and naming for shared layout pieces are fixed in [ADR 0001](./docs/adr/0001-shared-site-layout-components.md). This section documents **visual and behavioural contracts** using component keys.
+
 ### Navigation
 
-**`site-nav`** (`src/components/site/site-nav.tsx`) — Shared fixed/sticky top bar for public site pages. **`landing`** variant: fixed over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. **`inner`** variant: sticky dark frosted bar for secondary routes. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Internal links use TanStack Router `Link`; hash links resolve via `HOME_PATH` in `src/lib/site-nav.ts`. Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`.
+**`site-nav`** — Shared fixed or sticky top bar for public site pages. **`landing`** variant: fixed over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. **`inner`** variant: sticky dark frosted bar for secondary public routes with active-route underline. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`. Nav destinations are configured centrally, not hard-coded in the component.
 
 ### CTAs
 
@@ -143,19 +147,19 @@ Depth is **surface contrast** plus **CTA hover glow** — not a multi-shadow mar
 
 ### Page sections
 
-**`home-hero`** — Dark split hero with dot-grid texture, community photo, member badge. Section uses `{spacing.home-nav}` top padding (`PAGE_NAV_CLEARANCE`) so content clears the fixed nav while the dark background extends under it.
+**`home-hero`** — Dark split hero with dot-grid texture, community photo, member badge. Uses `{spacing.home-nav}` clearance so content sits below the fixed nav while the dark background extends under it.
 
-**`page-section`** — Shared section shell (`src/components/site/page-section.tsx`): outer `section` owns surface styles; inner container owns max-width and vertical padding via `PAGE_SECTION_INNER`.
+**`page-section`** — Shared section shell: outer `section` owns surface styles; inner container owns max-width and vertical padding.
 
-**`section-header`**, **`stat-card`**, **`cta-band`** — Reusable section building blocks in `src/components/site/`.
+**`section-header`**, **`stat-card`**, **`cta-band`** — Reusable section building blocks shared across public routes (see ADR 0001).
 
 **`home-marquee`** — Yellow hashtag band; duplicate track for infinite scroll; second track hidden under `prefers-reduced-motion`.
 
-**`site-footer`** (`src/components/site/site-footer.tsx`) — Three-column footer on `{colors.brand-footer-dark}` (`4fr / 1fr / 1fr` grid at `lg`): brand blurb + Discord CTA, Explore, Follow. Bottom bar stacks legal copy (copyright, ABN, tagline) beside the **ACNC Registered Charity Tick** (reverse mono, 76px height, links to the ACNC charity register). Follow links: `FOOTER_FOLLOW` in `src/lib/site-nav.ts` (URLs from `SOCIAL_LINKS` in `constants.ts`; short links managed in [static-sites](https://github.com/viet-aus-it/static-sites)). ACNC asset and URLs: `ACNC` in `constants.ts`; logo at `public/images/acnc-registered-charity-reverse.png`.
+**`site-footer`** — Three-column footer on `{colors.brand-footer-dark}` (`4fr / 1fr / 1fr` grid at `lg`): brand blurb + Discord CTA, Explore, Follow. Bottom bar stacks legal copy (copyright, ABN, tagline) beside the **ACNC Registered Charity Tick** (reverse mono, 76px height, links to the ACNC charity register). Follow links use configured social URLs; ACNC logo links to the charity register.
 
 ### Logo
 
-**`logo`** — SVG tick-and-star mark rendered by `src/components/ui/logo.tsx` (`{component.logo}`). Variants: `colour` (yellow + gray ticks), `gray`, `dark-gray` (charcoal + gray). Props: standard SVG attributes (`className`, `width`, `height`).
+**`logo`** — SVG tick-and-star mark (`{component.logo}`). Variants: `colour` (yellow + gray ticks), `gray`, `dark-gray` (charcoal + gray).
 
 **Favicon assets** — Browser chrome and iOS home-screen icons use a **dedicated favicon mark** (rounded `{colors.brand-gray-dark}` tile, yellow `#F5C518` + white ticks) for legibility at 16×16 / 32×32 — separate from `{component.logo}` above. Design source: `tmp/logo-favicon.svg` (not served). Declared in `index.html`:
 
@@ -178,13 +182,13 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 - Use `{component.page-section}` for new public site sections before inventing new shells.
 - Respect `max-w-screen-lg` for editorial width — do not stretch text edge-to-edge on desktop.
 - Honour `prefers-reduced-motion` for marquee animation (second track hidden).
-- Configure nav items in `src/lib/site-nav.ts` with progressive `enabled` flags as routes ship.
+- Configure nav items centrally with progressive enabled flags as routes ship.
 
 ### Don't
 
 - Don't add a second competing accent (e.g. blue CTAs) without updating `{colors.brand-yellow}` contract.
 - Don't remove the skip link or `#main-content` target — required for keyboard accessibility.
-- Don't hard-code nav destinations in components — use `site-nav.ts` helpers.
+- Don't hard-code nav destinations in components — use the central nav configuration.
 - Don't load a cold geometric sans that fights the yellow warmth without a design review.
 
 ## Responsive Behavior
@@ -225,4 +229,4 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 - Form inputs and validation states are shadcn defaults — not extracted for public site pages.
 - Additional routes (`not-found`, future pages) are not fully specified in this document.
 - Open Graph and structured data meta tags are not yet implemented.
-- In-app or member portal UI is out of scope — this file covers the public homepage only.
+- In-app or member portal UI is out of scope — this file covers the public site.
