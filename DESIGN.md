@@ -183,17 +183,17 @@ Static copy and data live in the community content module. Page sets `document.t
 
 **Layout:** White canvas, `{component.site-nav}` `variant="inner"`, skip link → `#main-content`, `{component.site-footer}`. Section order:
 
-| Section key            | Surface / notes                                                               |
-| ---------------------- | ----------------------------------------------------------------------------- |
-| `community-hero`       | Dark hero band; headline + credibility stats                                  |
-| `community-experience` | Warm surface; four experience cards                                           |
-| `community-reach`      | Warm surface; CSS cartogram + proportional bar chart (`reachBarWidthPercent`) |
-| `community-timeline`   | Vertical milestone timeline                                                   |
-| `community-rings`      | Three belonging rings (Grow / Connect / Build)                                |
-| `community-team`       | Board + contributors; `id="team"` anchor for in-page nav                      |
-| `community-pillars`    | Warm surface; Grow / Connect / Build pillar cards                             |
-| `community-values`     | Values grid                                                                   |
-| `community-cta`        | Dark `{component.cta-band}`; Discord only (no member CTA until `/join` ships) |
+| Section key            | Surface / notes                                                                                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `community-hero`       | Dark hero band; headline + credibility stats                                                                                                      |
+| `community-experience` | Warm surface; four experience cards                                                                                                               |
+| `community-reach`      | Warm surface; CSS cartogram + ranked bar chart (bar width via `reachBarWidthPercent` — visual scale vs largest region, not % of total membership) |
+| `community-timeline`   | Vertical milestone timeline                                                                                                                       |
+| `community-rings`      | Three belonging rings (Grow / Connect / Build)                                                                                                    |
+| `community-team`       | Board + contributors; `id="team"` anchor for in-page nav                                                                                          |
+| `community-pillars`    | Warm surface; Grow / Connect / Build pillar cards                                                                                                 |
+| `community-values`     | Values grid                                                                                                                                       |
+| `community-cta`        | Dark `{component.cta-band}`; Discord only (no member CTA until `/join` ships)                                                                     |
 
 **Cross-links:** Homepage community-reach section links to `/community` (“See the whole map →”). `PRIMARY_NAV` and `FOOTER_EXPLORE` Community entries use `to: '/community'`.
 

@@ -129,6 +129,7 @@ function CommunityReach() {
                 <div key={row.label} className="grid grid-cols-[60px_1fr_46px] items-center gap-3.5">
                   <span className={cn('font-display text-[13px] font-bold', row.abroad && 'text-brand-yellow-shade')}>{row.label}</span>
                   <span className="block h-3.5 overflow-hidden rounded-full bg-[#F0EFE9]">
+                    {/* Bar width = visual scale vs largest region, not % of total membership (see reachBarWidthPercent). */}
                     <span
                       className={cn('block h-full rounded-full', row.label === 'VIC' ? 'bg-brand-yellow' : 'bg-brand-near-black')}
                       style={{ width: reachBarWidthPercent(row.value) }}
