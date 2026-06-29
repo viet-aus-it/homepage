@@ -1,5 +1,7 @@
 # Engineering Principles
 
+> Load only for trade-off / architecture decisions — not with other domain rules. Routing: [AGENTS.md](../../AGENTS.md).
+
 This document outlines the engineering principles that guide development of the VAIT Homepage project, building upon the established architecture and technology stack.
 
 ## Core Principles
@@ -362,17 +364,11 @@ export const Button = ({
 - **Backup procedures**: Implement regular backup and recovery processes
 - **Data privacy**: Comply with relevant data protection regulations
 
-## Cross References
-
-- **Architecture Overview**: See `docs/architecture.md` for technology stack details
-- **Code Style**: See `code-style.md` for implementation patterns
-- **Testing Strategy**: See `docs/testing.md` for testing philosophy and tools
-- **Development Workflow**: See `docs/development.md` for team processes
-
 ## Decision Framework
 
 When making technical decisions, consider:
 
+0. **Recorded architecture**: Does an [ADR](../../docs/adr/README.md) already decide this? If yes, follow it or propose superseding it explicitly.
 1. **User Impact**: How does this affect the end user experience?
 2. **Maintainability**: Will this be easy to understand and modify later?
 3. **Performance**: What are the performance implications?

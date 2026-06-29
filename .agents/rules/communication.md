@@ -1,5 +1,7 @@
 # Communication Guidelines
 
+> Load only when response style matters — skip for pure coding tasks. Routing: [AGENTS.md](../../AGENTS.md).
+
 This document provides communication guidelines for AI agents working on the VAIT Homepage project, ensuring consistent, clear, and effective interactions.
 
 ## Core Communication Principles
@@ -161,7 +163,7 @@ This document provides communication guidelines for AI agents working on the VAI
 
 # Example:
 
-"The current routing structure uses basic React Router. Migrating to TanStack Router provides better type safety and code splitting. We can migrate incrementally starting with the main routes. See docs/architecture.md for current setup."
+"The routing stack uses TanStack Router with type-safe routes and code splitting. See [docs/explanation/01-architecture.md](../../docs/explanation/01-architecture.md) for the overview and [docs/adr/README.md](../../docs/adr/README.md) when adding public routes or shared layout."
 ```
 
 ## Error Reporting and Debugging
@@ -330,13 +332,6 @@ This document provides communication guidelines for AI agents working on the VAI
 - **Keep current**: Update communication patterns as project evolves
 - **Reference existing**: Link to current documentation rather than duplicating
 - **Version awareness**: Consider impact of changes on existing docs
-
-## Cross References
-
-- **Code Style**: See `code-style.md` for coding and formatting standards
-- **Commands**: See `commands.md` for command-line communication patterns
-- **Development**: See `docs/how-to/01-development.md` for team workflow patterns
-- **Contributing**: See `docs/how-to/02-contributing.md` for collaboration guidelines
 
 ## Agent-Specific Guidelines
 

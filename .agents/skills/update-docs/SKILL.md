@@ -16,14 +16,16 @@ When user asks to:
 
 ## Documentation Locations
 
-| Location          | Content                                                       | Key Sections                                                                                                  |
-| ----------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `README.md`       | Project overview, setup, tech stack                           | Overview, quick start, commands                                                                               |
-| `DESIGN.md`       | Homepage visual design system                                 | Colours, typography, components, do's/don'ts                                                                  |
-| `docs/`           | User-facing docs ([Diataxis](https://diataxis.fr/) framework) | Tutorials, how-to guides, explanation, reference                                                              |
-| `AGENTS.md`       | Agent control manifest                                        | Project structure, tech stack, available skills/rules, commands                                               |
-| `.agents/rules/`  | Domain-specific guidelines                                    | Code style, patterns, commands, engineering principles, communication, special considerations, infrastructure |
-| `.agents/skills/` | Task-specific toolkits                                        | Each skill's SKILL.md                                                                                         |
+| Location            | Content                                                       | Key Sections                                                                                                                   |
+| ------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `README.md`         | Project overview, setup, tech stack                           | Overview, quick start, commands                                                                                                |
+| `DESIGN.md`         | Public site visual design system                              | Colours, typography, component keys, do's/don'ts                                                                               |
+| `docs/adr/`         | Architecture Decision Records (structural rationale)          | Index in `README.md`; no implementation code — agents also use [architecture-decisions.md](../rules/architecture-decisions.md) |
+| `docs/`             | User-facing docs ([Diataxis](https://diataxis.fr/) framework) | Tutorials, how-to guides, explanation, reference                                                                               |
+| `AGENTS.md`         | Agent manifest (keep minimal)                                 | Routing, mandatory rules only                                                                                                  |
+| `.agents/README.md` | Maintainer guide for agent config                             | Where to add what — not for coding sessions                                                                                    |
+| `.agents/rules/`    | Domain guidelines                                             | On demand per [AGENTS.md](../../AGENTS.md); index in [references.md](../rules/references.md)                                   |
+| `.agents/skills/`   | Task-specific toolkits                                        | Each skill's SKILL.md                                                                                                          |
 
 ## Workflow
 
@@ -57,18 +59,19 @@ Group changes by their documentation impact:
 
 For each category, note which documentation locations are affected using the mapping:
 
-| Change Type                   | Docs to Check                                                                                                                                       |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| New feature/component         | `README.md`, `docs/explanation/01-architecture.md`, `AGENTS.md` (project structure)                                                                 |
-| Marketing UI / brand / layout | `DESIGN.md`, `docs/index.md`, `docs/explanation/01-architecture.md`, `docs/how-to/01-development.md`, `docs/how-to/02-contributing.md`, `AGENTS.md` |
-| New dependency                | `README.md`, `AGENTS.md` (tech stack), `docs/reference/01-project-reference.md`                                                                     |
-| New command/script            | `README.md`, `AGENTS.md` (commands), `docs/reference/01-project-reference.md`, `.agents/rules/commands.md`                                          |
-| Infrastructure change         | `docs/explanation/02-infrastructure.md`, `docs/how-to/03-deployment.md`, `.agents/rules/infrastructure.md`                                          |
-| New route                     | `AGENTS.md` (project structure), `docs/reference/01-project-reference.md`                                                                           |
-| New skill/rule                | `AGENTS.md` (available skills/rules)                                                                                                                |
-| Test changes                  | `docs/how-to/01-development.md`, `docs/reference/01-project-reference.md`                                                                           |
-| CI/CD change                  | `docs/how-to/03-deployment.md`, `docs/reference/01-project-reference.md`                                                                            |
-| Config/env var change         | `docs/reference/01-project-reference.md`, `README.md`                                                                                               |
+| Change Type                     | Docs to Check                                                                                                                                       |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| New feature/component           | `README.md`, `docs/explanation/01-architecture.md`, `AGENTS.md` (project structure)                                                                 |
+| Structural / module boundary    | `docs/adr/` (new or updated ADR), `.agents/rules/references.md`, `docs/explanation/01-architecture.md`, `AGENTS.md`                                 |
+| Public site UI / brand / layout | `DESIGN.md`, `docs/index.md`, `docs/explanation/01-architecture.md`, `docs/how-to/01-development.md`, `docs/how-to/02-contributing.md`, `AGENTS.md` |
+| New dependency                  | `README.md`, `AGENTS.md` (tech stack), `docs/reference/01-project-reference.md`                                                                     |
+| New command/script              | `README.md`, `AGENTS.md` (commands), `docs/reference/01-project-reference.md`, `.agents/rules/commands.md`                                          |
+| Infrastructure change           | `docs/explanation/02-infrastructure.md`, `docs/how-to/03-deployment.md`, `.agents/rules/infrastructure.md`                                          |
+| New route                       | `AGENTS.md` (project structure), `docs/reference/01-project-reference.md`                                                                           |
+| New skill/rule                  | `AGENTS.md` (available skills/rules)                                                                                                                |
+| Test changes                    | `docs/how-to/01-development.md`, `docs/reference/01-project-reference.md`                                                                           |
+| CI/CD change                    | `docs/how-to/03-deployment.md`, `docs/reference/01-project-reference.md`                                                                            |
+| Config/env var change           | `docs/reference/01-project-reference.md`, `README.md`                                                                                               |
 
 ### Step 3: Audit Each Location
 
@@ -118,6 +121,9 @@ pnpm run lint
 - [ ] Changes categorised by documentation impact
 - [ ] `README.md` checked and updated
 - [ ] `DESIGN.md` checked when UI tokens, components, or layout change
+- [ ] `.agents/rules/references.md` updated when adding rules, skills, or top-level doc paths
+- [ ] `.agents/README.md` or `AGENTS.md` updated when changing loading model or mandatory rules
+- [ ] `docs/adr/` checked or updated when structural conventions change (do not duplicate ADR text in rules or AGENTS.md)
 - [ ] `docs/` files checked and updated for affected topics
 - [ ] `AGENTS.md` checked: project structure, tech stack, skills, rules, commands
 - [ ] `.agents/rules/` checked for affected rules
@@ -144,6 +150,7 @@ Current `docs/` structure:
 - **`how-to/`**: `01-development`, `02-contributing`, `03-deployment`
 - **`explanation/`**: `01-architecture`, `02-infrastructure`
 - **`reference/`**: `01-project-reference`
+- **`adr/`**: Architecture Decision Records (structural decisions; index in `README.md`)
 
 When updating docs, do not mix content types. Move how-to steps out of reference docs, move reference tables out of explanation docs, etc.
 

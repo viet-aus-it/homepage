@@ -339,11 +339,9 @@ Production deploys automatically when changes merge to `master` (Cloudflare Git 
 pnpm run build && pnpm run deploy
 ```
 
-## Cross References
+## Related rules
 
-- **Development Workflow**: See `docs/development.md#workflow`
-- **Testing Strategy**: See `docs/testing.md#running-tests`
-- **Code Style**: See `code-style.md` for formatting and linting patterns
+Load [references.md](./references.md) with this rule for shared documentation links and the rules/skills index.
 
 ## Command Aliases (Optional)
 
