@@ -83,7 +83,7 @@ export const REACH_REGIONS: ReachRegion[] = [
 
 export const REACH_OVERSEAS_COUNT = 116;
 
-/** Ranked bar chart rows — widths derived from max member count in a single region. */
+/** Ranked bar chart rows — member counts per region; bar fill width is scaled separately via {@link reachBarWidthPercent}. */
 export const REACH_BAR_ROWS: ReachBarRow[] = [
   { label: 'VIC', value: 388 },
   { label: 'NSW', value: 353 },
@@ -98,7 +98,13 @@ export const REACH_BAR_ROWS: ReachBarRow[] = [
 
 const REACH_BAR_MAX = REACH_BAR_ROWS[0]?.value ?? 1;
 
-/** Bar fill width as a percentage of the largest region count. */
+/**
+ * CSS `width` for a ranked reach bar, as a percentage of the widest bar (largest region count).
+ *
+ * This scales bar length for visual comparison only — it is **not** the region's share of total
+ * membership. The actual member count is shown as a number beside each bar; readers should use
+ * that figure (or mental math) for cohort proportions, not the bar width.
+ */
 export function reachBarWidthPercent(value: number): string {
   return `${((value / REACH_BAR_MAX) * 100).toFixed(1)}%`;
 }
