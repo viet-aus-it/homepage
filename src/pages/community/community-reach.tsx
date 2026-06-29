@@ -1,7 +1,7 @@
 import { Globe } from 'lucide-react';
 
-import MarketingSection from '@/components/marketing/marketing-section';
-import SectionHeader from '@/components/marketing/section-header';
+import PageSection from '@/components/site/page-section';
+import SectionHeader from '@/components/site/section-header';
 import { REACH_BAR_ROWS, REACH_HEAT_CLASS, REACH_OVERSEAS_COUNT, reachBarWidthPercent, type ReachHeat } from '@/lib/community-content';
 import { COMMUNITY_MEMBER_COUNT } from '@/lib/constants';
 import { cn } from '@/lib/utils';
@@ -37,7 +37,7 @@ function CartogramTile({ value, label, heat, className, valueClassName, labelCla
  */
 function CommunityReach() {
   return (
-    <MarketingSection className="relative overflow-hidden border-b border-brand-border-warm bg-brand-surface-warm">
+    <PageSection className="relative overflow-hidden border-b border-brand-border-warm bg-brand-surface-warm">
       <div
         className="pointer-events-none absolute -top-8 -right-8 size-60 bg-[radial-gradient(#F5C518_2px,transparent_2.2px)] bg-size-[15px_15px] opacity-40"
         aria-hidden
@@ -142,7 +142,7 @@ function CommunityReach() {
           </div>
         </div>
       </div>
-    </MarketingSection>
+    </PageSection>
   );
 }
 

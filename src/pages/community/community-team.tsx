@@ -1,6 +1,6 @@
-import MarketingSection from '@/components/marketing/marketing-section';
-import SectionHeader from '@/components/marketing/section-header';
-import StatCard from '@/components/marketing/stat-card';
+import PageSection from '@/components/site/page-section';
+import SectionHeader from '@/components/site/section-header';
+import StatCard from '@/components/site/stat-card';
 import { BOARD_MEMBERS, CONTRIBUTOR_MEMBERS, CREDIBILITY_STATS, teamPlaceholderSrc } from '@/lib/community-content';
 import { cn } from '@/lib/utils';
 
@@ -18,7 +18,7 @@ function SectionDivider({ label }: { label: string }) {
  */
 function CommunityTeam() {
   return (
-    <MarketingSection id="team" className="bg-white">
+    <PageSection id="team" className="bg-white">
       <SectionHeader
         constrained
         className="mb-12"
@@ -83,7 +83,7 @@ function CommunityTeam() {
           />
         ))}
       </div>
-    </MarketingSection>
+    </PageSection>
   );
 }
 

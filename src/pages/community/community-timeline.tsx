@@ -1,5 +1,5 @@
-import MarketingSection from '@/components/marketing/marketing-section';
-import SectionHeader from '@/components/marketing/section-header';
+import PageSection from '@/components/site/page-section';
+import SectionHeader from '@/components/site/section-header';
 import { TIMELINE_MILESTONES } from '@/lib/community-content';
 import { cn } from '@/lib/utils';
 
@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
  */
 function CommunityTimeline() {
   return (
-    <MarketingSection className="bg-white" innerClassName="max-w-[1000px]">
+    <PageSection className="bg-white" innerClassName="max-w-[1000px]">
       <SectionHeader
         constrained
         className="mb-12"
@@ -45,7 +45,7 @@ function CommunityTimeline() {
           );
         })}
       </div>
-    </MarketingSection>
+    </PageSection>
   );
 }
 

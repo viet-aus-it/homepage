@@ -1,5 +1,5 @@
-import MarketingSection from '@/components/marketing/marketing-section';
-import SectionHeader from '@/components/marketing/section-header';
+import PageSection from '@/components/site/page-section';
+import SectionHeader from '@/components/site/section-header';
 import { VALUE_PRINCIPLES } from '@/lib/community-content';
 
 /**
@@ -7,7 +7,7 @@ import { VALUE_PRINCIPLES } from '@/lib/community-content';
  */
 function CommunityValues() {
   return (
-    <MarketingSection className="border-t border-brand-border-warm bg-brand-surface-warm" innerClassName="max-w-[1000px]">
+    <PageSection className="border-t border-brand-border-warm bg-brand-surface-warm" innerClassName="max-w-[1000px]">
       <SectionHeader
         constrained
         className="mb-12"
@@ -30,7 +30,7 @@ function CommunityValues() {
           </div>
         ))}
       </div>
-    </MarketingSection>
+    </PageSection>
   );
 }
 

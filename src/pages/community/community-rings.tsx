@@ -1,5 +1,5 @@
-import MarketingSection from '@/components/marketing/marketing-section';
-import SectionHeader from '@/components/marketing/section-header';
+import PageSection from '@/components/site/page-section';
+import SectionHeader from '@/components/site/section-header';
 import { BELONGING_RINGS } from '@/lib/community-content';
 import { cn } from '@/lib/utils';
 
@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
  */
 function CommunityRings() {
   return (
-    <MarketingSection className="border-y border-brand-border-warm bg-brand-surface-warm" innerClassName="max-w-[1100px]">
+    <PageSection className="border-y border-brand-border-warm bg-brand-surface-warm" innerClassName="max-w-[1100px]">
       <SectionHeader
         constrained
         className="mb-12"
@@ -65,7 +65,7 @@ function CommunityRings() {
           ))}
         </div>
       </div>
-    </MarketingSection>
+    </PageSection>
   );
 }
 

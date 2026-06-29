@@ -1,8 +1,8 @@
 import { Briefcase, Code2, Coffee, Users } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-import MarketingSection from '@/components/marketing/marketing-section';
-import SectionHeader from '@/components/marketing/section-header';
+import PageSection from '@/components/site/page-section';
+import SectionHeader from '@/components/site/section-header';
 import { EXPERIENCE_CARDS, type ExperienceCard } from '@/lib/community-content';
 import { MARKETING_IMAGES } from '@/lib/constants';
 
@@ -18,7 +18,7 @@ const EXPERIENCE_ICONS: Record<ExperienceCard['icon'], LucideIcon> = {
  */
 function CommunityExperience() {
   return (
-    <MarketingSection className="bg-white">
+    <PageSection className="bg-white">
       <SectionHeader
         constrained
         className="mb-10 max-w-[680px]"
@@ -55,7 +55,7 @@ function CommunityExperience() {
           />
         </div>
       </div>
-    </MarketingSection>
+    </PageSection>
   );
 }
 

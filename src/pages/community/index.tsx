@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-import SiteFooter from '@/components/marketing/site-footer';
-import SiteNav from '@/components/marketing/site-nav';
+import SiteFooter from '@/components/site/site-footer';
+import SiteNav from '@/components/site/site-nav';
 import { COMMUNITY_PAGE_META, COMMUNITY_PATH } from '@/lib/community-content';
 import CommunityCta from '@/pages/community/community-cta';
 import CommunityExperience from '@/pages/community/community-experience';

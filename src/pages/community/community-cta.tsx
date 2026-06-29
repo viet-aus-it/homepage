@@ -1,4 +1,4 @@
-import CtaBand from '@/components/marketing/cta-band';
+import CtaBand from '@/components/site/cta-band';
 import DiscordCtaLink from '@/components/ui/discord-cta-link';
 
 /**
