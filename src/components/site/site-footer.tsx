@@ -7,11 +7,12 @@ import { FOOTER_EXPLORE, FOOTER_FOLLOW, getEnabledNavLinks, HOME_PATH, resolveNa
 interface FooterLinkColumnProps {
   title: string;
   items: readonly SiteNavItem[];
+  homePath?: string;
 }
 
-function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
-  const links = getEnabledNavLinks(items, HOME_PATH);
-  const pendingLabels = items.filter((item) => item.enabled && !resolveNavHref(item, HOME_PATH)).map((item) => item.label);
+function FooterLinkColumn({ title, items, homePath = HOME_PATH }: FooterLinkColumnProps) {
+  const links = getEnabledNavLinks(items, homePath);
+  const pendingLabels = items.filter((item) => item.enabled && !resolveNavHref(item, homePath)).map((item) => item.label);
   const upcomingLabels = items.filter((item) => !item.enabled).map((item) => item.label);
 
   if (links.length === 0 && pendingLabels.length === 0 && upcomingLabels.length === 0) {
@@ -48,10 +49,14 @@ function FooterLinkColumn({ title, items }: FooterLinkColumnProps) {
   );
 }
 
+interface SiteFooterProps {
+  homePath?: string;
+}
+
 /**
- * Homepage footer — three-column layout on dark background.
+ * Shared site footer — three-column layout on dark background.
  */
-function HomeFooter() {
+function SiteFooter({ homePath = HOME_PATH }: SiteFooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -70,8 +75,8 @@ function HomeFooter() {
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:gap-16 lg:contents">
-            <FooterLinkColumn title="Explore" items={FOOTER_EXPLORE} />
-            <FooterLinkColumn title="Follow" items={FOOTER_FOLLOW} />
+            <FooterLinkColumn title="Explore" items={FOOTER_EXPLORE} homePath={homePath} />
+            <FooterLinkColumn title="Follow" items={FOOTER_FOLLOW} homePath={homePath} />
           </div>
         </div>
 
@@ -97,4 +102,4 @@ function HomeFooter() {
   );
 }
 
-export default HomeFooter;
+export default SiteFooter;

@@ -1,6 +1,7 @@
 import { Activity, CalendarCheck, MessagesSquare } from 'lucide-react';
 
-import HomeSection from '@/pages/home/home-section';
+import PageSection from '@/components/site/page-section';
+import SectionHeader from '@/components/site/section-header';
 
 const PILLARS = [
   {
@@ -27,13 +28,8 @@ const PILLARS = [
  */
 function HomePillars() {
   return (
-    <HomeSection className="bg-white">
-      <div className="max-w-[620px]">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-brand-yellow-shade">What you get</p>
-        <h2 className="font-display text-[clamp(1.75rem,5vw,2.625rem)] font-extrabold leading-[1.07] tracking-[-0.025em]">
-          Help when you&apos;re stuck. Mates when you&apos;re not.
-        </h2>
-      </div>
+    <PageSection className="bg-white">
+      <SectionHeader eyebrow="What you get" title="Help when you're stuck. Mates when you're not." className="max-w-[620px]" />
 
       <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {PILLARS.map(({ icon: Icon, title, description }) => (
@@ -49,7 +45,7 @@ function HomePillars() {
           </article>
         ))}
       </div>
-    </HomeSection>
+    </PageSection>
   );
 }
 

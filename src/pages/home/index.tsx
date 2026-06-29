@@ -1,10 +1,10 @@
+import SiteFooter from '@/components/site/site-footer';
+import SiteNav from '@/components/site/site-nav';
 import HomeCommunityReach from '@/pages/home/home-community-reach';
 import HomeCtaBand from '@/pages/home/home-cta-band';
 import HomeEventsPreview from '@/pages/home/home-events-preview';
-import HomeFooter from '@/pages/home/home-footer';
 import HomeHero from '@/pages/home/home-hero';
 import HomeMarquee from '@/pages/home/home-marquee';
-import HomeNav from '@/pages/home/home-nav';
 import HomePillars from '@/pages/home/home-pillars';
 
 /** Production homepage at `/`. */
@@ -17,7 +17,7 @@ function HomePage() {
       >
         Skip to content
       </a>
-      <HomeNav />
+      <SiteNav variant="landing" />
       <div className="bg-brand-near-black">
         <HomeHero />
       </div>
@@ -28,7 +28,7 @@ function HomePage() {
         <HomeEventsPreview />
         <HomeCtaBand />
       </main>
-      <HomeFooter />
+      <SiteFooter />
     </div>
   );
 }

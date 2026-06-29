@@ -1,10 +1,10 @@
 ## Overview
 
-The VAIT homepage is the public face of **Vietnamese Australians in Information Technology Inc.** — a not-for-profit community for Viet-Au IT professionals in Australia. The page opens on a **white canvas** with a **fixed dark navigation bar** (`{component.home-nav}`) over a **near-black hero band** (`{component.home-hero}`). Brand yellow (`{colors.brand-yellow}` — `#F5C518`) punctuates CTAs, the marquee band, and stat cards against charcoal and warm stone surfaces.
+The VAIT homepage is the public face of **Vietnamese Australians in Information Technology Inc.** — a not-for-profit community for Viet-Au IT professionals in Australia. The page opens on a **white canvas** with a **fixed dark navigation bar** (`{component.site-nav}`) over a **near-black hero band** (`{component.home-hero}`). Brand yellow (`{colors.brand-yellow}` — `#F5C518`) punctuates CTAs, the marquee band, and stat cards against charcoal and warm stone surfaces.
 
 Type voice runs **Montserrat** (display/headings) and **Inter** (body), both self-hosted via `@fontsource-variable/*`. Hierarchy is carried by size steps, weight (Bold 700 for h1, SemiBold 600 for section titles), and colour (yellow emphasis on stat cards, muted grays on dark surfaces).
 
-The page stacks vertically: dark hero → yellow hashtag marquee → warm-surface pillars and community reach → events preview → dark CTA band → three-column dark footer (`{component.home-footer}`). **Discord** is the single primary conversion path (`{component.discord-cta-link}`).
+The page stacks vertically: dark hero → yellow hashtag marquee → warm-surface pillars and community reach → events preview → dark CTA band → three-column dark footer (`{component.site-footer}`). **Discord** is the single primary conversion path (`{component.discord-cta-link}`).
 
 **Key Characteristics:**
 
@@ -135,7 +135,7 @@ Depth is **surface contrast** plus **CTA hover glow** — not a multi-shadow mar
 
 ### Navigation
 
-**`home-nav`** — Fixed top bar (`position: fixed`). Transparent over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Internal links use TanStack Router `Link`; hash links resolve via `HOME_PATH` in `src/lib/site-nav.ts`. Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`.
+**`site-nav`** (`src/components/site/site-nav.tsx`) — Shared fixed/sticky top bar for public site pages. **`landing`** variant: fixed over the dark hero at page top; solid `{colors.brand-near-black}` after scroll. **`inner`** variant: sticky dark frosted bar for secondary routes. Mobile sheet toggles with `aria-expanded` / `aria-hidden`. Internal links use TanStack Router `Link`; hash links resolve via `HOME_PATH` in `src/lib/site-nav.ts`. Discord CTA uses `{component.discord-cta-link}` `variant="outlined"`.
 
 ### CTAs
 
@@ -143,13 +143,15 @@ Depth is **surface contrast** plus **CTA hover glow** — not a multi-shadow mar
 
 ### Page sections
 
-**`home-hero`** — Dark split hero with dot-grid texture, community photo, member badge. Section uses `{spacing.home-nav}` top padding (`HOME_NAV_CLEARANCE`) so content clears the fixed nav while the dark background extends under it.
+**`home-hero`** — Dark split hero with dot-grid texture, community photo, member badge. Section uses `{spacing.home-nav}` top padding (`PAGE_NAV_CLEARANCE`) so content clears the fixed nav while the dark background extends under it.
 
-**`home-section`** — Section shell: outer `section` owns surface styles; inner container owns `{HOME_SECTION_INNER}` spacing. Export `HOME_NAV_CLEARANCE` for hero offset.
+**`page-section`** — Shared section shell (`src/components/site/page-section.tsx`): outer `section` owns surface styles; inner container owns max-width and vertical padding via `PAGE_SECTION_INNER`.
+
+**`section-header`**, **`stat-card`**, **`cta-band`** — Reusable section building blocks in `src/components/site/`.
 
 **`home-marquee`** — Yellow hashtag band; duplicate track for infinite scroll; second track hidden under `prefers-reduced-motion`.
 
-**`home-footer`** — Three-column footer on `{colors.brand-footer-dark}` (`4fr / 1fr / 1fr` grid at `lg`): brand blurb + Discord CTA, Explore, Follow. Bottom bar stacks legal copy (copyright, ABN, tagline) beside the **ACNC Registered Charity Tick** (reverse mono, 76px height, links to the ACNC charity register). Follow links: `FOOTER_FOLLOW` in `src/lib/site-nav.ts` (URLs from `SOCIAL_LINKS` in `constants.ts`; short links managed in [static-sites](https://github.com/viet-aus-it/static-sites)). ACNC asset and URLs: `ACNC` in `constants.ts`; logo at `public/images/acnc-registered-charity-reverse.png`.
+**`site-footer`** (`src/components/site/site-footer.tsx`) — Three-column footer on `{colors.brand-footer-dark}` (`4fr / 1fr / 1fr` grid at `lg`): brand blurb + Discord CTA, Explore, Follow. Bottom bar stacks legal copy (copyright, ABN, tagline) beside the **ACNC Registered Charity Tick** (reverse mono, 76px height, links to the ACNC charity register). Follow links: `FOOTER_FOLLOW` in `src/lib/site-nav.ts` (URLs from `SOCIAL_LINKS` in `constants.ts`; short links managed in [static-sites](https://github.com/viet-aus-it/static-sites)). ACNC asset and URLs: `ACNC` in `constants.ts`; logo at `public/images/acnc-registered-charity-reverse.png`.
 
 ### Logo
 
@@ -173,7 +175,7 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 - Keep the **dark hero / warm mid-page / dark footer** rhythm — it signals community with institutional weight at the close.
 - Use **brand yellow** only for emphasis: CTAs, marquee, stat labels — not body paragraphs.
 - Keep **Discord** as the primary outward CTA unless a second channel is officially approved.
-- Use `{component.home-section}` for new landing sections before inventing new shells.
+- Use `{component.page-section}` for new public site sections before inventing new shells.
 - Respect `max-w-screen-lg` for editorial width — do not stretch text edge-to-edge on desktop.
 - Honour `prefers-reduced-motion` for marquee animation (second track hidden).
 - Configure nav items in `src/lib/site-nav.ts` with progressive `enabled` flags as routes ship.
@@ -191,7 +193,7 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 
 | Name             | Width    | Key Changes                                                            |
 | ---------------- | -------- | ---------------------------------------------------------------------- |
-| Mobile           | < 768px  | `{component.home-nav}` mobile sheet; hero stacks; footer columns stack |
+| Mobile           | < 768px  | `{component.site-nav}` mobile sheet; hero stacks; footer columns stack |
 | Tablet / Desktop | ≥ 768px  | Full horizontal nav; hero split layout; footer three-column grid       |
 | Wide             | ≥ 1024px | `max-w-screen-lg` containers centred with side margin via `mx-auto`    |
 
@@ -208,9 +210,9 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 
 ## Iteration Guide
 
-1. Focus on **one component** per change — reference keys above (`{component.home-nav}`, etc.).
+1. Focus on **one component** per change — reference keys above (`{component.site-nav}`, etc.).
 2. Map new colours to CSS variables in `src/index.css` (`--brand-*`) and add utilities in `@layer utilities` — avoid inline hex in components.
-3. When adding pages, reuse `{component.home-nav}` + `{component.home-footer}` pattern before inventing new shells.
+3. When adding pages, reuse `{component.site-nav}` + `{component.site-footer}` with the appropriate nav variant.
 4. Nav and footer link changes belong in `src/lib/site-nav.ts` — not hard-coded in presentational components.
 5. Logo colour changes must update `LOGO_COLOURS` in `{component.logo}` and CSS tokens together.
 6. Display typography changes should update the hierarchy table in this file in the same PR.
@@ -218,9 +220,9 @@ Regenerate raster PNGs from `public/favicon.svg` via `rsvg-convert`. `index.html
 ## Known Gaps
 
 - Typography CSS variables (`--font-display`, `--font-sans`) and fonts are set; formal `{typography.*}` size/spacing tokens are not yet extracted to CSS variables — sizes still live in Tailwind classes only.
-- Dark mode tokens exist in `:root` / `.dark` but the marketing page does not toggle dark theme.
+- Dark mode tokens exist in `:root` / `.dark` but the public site does not toggle dark theme.
 - Marquee animation timings and `prefers-reduced-motion` overrides are not formalised beyond hiding the duplicate track.
-- Form inputs and validation states are shadcn defaults — not extracted for marketing.
+- Form inputs and validation states are shadcn defaults — not extracted for public site pages.
 - Additional routes (`not-found`, future pages) are not fully specified in this document.
 - Open Graph and structured data meta tags are not yet implemented.
 - In-app or member portal UI is out of scope — this file covers the public homepage only.
