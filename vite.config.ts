@@ -11,13 +11,15 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    tanstackRouter({
+      routeFileIgnorePattern: '.*\\.test\\.tsx$',
+      autoCodeSplitting: true,
+      target: 'react',
+    }),
     react({
       compiler: true,
     }),
     tailwindcss(),
-    tanstackRouter({
-      routeFileIgnorePattern: '.*\\.test\\.tsx$',
-    }),
     cloudflare(),
   ],
   resolve: {
