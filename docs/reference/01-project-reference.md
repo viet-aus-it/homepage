@@ -12,6 +12,7 @@ Quick-reference lookup for the VAIT Homepage tech stack, commands, project struc
 | [TanStack Router](https://tanstack.com/router)                                                                  | Routing                        | Latest      |
 | [React Query](https://tanstack.com/query)                                                                       | Server state management        | Latest      |
 | [Zod](https://zod.dev/)                                                                                         | Schema validation              | Latest      |
+| [cn](https://github.com/shadcn-ui/cn)                                                                           | Class merging                  | ^0.2.4      |
 | [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) | Linting and formatting         | Latest      |
 | [Vitest](https://vitest.dev/)                                                                                   | Testing framework              | Latest      |
 | [Testing Library](https://testing-library.com/)                                                                 | Component testing              | Latest      |
