@@ -63,7 +63,7 @@ export function isNavLinkActive(item: SiteNavLink, activePath: string): boolean 
 
 /** Primary header navigation — enable items as routes ship. */
 export const PRIMARY_NAV: SiteNavItem[] = [
-  { label: 'Community', hash: '#community-reach', enabled: true },
+  { label: 'Community', to: '/community', enabled: true },
   { label: 'Events', hash: '#events-preview', enabled: true },
   { label: 'About', to: '/about', enabled: false },
   { label: 'Resources', to: '/resources', enabled: false },
@@ -72,7 +72,7 @@ export const PRIMARY_NAV: SiteNavItem[] = [
 
 /** Footer Explore column. */
 export const FOOTER_EXPLORE: SiteNavItem[] = [
-  { label: 'Community', hash: '#community-reach', enabled: true },
+  { label: 'Community', to: '/community', enabled: true },
   { label: 'Events', hash: '#events-preview', enabled: true },
 ];
 

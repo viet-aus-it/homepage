@@ -19,17 +19,22 @@ describe('HomePage', () => {
     }
   });
 
-  it('links Community and Events nav to in-page sections', async () => {
+  it('links Community nav to the community page and Events to in-page sections', async () => {
     await renderHomeRoute();
 
-    expect(screen.getAllByRole('link', { name: 'Community' })[0]).toHaveAttribute('href', '/#community-reach');
+    expect(screen.getAllByRole('link', { name: 'Community' })[0]).toHaveAttribute('href', '/community');
     expect(screen.getAllByRole('link', { name: 'Events' })[0]).toHaveAttribute('href', '/#events-preview');
   });
 
-  it('does not render redundant in-section map or events links', async () => {
+  it('links the community reach section to the full community page', async () => {
     await renderHomeRoute();
 
-    expect(screen.queryByRole('link', { name: /See the whole map/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /See the whole map/i })).toHaveAttribute('href', '/community');
+  });
+
+  it('does not render redundant in-section events links', async () => {
+    await renderHomeRoute();
+
     expect(screen.queryByRole('link', { name: /All events/i })).not.toBeInTheDocument();
   });
 

@@ -44,9 +44,9 @@ describe('getEnabledNavLinks', () => {
     expect(links).toEqual([]);
   });
 
-  it('resolves hash links against homePath="/"', () => {
+  it('resolves community route links', () => {
     const links = getEnabledNavLinks(PRIMARY_NAV, '/');
-    expect(links.find((item) => item.label === 'Community')?.href).toBe('/#community-reach');
+    expect(links.find((item) => item.label === 'Community')?.href).toBe('/community');
   });
 });
 
